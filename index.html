@@ -215,6 +215,8 @@ p{margin:0}
 .quote{padding:6px 0 0}
 .quote p{font:400 22px/1.3 var(--f-hand);color:var(--chalk)}
 .quote small{display:block;margin-top:10px;font:600 12px/1 var(--f-num);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.mot{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.mot p{font-size:27px;text-shadow:0 0 26px rgb(244 180 58 / .22);overflow-wrap:anywhere}
 
 /* threads & messages */
 .thr{display:grid;grid-template-columns:1fr auto;gap:4px 12px;width:100%;text-align:left;padding:14px 16px;background:var(--deck);border:1px solid var(--rule);border-radius:var(--r)}
@@ -970,7 +972,7 @@ function platform(u){
 const S = {
   tab:'accueil', mode:'local', uid:null, isOwner:false, user:null, cwKnown:false,
   settings:{vma:14, start:DEFAULT_START, name:'Alice'},
-  progress:{}, checkins:{}, shots:{}, threads:{}, videos:{}, msgs:{}, matchs:{}, victoires:{},
+  progress:{}, checkins:{}, shots:{}, threads:{}, videos:{}, msgs:{}, matchs:{}, victoires:{}, mots:{}, motEdit:false,
   vCat:'seance', vFilter:'all', vDismissed:ls.get('oal-vdis',{}),
   sample:null, mSeg:'avant', jSel:null, ai:{},
   names:{}, drafts:{},
@@ -1050,7 +1052,7 @@ function subscribeAll(){
   unsubs.forEach(u => { try{ u(); }catch{} }); unsubs = [];
   unsubs.push(Store.watch('config', m => { if(m.main) S.settings = {...S.settings, ...m.main}; rerender(); }));
   unsubs.push(Store.watch('ffbb', m => { if(m.pouleA) applyFfbb(m.pouleA); rerender(); }));
-  for(const k of ['progress','checkins','shots','threads','videos','matchs','victoires']){
+  for(const k of ['progress','checkins','shots','threads','videos','matchs','victoires','mots']){
     unsubs.push(Store.watch(k, m => { S[k] = m; rerender(); }));
   }
 }
@@ -1125,10 +1127,8 @@ function renderAll(){
 }
 
 function vTop(){
-  const wi = weekInfo();
   return `<a class="brand" href="#accueil" style="text-decoration:none">
-      <b>De l’ombre <em>à la lumière</em></b>
-      <span>${esc(S.settings.name || 'Alice')} · Prépa 2026 · S${wi.w+1}</span></a>
+      <b>De l’ombre <em>à la lumière</em></b></a>
     <a class="vchip" href="#profil" aria-label="Profil et réglages, VMA ${S.settings.vma}">
       <i class="${S.mode}"></i><span><small>VMA</small>${String(S.settings.vma).replace('.',',')}</span></a>`;
 }
@@ -1136,20 +1136,12 @@ function unreadCount(){
   return Object.entries(S.threads).filter(([id,t]) => t.lastAt && t.lastBy !== meId() && (S.seen[id] || 0) < t.lastAt).length;
 }
 function vTabs(){
-  const T = [['accueil','home','Accueil'],['programme','prog','Programme'],['bilan','ball','Bilan'],['mental','mental','Mental'],['chrono','chrono','Chrono'],['videos','video','Vidéos']];
+  const T = [['accueil','home','Accueil'],['programme','prog','Intersaison'],['bilan','ball','Bilan'],['mental','mental','Mental'],['chrono','chrono','Chrono'],['videos','video','Vidéos']];
   const un = unreadCount(), lm = lastMatch(), todo = lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5;
   const cur = S.tab === 'victoires' ? 'mental' : S.tab;
   return T.map(([k,i,l]) => `<a class="tab" href="#${k}" ${cur===k?'aria-current="page"':''}>${svg(i)}<span>${l}</span>${k==='mental'&&un?'<i class="badge" aria-label="Nouveaux messages"></i>':''}${k==='bilan'&&todo?'<i class="badge" aria-label="Bilan à faire"></i>':''}${k==='chrono'&&TM.plan&&!TM.done?'<i class="badge run" aria-label="Chrono en cours"></i>':''}</a>`).join('');
 }
 
-function pathHTML(){
-  const f = lightFrac(), wi = weekInfo();
-  const st = ['Départ','S1','S2','S3','S4','Lumière'];
-  return `<div class="path" aria-label="Progression : ${doneCount()} séances sur ${TOTAL}">
-    <ol><div class="path-track"><i style="width:${(f*100).toFixed(1)}%"></i></div>
-    ${st.map((l,k) => `<li class="${f >= k/5 - 1e-9 ? 'on' : ''} ${k === wi.w+1 && !wi.before ? 'cur' : ''}"><span class="dot"></span><span class="lbl">${l}</span></li>`).join('')}
-    </ol></div>`;
-}
 function sesRow(sid, w, showDay){
   const s = SES[sid], d = isDone(w, sid);
   return `<button class="ses ${d?'done':''}" data-act="open" data-sid="${sid}" data-w="${w}">
@@ -1159,27 +1151,14 @@ function sesRow(sid, w, showDay){
 }
 
 function vAccueil(){
-  const wi = weekInfo(), W = WEEKS[wi.w], now = new Date();
+  const wi = weekInfo(), now = new Date();
   const dayId = DAY_BY_JS[now.getDay()], day = DAYS.find(d => d.id === dayId);
-  const q = QUOTES[Math.floor(today0() / 864e5) % QUOTES.length];
   const ci = S.checkins[todayISO()] || {};
-  let status;
-  if(wi.before) status = `Départ ${frDate(wi.st,{weekday:'long',day:'numeric',month:'long'})} · J−${-wi.diff}`;
-  else if(wi.after) status = 'Les 4 semaines sont terminées';
-  else status = `Jour ${wi.diff % 7 + 1} sur 7`;
   const threads = Object.entries(S.threads).filter(([,t]) => t.lastAt).sort((a,b) => b[1].lastAt - a[1].lastAt).slice(0,2);
   const lm = lastMatch();
   return `
   ${matchCard(nextMatch())}
   ${lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5 ? `<section><div class="h-sec"><h2>Dernier match</h2><span class="eyebrow">Ton bilan</span></div><button class="mrow" data-act="match" data-mid="${lm.id}" data-seg="apres">${mRowInner(lm)}</button></section>` : ''}
-  <section class="hero">
-    <span class="eyebrow gold">${esc(frDate(now))}</span>
-    <h1>Semaine ${W.n}<em>${W.name}</em></h1>
-    <div class="pts">${W.pts.map(p => `<span>${p}</span>`).join('')}</div>
-    <div class="hero-meta"><span class="muted">${esc(status)}</span><span class="muted"><b>${doneCount()}</b> / ${TOTAL} séances</span></div>
-    ${pathHTML()}
-  </section>
-
   <section>
     <div class="h-sec"><h2>Aujourd’hui</h2><span class="eyebrow">${wi.before ? 'Aperçu S1' : day.name}</span></div>
     <div class="stack">${day.ses.length ? day.ses.map(sid => sesRow(sid, wi.w)).join('') : `<div class="rest"><b style="color:var(--chalk)">Repos.</b> Récupère, hydrate-toi, dors bien. Une séance de respiration ou un mot dans « Mental » si tu en as envie.</div>`}</div>
@@ -1201,16 +1180,25 @@ function vAccueil(){
     ${ciHistory()}
   </section>
 
-  <section class="quote"><p>« ${esc(q[0])} »</p><small>${esc(q[1])}</small></section>
+  ${motHTML()}
 
   <section>
     <div class="h-sec"><h2>Échanges</h2><a class="eyebrow gold" href="#mental">Tout voir</a></div>
     <div class="stack">${threads.length ? threads.map(([id,t]) => thrRow(id,t)).join('') : `<button class="empty" data-act="prompts" style="text-align:left;width:100%">Aucune discussion pour l’instant. Lance la première : objectif de la semaine, avant ou après match, visualisation…</button>`}</div>
-  </section>
-
-  <section>
-    <div class="h-sec"><h2>Cette semaine</h2><span class="eyebrow">${weekDone(wi.w)} / 9 faites</span></div>
-    <div class="stack">${DAYS.filter(d => d.ses.length).map(d => d.ses.map(sid => sesRow(sid, wi.w, true)).join('')).join('')}</div>
+  </section>`;
+}
+// Mon mot de la semaine : une phrase par semaine (du lundi au dimanche), affichée en grand à l'accueil.
+const weekKey = () => { const d = today0(); d.setDate(d.getDate() - (d.getDay() + 6) % 7); return iso(d); };
+function motHTML(){
+  const m = S.mots[weekKey()];
+  if(m && m.text && !S.motEdit) return `<section class="quote mot"><span class="eyebrow gold">Mon mot de la semaine</span><p>« ${esc(m.text)} »</p><button class="chip" data-act="mot-edit">Changer</button></section>`;
+  const q = QUOTES[Math.floor(today0() / 864e5) % QUOTES.length];
+  return `<section class="card stack">
+    <div class="h-sec" style="margin:0"><h2>Mon mot de la semaine</h2></div>
+    <label for="mot-in">Dicte-moi ton mot ou ta phrase de la semaine</label>
+    <textarea id="mot-in" rows="2" maxlength="160" data-draft="mot" placeholder="Ex. : ${esc(q[0])}">${esc(S.drafts.mot || '')}</textarea>
+    ${dictHint}
+    <button class="btn block" data-act="mot-save">${svg('spark')}Afficher à l’accueil</button>
   </section>`;
 }
 function ciHistory(){
@@ -1236,6 +1224,7 @@ function vProgramme(){
   const todayId = DAY_BY_JS[new Date().getDay()];
   return `
   <section class="wk-head">
+    <span class="eyebrow gold">Programme intersaison</span>
     <div class="seg" role="group" aria-label="Semaine">${WEEKS.map((x,i) => `<button data-act="week" data-w="${i}" aria-pressed="${i===w}"><b>S${x.n}</b><span>${i===wi.w && !wi.before ? 'en cours' : weekDone(i) + '/9'}</span></button>`).join('')}</div>
     <h2>Semaine ${W.n}<br><em>${W.name}</em></h2>
     <p class="muted">${W.pts.join(' · ')}</p>
@@ -1849,16 +1838,6 @@ function vMental(){
     ${(S.manif ? MANIFESTE : MANIFESTE.slice(0,2)).map(p => `<p>${esc(p)}</p>`).join('')}
     <button class="chip" style="margin-top:14px" data-act="manif">${S.manif ? 'Réduire' : 'Lire en entier'}</button>
   </section>
-  <section class="card">
-    <div class="h-sec"><h2>Routine lancer franc</h2><span class="eyebrow">Toujours la même</span></div>
-    <ol class="ul" style="gap:8px">
-      <li><b>Pieds</b> : même placement, orteils derrière la ligne.</li>
-      <li><b>Ballon</b> : mêmes dribbles, même prise.</li>
-      <li><b>Respire</b> : une inspiration lente, une expiration longue.</li>
-      <li><b>Cible</b> : les yeux sur l’arceau, un mot-clé dans la tête.</li>
-      <li><b>Tire</b> : bras tendu, poignet cassé, tiens la pose.</li>
-    </ol>
-  </section>
   <section>
     <div class="h-sec"><h2>Citations</h2></div>
     <div class="stack">${QUOTES.map(q => `<div class="note"><b>${esc(q[1])}</b>« ${esc(q[0])} »</div>`).join('')}</div>
@@ -2425,6 +2404,15 @@ const ACT = {
     if(el.dataset.confirm !== '1'){ el.dataset.confirm = '1'; el.textContent = 'Confirmer : remplacer mes données'; setTimeout(() => { el.dataset.confirm = ''; el.textContent = 'Restaurer'; }, 4000); return; }
     Local.data = data; Local.save(); S.drafts.restore = ''; subscribeAll(); rerender(); toast('Sauvegarde restaurée.');
   },
+  'mot-save': el => {
+    if(!guard()) return;
+    const text = (S.drafts.mot || $('#mot-in')?.value || '').trim().slice(0,160);
+    if(!text){ toast('Dicte ou écris ton mot avant de valider.'); $('#mot-in')?.focus(); return; }
+    const k = weekKey(), d = {text, by:meId(), at:Date.now()};
+    burstAt(el, {n:34}); chime([1319,1568,2093]);
+    S.mots = {...S.mots, [k]:d}; S.drafts.mot = ''; S.motEdit = false; rerender(); save('mots', k, d);
+  },
+  'mot-edit': () => { S.drafts.mot = (S.mots[weekKey()] || {}).text || ''; S.motEdit = true; rerender(); setTimeout(() => $('#mot-in')?.focus(), 60); },
   'v-new': () => { openSheet({type:'victoire'}); setTimeout(() => $('#v-text')?.focus(), 120); },
   'v-cat': el => { S.vCat = el.dataset.c; renderSheet(); },
   'v-filter': el => { S.vFilter = el.dataset.c; rerender(); },
@@ -2705,7 +2693,7 @@ async function boot(){
   S.cwKnown = cw !== null;
   Store.db = db;
   S.mode = cw === false ? 'readonly' : 'shared';
-  S.progress = {}; S.checkins = {}; S.shots = {}; S.threads = {}; S.videos = {}; S.msgs = {};
+  S.progress = {}; S.checkins = {}; S.shots = {}; S.threads = {}; S.videos = {}; S.msgs = {}; S.mots = {};
   subscribeAll();
   if(SH) openSheet(SH);
   rerender();

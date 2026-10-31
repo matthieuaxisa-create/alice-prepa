@@ -47,7 +47,7 @@ Modifier l'appli
 - Remettre en ligne : dans le dépôt GitHub, ouvrir le fichier, crayon « Edit », ou
   « Add file » > « Upload files » pour écraser avec la nouvelle version, puis « Commit changes ».
 - Si Alice ne voit pas le changement : fermer et rouvrir l'appli (parfois deux fois).
-  Pour forcer, changer le numéro dans sw.js : const V='alice-v3' -> 'alice-v4'.
+  Pour forcer, changer le numéro dans sw.js : const V='alice-v4' -> 'alice-v5'.
 
 Limites hors claude.ai
 - Les conseils générés par Claude et la base partagée ne fonctionnent pas.
