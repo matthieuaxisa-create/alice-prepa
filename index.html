@@ -397,6 +397,7 @@ details.fiche summary i{font:900 24px/1 var(--f-display);color:var(--gold);font-
 details.fiche summary b{font:800 19px/1.1 var(--f-display);text-transform:uppercase}
 details.fiche summary span{font:600 11px/1.2 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--dust);text-align:right}
 details.fiche > div{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
+.affiche button{display:block;width:100%}
 .affiche img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--rule)}
 .empty{padding:18px 16px;border:1px dashed var(--rule);border-radius:var(--r);color:var(--dust);font-size:14.5px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -1906,6 +1907,10 @@ function vMental(){
   const th = Object.entries(S.threads).filter(([,t]) => t.lastAt).sort((a,b) => b[1].lastAt - a[1].lastAt);
   const local = S.mode === 'local';
   return `
+  <section class="affiche stack">
+    <button data-act="zoom" data-src="img/affiche.jpg" aria-label="Agrandir mon affiche"><img src="img/affiche.jpg" alt="Affiche De l’ombre à la lumière : départ, fondations, construction, progression, performance, arrivée dans la lumière"></button>
+    <button data-act="zoom" data-src="img/duo.jpg" aria-label="Agrandir la photo"><img src="img/duo.jpg" alt="Deux joueuses sous les projecteurs, bras ouverts : à gauche en maillot d’Iowa n° 22, à droite Alice en maillot de Canet"></button>
+  </section>
   ${wallTeaser()}
   ${penseesTeaser()}
   <section>
@@ -1935,10 +1940,6 @@ function vMental(){
   <section>
     <div class="h-sec"><h2>Citations</h2></div>
     <div class="stack">${QUOTES.map(q => `<div class="note"><b>${esc(q[1])}</b>« ${esc(q[0])} »</div>`).join('')}</div>
-  </section>
-  <section class="affiche">
-    <div class="h-sec"><h2>Mon affiche</h2></div>
-    <button data-act="zoom" data-src="img/affiche.jpg" style="display:block;width:100%"><img src="img/affiche.jpg" alt="Affiche De l’ombre à la lumière : départ, fondations, construction, progression, performance, arrivée dans la lumière" loading="lazy"></button>
   </section>`;
 }
 
