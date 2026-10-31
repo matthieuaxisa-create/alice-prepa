@@ -1,0 +1,54 @@
+APPLI D'ALICE — « De l'ombre à la lumière »
+===========================================
+
+Contenu
+- index.html : la page de l'appli (textes, séances, code d'accès)
+- img/ : affiche, image d'accueil et schémas de terrain (lun-1 … sam-6)
+- icons/ : icône de l'appli sur le téléphone
+- ffbb.json : derniers résultats et classement de la poule A
+- ffbb_update.py : relit le site FFBB et refabrique ffbb.json (lancé par le Mac, voir plus bas)
+- manifest.webmanifest, sw.js : installation sur l'écran d'accueil + mode hors ligne
+
+Résultats FFBB : c'est le Mac qui s'en charge
+- Le site FFBB bloque les serveurs de GitHub : la mise à jour automatique sur GitHub est impossible.
+- Le Mac relit donc le site le dimanche à 19 h et 21 h, et le lundi à 9 h
+  (s'il dort à ce moment-là, il le fait à son réveil). Il publie ffbb.json sur GitHub
+  seulement si un score ou le classement a changé.
+- Tout est dans : ~/Library/Application Support/AlicePrepa/
+  (maj_ffbb.sh = le script, maj.log = le journal, depot/ = la copie du dépôt GitHub)
+- La clé GitHub est dans le trousseau du Mac, sous le nom « github-alice-prepa ».
+  Quand elle expire, en recréer une sur GitHub et demander à Claude de la ranger.
+- Pour arrêter : supprimer ~/Library/LaunchAgents/com.alice-prepa.ffbb.plist
+
+Code d'accès
+- Demandé UNE SEULE FOIS, à la première ouverture dans Safari ou Chrome.
+- L'appli installée sur l'écran d'accueil ne le redemande jamais.
+- Plus de « code secret » à 4 chiffres : il a été retiré.
+
+La magie (31/10/2026)
+- Rayons de lumière et poussière dorée en fond : de plus en plus lumineux à chaque séance validée.
+- Allumage des projecteurs à la première ouverture de la journée (toucher l'écran pour passer).
+- Éclats de lumière + petit carillon : séance validée, victoire accrochée, 5/5 aux lancers francs,
+  chrono terminé. Le son se coupe avec le bouton haut-parleur du chrono.
+- Grands moments plein écran : première séance, semaine complète (9/9), les 36 séances,
+  victoire de Canet relevée sur le site FFBB (confettis or et bleu, une seule fois par match).
+- Si le téléphone est réglé sur « Réduire les animations », tout reste immobile.
+
+Mettre en ligne (GitHub Pages)
+1. Créer un dépôt public sur github.com.
+2. « Add file » > « Upload files » : glisser TOUT LE CONTENU de ce dossier (pas le dossier lui-même).
+3. Settings > Pages > branche main, dossier / (root) > Save.
+4. Le lien s'affiche après 1 à 2 minutes. Le donner à Alice avec le code.
+
+Modifier l'appli
+- Changer une image : remplacer le fichier dans img/ en gardant EXACTEMENT le même nom.
+- Changer un texte ou une séance : modifier index.html (ou demander à Claude de le faire).
+- Changer le code d'accès : demander à Claude (le code n'est pas écrit en clair dans le fichier).
+- Remettre en ligne : dans le dépôt GitHub, ouvrir le fichier, crayon « Edit », ou
+  « Add file » > « Upload files » pour écraser avec la nouvelle version, puis « Commit changes ».
+- Si Alice ne voit pas le changement : fermer et rouvrir l'appli (parfois deux fois).
+  Pour forcer, changer le numéro dans sw.js : const V='alice-v3' -> 'alice-v4'.
+
+Limites hors claude.ai
+- Les conseils générés par Claude et la base partagée ne fonctionnent pas.
+- Les données d'Alice restent sur son téléphone.
