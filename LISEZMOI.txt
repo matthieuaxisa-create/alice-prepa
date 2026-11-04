@@ -47,7 +47,7 @@ Modifier l'appli
 - Remettre en ligne : dans le dépôt GitHub, ouvrir le fichier, crayon « Edit », ou
   « Add file » > « Upload files » pour écraser avec la nouvelle version, puis « Commit changes ».
 - Si Alice ne voit pas le changement : fermer et rouvrir l'appli (parfois deux fois).
-  Pour forcer, changer le numéro dans sw.js : const V='alice-v12' -> 'alice-v13'.
+  Pour forcer, changer le numéro dans sw.js : const V='alice-v13' -> 'alice-v14'.
 
 Mes phrases (04/11/2026)
 - En haut de l'accueil : un livre de 1 à 5 phrases positives, sans négation. Toucher la page la fait tourner.
@@ -68,9 +68,11 @@ Onglets et Statistique (04/11/2026)
   interceptions, balles perdues, fautes. Carte des tirs, zones, évolution, historique.
   Un match peut être reporté dans son bilan. Les séances sont sur le téléphone (avec la sauvegarde).
 
-Test de couleurs « wahou » (04/11/2026)
-- Invisible par défaut. Pour le voir : ajouter ?theme=wahou au lien de l'appli. Pour revenir : ?theme=normal.
-- Captures et prompts d'images : dossier « Test design (4 nov) » sur le Mac.
+Thème « wahou » : le thème par défaut depuis le 04/11/2026
+- La photo d'Alice (img/biblio/fond-alice10.jpg) en fond d'écran, sous un voile coloré, les couleurs de
+  l'affiche graffiti (jaune, rose, turquoise, bleu électrique) et quelques phrases taguées en fond.
+- Pour retrouver l'ancien thème sur un téléphone : ouvrir le lien de l'appli avec ?theme=normal à la fin.
+  Pour revenir au nouveau : ?theme=wahou. Le choix reste mémorisé sur ce téléphone.
 
 Coach mental (IA)
 - Déjà dans index.html, mais désactivé : il reste invisible tant que COACH_URL est vide.

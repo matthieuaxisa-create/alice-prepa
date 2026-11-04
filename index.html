@@ -788,8 +788,17 @@ body.swell .rays{opacity:1}
 
 <script>
 'use strict';
-// Test de design « wahou » : activé seulement par le lien ?theme=wahou (désactivé par ?theme=normal). Invisible sinon.
-(() => { try{ const q = new URLSearchParams(location.search).get('theme'); if(q) localStorage.setItem('oal-theme', q === 'wahou' ? 'wahou' : ''); if(localStorage.getItem('oal-theme') === 'wahou') document.documentElement.classList.add('theme-wahou'); }catch{} })();
+// Thème « wahou » (photo d'Alice en fond, couleurs graffiti) : le thème par défaut depuis le 4 novembre.
+// Le lien ?theme=normal remet l'ancien thème sur ce téléphone, ?theme=wahou le rétablit.
+(() => {
+  let classic = false;
+  try{
+    const q = new URLSearchParams(location.search).get('theme');
+    if(q) localStorage.setItem('oal-theme', q === 'normal' || q === 'classique' ? 'classique' : 'wahou');
+    classic = localStorage.getItem('oal-theme') === 'classique';
+  }catch{}
+  if(!classic){ document.documentElement.classList.add('theme-wahou'); document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0d0926'); }
+})();
 const WAHOU = () => document.documentElement.classList.contains('theme-wahou');
 /* ================= Contenu du programme ================= */
 const DEFAULT_START = '2026-11-02';
