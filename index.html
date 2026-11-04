@@ -304,6 +304,28 @@ p{margin:0}
 .phchk{flex:none;width:30px;height:30px;border-radius:9px;border:1.5px solid var(--dim);display:grid;place-items:center;color:transparent}
 .phchk svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .phrow.on .phchk{border-color:var(--gold);background:var(--gold);color:var(--gold-ink)}
+
+/* Ma bibliothèque */
+.lib-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.lib-strip img,.lib-card img{display:block;width:100%;aspect-ratio:1/1.414;object-fit:cover;border-radius:8px;border:1px solid var(--rule);background:var(--deck-2)}
+.lib-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 12px}
+.lib-card{display:flex;flex-direction:column;gap:6px;text-align:left;min-width:0}
+.lib-card img{border-radius:10px;box-shadow:0 8px 18px rgb(0 0 0 / .35)}
+.lib-card b{font:700 14px/1.2 var(--f-num);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+.lib-card small{font-size:12.5px;line-height:1.3;color:var(--dust)}
+.lib-t{font:800 28px/1 var(--f-display);text-transform:uppercase;margin-top:6px}
+.lire{display:flex;flex-direction:column;gap:14px}
+.lire h1{font:900 clamp(38px,11vw,54px)/.92 var(--f-display);text-transform:uppercase;margin:2px 0 6px}
+.lire h2{font:800 22px/1.1 var(--f-display);text-transform:uppercase;color:var(--gold);margin-top:12px}
+.lire h3{font:700 18px/1.3 var(--f-body);color:var(--gold);margin-top:8px;margin-bottom:-8px}
+.lire p{font-size:17px;line-height:1.6}
+.lire ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.lire li{border-left:3px solid var(--gold);padding:2px 0 2px 14px;font-size:16.5px;line-height:1.55}
+.lire li b{display:block;color:var(--chalk);font-weight:700}
+.lire .note{font-size:16.5px;line-height:1.5;margin-top:10px}
+.lire-cap{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:16px;border-radius:var(--r);background:linear-gradient(180deg,var(--note),var(--note-2));border:1px solid var(--note-line)}
+.lire-cap p{font:400 23px/1.32 var(--f-hand);text-shadow:0 0 22px rgb(244 180 58 / .22)}
+.lire-cap .ok{font:600 12px/1 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--ok)}
 .prompt{display:flex;flex-direction:column;gap:4px;width:100%;text-align:left;padding:14px 16px;background:var(--deck);border:1px solid var(--rule);border-radius:var(--r)}
 .prompt b{font:800 19px/1.1 var(--f-display);text-transform:uppercase;letter-spacing:.01em}
 .prompt span{color:var(--dust);font-size:14px}
@@ -1191,7 +1213,7 @@ function renderAll(){
   document.documentElement.style.setProperty('--light', (0.07 + 0.38 * lightFrac()).toFixed(3));
   patch($('#top'), vTop());
   patch($('#tabs'), vTabs());
-  const V = {accueil:vAccueil, programme:vProgramme, chrono:vChrono, bilan:vBilan, videos:vVideos, mental:vMental, victoires:vVictoires, pensees:vPensees, routine:vRoutine, adresse:vAdresse, profil:vProfil, coach:vCoach, phrases:vPhrases}[S.tab] || vAccueil;
+  const V = {accueil:vAccueil, programme:vProgramme, chrono:vChrono, bilan:vBilan, videos:vVideos, mental:vMental, victoires:vVictoires, pensees:vPensees, routine:vRoutine, adresse:vAdresse, profil:vProfil, coach:vCoach, phrases:vPhrases, biblio:vBiblio}[S.tab] || vAccueil;
   patch($('#view'), V());
   if(SH) renderSheet();
   const ids = [...Object.values(S.threads).flatMap(t => [t.lastBy, t.createdBy]), ...Object.values(S.videos).map(v => v.by), ...Object.values(S.msgs).flatMap(m => Object.values(m).map(x => x.by))].filter(x => x && x !== 'local');
@@ -1211,7 +1233,7 @@ function unreadCount(){
 function vTabs(){
   const T = [['accueil','home','Accueil'],['programme','prog','Intersaison'],['routine','list','Routine'],['bilan','ball','Bilan'],['mental','mental','Mental'],['chrono','chrono','Chrono'],['videos','video','Vidéos']];
   const un = unreadCount(), lm = lastMatch(), todo = lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5;
-  const cur = ['victoires','pensees','coach','phrases'].includes(S.tab) ? 'mental' : S.tab;
+  const cur = ['victoires','pensees','coach','phrases','biblio'].includes(S.tab) ? 'mental' : S.tab;
   return T.map(([k,i,l]) => `<a class="tab" href="#${k}" ${cur===k?'aria-current="page"':''}>${svg(i)}<span>${l}</span>${k==='mental'&&un?'<i class="badge" aria-label="Nouveaux messages"></i>':''}${k==='bilan'&&todo?'<i class="badge" aria-label="Bilan à faire"></i>':''}${k==='chrono'&&TM.plan&&!TM.done?'<i class="badge run" aria-label="Chrono en cours"></i>':''}</a>`).join('');
 }
 
@@ -1987,6 +2009,7 @@ function vMental(){
   </section>
   ${coachTeaser()}
   ${phrasesTeaser()}
+  ${biblioTeaser()}
   ${wallTeaser()}
   ${penseesTeaser()}
   <section>
@@ -2140,6 +2163,110 @@ function phraseAdd(text, src, el){
   rerender(); save('phrases', id, d);
   toast(room ? 'Ajoutée, et affichée sur ton accueil.' : `Ajoutée à tes phrases. Ton accueil en a déjà ${PH_MAX} : décoche-en une pour faire de la place.`);
   return true;
+}
+
+/* ---------- Ma bibliothèque : textes à relire, affiches, feuillets ---------- */
+const LIB_TEXTS = [
+  {id:'temps', t:'La meilleure motivation', s:'Discours · le temps présent', x:'Une journée, c’est 1 440 minutes. Commencer maintenant, là où tu es, avec ce que tu as.', blocks:[
+    ['h','Le message central'],
+    ['p','Le discours invite à utiliser le temps présent pour avancer concrètement vers ses objectifs. Son repère est simple : une journée représente 24 heures, soit 1 440 minutes ou 86 400 secondes. Le message insiste sur les choix et les actions réalisés aujourd’hui, à partir de sa situation et de ses moyens actuels.'],
+    ['h','Les idées à retenir'],
+    ['ul',[
+      ['Commencer maintenant.','Partir de là où l’on se trouve, utiliser ce que l’on possède et réaliser ce qui est à sa portée.'],
+      ['Transformer ses intentions en actions.','Donner une place concrète à ses projets et faire de la progression une pratique quotidienne.'],
+      ['Garder le sens de son engagement.','Se rappeler les raisons de son départ et poursuivre le chemin avec détermination.'],
+      ['Concentrer son énergie sur sa progression.','Accorder de l’attention au travail personnel et aux actions qui permettent de devenir meilleur.'],
+      ['Donner de la valeur à chaque journée.','Considérer le temps comme une ressource précieuse et choisir consciemment la manière de l’employer.'],
+      ['Allier engagement et patience.','Avancer avec intensité tout en laissant au parcours et aux résultats le temps de se construire.'],
+    ]],
+    ['h','Une phrase pour garder le cap'],
+    ['cap','Aujourd’hui, j’utilise mon temps pour poser les actions qui construisent mon avenir.'],
+  ]},
+  {id:'ose', t:'Ose. Apprends. Recommence.', s:'D’après le discours de Denzel Washington', x:'Tomber en avant, revenir, essayer encore, et trouver sa voie en avançant.', blocks:[
+    ['h3','Oser prendre des risques et voir grand'],
+    ['p','Une ambition demande de sortir de sa zone de confort. L’image de « tomber en avant » invite à tirer une leçon de ses revers et à poursuivre son chemin.'],
+    ['h3','Persévérer après les refus'],
+    ['p','Les échecs font partie du parcours. À travers ses auditions ratées, Washington montre que la progression exige de revenir, de se préparer et d’essayer encore.'],
+    ['h3','Essayer et donner ce que l’on a'],
+    ['p','Ne jamais tenter, c’est laisser ses possibilités inexploitées. Le discours encourage aussi à offrir son temps, ses compétences et son énergie : chacun a quelque chose à apporter.'],
+    ['h3','Découvrir sa voie en avançant'],
+    ['p','Un parcours n’est pas toujours linéaire. Washington revient sur ses changements d’orientation et sur la place de sa foi : un détour ou un échec peut ouvrir une nouvelle direction.'],
+    ['h3','Rester ouvert aux autres et à la vie'],
+    ['p','La conclusion appelle à accueillir de nouvelles idées et à agir malgré la peur. Les risques pris, les rencontres, l’amour et la foi contribuent à définir le chemin de chacun.'],
+    ['h','À mettre en jeu, dès aujourd’hui'],
+    ['p','Avant la séance, choisis une intention précise. Après une erreur, identifie un réglage et rejoue l’action. Après l’entraînement, note un apprentissage. Pendant le jeu, aide aussi une coéquipière à progresser.'],
+    ['key','À retenir','Tu ne contrôles pas chaque résultat. Tu peux choisir d’oser, d’apprendre et de revenir.'],
+  ]},
+];
+const LIB_IMGS = [
+  {k:'affiche', f:'je-construis-alice10.jpg', t:'Je construis mon rêve', s:'Affiche · Alice 10', alt:'Affiche « Je construis mon rêve » : Alice de dos, maillot 10, ballon sous le bras, dans un gymnase traversé par la lumière, avec ses phrases'},
+  {k:'affiche', f:'je-construis-graffiti.png', t:'Je construis mon rêve', s:'Affiche · Graffiti', alt:'Affiche « Je construis mon rêve » en lettres graffiti colorées, avec ses phrases positives'},
+  {k:'fond', f:'fond-alice10.jpg', t:'Fond d’écran', s:'Alice 10 dans la lumière', alt:'Alice de dos, maillot 10, ballon sous le bras, face au panier dans la lumière du gymnase'},
+  {k:'feuillet', f:'feuillet-1.png', t:'Je construis mon rêve.', s:'Feuillet 1 / 4', alt:'Feuillet de phrases positives : Je construis mon rêve'},
+  {k:'feuillet', f:'feuillet-2.png', t:'J’ose et j’apprends.', s:'Feuillet 2 / 4', alt:'Feuillet de phrases positives : J’ose et j’apprends'},
+  {k:'feuillet', f:'feuillet-3.png', t:'Je progresse avec plaisir.', s:'Feuillet 3 / 4', alt:'Feuillet de phrases positives : Je progresse avec plaisir'},
+  {k:'feuillet', f:'feuillet-4.png', t:'Je partage et je grandis.', s:'Feuillet 4 / 4', alt:'Feuillet de phrases positives : Je partage et je grandis'},
+];
+const libSrc = m => 'img/biblio/' + m.f;
+const libThumb = m => 'img/biblio/t-' + m.f.replace(/\.\w+$/, '.jpg');
+const LIB_N = LIB_TEXTS.length + LIB_IMGS.length;
+
+function biblioTeaser(){
+  return `<section class="card stack">
+    <div class="h-sec" style="margin:0"><h2>Ma bibliothèque</h2><span class="eyebrow gold">${LIB_N} documents</span></div>
+    <div class="lib-strip">${LIB_IMGS.slice(0, 4).map((m,i) => `<button data-act="lib-img" data-i="${i}" aria-label="${esc(m.t)}, ${esc(m.s)}"><img src="${libThumb(m)}" alt="" loading="lazy"></button>`).join('')}</div>
+    <div class="row"><a class="btn ghost" href="#biblio">${svg('list')}Ouvrir ma bibliothèque</a></div>
+  </section>`;
+}
+const libCard = i => { const m = LIB_IMGS[i]; return `<button class="lib-card" data-act="lib-img" data-i="${i}"><img src="${libThumb(m)}" alt="" loading="lazy"><b>${esc(m.t)}</b><small>${esc(m.s)}</small></button>`; };
+function vBiblio(){
+  const idx = k => LIB_IMGS.map((m,i) => m.k === k || (k === 'affiche' && m.k === 'fond') ? i : -1).filter(i => i >= 0);
+  return `
+  <section class="vw-head">
+    <span class="eyebrow gold">Ma bibliothèque</span>
+    <div class="vw-count">${LIB_N}<small>documents</small></div>
+    <p class="muted">Des textes à relire, tes affiches et des feuillets de phrases positives. Touche pour lire ou pour agrandir.</p>
+  </section>
+  <section>
+    <div class="h-sec"><h2>À lire</h2><span class="eyebrow">${LIB_TEXTS.length} textes</span></div>
+    <div class="stack">${LIB_TEXTS.map(d => `<button class="prompt" data-act="lib-txt" data-id="${d.id}"><small class="eyebrow gold">${esc(d.s)}</small><b>${esc(d.t)}</b><span>${esc(d.x)}</span></button>`).join('')}</div>
+  </section>
+  <section>
+    <div class="h-sec"><h2>Affiches</h2><span class="eyebrow">${idx('affiche').length} images</span></div>
+    <div class="lib-grid">${idx('affiche').map(libCard).join('')}</div>
+  </section>
+  <section>
+    <div class="h-sec"><h2>Feuillets</h2><span class="eyebrow">Phrases positives</span></div>
+    <div class="lib-grid">${idx('feuillet').map(libCard).join('')}</div>
+  </section>`;
+}
+function shLire(){
+  const d = LIB_TEXTS.find(x => x.id === SH.id); if(!d) return '';
+  const blk = b => {
+    if(b[0] === 'h') return `<h2>${esc(b[1])}</h2>`;
+    if(b[0] === 'h3') return `<h3>${esc(b[1])}</h3>`;
+    if(b[0] === 'p') return `<p>${esc(b[1])}</p>`;
+    if(b[0] === 'ul') return `<ul>${b[1].map(([k,v]) => `<li><b>${esc(k)}</b>${esc(v)}</li>`).join('')}</ul>`;
+    if(b[0] === 'key') return `<div class="note"><b>${esc(b[1])}</b>${esc(b[2])}</div>`;
+    if(b[0] === 'cap'){
+      const has = phraseHas(b[1]) && S.phrases[phraseId(b[1])].src !== 'liste';
+      return `<div class="lire-cap"><p>« ${esc(b[1])} »</p>${has ? `<span class="ok">Dans mes phrases ✓</span>` : `<button class="btn" data-act="ph-lib" data-t="${esc(b[1])}">${svg('plus')}Ajouter à mes phrases</button>`}</div>`;
+    }
+    return '';
+  };
+  return `<article class="lire"><span class="eyebrow gold">${esc(d.s)}</span><h1>${esc(d.t)}</h1>${d.blocks.map(blk).join('')}</article>`;
+}
+function shLibImg(){
+  const i = SH.i, m = LIB_IMGS[i], n = LIB_IMGS.length;
+  return `<div class="stack">
+    <div><span class="eyebrow gold">${esc(m.s)}</span><h2 class="lib-t">${esc(m.t)}</h2></div>
+    <div class="zoom"><img src="${libSrc(m)}" alt="${esc(m.alt)}"></div>
+    <p class="small muted">Pour l’enregistrer dans tes photos, appuie longuement sur l’image.${m.k === 'fond' ? ' Elle fera un beau fond d’écran.' : ''}</p>
+    <div class="row" style="justify-content:space-between">
+      <button class="btn ghost" data-act="lib-go" data-d="-1" ${i === 0 ? 'disabled' : ''}>${svg('prev')}Précédent</button>
+      <button class="btn ghost" data-act="lib-go" data-d="1" ${i === n - 1 ? 'disabled' : ''}>Suivant${svg('next')}</button>
+    </div>
+  </div>`;
 }
 
 /* ---------- Coach mental (IA) ---------- */
@@ -2481,6 +2608,8 @@ function renderSheet(){
   else if(SH.type === 'victoire'){ eb = 'Mur des victoires'; html = shVictoire(); }
   else if(SH.type === 'rtvids'){ eb = 'Routine de la semaine'; html = shRtVids(); }
   else if(SH.type === 'zoom'){ eb = 'Agrandir'; html = `<div class="zoom"><img src="${esc(SH.src)}" alt=""></div>`; }
+  else if(SH.type === 'lire'){ eb = 'Ma bibliothèque'; html = shLire(); }
+  else if(SH.type === 'bimg'){ eb = 'Ma bibliothèque'; html = shLibImg(); }
   $('#sh-eyebrow').textContent = eb;
   patch($('#sh-main'), html);
   renderSheetMsgs();
@@ -3004,6 +3133,11 @@ const ACT = {
     if(phraseAdd(text, 'perso', el)){ S.drafts.ph = ''; S.phWarn = false; rerender(); }
   },
   'ph-coach': el => phraseAdd(el.dataset.t, 'coach', el),
+  'ph-lib': el => phraseAdd(el.dataset.t, 'biblio', el),
+  // Ma bibliothèque
+  'lib-txt': el => openSheet({type:'lire', id:el.dataset.id}),
+  'lib-img': el => openSheet({type:'bimg', i:+el.dataset.i}),
+  'lib-go': el => { const i = SH.i + +el.dataset.d; if(i < 0 || i >= LIB_IMGS.length) return; SH.i = i; renderSheet(); $('#sheet').scrollTo({top:0}); },
   'ph-del': async el => {
     if(!guard()) return;
     if(el.dataset.confirm !== '1'){ el.dataset.confirm = '1'; el.style.color = 'var(--warn)'; toast('Touche encore pour supprimer cette phrase.'); setTimeout(() => { el.dataset.confirm = ''; el.style.color = ''; }, 3000); return; }
@@ -3206,7 +3340,7 @@ document.addEventListener('change', e => {
 });
 
 /* ================= Navigation ================= */
-const ROUTES = ['accueil','programme','routine','bilan','chrono','videos','mental','victoires','pensees','adresse','profil','coach','phrases'];
+const ROUTES = ['accueil','programme','routine','bilan','chrono','videos','mental','victoires','pensees','adresse','profil','coach','phrases','biblio'];
 function route(){
   const h = location.hash.replace('#','');
   const nt = ROUTES.includes(h) ? h : 'accueil';
