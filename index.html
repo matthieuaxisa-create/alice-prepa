@@ -344,9 +344,9 @@ p{margin:0}
 .st-tile small{font:600 11px/1.2 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--dust)}
 .st-tile b{font:800 30px/1 var(--f-display);font-variant-numeric:tabular-nums}
 .st-tile span{font-size:13px;color:var(--dust)}
-.st-tile.hero{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:12px}
-.st-tile.hero small{width:100%}
-.st-tile.hero b{font-size:54px;color:var(--gold);text-shadow:0 0 26px rgb(244 180 58 / .3)}
+.st-tile.big{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:12px}
+.st-tile.big small{width:100%}
+.st-tile.big b{font-size:54px;color:var(--gold);text-shadow:0 0 26px rgb(244 180 58 / .3)}
 .seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;margin-bottom:10px;background:var(--deck);border:1px solid var(--rule);border-radius:12px}
 .seg2 button{min-height:38px;border-radius:9px;font:700 13px/1 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--dust)}
 .seg2 button[aria-pressed="true"]{background:var(--deck-2);color:var(--gold);box-shadow:inset 0 0 0 1px rgb(244 180 58 / .4)}
@@ -403,21 +403,28 @@ html.theme-wahou .brand em{background:var(--grad);-webkit-background-clip:text;b
 html.theme-wahou .h-sec h2,html.theme-wahou .coach-t em,html.theme-wahou .wk-head h2 em{background:linear-gradient(90deg,#fff6ea 10%,#ffd23f 55%,#ff3d7f);-webkit-background-clip:text;background-clip:text;color:transparent}
 html.theme-wahou .btn:not(.ghost):not(.ok):not(.ko):not(.blue){background:var(--grad);color:#22104a;box-shadow:0 6px 22px rgb(255 61 127 / .28)}
 html.theme-wahou .btn.blue{background:linear-gradient(100deg,#3d7bff,#2fd9b9);color:#06122a}
-html.theme-wahou .card,html.theme-wahou .mc,html.theme-wahou .tile,html.theme-wahou .st-tile,html.theme-wahou .coach-card,html.theme-wahou .prompt{border:1px solid transparent;background:linear-gradient(var(--deck),var(--deck)) padding-box,var(--grad-cool) border-box}
+html.theme-wahou{--deck:rgb(24 18 56 / .8);--deck-2:rgb(36 27 77 / .86)}
+html.theme-wahou :is(.card,.mc,.tile,.st-tile,.coach-card,.prompt){position:relative;border-color:transparent;background:rgb(24 18 56 / .74);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3)}
+html.theme-wahou :is(.card,.mc,.tile,.st-tile,.coach-card,.prompt)::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--grad-cool);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 html.theme-wahou .tile svg{stroke:var(--teal)}
 html.theme-wahou .tabs{background:rgb(15 10 44 / .93);border-top:1px solid transparent;border-image:var(--grad-cool) 1}
 html.theme-wahou .tab[aria-current="page"]::before{background:var(--grad);box-shadow:0 0 12px var(--pink)}
 html.theme-wahou .page{background:linear-gradient(90deg,rgb(0 0 0 / .3),rgb(0 0 0 / 0) 10%),linear-gradient(160deg,#3a2470,#24174f 60%,#1c1342);border-color:#5b47a8;box-shadow:inset 5px 0 0 var(--pink),0 10px 28px rgb(255 61 127 / .25)}
 html.theme-wahou .page p{text-shadow:0 0 22px rgb(255 61 127 / .35)}
-html.theme-wahou .st-tile.hero b,html.theme-wahou .vw-count{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+html.theme-wahou .st-tile.big b,html.theme-wahou .vw-count{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
 html.theme-wahou .chip.on{border-color:var(--pink);color:#fff;background:rgb(255 61 127 / .2)}
-.mural{margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));overflow:hidden;border-block:1px solid #3a2d6c}
-.mural svg{display:block;width:100%;height:auto}
+.wh-hero{position:relative;margin:-4px calc(-1 * max(16px,env(safe-area-inset-left,0px))) 0;height:min(62vh,470px);display:flex;align-items:flex-start;padding:26px max(20px,env(safe-area-inset-left,0px));background:linear-gradient(180deg,rgb(13 9 38 / .1) 0%,rgb(13 9 38 / 0) 45%,var(--ink) 100%),linear-gradient(90deg,rgb(255 61 127 / .22),rgb(61 123 255 / .12) 60%,rgb(47 217 185 / .18)),url(img/biblio/fond-alice10.jpg) 58% 24% / cover no-repeat}
+.wh-hero-in{display:flex;flex-direction:column;gap:2px;transform:rotate(-5deg);transform-origin:left top}
+.wh-hero-in span{font:400 clamp(38px,11.5vw,56px)/1.05 var(--f-hand);-webkit-text-stroke:6px #120c2c;paint-order:stroke fill;text-shadow:0 6px 24px rgb(0 0 0 / .45)}
+.wh-hero-in .h-a{color:#ffd23f}
+.wh-hero-in .h-b{color:#ff3d7f;margin-left:18px}
 .wall-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.wall-bg span{position:absolute;white-space:nowrap;font-family:var(--f-hand);opacity:.09;line-height:1}
-.wall-bg .bg-pl{position:absolute;bottom:76px;width:46vw;max-width:270px;opacity:.14}
-.wall-bg .bg-pl.l{left:-8vw}
-.wall-bg .bg-pl.r{right:-8vw}
+.wall-bg .bg-photo{position:absolute;inset:0;background:url(img/biblio/fond-alice10.jpg) 60% 30% / cover no-repeat}
+.wall-bg .bg-veil{position:absolute;inset:0;background:radial-gradient(90% 50% at 0% 0%,rgb(255 61 127 / .28),transparent 70%),radial-gradient(90% 50% at 100% 100%,rgb(47 217 185 / .22),transparent 70%),linear-gradient(180deg,rgb(13 9 38 / .62),rgb(13 9 38 / .4) 40%,rgb(13 9 38 / .62) 75%,rgb(13 9 38 / .88))}
+.wall-bg span{position:absolute;white-space:nowrap;font-family:var(--f-hand);opacity:.1;line-height:1}
+.wall-bg .bb{position:absolute;width:min(80vw,440px);height:auto;opacity:.62}
+.wall-bg .bb.l{left:0;top:14%;transform:translateX(-48%) rotate(-12deg)}
+.wall-bg .bb.r{right:0;bottom:10%;transform:translateX(48%) rotate(16deg)}
 
 /* Ma bibliothèque */
 .lib-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -1371,7 +1378,7 @@ function vAccueil(){
   const threads = Object.entries(S.threads).filter(([,t]) => t.lastAt).sort((a,b) => b[1].lastAt - a[1].lastAt).slice(0,2);
   const lm = lastMatch();
   return `
-  ${WAHOU() ? muralHTML() : ''}
+  ${WAHOU() ? heroHTML() : ''}
   ${bookHTML()}
   ${matchCard(nextMatch())}
   ${lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5 ? `<section><div class="h-sec"><h2>Dernier match</h2><span class="eyebrow">Ton bilan</span></div><button class="mrow" data-act="match" data-mid="${lm.id}" data-seg="apres">${mRowInner(lm)}</button></section>` : ''}
@@ -2074,61 +2081,41 @@ function vChrono(){
   </section>`;
 }
 
-/* ---------- Test de design « wahou » : fresque et graffitis en fond ---------- */
-// Alice en pochoir : maillot de Canet (bleu et jaune) ou maillot rouge façon Indiana Fever (sans logo).
-const KITS = {
-  canet:{j:'#2350d8', j2:'#ffd23f', n:'#ffffff', no:'#ffd23f', s:'#2350d8', line:'#ffd23f', shoe:'#3f6bff', glow:'#3d7bff'},
-  fever:{j:'#c8102e', j2:'#0c2340', n:'#ffffff', no:'#ffcd00', s:'#c8102e', line:'#ffcd00', shoe:'#f4f1ea', glow:'#ff3d7f'},
-};
-function playerSVG(k, mirror){
-  const K = KITS[k], ink = '#140e30';
-  const body = `
-    <path d="M54 47Q42 58 39 70Q37 80 40 88" fill="none" stroke="${ink}" stroke-width="8.5" stroke-linecap="round"/>
-    <path d="M60 116Q52 136 50 150Q45 165 37 175" fill="none" stroke="${ink}" stroke-width="11" stroke-linecap="round"/>
-    <path d="M25 176q9-7 17-3l2 7q-10 3-20 1z" fill="${K.shoe}"/>
-    <path d="M73 116Q86 134 89 148Q90 164 87 179" fill="none" stroke="${ink}" stroke-width="11" stroke-linecap="round"/>
-    <path d="M80 177h16q8 0 9 7v3H79z" fill="${K.shoe}"/>
-    <path d="M52 92L79 90L86 121L70 124L66 108L62 124L46 121Z" fill="${K.s}"/>
-    <path d="M79 90L86 121L82 122L76 91Z" fill="${K.line}"/>
-    <path d="M50 42Q64 36 79 42L82 58Q79 76 79 92L52 94Q51 76 48 58Z" fill="${K.j}"/>
-    ${k === 'canet' ? `<path d="M50 60L61 51L58 71ZM73 82L82 66L80 89ZM54 84L65 93L52 93Z" fill="${K.j2}"/>` : `<path d="M50 42Q64 36 79 42L78 47Q64 41 51 47Z" fill="${K.j2}"/><path d="M80 52L82 58Q80 74 80 90L77 90Q77 74 79 56Z" fill="${K.j2}"/>`}
-    <rect x="61" y="30" width="7" height="9" fill="${ink}"/>
-    <circle cx="65" cy="22" r="11" fill="${ink}"/>
-    <path d="M56 15C46 14 40 24 37 37C44 32 49 28 55 25Z" fill="${ink}"/>
-    <path d="M77 46Q88 58 90 72Q92 86 95 98" fill="none" stroke="${ink}" stroke-width="8.5" stroke-linecap="round"/>
-    <path d="M96 107v6M96 119v6M96 131v3" stroke="${K.line}" stroke-width="2" stroke-linecap="round" opacity=".85"/>
-    <circle cx="98" cy="150" r="12" fill="#f08a24"/>
-    <path d="M86 150h24M98 138v24M89.5 141.5q8.5 8.5 0 17M106.5 141.5q-8.5 8.5 0 17" fill="none" stroke="#5a2a08" stroke-width="1.2"/>`;
-  const num = `<text x="${mirror ? 64 : 66}" y="77" text-anchor="middle" font-family="'Big Shoulders Display','Barlow Condensed',sans-serif" font-weight="900" font-size="22" fill="${K.n}" stroke="${K.no}" stroke-width="1.2" paint-order="stroke">10</text>`;
-  return `<g style="filter:drop-shadow(0 0 5px ${K.glow})">${mirror ? `<g transform="translate(130 0) scale(-1 1)">${body}</g>` : body}${num}</g>`;
-}
-function muralHTML(){
-  const sp = (id, c) => `<radialGradient id="${id}"><stop offset="0" stop-color="${c}" stop-opacity=".8"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></radialGradient>`;
-  return `<section class="mural" aria-label="Fresque : Alice dribble, en maillot de Canet et en maillot rouge">
-    <svg viewBox="0 0 360 230" aria-hidden="true">
-      <defs>
-        <pattern id="mw-brick" width="36" height="18" patternUnits="userSpaceOnUse"><rect width="36" height="18" fill="#2a1f57"/><path d="M0 .6H36M0 9.6H36M.6 0V9M18.6 9V18" stroke="#191240" stroke-width="1.3"/></pattern>
-        ${sp('mw-b', '#3d7bff')}${sp('mw-p', '#ff3d7f')}${sp('mw-y', '#ffd23f')}${sp('mw-t', '#2fd9b9')}
-      </defs>
-      <rect width="360" height="230" fill="url(#mw-brick)"/>
-      <circle cx="70" cy="130" r="95" fill="url(#mw-b)" opacity=".75"/><circle cx="292" cy="130" r="95" fill="url(#mw-p)" opacity=".75"/>
-      <circle cx="180" cy="60" r="70" fill="url(#mw-y)" opacity=".45"/><circle cx="185" cy="205" r="60" fill="url(#mw-t)" opacity=".5"/>
-      <g font-family="'Permanent Marker',cursive" text-anchor="middle" stroke="#120c2c" stroke-width="5" paint-order="stroke" stroke-linejoin="round">
-        <text x="181" y="70" font-size="28" fill="#ffd23f" transform="rotate(-6 181 70)">C’est moi</text>
-        <text x="182" y="106" font-size="28" fill="#ff3d7f" transform="rotate(-4 182 106)">contre moi</text>
-        <text x="180" y="152" font-size="16" fill="#2fd9b9" transform="rotate(-3 180 152)">Je construis</text>
-        <text x="182" y="174" font-size="16" fill="#2fd9b9" transform="rotate(-3 182 174)">mon rêve</text>
-      </g>
-      <path d="M142 76v12M152 78v8M222 112v14M232 114v7" stroke="#ff3d7f" stroke-width="2.4" stroke-linecap="round" opacity=".7"/>
-      <g transform="translate(-6 26)">${playerSVG('canet')}</g>
-      <g transform="translate(236 26)">${playerSVG('fever', true)}</g>
-    </svg>
+/* ---------- Test de design « wahou » : la photo d'Alice en fond d'écran ---------- */
+// La photo (Alice de dos, maillot ALICE 10, dans la lumière du gymnase) : en grand en haut de l'accueil, et en fond fixe partout, sous un voile coloré.
+const BG_PHOTO = 'img/biblio/fond-alice10.jpg';
+const heroHTML = () => `<section class="wh-hero" aria-label="Alice de dos, ballon sous le bras, dans la lumière du gymnase">
+    <div class="wh-hero-in"><span class="h-a">C’est moi</span><span class="h-b">contre moi</span></div>
   </section>`;
+// Ballon en éclaboussure d'aquarelle (orange et bleu), dessiné ici : taches aux bords irréguliers, gouttes, traînées.
+function splashURL(seed, hot){
+  let s = seed; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const O = ['#ff7a1a', '#ff9d2e', '#e8430c', '#ffc14a'], B = ['#2f6bff', '#58a6ff', '#1d3fb8', '#8fd0ff'];
+  const A = hot ? O : B, C = hot ? B : O, pick = L => L[Math.floor(rnd() * L.length)];
+  let blobs = '', drops = '', streaks = '';
+  for(let i = 0; i < 28; i++){ const a = rnd() * Math.PI * 2, d = 36 + rnd() * 92, r = 16 + rnd() * 46; blobs += `<circle cx="${(200 + Math.cos(a) * d).toFixed(1)}" cy="${(200 + Math.sin(a) * d).toFixed(1)}" r="${r.toFixed(1)}" fill="${pick(i % 3 === 2 ? C : A)}" opacity="${(.35 + rnd() * .4).toFixed(2)}"/>`; }
+  for(let i = 0; i < 16; i++){ const a = rnd() * 360, d = 100 + rnd() * 45, len = 22 + rnd() * 50; streaks += `<rect x="${(200 + d).toFixed(1)}" y="198" width="${len.toFixed(1)}" height="${(1.6 + rnd() * 3.4).toFixed(1)}" rx="1.6" transform="rotate(${a.toFixed(1)} 200 200)" fill="${pick(rnd() < .7 ? A : C)}" opacity=".7"/>`; }
+  for(let i = 0; i < 80; i++){ const a = rnd() * Math.PI * 2, d = 118 + rnd() * 78, r = .8 + rnd() * 4.2; drops += `<circle cx="${(200 + Math.cos(a) * d).toFixed(1)}" cy="${(200 + Math.sin(a) * d).toFixed(1)}" r="${r.toFixed(1)}" fill="${pick(rnd() < .65 ? A : C)}" opacity="${(.5 + rnd() * .45).toFixed(2)}"/>`; }
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+    <defs>
+      <filter id="w" x="-25%" y="-25%" width="150%" height="150%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="${seed}"/><feDisplacementMap in="SourceGraphic" scale="40"/><feGaussianBlur stdDeviation="1.1"/></filter>
+      <radialGradient id="b" cx="36%" cy="30%" r="78%"><stop offset="0" stop-color="#ffb867"/><stop offset=".55" stop-color="#ef6a12"/><stop offset="1" stop-color="#8f2d05"/></radialGradient>
+      <clipPath id="c"><circle cx="200" cy="200" r="76"/></clipPath>
+    </defs>
+    <g filter="url(#w)">${blobs}${streaks}</g>${drops}
+    <circle cx="200" cy="200" r="76" fill="url(#b)" stroke="#2a1206" stroke-width="3"/>
+    <g clip-path="url(#c)" fill="none" stroke="#2a1206" stroke-width="3.2" stroke-linecap="round" transform="rotate(-22 200 200)">
+      <path d="M118 196Q200 222 282 196"/><path d="M200 120V280"/><path d="M146 132Q186 200 146 268"/><path d="M254 132Q214 200 254 268"/>
+    </g>
+    <ellipse cx="170" cy="166" rx="30" ry="16" fill="#fff" opacity=".2" transform="rotate(-32 170 166)"/>
+  </svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
 function wallBgHTML(){
-  const W = [['C’est moi contre moi', 4, 9, -8, '#ffd23f', 30], ['Ose', 72, 22, 7, '#ff3d7f', 70], ['Je construis mon rêve', 2, 41, -4, '#2fd9b9', 27], ['Un pas après l’autre', 26, 60, 5, '#ffd23f', 24], ['J’apprends · je progresse · je grandis', 0, 79, -3, '#3d7bff', 19], ['10', 78, 66, -10, '#ff3d7f', 88]];
-  return `<div class="wall-bg" aria-hidden="true">${W.map(([t, x, y, r, c, s]) => `<span style="left:${x}%;top:${y}%;transform:rotate(${r}deg);color:${c};font-size:${s}px">${t}</span>`).join('')}
-    <svg class="bg-pl l" viewBox="0 0 130 200">${playerSVG('canet')}</svg><svg class="bg-pl r" viewBox="0 0 130 200">${playerSVG('fever', true)}</svg></div>`;
+  const W = [['C’est moi contre moi', 4, 12, -8, '#ffd23f', 28], ['Un pas après l’autre', 26, 58, 5, '#2fd9b9', 24], ['Je construis mon rêve', 18, 86, -4, '#ffd23f', 24]];
+  return `<div class="wall-bg" aria-hidden="true"><div class="bg-photo"></div><div class="bg-veil"></div>
+    <img class="bb l" src="${splashURL(11, true)}" alt=""><img class="bb r" src="${splashURL(29, false)}" alt="">
+    ${W.map(([t, x, y, r, c, sz]) => `<span style="left:${x}%;top:${y}%;transform:rotate(${r}deg);color:${c};font-size:${sz}px">${t}</span>`).join('')}</div>`;
 }
 
 /* ---------- Statistique : tirs par position, entraînements et matchs ---------- */
@@ -2229,7 +2216,7 @@ function courtSVG(o){
 }
 function stTiles(A, one){
   const t = (l, v, s, c='') => `<div class="st-tile ${c}"><small>${l}</small><b>${v}</b>${s ? `<span>${s}</span>` : ''}</div>`;
-  const out = [t('Tirs', pcS(A.fgm, A.fga), `${A.fgm} réussis sur ${A.fga}`, 'hero'), t('2 pts', pcS(A.m2, A.a2), `${A.m2} / ${A.a2}`), t('3 pts', pcS(A.m3, A.a3), `${A.m3} / ${A.a3}`), t('Lancers francs', pcS(A.ftm, A.fta), `${A.ftm} / ${A.fta}`)];
+  const out = [t('Tirs', pcS(A.fgm, A.fga), `${A.fgm} réussis sur ${A.fga}`, 'big'), t('2 pts', pcS(A.m2, A.a2), `${A.m2} / ${A.a2}`), t('3 pts', pcS(A.m3, A.a3), `${A.m3} / ${A.a3}`), t('Lancers francs', pcS(A.ftm, A.fta), `${A.ftm} / ${A.fta}`)];
   if(A.nm) out.push(one ? t('Points', A.ptsM, '') : t('Points par match', (A.ptsM / A.nm).toFixed(1).replace('.', ','), `${A.ptsM} en ${A.nm} match${A.nm > 1 ? 's' : ''}`));
   for(const k of Object.keys(EVN)) if(A[k]) out.push(t(EVP[k], A[k], ''));
   return `<div class="st-tiles">${out.join('')}</div>`;
@@ -3608,7 +3595,7 @@ const ACT = {
     S.stats = {...S.stats, [id]:d}; save('stats', id, d);
     if(S.tab !== 'stats'){ history.replaceState(null, '', '#stats'); S.tab = 'stats'; window.scrollTo(0, 0); }
     openSheet({type:'stsess', id}); rerender();
-    audioInit(); chime(); setTimeout(() => burstAt($('#sh-main .st-tile.hero'), {n:46}), 200);
+    audioInit(); chime(); setTimeout(() => burstAt($('#sh-main .st-tile.big'), {n:46}), 200);
     toast(A.fga ? `Séance enregistrée : ${A.fgm}/${A.fga} aux tirs.` : 'Séance enregistrée.');
   },
   'st-open': el => openSheet({type:'stsess', id:el.dataset.id}),
