@@ -194,6 +194,7 @@ p{margin:0}
 
 /* tiles */
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tiles.four{grid-template-columns:repeat(2,1fr)}
 .tile{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:14px 12px;background:var(--deck);border:1px solid var(--rule);border-radius:var(--r);text-align:left;text-decoration:none}
 .tile svg{width:22px;height:22px;fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .tile b{font:700 14px/1.15 var(--f-num);letter-spacing:.06em;text-transform:uppercase}
@@ -259,6 +260,50 @@ p{margin:0}
 .composer{display:flex;gap:8px;align-items:flex-end}
 .composer textarea{min-height:48px;max-height:180px}
 .composer .btn{flex:none;width:52px;padding:0}
+
+/* Coach mental (IA) */
+.coach-card{display:flex;flex-direction:column;gap:12px;padding:18px 16px;border-radius:var(--r);border:1px solid rgb(244 180 58 / .4);background:radial-gradient(120% 90% at 100% 0%,rgb(244 180 58 / .2),transparent 60%),var(--deck);box-shadow:0 0 28px rgb(244 180 58 / .08)}
+.coach-card .vt-last{font-size:15.5px}
+.coach-t{font:900 clamp(40px,12vw,60px)/.9 var(--f-display);text-transform:uppercase}
+.coach-t em{display:block;font-style:normal;color:var(--gold);text-shadow:0 0 26px rgb(244 180 58 / .4)}
+.goal{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--deck);border:1px solid var(--rule);border-radius:var(--r)}
+.goal > svg{width:22px;height:22px;flex:none;fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.goal > div{flex:1;min-width:0}
+.goal p{font-weight:600;line-height:1.35;overflow-wrap:anywhere}
+.goal small{display:block;font:600 11px/1.2 var(--f-num);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-top:4px}
+.goal .btn{min-height:38px;padding:0 12px;flex:none}
+.goal.won{border-style:dashed}
+.goal.won > svg{stroke:var(--ok)}
+.goal.won p{color:var(--dust)}
+.cmsgs{display:flex;flex-direction:column;gap:12px}
+.cmsg{max-width:90%;align-self:flex-start;display:flex;flex-direction:column;gap:10px;background:var(--deck);border:1px solid var(--rule);border-radius:16px 16px 16px 4px;padding:11px 14px}
+.cmsg.me{align-self:flex-end;background:var(--gold-soft);border-color:rgb(244 180 58 / .35);border-radius:16px 16px 4px 16px}
+.cmsg p{white-space:pre-wrap;overflow-wrap:anywhere;font-size:16px;line-height:1.5}
+.cmsg small{font:600 11px/1.2 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:-4px}
+.cgoal{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:10px 12px;border-left:3px solid var(--gold);background:var(--gold-soft);border-radius:0 10px 10px 0}
+.cgoal b{font:700 16px/1.35 var(--f-body);overflow-wrap:anywhere}
+.cgoal .btn{min-height:36px;padding:0 12px;font-size:13px}
+.cgoal .ok{font:600 12px/1 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--ok)}
+.cdots{display:inline-flex;gap:6px;padding:6px 2px}
+.cdots i{width:7px;height:7px;border-radius:50%;background:var(--gold);opacity:.3;animation:cdot 1.2s infinite}
+.cdots i:nth-child(2){animation-delay:.2s}
+.cdots i:nth-child(3){animation-delay:.4s}
+@keyframes cdot{30%{opacity:1;transform:translateY(-3px)}}
+
+/* Mes phrases : un livre dont la page tourne à chaque toucher */
+.book{display:grid;width:100%;perspective:1600px;text-align:center}
+.page{grid-area:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;min-height:156px;padding:26px 22px 14px 30px;border-radius:4px 14px 14px 4px;border:1px solid var(--note-line);background:linear-gradient(90deg,rgb(0 0 0 / .32),rgb(0 0 0 / 0) 10%),linear-gradient(180deg,var(--note),var(--note-2));box-shadow:inset 5px 0 0 rgb(244 180 58 / .45),0 10px 24px rgb(0 0 0 / .45);transform-origin:left center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.page p{font:400 23px/1.32 var(--f-hand);color:var(--chalk);text-shadow:0 0 22px rgb(244 180 58 / .22);overflow-wrap:anywhere}
+.page .pg{font:600 11px/1 var(--f-num);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.page.under{transform:translate(3px,3px)}
+.page.top.turn{animation:ph-turn .62s cubic-bezier(.4,.1,.6,1) forwards}
+@keyframes ph-turn{0%{transform:rotateY(0)}55%{box-shadow:inset 5px 0 0 rgb(244 180 58 / .45),-24px 14px 34px rgb(0 0 0 / .55)}100%{transform:rotateY(-155deg);opacity:0}}
+.phrow{display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--deck);border:1px solid var(--rule);border-radius:var(--r)}
+.phrow.on{border-color:rgb(244 180 58 / .55);background:var(--gold-soft)}
+.phrow p{flex:1;min-width:0;font-size:15.5px;line-height:1.35;overflow-wrap:anywhere}
+.phchk{flex:none;width:30px;height:30px;border-radius:9px;border:1.5px solid var(--dim);display:grid;place-items:center;color:transparent}
+.phchk svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.phrow.on .phchk{border-color:var(--gold);background:var(--gold);color:var(--gold-ink)}
 .prompt{display:flex;flex-direction:column;gap:4px;width:100%;text-align:left;padding:14px 16px;background:var(--deck);border:1px solid var(--rule);border-radius:var(--r)}
 .prompt b{font:800 19px/1.1 var(--f-display);text-transform:uppercase;letter-spacing:.01em}
 .prompt span{color:var(--dust);font-size:14px}
@@ -1000,7 +1045,7 @@ function platform(u){
 const S = {
   tab:'accueil', mode:'local', uid:null, isOwner:false, user:null, cwKnown:false,
   settings:{vma:14, start:DEFAULT_START, name:'Alice'},
-  progress:{}, checkins:{}, shots:{}, threads:{}, videos:{}, msgs:{}, matchs:{}, victoires:{}, mots:{}, motEdit:false, routines:{}, rtEdit:null, rtVidCat:'all',
+  progress:{}, checkins:{}, shots:{}, threads:{}, videos:{}, msgs:{}, matchs:{}, victoires:{}, mots:{}, motEdit:false, routines:{}, rtEdit:null, rtVidCat:'all', objectifs:{}, goalsWon:false, phrases:{}, phWarn:false,
   vCat:'seance', vFilter:'all', vDismissed:ls.get('oal-vdis',{}),
   sample:null, mSeg:'avant', jSel:null, ai:{},
   names:{}, drafts:{},
@@ -1080,7 +1125,7 @@ function subscribeAll(){
   unsubs.forEach(u => { try{ u(); }catch{} }); unsubs = [];
   unsubs.push(Store.watch('config', m => { if(m.main) S.settings = {...S.settings, ...m.main}; rerender(); }));
   unsubs.push(Store.watch('ffbb', m => { if(m.pouleA) applyFfbb(m.pouleA); rerender(); }));
-  for(const k of ['progress','checkins','shots','threads','videos','matchs','victoires','mots','routines']){
+  for(const k of ['progress','checkins','shots','threads','videos','matchs','victoires','mots','routines','objectifs','phrases']){
     unsubs.push(Store.watch(k, m => { S[k] = m; rerender(); }));
   }
 }
@@ -1146,7 +1191,7 @@ function renderAll(){
   document.documentElement.style.setProperty('--light', (0.07 + 0.38 * lightFrac()).toFixed(3));
   patch($('#top'), vTop());
   patch($('#tabs'), vTabs());
-  const V = {accueil:vAccueil, programme:vProgramme, chrono:vChrono, bilan:vBilan, videos:vVideos, mental:vMental, victoires:vVictoires, pensees:vPensees, routine:vRoutine, adresse:vAdresse, profil:vProfil}[S.tab] || vAccueil;
+  const V = {accueil:vAccueil, programme:vProgramme, chrono:vChrono, bilan:vBilan, videos:vVideos, mental:vMental, victoires:vVictoires, pensees:vPensees, routine:vRoutine, adresse:vAdresse, profil:vProfil, coach:vCoach, phrases:vPhrases}[S.tab] || vAccueil;
   patch($('#view'), V());
   if(SH) renderSheet();
   const ids = [...Object.values(S.threads).flatMap(t => [t.lastBy, t.createdBy]), ...Object.values(S.videos).map(v => v.by), ...Object.values(S.msgs).flatMap(m => Object.values(m).map(x => x.by))].filter(x => x && x !== 'local');
@@ -1166,7 +1211,7 @@ function unreadCount(){
 function vTabs(){
   const T = [['accueil','home','Accueil'],['programme','prog','Intersaison'],['routine','list','Routine'],['bilan','ball','Bilan'],['mental','mental','Mental'],['chrono','chrono','Chrono'],['videos','video','Vidéos']];
   const un = unreadCount(), lm = lastMatch(), todo = lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5;
-  const cur = S.tab === 'victoires' || S.tab === 'pensees' ? 'mental' : S.tab;
+  const cur = ['victoires','pensees','coach','phrases'].includes(S.tab) ? 'mental' : S.tab;
   return T.map(([k,i,l]) => `<a class="tab" href="#${k}" ${cur===k?'aria-current="page"':''}>${svg(i)}<span>${l}</span>${k==='mental'&&un?'<i class="badge" aria-label="Nouveaux messages"></i>':''}${k==='bilan'&&todo?'<i class="badge" aria-label="Bilan à faire"></i>':''}${k==='chrono'&&TM.plan&&!TM.done?'<i class="badge run" aria-label="Chrono en cours"></i>':''}</a>`).join('');
 }
 
@@ -1185,6 +1230,7 @@ function vAccueil(){
   const threads = Object.entries(S.threads).filter(([,t]) => t.lastAt).sort((a,b) => b[1].lastAt - a[1].lastAt).slice(0,2);
   const lm = lastMatch();
   return `
+  ${bookHTML()}
   ${matchCard(nextMatch())}
   ${lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5 ? `<section><div class="h-sec"><h2>Dernier match</h2><span class="eyebrow">Ton bilan</span></div><button class="mrow" data-act="match" data-mid="${lm.id}" data-seg="apres">${mRowInner(lm)}</button></section>` : ''}
   <section>
@@ -1193,10 +1239,11 @@ function vAccueil(){
   </section>
 
   <section>
-    <div class="tiles">
+    <div class="tiles ${COACH_URL ? 'four' : ''}">
       <a class="tile" href="#chrono">${svg('chrono')}<b>Chrono</b><small>VMA, vitesse, séquences</small></a>
       <a class="tile" href="#adresse">${svg('target')}<b>Adresse</b><small>Lancers francs, 3 pts</small></a>
       <button class="tile" data-act="go-breath">${svg('wind')}<b>Respirer</b><small>Avant match, avant LF</small></button>
+      ${COACH_URL ? `<a class="tile" href="#coach">${svg('spark')}<b>Mon coach</b><small>Mental, objectifs</small></a>` : ''}
     </div>
   </section>
 
@@ -1745,6 +1792,7 @@ function victorySuggestions(){
   if(prog.length) add('first', 'Première séance de la prépa validée', 'seance', Math.min(...prog.map(([,p]) => p.at || 0)));
   WEEKS.forEach((W,w) => { if(weekDone(w) === 9) add('week-' + W.n, `Semaine ${W.n} complète : 9 séances sur 9`, 'seance', Math.max(...prog.filter(([k]) => k.startsWith(`S${W.n}-`)).map(([,p]) => p.at || 0))); });
   prog.forEach(([k,p]) => { if(p.rpe >= 8){ const sid = k.replace(/^S\d-/, ''); if(SES[sid]) add('hard-' + k, `Séance dure terminée : ${SES[sid].title.toLowerCase()} (effort ${p.rpe}/10)`, 'seance', p.at); } });
+  Object.entries(S.objectifs).forEach(([id,g]) => { if(g && g.done && g.text) add('goal-' + id, `Objectif atteint : ${String(g.text).slice(0,140)}`, 'mental', g.done); });
   return out.sort((a,b) => (b.at || 0) - (a.at || 0));
 }
 const rotOf = id => { let h = 0; for(const c of id) h = (h * 31 + c.charCodeAt(0)) | 0; return ((Math.abs(h) % 5) - 2) * 0.7; };
@@ -1937,6 +1985,8 @@ function vMental(){
     <button data-act="zoom" data-src="img/affiche.jpg" aria-label="Agrandir mon affiche"><img src="img/affiche.jpg" alt="Affiche De l’ombre à la lumière : départ, fondations, construction, progression, performance, arrivée dans la lumière"></button>
     <button data-act="zoom" data-src="img/duo.jpg" aria-label="Agrandir la photo"><img src="img/duo.jpg" alt="Deux joueuses sous les projecteurs, bras ouverts : à gauche en maillot d’Iowa n° 22, à droite Alice en maillot de Canet"></button>
   </section>
+  ${coachTeaser()}
+  ${phrasesTeaser()}
   ${wallTeaser()}
   ${penseesTeaser()}
   <section>
@@ -1967,6 +2017,299 @@ function vMental(){
     <div class="h-sec"><h2>Citations</h2></div>
     <div class="stack">${QUOTES.map(q => `<div class="note"><b>${esc(q[1])}</b>« ${esc(q[0])} »</div>`).join('')}</div>
   </section>`;
+}
+
+/* ---------- Mes phrases : au positif, sans négation ---------- */
+// Alice en écrit autant qu'elle veut (onglet Mental) et en coche 1 à 5 pour l'accueil, où elles défilent comme les pages d'un livre.
+const PHRASES = [
+  'Planifier le jour présent, c’est planifier sa réussite de demain.',
+  'Chaque matin, je suis meilleure qu’hier, et je serai encore meilleure demain.',
+  'C’est moi contre moi.',
+  'Chaque jour, je me réveille prête à me dépasser.',
+  'C’est dans le présent que se forge ma réussite de demain.',
+  'Je deviens chaque jour la meilleure version de moi-même.',
+  'J’ai grandi, j’ai progressé, j’ai beaucoup appris.',
+  'La personne à surpasser, c’est celle que j’étais hier.',
+  'Mon parcours m’appartient.',
+  'Je choisis de vivre pleinement chaque instant.',
+  'Je suis prête. Je suis là. Je joue.',
+  'Chaque séance me rapproche de la lumière.',
+  'Je respire, je vois le jeu, je décide.',
+  'Ma confiance grandit à chaque effort.',
+  'Je suis la meneuse : je donne le rythme.',
+  'Je suis calme, précise et déterminée.',
+  'J’aime les défis : ils me font grandir.',
+  'Je prends mes tirs avec confiance.',
+  'Mes appuis sont solides, mon regard est haut.',
+  'Je suis fière du chemin parcouru.',
+  'Je transforme la pression en énergie.',
+  'Je choisis l’action suivante.',
+  'Sur la ligne, ma routine me guide.',
+  'Je garde la tête haute et le cœur chaud.',
+  'Aujourd’hui, je donne le meilleur de moi-même.',
+  'Mon corps est fort, mon esprit est clair.',
+  'Je crois en moi, et ça se voit sur le terrain.',
+  'J’apprends de chaque action et j’avance.',
+  'Mon énergie rend l’équipe plus forte.',
+  'Je vois le jeu avant les autres.',
+  'Je défends avec mes pieds, mon cœur et ma tête.',
+  'Je savoure chaque minute sur le terrain.',
+  'Je suis régulière, séance après séance.',
+  'J’ose, j’essaie, je progresse.',
+  'Je mérite ma place et je la prends.',
+  'À chaque chute, je rebondis plus haut.',
+  'Je suis le calme au milieu de la tempête.',
+  'Je joue libre, je joue juste.',
+  'Chaque jour, je deviens la joueuse que je veux être.',
+  'La lumière est au bout de chaque effort.',
+];
+const PH_MAX = 5;
+const NEG_WORDS = new Set(['ne','pas','jamais','rien','aucun','aucune','sans','nul','nulle']);
+const hasNeg = s => (String(s).toLowerCase().match(/\p{L}+(?:['’]\p{L}+)?/gu) || []).some(w => NEG_WORDS.has(w) || /^n['’]/.test(w));
+const normTxt = s => String(s || '').toLowerCase().replace(/[«»"“”.,;:!?…’'\s]+/g, ' ').trim();
+const phraseId = t => { let h = 0; for(const c of normTxt(t)) h = (h * 31 + c.charCodeAt(0)) | 0; return 'p' + (h >>> 0).toString(36); };
+const phraseDocs = () => Object.entries(S.phrases).map(([id,p]) => ({id, ...p})).filter(p => p && p.text);
+const phraseOwn = () => phraseDocs().filter(p => p.src !== 'liste').sort((a,b) => (b.at || 0) - (a.at || 0));
+const phraseHome = () => phraseDocs().filter(p => p.home).sort((a,b) => (a.hAt || 0) - (b.hAt || 0));
+const phraseOn = t => !!(S.phrases[phraseId(t)] || {}).home;
+const phraseHas = t => !!S.phrases[phraseId(t)];
+// Rien de coché : les 5 premières idées de la liste.
+const phraseBook = () => { const h = phraseHome().map(p => p.text); return h.length ? h : PHRASES.slice(0, PH_MAX); };
+const PH = {i: ls.get('oal-ph', 0), turning:false};
+
+function bookHTML(){
+  const book = phraseBook(), n = book.length, i = ((PH.i % n) + n) % n, j = (i + 1) % n;
+  return `<section>
+    <div class="h-sec"><h2>Mes phrases</h2><a class="eyebrow gold" href="#phrases">Choisir</a></div>
+    <button class="book" data-act="ph-next" aria-label="Phrase ${i + 1} sur ${n}. Touche pour tourner la page.">
+      <div class="page under" aria-hidden="true"><p>${esc(book[j])}</p><span class="pg">${j + 1} / ${n}</span></div>
+      <div class="page top" id="ph-top"><p>${esc(book[i])}</p><span class="pg">${i + 1} / ${n}</span></div>
+    </button>
+  </section>`;
+}
+function phrasesTeaser(){
+  const h = phraseHome().length, own = phraseOwn().length;
+  return `<section class="card stack">
+    <div class="h-sec" style="margin:0"><h2>Mes phrases</h2><span class="eyebrow gold">${h ? `${h} / ${PH_MAX} à l’accueil` : 'À choisir'}</span></div>
+    <p class="muted small">Écris tes phrases au positif, autant que tu veux, et coche jusqu’à ${PH_MAX} phrases pour ton accueil.${own ? ` Tu en as écrit ${own}.` : ''}</p>
+    <div class="row"><a class="btn" href="#phrases">${svg('list')}Écrire et choisir</a></div>
+  </section>`;
+}
+function phRow(text, id, own){
+  const on = phraseOn(text);
+  return `<div class="phrow ${on ? 'on' : ''}">
+    <button class="phchk" data-act="ph-home" data-t="${esc(text)}" aria-pressed="${on}" aria-label="${on ? 'Retirer de l’accueil' : 'Afficher à l’accueil'}">${svg('check')}</button>
+    <p>${esc(text)}</p>
+    ${own ? `<button class="vdel" data-act="ph-del" data-id="${esc(id)}" aria-label="Supprimer cette phrase">${svg('trash')}</button>` : ''}
+  </div>`;
+}
+function vPhrases(){
+  const home = phraseHome(), own = phraseOwn(), ideas = PHRASES.filter(t => !own.some(p => phraseId(p.text) === phraseId(t)));
+  return `
+  <section class="vw-head">
+    <span class="eyebrow gold">Mes phrases</span>
+    <div class="vw-count">${home.length}<small>/ ${PH_MAX} à l’accueil</small></div>
+    <p class="muted">Des phrases au positif, au présent, qui disent ce que tu es et ce que tu fais. Coche celles qui défilent sur ton accueil, comme les pages d’un livre.</p>
+    ${home.length ? '' : `<p class="small" style="color:var(--gold)">Pour l’instant, l’accueil montre les ${PH_MAX} premières idées de la liste. Coche les tiennes.</p>`}
+  </section>
+  <section class="card stack">
+    <div class="h-sec" style="margin:0"><h2>Écrire ma phrase</h2></div>
+    <label for="ph-in">Ce que tu es, ce que tu fais</label>
+    <textarea id="ph-in" rows="2" maxlength="160" data-draft="ph" placeholder="Ex. : Sur la ligne, je suis calme et précise.">${esc(S.drafts.ph || '')}</textarea>
+    ${dictHint}
+    ${S.phWarn ? `<p class="small" style="color:var(--gold)">Ta phrase contient une négation. Essaie de la dire au positif : « Je n’ai pas peur » devient « Je suis courageuse ».</p>` : ''}
+    <div class="row"><button class="btn" data-act="ph-save">${svg('plus')}${S.phWarn ? 'Garder quand même' : 'Ajouter'}</button>${COACH_URL ? `<a class="btn ghost" href="#coach">${svg('spark')}Avec mon coach</a>` : ''}</div>
+  </section>
+  ${own.length ? `<section><div class="h-sec"><h2>Mes phrases à moi</h2><span class="eyebrow">${own.length}</span></div><div class="stack">${own.map(p => phRow(p.text, p.id, true)).join('')}</div></section>` : ''}
+  <section>
+    <div class="h-sec"><h2>Idées de phrases</h2><span class="eyebrow">${ideas.length}</span></div>
+    <div class="stack">${ideas.map(t => phRow(t, phraseId(t), false)).join('')}</div>
+  </section>`;
+}
+// Ajoute une phrase (écrite, proposée par le coach ou cochée dans la liste). Elle va à l'accueil s'il reste de la place.
+function phraseAdd(text, src, el){
+  text = String(text || '').trim().replace(/\s+/g, ' ').slice(0, 160);
+  if(!text || !guard()) return false;
+  const id = phraseId(text), cur = S.phrases[id];
+  if(cur && cur.src !== 'liste'){ toast('Cette phrase est déjà dans tes phrases.'); return false; }
+  const room = phraseHome().filter(p => p.id !== id).length < PH_MAX;
+  const d = {text, src, at:(cur && cur.at) || Date.now(), by:meId(), home:room, hAt:room ? Date.now() : null};
+  if(el){ burstAt(el, {n:28, v:.7}); chime([1319,1568,2093], .08, .1); }
+  S.phrases = {...S.phrases, [id]:d};
+  if(room){ PH.i = phraseHome().length - 1; ls.set('oal-ph', PH.i); }
+  rerender(); save('phrases', id, d);
+  toast(room ? 'Ajoutée, et affichée sur ton accueil.' : `Ajoutée à tes phrases. Ton accueil en a déjà ${PH_MAX} : décoche-en une pour faire de la place.`);
+  return true;
+}
+
+/* ---------- Coach mental (IA) ---------- */
+// Le coach passe par un relais Cloudflare (dossier « Coach IA » sur le Mac) qui garde la clé de l'API Claude.
+// La conversation reste sur ce téléphone ; les objectifs vont dans le carnet (collection « objectifs », sauvegardée avec le reste).
+const COACH_URL = '';
+const CO = {msgs: ls.get('oal-coach', []), busy:false, ctl:null, live:'', err:null};
+const coachSave = () => { CO.msgs = CO.msgs.slice(-80); ls.set('oal-coach', CO.msgs); };
+const COACH_STARTS = ['Aide-moi à me fixer un objectif pour cette semaine','Prépare-moi pour le prochain match','J’ai raté une action, aide-moi à rebondir','Aide-moi à écrire une phrase positive'];
+const COACH_HI = name => `Salut ${name} ! Je suis ton coach mental. Raconte-moi ce qui t’occupe : un objectif à construire, un match à préparer, une séance qui t’a fait douter. On cherche ensemble ce que tu peux en faire, puis la marche suivante.`;
+const COACH_ERR = {
+  net:'Je n’arrive pas à joindre ton coach. Vérifie ta connexion, puis réessaie.',
+  offline:'Tu es hors connexion. Ton message est gardé : réessaie dès que tu as du réseau.',
+  busy:'Ton coach est très demandé en ce moment. Réessaie dans une minute.',
+  not_configured:'Ton coach se prépare encore. Réessaie un peu plus tard.',
+  cut:'La réponse a été interrompue.',
+};
+const COACH_REFUSAL = 'Prenons ça autrement. Dis-moi ce que tu vis en ce moment et ce que tu aimerais construire : on cherche ensemble la prochaine marche. Et si quelque chose de lourd te pèse, parles-en aussi à un adulte de confiance.';
+const MARK_RE = /^\s*(🎯|✨)\s*(Objectif|Phrase)\s*:\s*(.+?)\s*$/i;
+const goalList = () => Object.entries(S.objectifs).map(([id,g]) => ({id, ...g})).filter(g => g && g.text);
+const coachClip = (s, n) => s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s;
+
+function coachTeaser(){
+  if(!COACH_URL) return '';
+  const open = goalList().filter(g => !g.done), last = [...CO.msgs].reverse().find(m => m.r === 'a');
+  const lastTxt = last ? last.t.split('\n').map(l => l.replace(/\*\*/g, '')).filter(l => l.trim() && !MARK_RE.test(l)).join(' ') : '';
+  return `<section class="coach-card">
+    <div class="h-sec" style="margin:0"><h2>Mon coach</h2><span class="eyebrow gold">${open.length ? `${open.length} objectif${open.length > 1 ? 's' : ''} en cours` : 'Coach mental'}</span></div>
+    ${lastTxt ? `<p class="vt-last">« ${esc(coachClip(lastTxt, 130))} »</p>` : `<p class="small">Pose-lui tes questions, raconte ton match ou ta séance : il t’aide à voir ce que tu peux construire, puis à viser la marche suivante.</p>`}
+    <a class="btn block" href="#coach">${svg('spark')}Parler à mon coach</a>
+  </section>`;
+}
+const goalRow = g => `<div class="goal ${g.done ? 'won' : ''}">${svg(g.done ? 'check' : 'target')}
+  <div><p>${esc(g.text)}</p><small>${g.done ? 'Atteint le ' + frDate(new Date(g.done), {day:'numeric', month:'long'}) : 'Depuis le ' + frDate(new Date(g.at || Date.now()), {day:'numeric', month:'long'})}</small></div>
+  ${g.done ? '' : `<button class="btn" data-act="goal-done" data-id="${esc(g.id)}">Atteint</button>`}
+  <button class="vdel" data-act="goal-del" data-id="${esc(g.id)}" aria-label="Retirer cet objectif">${svg('trash')}</button></div>`;
+const fmtCoach = t => esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+function coachMsg(m){
+  if(m.r === 'u') return `<div class="cmsg me"><p>${esc(m.t)}</p></div>`;
+  const parts = [], buf = [];
+  const flush = () => { const t = buf.join('\n').trim(); if(t) parts.push(`<p>${fmtCoach(t)}</p>`); buf.length = 0; };
+  String(m.t).split('\n').forEach(line => {
+    const mk = line.replace(/\*\*/g, '').match(MARK_RE);
+    if(!mk){ buf.push(line); return; }
+    flush();
+    const goal = mk[2].toLowerCase() === 'objectif', text = mk[3].replace(/^[«"“]\s*|\s*[»"”]$/g, '').slice(0, 160);
+    const has = goal ? goalList().some(g => normTxt(g.text) === normTxt(text)) : phraseHas(text) && S.phrases[phraseId(text)].src !== 'liste';
+    parts.push(`<div class="cgoal"><b>${goal ? '🎯' : '✨'} ${esc(text)}</b>${has
+      ? `<span class="ok">${goal ? 'Dans mes objectifs' : 'Dans mes phrases'} ✓</span>`
+      : `<button class="btn" data-act="${goal ? 'goal-add' : 'ph-coach'}" data-t="${esc(text)}">${svg('plus')}${goal ? 'Ajouter à mes objectifs' : 'Ajouter à mes phrases'}</button>`}</div>`);
+  });
+  flush();
+  return `<div class="cmsg"><small>Coach</small>${parts.join('')}</div>`;
+}
+function vCoach(){
+  const goals = goalList(), open = goals.filter(g => !g.done).sort((a,b) => (a.at || 0) - (b.at || 0)), won = goals.filter(g => g.done).sort((a,b) => b.done - a.done);
+  const last = CO.msgs.at(-1), stuck = !CO.busy && last && last.r === 'u';
+  return `
+  <section class="vw-head">
+    <span class="eyebrow gold">Mon coach mental</span>
+    <h1 class="coach-t">Un cran<em>plus haut</em></h1>
+    <p class="muted">Raconte, pose tes questions : ton coach t’aide à voir ce que tu peux construire, puis à viser la marche suivante. Encore et encore.</p>
+  </section>
+  <section>
+    <div class="h-sec"><h2>Mes objectifs</h2>${won.length ? `<button class="chip ${S.goalsWon ? 'on' : ''}" data-act="goal-won">Atteints · ${won.length}</button>` : ''}</div>
+    <div class="stack">
+      ${open.length ? open.map(goalRow).join('') : `<div class="empty">Construis ton prochain objectif avec ton coach : il viendra s’afficher ici.</div>`}
+      ${S.goalsWon ? won.map(goalRow).join('') : ''}
+    </div>
+  </section>
+  <section>
+    <div class="h-sec"><h2>Conversation</h2>${CO.msgs.length ? `<button class="chip" data-act="coach-new">Nouvelle</button>` : ''}</div>
+    <div class="cmsgs">
+      <div class="cmsg"><small>Coach</small><p>${esc(COACH_HI(S.settings.name || 'Alice'))}</p></div>
+      ${CO.msgs.map(coachMsg).join('')}
+      ${CO.busy ? `<div class="cmsg"><small>Coach</small><p id="coach-live" ${CO.live ? '' : 'hidden'}>${esc(CO.live)}</p>${CO.live ? '' : `<span class="cdots" id="coach-dots" role="status" aria-label="Le coach écrit"><i></i><i></i><i></i></span>`}</div>` : ''}
+    </div>
+    ${!CO.msgs.length && !CO.busy && COACH_URL ? `<div class="stack" style="margin-top:14px">${COACH_STARTS.map((t,i) => `<button class="prompt" data-act="coach-start" data-i="${i}"><b>${esc(t)}</b></button>`).join('')}</div>` : ''}
+    ${stuck ? `<div class="note" style="margin-top:14px;border-color:var(--warn);background:rgb(255 143 97 / .1)"><b style="color:var(--warn)">Pas de réponse</b>${esc(COACH_ERR[CO.err] || COACH_ERR.cut)}<div class="row" style="margin-top:10px"><button class="btn" data-act="coach-retry">Réessayer</button></div></div>` : ''}
+  </section>
+  <section>
+    ${COACH_URL ? `<form class="composer" data-submit="coach-send"><label class="sr" for="coach-in">Ton message au coach</label><textarea id="coach-in" maxlength="2000" rows="2" placeholder="Écris ou dicte ton message…" data-draft="coach">${esc(S.drafts.coach || '')}</textarea>${CO.busy
+      ? `<button class="btn ghost" type="button" data-act="coach-stop" aria-label="Arrêter la réponse">${svg('stop')}</button>`
+      : `<button class="btn" type="submit" aria-label="Envoyer">${svg('send')}</button>`}</form>
+      <div style="margin-top:8px">${dictHint}</div>`
+      : `<div class="empty">Ton coach arrive très bientôt.</div>`}
+    <p class="small muted" style="margin-top:14px">Ton coach est une intelligence artificielle. Cette conversation est enregistrée sur ton téléphone uniquement. Si quelque chose de lourd te pèse, parles-en aussi à un adulte de confiance.</p>
+  </section>`;
+}
+// Repères envoyés au coach à chaque message (sans l'heure, pour que l'historique reste en cache d'un message à l'autre).
+function coachContext(){
+  const wi = weekInfo(), L = [], fd = d => frDate(d, {day:'numeric', month:'long'});
+  L.push(`Date : ${frDate(new Date(), {weekday:'long', day:'numeric', month:'long', year:'numeric'})}.`);
+  L.push(`Prénom : ${S.settings.name || 'Alice'}. VMA : ${S.settings.vma} km/h.`);
+  L.push(wi.before ? `Prépa intersaison (4 semaines, ${TOTAL} séances) : départ le ${fd(wi.st)}.`
+    : wi.after ? `Prépa intersaison terminée : ${doneCount()} séances validées sur ${TOTAL}.`
+    : `Prépa intersaison : semaine ${wi.w + 1} sur 4 (${WEEKS[wi.w].name}), ${doneCount()} séances validées sur ${TOTAL}, dont ${weekDone(wi.w)} sur 9 cette semaine.`);
+  const nm = nextMatch();
+  if(nm){
+    L.push(`Prochain match : ${frDate(new Date(nm.date))} à ${hm(new Date(nm.date))}. ${matchContext(nm)}`);
+    const mo = (S.matchs[nm.id] || {}).obj;
+    const t = mo ? OBJ.map(f => mo[f.k] ? `${f.t} : ${mo[f.k]}` : '').filter(Boolean) : [];
+    if(t.length) L.push(`Ses objectifs pour ce match : ${t.join(' / ')}.`);
+  }
+  const lm = ourMatches().filter(m => ended(m) && !m.note && scoreOf(m)).at(-1);
+  if(lm){ const s = scoreOf(lm); L.push(`Dernier match : ${s.us > s.them ? 'victoire' : 'défaite'} ${s.us}–${s.them} contre ${TEAMS[opp(lm)][1]}, le ${fd(new Date(lm.date))}.`); }
+  const ci = S.checkins[todayISO()];
+  if(ci && (ci.e || ci.c || ci.s)) L.push(`Sa météo du jour (de 1 à 5) : énergie ${ci.e || '?'}, confiance ${ci.c || '?'}, sommeil ${ci.s || '?'}.`);
+  const mot = S.mots[weekKey()];
+  if(mot && mot.text) L.push(`Son mot de la semaine : « ${mot.text} ».`);
+  const r = rtDoc(), rt = RT.map(([k,l]) => (r[k] && r[k].text) ? `${l} : ${r[k].text}` : '').filter(Boolean);
+  if(rt.length) L.push(`Sa routine de la semaine. ${rt.join(' / ')}`);
+  const goals = goalList(), open = goals.filter(g => !g.done), won = goals.filter(g => g.done).sort((a,b) => b.done - a.done).slice(0, 3);
+  if(open.length) L.push(`Ses objectifs en cours : ${open.map(g => `« ${g.text} » (depuis le ${fd(new Date(g.at || Date.now()))})`).join(' ; ')}.`);
+  if(won.length) L.push(`Objectifs atteints récemment : ${won.map(g => `« ${g.text} » (le ${fd(new Date(g.done))})`).join(' ; ')}.`);
+  const ph = phraseHome();
+  if(ph.length) L.push(`Ses phrases à l’accueil : ${ph.map(p => `« ${p.text} »`).join(' ; ')}.`);
+  const vs = victoryList().slice(0, 3);
+  if(vs.length) L.push(`Ses dernières victoires notées : ${vs.map(v => `« ${v.text} »`).join(' ; ')}.`);
+  return L.join('\n').slice(0, 3800);
+}
+const coachHistory = () => CO.msgs.slice(-20).map(m => ({role: m.r === 'u' ? 'user' : 'assistant', content: String(m.t).slice(0, 4000)}));
+const coachScroll = instant => requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({top: document.documentElement.scrollHeight, behavior: instant || CALM.matches ? 'auto' : 'smooth'})));
+function coachLive(t){
+  CO.live = t;
+  const p = $('#coach-live'); if(!p){ rerender(); return; }
+  const atEnd = innerHeight + scrollY >= document.documentElement.scrollHeight - 160;
+  p.hidden = false; p.textContent = t; $('#coach-dots')?.remove();
+  if(atEnd) coachScroll(true);
+}
+function coachSend(text){
+  text = String(text || '').trim().slice(0, 2000);
+  if(!text || CO.busy || !COACH_URL) return;
+  CO.msgs.push({r:'u', t:text, at:Date.now()}); coachSave();
+  S.drafts.coach = ''; const ta = $('#coach-in'); if(ta){ ta.value = ''; ta.blur(); }
+  coachAsk();
+}
+// Réponse en flux (SSE de l'API Claude, relayé tel quel) : le texte s'affiche au fil de l'eau.
+async function coachAsk(){
+  if(CO.busy || !COACH_URL) return;
+  const ctl = new AbortController();
+  CO.busy = true; CO.ctl = ctl; CO.live = ''; CO.err = null; rerender(); coachScroll();
+  let text = '', stop = null;
+  try{
+    const r = await fetch(COACH_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({messages:coachHistory(), context:coachContext()}), signal:ctl.signal});
+    if(!r.ok || !r.body){ let code = 'net'; try{ code = (await r.json()).error || code; }catch{} throw {code}; }
+    const rd = r.body.getReader(), dec = new TextDecoder();
+    let buf = '';
+    for(;;){
+      const {value, done} = await rd.read(); if(done) break;
+      buf += dec.decode(value, {stream:true}).replace(/\r/g, '');
+      let k;
+      while((k = buf.indexOf('\n\n')) >= 0){
+        const ev = buf.slice(0, k); buf = buf.slice(k + 2);
+        const line = ev.split('\n').find(l => l.startsWith('data:')); if(!line) continue;
+        let d; try{ d = JSON.parse(line.slice(5)); }catch{ continue; }
+        if(d.type === 'content_block_delta' && d.delta && d.delta.type === 'text_delta'){ text += d.delta.text; coachLive(text); }
+        else if(d.type === 'message_delta' && d.delta && d.delta.stop_reason) stop = d.delta.stop_reason;
+        else if(d.type === 'error') throw {code: d.error && d.error.type === 'overloaded_error' ? 'busy' : 'net'};
+      }
+    }
+    if(stop === 'refusal') text = COACH_REFUSAL;
+    if(!text.trim()) throw {code:'net'};
+    CO.msgs.push({r:'a', t:text.trim(), at:Date.now()}); coachSave();
+  }catch(e){
+    if(ctl.signal.aborted){ if(text.trim()){ CO.msgs.push({r:'a', t:text.trim() + ' …', at:Date.now()}); coachSave(); } }
+    else CO.err = navigator.onLine === false ? 'offline' : (e && COACH_ERR[e.code] ? e.code : 'net');
+  }finally{
+    CO.busy = false; CO.ctl = null; CO.live = ''; rerender(); coachScroll();
+  }
 }
 
 /* ---------- Adresse ---------- */
@@ -2628,6 +2971,80 @@ const ACT = {
     [...OBJ.map(f => f.k), 'motCle'].forEach(o => { if(r[o]) S.drafts[`m-${mid}-obj.${o}`] = r[o]; });
     commitMatch(mid, buildMatch(mid), 50); toast('Objectifs enregistrés.');
   },
+  // Mes phrases
+  'ph-next': () => {
+    if(PH.turning) return;
+    const n = phraseBook().length, top = $('#ph-top');
+    const go = () => { PH.i = (((PH.i % n) + n) % n + 1) % n; ls.set('oal-ph', PH.i); PH.turning = false; rerender(); };
+    buzz(8);
+    if(CALM.matches || !top){ go(); return; }
+    PH.turning = true; top.classList.add('turn'); setTimeout(go, 600);
+  },
+  'ph-home': async el => {
+    if(!guard()) return;
+    const text = el.dataset.t, id = phraseId(text), cur = S.phrases[id];
+    if(cur && cur.home){
+      if(phraseHome().length <= 1){ toast('Garde au moins une phrase sur ton accueil.'); return; }
+      if(cur.src === 'liste'){
+        const nx = {...S.phrases}; delete nx[id]; S.phrases = nx; rerender();
+        try{ await Store.del('phrases', id); }catch(e){ S.phrases = {...S.phrases, [id]:cur}; rerender(); writeFail(e); }
+      } else { const d = {...cur, home:false, hAt:null}; S.phrases = {...S.phrases, [id]:d}; rerender(); save('phrases', id, d); }
+      return;
+    }
+    if(phraseHome().length >= PH_MAX){ toast(`${PH_MAX} phrases maximum sur l’accueil : décoche-en une d’abord.`); return; }
+    const d = cur ? {...cur, home:true, hAt:Date.now()} : {text, src:'liste', at:Date.now(), by:meId(), home:true, hAt:Date.now()};
+    buzz(15); burstAt(el, {n:16, v:.5, s:.6});
+    S.phrases = {...S.phrases, [id]:d}; PH.i = phraseHome().length - 1; ls.set('oal-ph', PH.i); rerender(); save('phrases', id, d);
+  },
+  'ph-save': el => {
+    const text = (S.drafts.ph || $('#ph-in')?.value || '').trim();
+    if(!text){ toast('Écris ou dicte ta phrase avant de l’ajouter.'); $('#ph-in')?.focus(); return; }
+    $('#ph-in')?.blur();
+    if(hasNeg(text) && !S.phWarn){ S.phWarn = true; rerender(); return; }
+    if(phraseAdd(text, 'perso', el)){ S.drafts.ph = ''; S.phWarn = false; rerender(); }
+  },
+  'ph-coach': el => phraseAdd(el.dataset.t, 'coach', el),
+  'ph-del': async el => {
+    if(!guard()) return;
+    if(el.dataset.confirm !== '1'){ el.dataset.confirm = '1'; el.style.color = 'var(--warn)'; toast('Touche encore pour supprimer cette phrase.'); setTimeout(() => { el.dataset.confirm = ''; el.style.color = ''; }, 3000); return; }
+    const id = el.dataset.id, prev = S.phrases[id], nx = {...S.phrases}; delete nx[id]; S.phrases = nx; rerender();
+    try{ await Store.del('phrases', id); }catch(e){ S.phrases = {...S.phrases, [id]:prev}; rerender(); writeFail(e); }
+  },
+  // Coach mental
+  'coach-start': el => coachSend(COACH_STARTS[+el.dataset.i]),
+  'coach-stop': () => { if(CO.ctl) CO.ctl.abort(); },
+  'coach-retry': () => { CO.err = null; coachAsk(); },
+  'coach-new': el => {
+    if(el.dataset.confirm !== '1'){ el.dataset.confirm = '1'; el.textContent = 'Effacer ?'; toast('Touche encore pour effacer la conversation. Tes objectifs restent.'); setTimeout(() => { el.dataset.confirm = ''; el.textContent = 'Nouvelle'; }, 3000); return; }
+    if(CO.ctl) CO.ctl.abort();
+    CO.msgs = []; CO.err = null; coachSave(); rerender(); window.scrollTo(0, 0);
+  },
+  'goal-add': el => {
+    if(!guard()) return;
+    const text = String(el.dataset.t || '').trim().slice(0, 160);
+    if(!text || goalList().some(g => normTxt(g.text) === normTxt(text))) return;
+    const id = 'g' + Store.newId(), d = {text, at:Date.now(), done:null, by:meId()};
+    burstAt(el, {n:30, v:.8}); chime([1319,1568], .08, .1);
+    S.objectifs = {...S.objectifs, [id]:d}; rerender(); save('objectifs', id, d);
+    toast('Ajouté à tes objectifs.');
+  },
+  'goal-done': el => {
+    if(!guard()) return;
+    const id = el.dataset.id, g = S.objectifs[id]; if(!g || g.done) return;
+    const d = {...g, done:Date.now()};
+    audioInit(); burstAt(el, {n:56, v:1.1}); swell(); chime(); buzz([40,60,140]);
+    S.objectifs = {...S.objectifs, [id]:d};
+    S.drafts.coach = `J’ai atteint mon objectif : « ${g.text} » ! Quelle est la marche suivante ?`;
+    rerender(); save('objectifs', id, d);
+    toast('Objectif atteint ! Ton coach t’attend pour la marche suivante.');
+  },
+  'goal-del': async el => {
+    if(!guard()) return;
+    if(el.dataset.confirm !== '1'){ el.dataset.confirm = '1'; el.style.color = 'var(--warn)'; toast('Touche encore pour retirer cet objectif.'); setTimeout(() => { el.dataset.confirm = ''; el.style.color = ''; }, 3000); return; }
+    const id = el.dataset.id, prev = S.objectifs[id], nx = {...S.objectifs}; delete nx[id]; S.objectifs = nx; rerender();
+    try{ await Store.del('objectifs', id); }catch(e){ S.objectifs = {...S.objectifs, [id]:prev}; rerender(); writeFail(e); }
+  },
+  'goal-won': () => { S.goalsWon = !S.goalsWon; rerender(); },
   close: () => closeSheet(),
   'm-close': () => momentClose(),
   'm-bilan': el => { momentClose(); ACT.match({dataset:{mid:el.dataset.mid, seg:'apres'}}); },
@@ -2726,6 +3143,7 @@ const ACT = {
   },
 };
 const SUBMIT = {
+  'coach-send': () => coachSend(S.drafts.coach || $('#coach-in')?.value),
   'vid-save': async () => {
     if(!guard()) return;
     const raw = (S.drafts['vf-url'] || $('#vf-url')?.value || '').trim();
@@ -2773,6 +3191,7 @@ document.addEventListener('submit', e => {
 document.addEventListener('input', e => {
   const k = e.target.dataset && e.target.dataset.draft;
   if(k) S.drafts[k] = e.target.value;
+  if(k === 'ph') S.phWarn = false;
 });
 document.addEventListener('change', e => {
   const t = e.target, k = t.dataset && t.dataset.change;
@@ -2787,11 +3206,11 @@ document.addEventListener('change', e => {
 });
 
 /* ================= Navigation ================= */
-const ROUTES = ['accueil','programme','routine','bilan','chrono','videos','mental','victoires','pensees','adresse','profil'];
+const ROUTES = ['accueil','programme','routine','bilan','chrono','videos','mental','victoires','pensees','adresse','profil','coach','phrases'];
 function route(){
   const h = location.hash.replace('#','');
   const nt = ROUTES.includes(h) ? h : 'accueil';
-  if(nt !== S.tab){ S.tab = nt; S.motEdit = false; S.rtEdit = null; window.scrollTo(0,0); }
+  if(nt !== S.tab){ S.tab = nt; S.motEdit = false; S.rtEdit = null; window.scrollTo(0,0); if(nt === 'coach' && CO.msgs.length) coachScroll(); }
   if(SH && SH.type !== 'zoom') closeSheet();
   rerender();
 }
@@ -2847,7 +3266,7 @@ async function boot(){
   S.cwKnown = cw !== null;
   Store.db = db;
   S.mode = cw === false ? 'readonly' : 'shared';
-  S.progress = {}; S.checkins = {}; S.shots = {}; S.threads = {}; S.videos = {}; S.msgs = {}; S.mots = {}; S.routines = {};
+  S.progress = {}; S.checkins = {}; S.shots = {}; S.threads = {}; S.videos = {}; S.msgs = {}; S.mots = {}; S.routines = {}; S.objectifs = {}; S.phrases = {};
   subscribeAll();
   if(SH) openSheet(SH);
   rerender();
