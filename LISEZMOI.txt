@@ -47,7 +47,7 @@ Modifier l'appli
 - Remettre en ligne : dans le dépôt GitHub, ouvrir le fichier, crayon « Edit », ou
   « Add file » > « Upload files » pour écraser avec la nouvelle version, puis « Commit changes ».
 - Si Alice ne voit pas le changement : fermer et rouvrir l'appli (parfois deux fois).
-  Pour forcer, changer le numéro dans sw.js : const V='alice-v18' -> 'alice-v19'.
+  Pour forcer, changer le numéro dans sw.js : const V='alice-v19' -> 'alice-v20'.
 
 Mes phrases (04/11/2026)
 - En haut de l'accueil : un livre de 1 à 5 phrases positives, sans négation. Toucher la page la fait tourner.
@@ -56,7 +56,7 @@ Mes phrases (04/11/2026)
 
 Ma bibliothèque (04/11/2026)
 - Onglet Mental > « Ma bibliothèque » : 2 textes à lire (« La meilleure motivation », « Ose. Apprends.
-  Recommence. »), 1 affiche graffiti, 1 fond d'écran (Alice 12), 4 feuillets de phrases positives. Les images sont dans img/biblio/
+  Recommence. »), 4 affiches (peinture, mur graffiti et fresque du duo en Alice 12, graffiti), 1 fond d'écran (Alice 12), 4 feuillets de phrases positives. Les images sont dans img/biblio/
   (version grand format + vignette t-…). Les textes sont dans index.html (LIB_TEXTS).
 - Ajouter une image : la mettre dans img/biblio/ avec sa vignette, puis l'ajouter à LIB_IMGS (ou demander à Claude).
 

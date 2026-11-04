@@ -435,6 +435,8 @@ html.theme-wahou .chip.on{border-color:var(--pink);color:#fff;background:rgb(255
 .lib-card img{border-radius:10px;box-shadow:0 8px 18px rgb(0 0 0 / .35)}
 .lib-card b{font:700 14px/1.2 var(--f-num);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
 .lib-card small{font-size:12.5px;line-height:1.3;color:var(--dust)}
+.lib-card.wide{grid-column:1/-1}
+.lib-card.wide img{aspect-ratio:3/2}
 .lib-t{font:800 28px/1 var(--f-display);text-transform:uppercase;margin-top:6px}
 .lire{display:flex;flex-direction:column;gap:14px}
 .lire h1{font:900 clamp(38px,11vw,54px)/.92 var(--f-display);text-transform:uppercase;margin:2px 0 6px}
@@ -2608,6 +2610,9 @@ const LIB_TEXTS = [
   ]},
 ];
 const LIB_IMGS = [
+  {k:'affiche', f:'reve-peinture.jpg', t:'Je construis mon rêve', s:'Affiche · Peinture, Alice 12', alt:'Affiche peinte à la manière d’un tableau étoilé : Alice de dos, maillot 12, ballon sous le bras, sur un terrain de quartier, entourée de ses phrases positives'},
+  {k:'affiche', f:'reve-graffiti-12.jpg', t:'Je construis mon rêve', s:'Affiche · Mur graffiti, Alice 12', alt:'Affiche : mur couvert de graffitis colorés avec ses phrases positives, Alice de dos, maillot 12, ballon sous le bras, devant le panier'},
+  {k:'affiche', f:'fresque-duo.jpg', t:'Je construis mon rêve', s:'Fresque · le duo', wide:true, alt:'Fresque murale : deux joueuses bras ouverts, à gauche en maillot d’Iowa n° 22, à droite Alice en maillot de Canet n° 12, entourées de ses phrases'},
   {k:'affiche', f:'je-construis-graffiti.png', t:'Je construis mon rêve', s:'Affiche · Graffiti', alt:'Affiche « Je construis mon rêve » en lettres graffiti colorées, avec ses phrases positives'},
   {k:'fond', f:'fond-alice12.jpg', t:'Fond d’écran', s:'Alice 12 dans la lumière', alt:'Alice de dos, maillot 12, ballon sous le bras, face au panier dans la lumière du gymnase'},
   {k:'feuillet', f:'feuillet-1.png', t:'Je construis mon rêve.', s:'Feuillet 1 / 4', alt:'Feuillet de phrases positives : Je construis mon rêve'},
@@ -2622,11 +2627,11 @@ const LIB_N = LIB_TEXTS.length + LIB_IMGS.length;
 function biblioTeaser(){
   return `<section class="card stack">
     <div class="h-sec" style="margin:0"><h2>Ma bibliothèque</h2><span class="eyebrow gold">${LIB_N} documents</span></div>
-    <div class="lib-strip">${LIB_IMGS.slice(0, 4).map((m,i) => `<button data-act="lib-img" data-i="${i}" aria-label="${esc(m.t)}, ${esc(m.s)}"><img src="${libThumb(m)}" alt="" loading="lazy"></button>`).join('')}</div>
+    <div class="lib-strip">${LIB_IMGS.map((m,i) => ({m, i})).filter(x => !x.m.wide).slice(0, 4).map(({m, i}) => `<button data-act="lib-img" data-i="${i}" aria-label="${esc(m.t)}, ${esc(m.s)}"><img src="${libThumb(m)}" alt="" loading="lazy"></button>`).join('')}</div>
     <div class="row"><a class="btn ghost" href="#biblio">${svg('list')}Ouvrir ma bibliothèque</a></div>
   </section>`;
 }
-const libCard = i => { const m = LIB_IMGS[i]; return `<button class="lib-card" data-act="lib-img" data-i="${i}"><img src="${libThumb(m)}" alt="" loading="lazy"><b>${esc(m.t)}</b><small>${esc(m.s)}</small></button>`; };
+const libCard = i => { const m = LIB_IMGS[i]; return `<button class="lib-card${m.wide ? ' wide' : ''}" data-act="lib-img" data-i="${i}"><img src="${libThumb(m)}" alt="" loading="lazy"><b>${esc(m.t)}</b><small>${esc(m.s)}</small></button>`; };
 function vBiblio(){
   const idx = k => LIB_IMGS.map((m,i) => m.k === k || (k === 'affiche' && m.k === 'fond') ? i : -1).filter(i => i >= 0);
   return `
