@@ -47,18 +47,30 @@ Modifier l'appli
 - Remettre en ligne : dans le dépôt GitHub, ouvrir le fichier, crayon « Edit », ou
   « Add file » > « Upload files » pour écraser avec la nouvelle version, puis « Commit changes ».
 - Si Alice ne voit pas le changement : fermer et rouvrir l'appli (parfois deux fois).
-  Pour forcer, changer le numéro dans sw.js : const V='alice-v9' -> 'alice-v10'.
+  Pour forcer, changer le numéro dans sw.js : const V='alice-v10' -> 'alice-v11'.
 
 Mes phrases (04/11/2026)
 - En haut de l'accueil : un livre de 1 à 5 phrases positives, sans négation. Toucher la page la fait tourner.
 - Onglet Mental > « Mes phrases » : écrire ses phrases, et cocher jusqu'à 5 phrases pour l'accueil
-  (40 idées proposées). Sans coche, l'accueil montre les 5 premières idées.
+  (92 idées rangées par thème, dont les 4 feuillets). Sans coche, l'accueil montre les 5 premières idées.
 
 Ma bibliothèque (04/11/2026)
 - Onglet Mental > « Ma bibliothèque » : 2 textes à lire (« La meilleure motivation », « Ose. Apprends.
   Recommence. »), 3 affiches et fonds, 4 feuillets de phrases positives. Les images sont dans img/biblio/
   (version grand format + vignette t-…). Les textes sont dans index.html (LIB_TEXTS).
 - Ajouter une image : la mettre dans img/biblio/ avec sa vignette, puis l'ajouter à LIB_IMGS (ou demander à Claude).
+
+Onglets et Statistique (04/11/2026)
+- Onglets du bas : Accueil · Routine · Bilan · Mental · Intersaison · Statistique · Vidéos.
+  Le Chrono est dans Intersaison (bascule « Programme | Chrono » en haut de la page).
+- Statistique : démarrer un entraînement ou un match, toucher le terrain à l'endroit du tir, puis Réussi
+  ou Raté (2 ou 3 pts détectés). Séries (ex. 7 sur 10), lancers francs, et en match passes, rebonds,
+  interceptions, balles perdues, fautes. Carte des tirs, zones, évolution, historique.
+  Un match peut être reporté dans son bilan. Les séances sont sur le téléphone (avec la sauvegarde).
+
+Test de couleurs « wahou » (04/11/2026)
+- Invisible par défaut. Pour le voir : ajouter ?theme=wahou au lien de l'appli. Pour revenir : ?theme=normal.
+- Captures et prompts d'images : dossier « Test design (4 nov) » sur le Mac.
 
 Coach mental (IA)
 - Déjà dans index.html, mais désactivé : il reste invisible tant que COACH_URL est vide.

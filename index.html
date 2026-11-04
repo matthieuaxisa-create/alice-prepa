@@ -305,6 +305,120 @@ p{margin:0}
 .phchk svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .phrow.on .phchk{border-color:var(--gold);background:var(--gold);color:var(--gold-ink)}
 
+/* Intersaison : Programme | Chrono */
+.subnav{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;background:var(--deck);border:1px solid var(--rule);border-radius:14px}
+.subnav a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:42px;border-radius:10px;text-decoration:none;font:700 14px/1 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--dust)}
+.subnav a[aria-current]{background:var(--gold);color:var(--gold-ink)}
+.subnav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+
+/* Statistique */
+.st-new{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.st-resume{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;text-align:left;padding:14px 16px;border-radius:var(--r);background:var(--gold-soft);border:1px solid rgb(244 180 58 / .55)}
+.st-resume b{font:800 22px/1 var(--f-display);text-transform:uppercase}
+.st-resume > span:last-child{font-size:14px;color:var(--dust)}
+.court{display:block;width:100%;height:auto;border-radius:12px;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.court .cbg{fill:#182132}
+.court .cl{fill:none;stroke:rgb(239 232 218 / .55);stroke-width:.55;pointer-events:none}
+.court .cl .rim{stroke:var(--warn);stroke-width:.7}
+.court .cl .bb{stroke-width:1}
+.court .zgap{fill:none;stroke:var(--ink);stroke-width:.9;pointer-events:none}
+.court [data-z]{cursor:pointer}
+.court .zl.on rect{fill:var(--ink);stroke:var(--gold);stroke-width:.8}
+.court .zl,.court .zlc{pointer-events:none}
+.court .zl rect{fill:rgb(11 14 20 / .8)}
+.court .zl text,.court .zlc{font:700 4.6px var(--f-num);fill:var(--chalk);text-anchor:middle}
+.court .zl .zp{font:600 3.5px var(--f-num);fill:var(--dust)}
+.court .zlc{font-size:3.6px}
+.court .dots,.court .glow{pointer-events:none}
+.court .mk-ok{fill:#16a37f;stroke:var(--ink);stroke-width:.6}
+.court .mk-koh{fill:none;stroke:var(--ink);stroke-width:2.1;stroke-linecap:round}
+.court .mk-ko{fill:none;stroke:#e8573a;stroke-width:1;stroke-linecap:round}
+.court .mk-s circle{fill:rgb(244 180 58 / .22);stroke:var(--gold);stroke-width:.6}
+.court .mk-s text{font:700 3.2px var(--f-num);fill:var(--chalk);text-anchor:middle}
+.court .pend{fill:none;stroke:var(--chalk);stroke-width:.8;animation:pend 1s ease-in-out infinite}
+.court .pend-dot{fill:var(--chalk)}
+.court.live{cursor:crosshair;box-shadow:0 0 0 1px rgb(244 180 58 / .35)}
+@keyframes pend{50%{stroke-opacity:.2}}
+.st-tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.st-tile{display:flex;flex-direction:column;gap:3px;padding:10px 12px;background:var(--deck);border:1px solid var(--rule);border-radius:12px;min-width:0}
+.st-tile small{font:600 11px/1.2 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--dust)}
+.st-tile b{font:800 30px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.st-tile span{font-size:13px;color:var(--dust)}
+.st-tile.hero{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:12px}
+.st-tile.hero small{width:100%}
+.st-tile.hero b{font-size:54px;color:var(--gold);text-shadow:0 0 26px rgb(244 180 58 / .3)}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;margin-bottom:10px;background:var(--deck);border:1px solid var(--rule);border-radius:12px}
+.seg2 button{min-height:38px;border-radius:9px;font:700 13px/1 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--dust)}
+.seg2 button[aria-pressed="true"]{background:var(--deck-2);color:var(--gold);box-shadow:inset 0 0 0 1px rgb(244 180 58 / .4)}
+.st-leg{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:13px;color:var(--dust);align-items:center}
+.st-leg svg{width:12px;height:12px;margin-right:6px;vertical-align:-1px;overflow:visible}
+.st-leg .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.st-ramp{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:var(--dust)}
+.st-ramp i{flex:1;height:8px;border-radius:4px;background:linear-gradient(90deg,rgb(244 180 58 / .14),rgb(244 180 58 / .8))}
+.st-cap{margin-top:10px;font-size:14.5px;line-height:1.45}
+.st-cap b{color:var(--gold)}
+.st-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+.st-table th{padding:6px 4px;border-bottom:1px solid var(--rule);font:600 11px/1.2 var(--f-num);letter-spacing:.08em;text-transform:uppercase;color:var(--dust);text-align:right}
+.st-table td{padding:7px 4px;border-bottom:1px solid var(--rule);text-align:right;font-variant-numeric:tabular-nums}
+.st-table th:first-child,.st-table td:first-child{text-align:left}
+.st-evo{display:block;width:100%;height:auto}
+.st-evo .gl{stroke:var(--rule);stroke-width:1}
+.st-evo text{font:600 9px var(--f-num);fill:var(--dust)}
+.st-evo .ev{font-size:11px;fill:var(--chalk)}
+.st-evo [data-act]{cursor:pointer}
+.st-row{display:grid;grid-template-columns:6px 1fr auto;gap:12px;align-items:center;width:100%;padding:12px 14px;text-align:left;background:var(--deck);border:1px solid var(--rule);border-radius:var(--r)}
+.st-row > i{align-self:stretch;border-radius:3px}
+.st-row b{display:block;font-weight:600}
+.st-row small{font-size:13px;color:var(--dust)}
+.st-row > span{font:700 18px/1 var(--f-num);text-align:right;font-variant-numeric:tabular-nums}
+.st-row > span small{display:block;margin-top:3px;font:600 12px/1 var(--f-num)}
+.st-count{display:grid;grid-template-columns:repeat(auto-fit,minmax(68px,1fr));gap:6px}
+.st-count div{padding:8px 6px;text-align:center;background:var(--deck);border:1px solid var(--rule);border-radius:10px}
+.st-count small{display:block;font:600 10.5px/1 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--dust)}
+.st-count b{display:block;margin-top:4px;font:800 22px/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.st-count span{font-size:12px;color:var(--gold)}
+.st-pend{display:flex;flex-direction:column;gap:12px;padding:12px;background:var(--deck);border:1px solid rgb(244 180 58 / .5);border-radius:var(--r)}
+.st-okko{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn.ok{background:#16a37f;color:#03140e}
+.btn.ko{background:#e8573a;color:#1c0803}
+.btn.big{min-height:58px;font-size:17px}
+.st-acts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.st-act{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:50px;padding:0 14px;text-align:left;background:var(--deck);border:1px solid var(--rule);border-radius:12px;font:700 14px/1.1 var(--f-num);letter-spacing:.05em;text-transform:uppercase}
+.st-act b{font:800 21px/1 var(--f-display);color:var(--gold);font-variant-numeric:tabular-nums}
+.st-act.ok{border-color:rgb(22 163 127 / .7)}
+.st-act.ko{border-color:rgb(232 87 58 / .7)}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.step{display:flex;flex-direction:column;gap:6px}
+.step > div{display:flex;align-items:center;justify-content:space-between;padding:4px;background:var(--deck-2);border-radius:12px}
+.step button{width:46px;height:46px;border-radius:10px;background:var(--deck);font:700 24px/1 var(--f-num)}
+.step b{font:800 30px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.st-log{display:flex;flex-direction:column;gap:3px;font-size:13px;color:var(--dust)}
+
+/* Test de design « wahou » (lien ?theme=wahou) : couleurs de l'affiche graffiti, fresque, mots tagués en fond */
+html.theme-wahou{--ink:#0d0926;--deck:#191339;--deck-2:#241b4d;--rule:#3a2d6c;--chalk:#fff6ea;--dust:#c0b8e0;--dim:#8a80b8;--gold:#ffd23f;--gold-ink:#22104a;--gold-soft:rgb(255 210 63 / .15);--blue:#3d7bff;--blue-soft:rgb(61 123 255 / .16);--note:#2d2058;--note-2:#21184a;--note-line:#4d3c8c;--pink:#ff3d7f;--teal:#2fd9b9;--grad:linear-gradient(100deg,#ffd23f,#ff8a3d 50%,#ff3d7f);--grad-cool:linear-gradient(120deg,#2fd9b9,#3d7bff 55%,#ff3d7f)}
+html.theme-wahou body{background:radial-gradient(90% 45% at 0% 0%,rgb(255 61 127 / .2),transparent 70%),radial-gradient(90% 45% at 100% 100%,rgb(47 217 185 / .16),transparent 70%),radial-gradient(70% 40% at 100% 30%,rgb(61 123 255 / .16),transparent 70%),var(--ink);background-attachment:fixed}
+html.theme-wahou .glow,html.theme-wahou .rays{opacity:.45;filter:hue-rotate(-40deg) saturate(1.6)}
+html.theme-wahou .top{background:linear-gradient(180deg,var(--ink) 72%,rgb(13 9 38 / 0))}
+html.theme-wahou .brand em{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+html.theme-wahou .h-sec h2,html.theme-wahou .coach-t em,html.theme-wahou .wk-head h2 em{background:linear-gradient(90deg,#fff6ea 10%,#ffd23f 55%,#ff3d7f);-webkit-background-clip:text;background-clip:text;color:transparent}
+html.theme-wahou .btn:not(.ghost):not(.ok):not(.ko):not(.blue){background:var(--grad);color:#22104a;box-shadow:0 6px 22px rgb(255 61 127 / .28)}
+html.theme-wahou .btn.blue{background:linear-gradient(100deg,#3d7bff,#2fd9b9);color:#06122a}
+html.theme-wahou .card,html.theme-wahou .mc,html.theme-wahou .tile,html.theme-wahou .st-tile,html.theme-wahou .coach-card,html.theme-wahou .prompt{border:1px solid transparent;background:linear-gradient(var(--deck),var(--deck)) padding-box,var(--grad-cool) border-box}
+html.theme-wahou .tile svg{stroke:var(--teal)}
+html.theme-wahou .tabs{background:rgb(15 10 44 / .93);border-top:1px solid transparent;border-image:var(--grad-cool) 1}
+html.theme-wahou .tab[aria-current="page"]::before{background:var(--grad);box-shadow:0 0 12px var(--pink)}
+html.theme-wahou .page{background:linear-gradient(90deg,rgb(0 0 0 / .3),rgb(0 0 0 / 0) 10%),linear-gradient(160deg,#3a2470,#24174f 60%,#1c1342);border-color:#5b47a8;box-shadow:inset 5px 0 0 var(--pink),0 10px 28px rgb(255 61 127 / .25)}
+html.theme-wahou .page p{text-shadow:0 0 22px rgb(255 61 127 / .35)}
+html.theme-wahou .st-tile.hero b,html.theme-wahou .vw-count{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+html.theme-wahou .chip.on{border-color:var(--pink);color:#fff;background:rgb(255 61 127 / .2)}
+.mural{margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));overflow:hidden;border-block:1px solid #3a2d6c}
+.mural svg{display:block;width:100%;height:auto}
+.wall-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.wall-bg span{position:absolute;white-space:nowrap;font-family:var(--f-hand);opacity:.09;line-height:1}
+.wall-bg .bg-pl{position:absolute;bottom:76px;width:46vw;max-width:270px;opacity:.14}
+.wall-bg .bg-pl.l{left:-8vw}
+.wall-bg .bg-pl.r{right:-8vw}
+
 /* Ma bibliothèque */
 .lib-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .lib-strip img,.lib-card img{display:block;width:100%;aspect-ratio:1/1.414;object-fit:cover;border-radius:8px;border:1px solid var(--rule);background:var(--deck-2)}
@@ -675,6 +789,9 @@ body.swell .rays{opacity:1}
 
 <script>
 'use strict';
+// Test de design « wahou » : activé seulement par le lien ?theme=wahou (désactivé par ?theme=normal). Invisible sinon.
+(() => { try{ const q = new URLSearchParams(location.search).get('theme'); if(q) localStorage.setItem('oal-theme', q === 'wahou' ? 'wahou' : ''); if(localStorage.getItem('oal-theme') === 'wahou') document.documentElement.classList.add('theme-wahou'); }catch{} })();
+const WAHOU = () => document.documentElement.classList.contains('theme-wahou');
 /* ================= Contenu du programme ================= */
 const DEFAULT_START = '2026-11-02';
 const WEEKS = [
@@ -1043,6 +1160,8 @@ const ICON = {
   flame:'<path d="M12 21.5c-3.9 0-6.6-2.7-6.6-6.3 0-3.4 2.3-5.3 3.7-8 .4 1.8 1.4 2.9 2.6 3.5.2-3 1.6-5.5 3.9-7.2-.4 3 1.2 4.8 2.4 6.6.9 1.4 1.6 3 1.6 5.1 0 3.6-2.7 6.3-7.6 6.3z"/>',
   list:'<path d="M10 6.5h10M10 12h10M10 17.5h10"/><path d="m3.5 6.5 1.3 1.3L7.2 5.3M3.5 12l1.3 1.3 2.4-2.5M3.5 17.5l1.3 1.3 2.4-2.5"/>',
   spark:'<path d="M12 3.5l1.8 5.2 5.2 1.8-5.2 1.8L12 17.5l-1.8-5.2L5 10.5l5.2-1.8zM18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/>',
+  stats:'<path d="M4 20.5h16"/><rect x="5.5" y="12" width="3" height="5.5" rx="1"/><rect x="10.5" y="5" width="3" height="12.5" rx="1"/><rect x="15.5" y="9" width="3" height="8.5" rx="1"/>',
+  undo:'<path d="M9 7 4.5 11.5 9 16"/><path d="M5 11.5h9a5 5 0 0 1 0 10h-2"/>',
 };
 const svg = (k, cls='') => `<svg viewBox="0 0 24 24" class="${cls}" aria-hidden="true">${ICON[k]}</svg>`;
 // Partage sans compte : un lien wa.me ouvre WhatsApp avec le texte prêt, Alice choisit à qui l'envoyer.
@@ -1067,7 +1186,7 @@ function platform(u){
 const S = {
   tab:'accueil', mode:'local', uid:null, isOwner:false, user:null, cwKnown:false,
   settings:{vma:14, start:DEFAULT_START, name:'Alice'},
-  progress:{}, checkins:{}, shots:{}, threads:{}, videos:{}, msgs:{}, matchs:{}, victoires:{}, mots:{}, motEdit:false, routines:{}, rtEdit:null, rtVidCat:'all', objectifs:{}, goalsWon:false, phrases:{}, phWarn:false,
+  progress:{}, checkins:{}, shots:{}, threads:{}, videos:{}, msgs:{}, matchs:{}, victoires:{}, mots:{}, motEdit:false, routines:{}, rtEdit:null, rtVidCat:'all', objectifs:{}, goalsWon:false, phrases:{}, phWarn:false, stats:{},
   vCat:'seance', vFilter:'all', vDismissed:ls.get('oal-vdis',{}),
   sample:null, mSeg:'avant', jSel:null, ai:{},
   names:{}, drafts:{},
@@ -1147,7 +1266,7 @@ function subscribeAll(){
   unsubs.forEach(u => { try{ u(); }catch{} }); unsubs = [];
   unsubs.push(Store.watch('config', m => { if(m.main) S.settings = {...S.settings, ...m.main}; rerender(); }));
   unsubs.push(Store.watch('ffbb', m => { if(m.pouleA) applyFfbb(m.pouleA); rerender(); }));
-  for(const k of ['progress','checkins','shots','threads','videos','matchs','victoires','mots','routines','objectifs','phrases']){
+  for(const k of ['progress','checkins','shots','threads','videos','matchs','victoires','mots','routines','objectifs','phrases','stats']){
     unsubs.push(Store.watch(k, m => { S[k] = m; rerender(); }));
   }
 }
@@ -1213,7 +1332,7 @@ function renderAll(){
   document.documentElement.style.setProperty('--light', (0.07 + 0.38 * lightFrac()).toFixed(3));
   patch($('#top'), vTop());
   patch($('#tabs'), vTabs());
-  const V = {accueil:vAccueil, programme:vProgramme, chrono:vChrono, bilan:vBilan, videos:vVideos, mental:vMental, victoires:vVictoires, pensees:vPensees, routine:vRoutine, adresse:vAdresse, profil:vProfil, coach:vCoach, phrases:vPhrases, biblio:vBiblio}[S.tab] || vAccueil;
+  const V = {accueil:vAccueil, programme:vProgramme, chrono:vChrono, bilan:vBilan, videos:vVideos, mental:vMental, victoires:vVictoires, pensees:vPensees, routine:vRoutine, adresse:vAdresse, profil:vProfil, coach:vCoach, phrases:vPhrases, biblio:vBiblio, stats:vStats}[S.tab] || vAccueil;
   patch($('#view'), V());
   if(SH) renderSheet();
   const ids = [...Object.values(S.threads).flatMap(t => [t.lastBy, t.createdBy]), ...Object.values(S.videos).map(v => v.by), ...Object.values(S.msgs).flatMap(m => Object.values(m).map(x => x.by))].filter(x => x && x !== 'local');
@@ -1231,10 +1350,10 @@ function unreadCount(){
   return Object.entries(S.threads).filter(([id,t]) => t.lastAt && t.lastBy !== meId() && (S.seen[id] || 0) < t.lastAt).length;
 }
 function vTabs(){
-  const T = [['accueil','home','Accueil'],['programme','prog','Intersaison'],['routine','list','Routine'],['bilan','ball','Bilan'],['mental','mental','Mental'],['chrono','chrono','Chrono'],['videos','video','Vidéos']];
+  const T = [['accueil','home','Accueil'],['routine','list','Routine'],['bilan','ball','Bilan'],['mental','mental','Mental'],['programme','prog','Intersaison'],['stats','stats','Statistique'],['videos','video','Vidéos']];
   const un = unreadCount(), lm = lastMatch(), todo = lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5;
-  const cur = ['victoires','pensees','coach','phrases','biblio'].includes(S.tab) ? 'mental' : S.tab;
-  return T.map(([k,i,l]) => `<a class="tab" href="#${k}" ${cur===k?'aria-current="page"':''}>${svg(i)}<span>${l}</span>${k==='mental'&&un?'<i class="badge" aria-label="Nouveaux messages"></i>':''}${k==='bilan'&&todo?'<i class="badge" aria-label="Bilan à faire"></i>':''}${k==='chrono'&&TM.plan&&!TM.done?'<i class="badge run" aria-label="Chrono en cours"></i>':''}</a>`).join('');
+  const cur = ['victoires','pensees','coach','phrases','biblio'].includes(S.tab) ? 'mental' : S.tab === 'chrono' ? 'programme' : S.tab;
+  return T.map(([k,i,l]) => `<a class="tab" href="#${k}" ${cur===k?'aria-current="page"':''}>${svg(i)}<span>${l}</span>${k==='mental'&&un?'<i class="badge" aria-label="Nouveaux messages"></i>':''}${k==='bilan'&&todo?'<i class="badge" aria-label="Bilan à faire"></i>':''}${k==='programme'&&TM.plan&&!TM.done?'<i class="badge run" aria-label="Chrono en cours"></i>':''}${k==='stats'&&ST.live?'<i class="badge run" aria-label="Séance de stats en cours"></i>':''}</a>`).join('');
 }
 
 function sesRow(sid, w, showDay){
@@ -1252,6 +1371,7 @@ function vAccueil(){
   const threads = Object.entries(S.threads).filter(([,t]) => t.lastAt).sort((a,b) => b[1].lastAt - a[1].lastAt).slice(0,2);
   const lm = lastMatch();
   return `
+  ${WAHOU() ? muralHTML() : ''}
   ${bookHTML()}
   ${matchCard(nextMatch())}
   ${lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5 ? `<section><div class="h-sec"><h2>Dernier match</h2><span class="eyebrow">Ton bilan</span></div><button class="mrow" data-act="match" data-mid="${lm.id}" data-seg="apres">${mRowInner(lm)}</button></section>` : ''}
@@ -1407,11 +1527,14 @@ function thrRow(id, t){
     <p>${t.lastText ? `${esc(nameOf(t.lastBy))} : ${esc(t.lastText)}` : esc(t.prompt || '')}</p></button>`;
 }
 
+// Intersaison : le programme et le chrono, côte à côte.
+const interNav = cur => `<nav class="subnav" aria-label="Intersaison">${[['programme','prog','Programme'],['chrono','chrono','Chrono']].map(([k,i,l]) => `<a href="#${k}" ${cur === k ? 'aria-current="page"' : ''}>${svg(i)}${l}</a>`).join('')}</nav>`;
 function vProgramme(){
   const wi = weekInfo();
   const w = S.viewWeek ?? wi.w, W = WEEKS[w];
   const todayId = DAY_BY_JS[new Date().getDay()];
   return `
+  ${interNav('programme')}
   <section class="wk-head">
     <span class="eyebrow gold">Programme intersaison</span>
     <div class="seg" role="group" aria-label="Semaine">${WEEKS.map((x,i) => `<button data-act="week" data-w="${i}" aria-pressed="${i===w}"><b>S${x.n}</b><span>${i===wi.w && !wi.before ? 'en cours' : weekDone(i) + '/9'}</span></button>`).join('')}</div>
@@ -1933,6 +2056,7 @@ function vChrono(){
   const w = weekInfo().w, M = WEEKS[w].mardi;
   const c = S.custom;
   return `
+  ${interNav('chrono')}
   <section>
     <div class="h-sec"><h2>Chrono</h2><span class="eyebrow">VMA ${String(S.settings.vma).replace('.',',')} · S${w+1}</span></div>
     <p class="muted small" style="margin-bottom:14px">Bips à 3, 2, 1 et au départ de chaque effort. L’écran reste allumé pendant le chrono. Les distances cibles sont calculées avec ta VMA.</p>
@@ -1949,6 +2073,288 @@ function vChrono(){
     <button class="btn" data-act="tm-start" data-k="custom">${svg('play')}Démarrer</button>
   </section>`;
 }
+
+/* ---------- Test de design « wahou » : fresque et graffitis en fond ---------- */
+// Alice en pochoir : maillot de Canet (bleu et jaune) ou maillot rouge façon Indiana Fever (sans logo).
+const KITS = {
+  canet:{j:'#2350d8', j2:'#ffd23f', n:'#ffffff', no:'#ffd23f', s:'#2350d8', line:'#ffd23f', shoe:'#3f6bff', glow:'#3d7bff'},
+  fever:{j:'#c8102e', j2:'#0c2340', n:'#ffffff', no:'#ffcd00', s:'#c8102e', line:'#ffcd00', shoe:'#f4f1ea', glow:'#ff3d7f'},
+};
+function playerSVG(k, mirror){
+  const K = KITS[k], ink = '#140e30';
+  const body = `
+    <path d="M54 47Q42 58 39 70Q37 80 40 88" fill="none" stroke="${ink}" stroke-width="8.5" stroke-linecap="round"/>
+    <path d="M60 116Q52 136 50 150Q45 165 37 175" fill="none" stroke="${ink}" stroke-width="11" stroke-linecap="round"/>
+    <path d="M25 176q9-7 17-3l2 7q-10 3-20 1z" fill="${K.shoe}"/>
+    <path d="M73 116Q86 134 89 148Q90 164 87 179" fill="none" stroke="${ink}" stroke-width="11" stroke-linecap="round"/>
+    <path d="M80 177h16q8 0 9 7v3H79z" fill="${K.shoe}"/>
+    <path d="M52 92L79 90L86 121L70 124L66 108L62 124L46 121Z" fill="${K.s}"/>
+    <path d="M79 90L86 121L82 122L76 91Z" fill="${K.line}"/>
+    <path d="M50 42Q64 36 79 42L82 58Q79 76 79 92L52 94Q51 76 48 58Z" fill="${K.j}"/>
+    ${k === 'canet' ? `<path d="M50 60L61 51L58 71ZM73 82L82 66L80 89ZM54 84L65 93L52 93Z" fill="${K.j2}"/>` : `<path d="M50 42Q64 36 79 42L78 47Q64 41 51 47Z" fill="${K.j2}"/><path d="M80 52L82 58Q80 74 80 90L77 90Q77 74 79 56Z" fill="${K.j2}"/>`}
+    <rect x="61" y="30" width="7" height="9" fill="${ink}"/>
+    <circle cx="65" cy="22" r="11" fill="${ink}"/>
+    <path d="M56 15C46 14 40 24 37 37C44 32 49 28 55 25Z" fill="${ink}"/>
+    <path d="M77 46Q88 58 90 72Q92 86 95 98" fill="none" stroke="${ink}" stroke-width="8.5" stroke-linecap="round"/>
+    <path d="M96 107v6M96 119v6M96 131v3" stroke="${K.line}" stroke-width="2" stroke-linecap="round" opacity=".85"/>
+    <circle cx="98" cy="150" r="12" fill="#f08a24"/>
+    <path d="M86 150h24M98 138v24M89.5 141.5q8.5 8.5 0 17M106.5 141.5q-8.5 8.5 0 17" fill="none" stroke="#5a2a08" stroke-width="1.2"/>`;
+  const num = `<text x="${mirror ? 64 : 66}" y="77" text-anchor="middle" font-family="'Big Shoulders Display','Barlow Condensed',sans-serif" font-weight="900" font-size="22" fill="${K.n}" stroke="${K.no}" stroke-width="1.2" paint-order="stroke">10</text>`;
+  return `<g style="filter:drop-shadow(0 0 5px ${K.glow})">${mirror ? `<g transform="translate(130 0) scale(-1 1)">${body}</g>` : body}${num}</g>`;
+}
+function muralHTML(){
+  const sp = (id, c) => `<radialGradient id="${id}"><stop offset="0" stop-color="${c}" stop-opacity=".8"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></radialGradient>`;
+  return `<section class="mural" aria-label="Fresque : Alice dribble, en maillot de Canet et en maillot rouge">
+    <svg viewBox="0 0 360 230" aria-hidden="true">
+      <defs>
+        <pattern id="mw-brick" width="36" height="18" patternUnits="userSpaceOnUse"><rect width="36" height="18" fill="#2a1f57"/><path d="M0 .6H36M0 9.6H36M.6 0V9M18.6 9V18" stroke="#191240" stroke-width="1.3"/></pattern>
+        ${sp('mw-b', '#3d7bff')}${sp('mw-p', '#ff3d7f')}${sp('mw-y', '#ffd23f')}${sp('mw-t', '#2fd9b9')}
+      </defs>
+      <rect width="360" height="230" fill="url(#mw-brick)"/>
+      <circle cx="70" cy="130" r="95" fill="url(#mw-b)" opacity=".75"/><circle cx="292" cy="130" r="95" fill="url(#mw-p)" opacity=".75"/>
+      <circle cx="180" cy="60" r="70" fill="url(#mw-y)" opacity=".45"/><circle cx="185" cy="205" r="60" fill="url(#mw-t)" opacity=".5"/>
+      <g font-family="'Permanent Marker',cursive" text-anchor="middle" stroke="#120c2c" stroke-width="5" paint-order="stroke" stroke-linejoin="round">
+        <text x="181" y="70" font-size="28" fill="#ffd23f" transform="rotate(-6 181 70)">C’est moi</text>
+        <text x="182" y="106" font-size="28" fill="#ff3d7f" transform="rotate(-4 182 106)">contre moi</text>
+        <text x="180" y="152" font-size="16" fill="#2fd9b9" transform="rotate(-3 180 152)">Je construis</text>
+        <text x="182" y="174" font-size="16" fill="#2fd9b9" transform="rotate(-3 182 174)">mon rêve</text>
+      </g>
+      <path d="M142 76v12M152 78v8M222 112v14M232 114v7" stroke="#ff3d7f" stroke-width="2.4" stroke-linecap="round" opacity=".7"/>
+      <g transform="translate(-6 26)">${playerSVG('canet')}</g>
+      <g transform="translate(236 26)">${playerSVG('fever', true)}</g>
+    </svg>
+  </section>`;
+}
+function wallBgHTML(){
+  const W = [['C’est moi contre moi', 4, 9, -8, '#ffd23f', 30], ['Ose', 72, 22, 7, '#ff3d7f', 70], ['Je construis mon rêve', 2, 41, -4, '#2fd9b9', 27], ['Un pas après l’autre', 26, 60, 5, '#ffd23f', 24], ['J’apprends · je progresse · je grandis', 0, 79, -3, '#3d7bff', 19], ['10', 78, 66, -10, '#ff3d7f', 88]];
+  return `<div class="wall-bg" aria-hidden="true">${W.map(([t, x, y, r, c, s]) => `<span style="left:${x}%;top:${y}%;transform:rotate(${r}deg);color:${c};font-size:${s}px">${t}</span>`).join('')}
+    <svg class="bg-pl l" viewBox="0 0 130 200">${playerSVG('canet')}</svg><svg class="bg-pl r" viewBox="0 0 130 200">${playerSVG('fever', true)}</svg></div>`;
+}
+
+/* ---------- Statistique : tirs par position, entraînements et matchs ---------- */
+// Demi-terrain FIBA en décimètres (15 m × 14 m), panier en haut. Une séance = une liste d'actions :
+// {t:'tir',x,y,v,ok} · {t:'serie',x,y,v,m,a} · {t:'lf',ok} · {t:'pd'|'reb'|'int'|'to'|'fa'}.
+const BX = 75, BY = 15.75, BRK = 29.9, ARC = 'A67.5 67.5 0 0 0 141 29.9';
+const C_OK = '#16a37f', C_KO = '#e8573a', C_TR = '#c08416', C_MA = '#3d78e0';
+const ZNAME = {rq:'Raquette', xm:'Mi-distance axe', amg:'Mi-distance 45° gauche', amd:'Mi-distance 45° droite', fmg:'Mi-distance ligne de fond gauche', fmd:'Mi-distance ligne de fond droite', x3:'3 pts axe', a3g:'3 pts 45° gauche', a3d:'3 pts 45° droite', c3g:'3 pts corner gauche', c3d:'3 pts corner droit'};
+const ZORDER = ['rq','xm','amg','amd','fmg','fmd','x3','a3g','a3d','c3g','c3d'];
+const ZPOS = {rq:[75,36], xm:[75,72], amg:[35,52], amd:[115,52], fmg:[30,15], fmd:[120,15], a3g:[19,100], a3d:[131,100], x3:[75,120], c3g:[4.5,15], c3d:[145.5,15]};
+const EVN = {pd:'Passe décisive', reb:'Rebond', int:'Interception', to:'Balle perdue', fa:'Faute'};
+const EVP = {pd:'Passes déc.', reb:'Rebonds', int:'Interceptions', to:'Balles perdues', fa:'Fautes'};
+function shotInfo(x, y){
+  const dx = x - BX, dy = y - BY, d = Math.hypot(dx, dy);
+  const three = y <= BRK ? Math.abs(dx) >= 66 : d >= 67.5;
+  const s = dx < 0 ? 'g' : 'd', a = Math.atan2(Math.abs(dx), dy) * 180 / Math.PI;
+  let z;
+  if(!three && Math.abs(dx) <= 24.5 && y <= 58) z = 'rq';
+  else if(y <= BRK) z = (three ? 'c3' : 'fm') + s;
+  else if(a <= 22.5) z = three ? 'x3' : 'xm';
+  else z = (three ? 'a3' : 'am') + s;
+  return {v: three ? 3 : 2, z};
+}
+const ST = {live: ls.get('oal-statlive', null), pend:null, serie:null, filt: ls.get('oal-stfilt', 'all'), per:'all', view:'carte', zone:null, bar:null};
+const stSaveLive = () => ls.set('oal-statlive', ST.live);
+const pc = (m, a) => a ? Math.round(100 * m / a) : null;
+const pcS = (m, a) => a ? pc(m, a) + ' %' : '—';
+const stList = () => Object.entries(S.stats).map(([id,s]) => ({id, ...s})).filter(s => s && Array.isArray(s.ev)).sort((a,b) => (b.start || 0) - (a.start || 0));
+function stFiltered(list){
+  const min = ST.per === '7' ? Date.now() - 7 * 864e5 : ST.per === '30' ? Date.now() - 30 * 864e5 : 0;
+  return list.filter(s => (ST.filt === 'all' || s.kind === ST.filt) && (s.start || 0) >= min);
+}
+const stPts = s => (s.ev || []).reduce((n,e) => n + (e.t === 'tir' ? (e.ok ? e.v : 0) : e.t === 'serie' ? e.m * e.v : e.t === 'lf' && e.ok ? 1 : 0), 0);
+function stAgg(list){
+  const A = {n:list.length, nm:0, fga:0, fgm:0, a2:0, m2:0, a3:0, m3:0, fta:0, ftm:0, pd:0, reb:0, int:0, to:0, fa:0, ptsM:0, zones:{}, shots:[]};
+  for(const s of list){
+    if(s.kind === 'match'){ A.nm++; A.ptsM += stPts(s); }
+    for(const e of s.ev || []){
+      if(e.t === 'tir' || e.t === 'serie'){
+        const a = e.t === 'tir' ? 1 : e.a, m = e.t === 'tir' ? (e.ok ? 1 : 0) : e.m, z = shotInfo(e.x, e.y).z;
+        A.fga += a; A.fgm += m;
+        if(e.v === 3){ A.a3 += a; A.m3 += m; } else { A.a2 += a; A.m2 += m; }
+        const Z = A.zones[z] || (A.zones[z] = {a:0, m:0}); Z.a += a; Z.m += m;
+        A.shots.push(e);
+      } else if(e.t === 'lf'){ A.fta++; if(e.ok) A.ftm++; }
+      else if(e.t in EVN) A[e.t]++;
+    }
+  }
+  return A;
+}
+function stTitle(s){
+  if(s.kind !== 'match') return 'Entraînement';
+  const m = s.mid && findMatch(s.mid);
+  return m ? `J${m.j} · ${home(m) ? 'contre' : 'à'} ${TEAMS[opp(m)][0]}` : (s.opp ? 'Match · ' + s.opp : 'Match');
+}
+const stDate = (s, o={weekday:'short', day:'numeric', month:'short'}) => cap(frDate(new Date(s.start || Date.now()), o));
+
+// Le terrain : lignes FIBA, puis carte des tirs (points, croix, halo de chaleur) ou zones (plus il y a de tirs, plus la zone s'allume).
+const courtLines = () => `<g class="cl">
+  <rect x=".4" y=".4" width="149.2" height="139.2" rx="2"/>
+  <path d="M9 0V${BRK}${ARC}V0"/>
+  <path d="M50.5 0V58H99.5V0"/>
+  <path d="M57 58a18 18 0 0 0 36 0"/><path d="M57 58a18 18 0 0 1 36 0" stroke-dasharray="2.4 2.4"/>
+  <path d="M62.5 12v3.75a12.5 12.5 0 0 0 25 0V12"/>
+  <path d="M57 140a18 18 0 0 1 36 0"/>
+  <path class="bb" d="M66 12H84"/><circle class="rim" cx="75" cy="15.75" r="2.25"/></g>`;
+const stMark = e => e.t === 'serie'
+  ? `<g class="mk-s"><circle cx="${e.x}" cy="${e.y}" r="4.8"/><text x="${e.x}" y="${e.y + 1.2}">${e.m}/${e.a}</text></g>`
+  : e.ok ? `<circle class="mk-ok" cx="${e.x}" cy="${e.y}" r="2"/>`
+  : `<path class="mk-koh" d="M${e.x - 1.7} ${e.y - 1.7}l3.4 3.4m0-3.4l-3.4 3.4"/><path class="mk-ko" d="M${e.x - 1.7} ${e.y - 1.7}l3.4 3.4m0-3.4l-3.4 3.4"/>`;
+function courtSVG(o){
+  const u = 'ct' + (o.id || 'x'), live = o.mode === 'live';
+  let body = '';
+  if(o.mode === 'zones'){
+    const Z = o.zones || {}, max = Math.max(1, ...Object.values(Z).map(z => z.a));
+    const f = z => { const a = (Z[z] || {}).a || 0; return `data-act="st-zone" data-z="${z}" fill="${a ? 'var(--gold)' : 'var(--deck-2)'}" fill-opacity="${a ? (0.14 + 0.66 * a / max).toFixed(2) : 1}"`; };
+    const wedges = k => `<polygon points="75,15.75 -40,293 -400,293 -400,15.75" ${f(k[0])}/><polygon points="75,15.75 -40,293 190,293" ${f(k[1])}/><polygon points="75,15.75 190,293 550,293 550,15.75" ${f(k[2])}/>`;
+    body += `<defs><clipPath id="${u}o"><path d="M0 ${BRK}H9${ARC}H150V140H0Z"/></clipPath><clipPath id="${u}i"><path d="M9 ${BRK}${ARC}Z"/></clipPath></defs>
+      <g clip-path="url(#${u}o)">${wedges(['a3g','x3','a3d'])}</g><g clip-path="url(#${u}i)">${wedges(['amg','xm','amd'])}</g>
+      <rect x="0" y="0" width="9" height="${BRK}" ${f('c3g')}/><rect x="141" y="0" width="9" height="${BRK}" ${f('c3d')}/>
+      <rect x="9" y="0" width="41.5" height="${BRK}" ${f('fmg')}/><rect x="99.5" y="0" width="41.5" height="${BRK}" ${f('fmd')}/>
+      <path class="zgap" d="M0 ${BRK}H150M75 15.75L-40 293M75 15.75L190 293"/>
+      <rect x="50.5" y="0" width="49" height="58" ${f('rq')}/>
+      ${courtLines()}
+      ${ZORDER.filter(z => (Z[z] || {}).a).map(z => {
+        const [x, y] = ZPOS[z], q = Z[z];
+        if(z === 'c3g' || z === 'c3d') return `<text class="zlc" x="${x}" y="${y + 1.6}" transform="rotate(-90 ${x} ${y})">${q.m}/${q.a}</text>`;
+        return `<g class="zl${o.sel === z ? ' on' : ''}"><rect x="${x - 11}" y="${y - 6.6}" width="22" height="12.4" rx="2"/><text x="${x}" y="${y - 1}">${q.m}/${q.a}</text><text class="zp" x="${x}" y="${y + 3.9}">${pc(q.m, q.a)} %</text></g>`;
+      }).join('')}`;
+  } else {
+    const sh = o.shots || [];
+    if(!live && sh.length) body += `<defs><radialGradient id="${u}g"><stop offset="0" stop-color="#ffb43a" stop-opacity=".4"/><stop offset="1" stop-color="#ffb43a" stop-opacity="0"/></radialGradient></defs>
+      <g class="glow">${sh.map(e => `<circle cx="${e.x}" cy="${e.y}" r="${e.t === 'serie' ? 7 + Math.min(7, e.a / 2) : 7}" fill="url(#${u}g)"/>`).join('')}</g>`;
+    body += courtLines() + `<g class="dots">${sh.map(stMark).join('')}</g>`;
+    if(live && o.pend) body += `<circle class="pend" cx="${o.pend.x}" cy="${o.pend.y}" r="3.6"/><circle class="pend-dot" cx="${o.pend.x}" cy="${o.pend.y}" r="1"/>`;
+  }
+  return `<svg class="court${live ? ' live' : ''}" viewBox="0 0 150 140" ${live ? 'data-act="st-tap" role="img" aria-label="Demi-terrain : touche l’endroit du tir"' : `role="img" aria-label="${o.mode === 'zones' ? 'Tes zones de tir' : 'Ta carte des tirs'}"`}><rect class="cbg" width="150" height="140" rx="2"/>${body}</svg>`;
+}
+function stTiles(A, one){
+  const t = (l, v, s, c='') => `<div class="st-tile ${c}"><small>${l}</small><b>${v}</b>${s ? `<span>${s}</span>` : ''}</div>`;
+  const out = [t('Tirs', pcS(A.fgm, A.fga), `${A.fgm} réussis sur ${A.fga}`, 'hero'), t('2 pts', pcS(A.m2, A.a2), `${A.m2} / ${A.a2}`), t('3 pts', pcS(A.m3, A.a3), `${A.m3} / ${A.a3}`), t('Lancers francs', pcS(A.ftm, A.fta), `${A.ftm} / ${A.fta}`)];
+  if(A.nm) out.push(one ? t('Points', A.ptsM, '') : t('Points par match', (A.ptsM / A.nm).toFixed(1).replace('.', ','), `${A.ptsM} en ${A.nm} match${A.nm > 1 ? 's' : ''}`));
+  for(const k of Object.keys(EVN)) if(A[k]) out.push(t(EVP[k], A[k], ''));
+  return `<div class="st-tiles">${out.join('')}</div>`;
+}
+function stCharts(A, id){
+  const rows = ZORDER.filter(z => (A.zones[z] || {}).a), z = ST.zone && A.zones[ST.zone] ? ST.zone : null;
+  const best = rows.filter(k => A.zones[k].a >= 5).sort((a,b) => A.zones[b].m / A.zones[b].a - A.zones[a].m / A.zones[a].a)[0];
+  const zc = k => `${A.zones[k].m}/${A.zones[k].a} · ${pc(A.zones[k].m, A.zones[k].a)} % de réussite · ${Math.round(100 * A.zones[k].a / A.fga)} % de tes tirs`;
+  const mk = (e, l) => `<span><svg viewBox="0 0 10 10" aria-hidden="true">${e}</svg>${l}</span>`;
+  return `<div class="seg2" role="group" aria-label="Affichage">${[['carte','Carte des tirs'],['zones','Zones']].map(([k,l]) => `<button data-act="st-view" data-v="${k}" aria-pressed="${ST.view === k}">${l}</button>`).join('')}</div>
+    ${courtSVG({mode:ST.view, shots:A.shots, zones:A.zones, sel:z, id})}
+    ${ST.view === 'carte'
+      ? `<div class="st-leg">${mk(`<circle cx="5" cy="5" r="3.4" fill="${C_OK}"/>`, 'Réussi')}${mk(`<path d="M2 2l6 6m0-6L2 8" stroke="${C_KO}" stroke-width="2" stroke-linecap="round"/>`, 'Raté')}${mk(`<circle cx="5" cy="5" r="3.8" fill="rgb(244 180 58 / .22)" stroke="#f4b43a"/>`, 'Série (réussis / tentés)')}</div>`
+      : `<div class="st-ramp"><span>Peu de tirs</span><i></i><span>Le plus de tirs</span></div>
+        <p class="st-cap">${z ? `<b>${ZNAME[z]}</b> : ${zc(z)}` : best ? `Ta zone forte : <b>${ZNAME[best]}</b>, ${zc(best)}.` : 'Touche une zone pour voir le détail.'}</p>
+        <table class="st-table"><thead><tr><th>Zone</th><th>Tirs</th><th>Réussite</th><th>Part</th></tr></thead><tbody>${rows.map(k => `<tr><td>${ZNAME[k]}</td><td>${A.zones[k].m}/${A.zones[k].a}</td><td>${pc(A.zones[k].m, A.zones[k].a)} %</td><td>${Math.round(100 * A.zones[k].a / A.fga)} %</td></tr>`).join('')}</tbody></table>`}`;
+}
+function stEvo(list){
+  const L = list.map(s => ({s, A:stAgg([s])})).filter(x => x.A.fga).slice(0, 12).reverse();
+  if(L.length < 2) return '';
+  const W = 320, H = 150, X0 = 26, Y0 = 122, HH = 104, step = (W - X0 - 6) / L.length, bw = Math.min(22, step - 6);
+  const sel = ST.bar != null && L[ST.bar] ? ST.bar : L.length - 1, x = L[sel];
+  const grid = [0, 50, 100].map(v => `<line class="gl" x1="${X0}" x2="${W - 4}" y1="${Y0 - v / 100 * HH}" y2="${Y0 - v / 100 * HH}"/><text x="${X0 - 5}" y="${Y0 - v / 100 * HH + 3}" text-anchor="end">${v}</text>`).join('');
+  const bars = L.map((b, i) => {
+    const p = pc(b.A.fgm, b.A.fga), h = Math.max(2, p / 100 * HH), bx = X0 + i * step + (step - bw) / 2, by = Y0 - h, r = Math.min(4, bw / 2, h);
+    return `<g data-act="st-bar" data-i="${i}"><rect x="${X0 + i * step}" y="${Y0 - HH - 8}" width="${step}" height="${HH + 24}" fill="transparent"/><path d="M${bx} ${Y0}V${by + r}Q${bx} ${by} ${bx + r} ${by}H${bx + bw - r}Q${bx + bw} ${by} ${bx + bw} ${by + r}V${Y0}Z" fill="${b.s.kind === 'match' ? C_MA : C_TR}"${i === sel ? ' stroke="#efe8da" stroke-width="1.4"' : ''}/>${i === sel ? `<text class="ev" x="${bx + bw / 2}" y="${by - 5}" text-anchor="middle">${p} %</text>` : ''}</g>`;
+  }).join('');
+  const both = L.some(b => b.s.kind === 'match') && L.some(b => b.s.kind !== 'match');
+  return `<section>
+    <div class="h-sec"><h2>Évolution</h2><span class="eyebrow">Réussite aux tirs</span></div>
+    <svg class="st-evo" viewBox="0 0 ${W} ${H}" role="img" aria-label="Réussite aux tirs, séance par séance">${grid}${bars}<text x="${X0}" y="${H - 6}">${stDate(L[0].s, {day:'numeric', month:'short'})}</text><text x="${W - 4}" y="${H - 6}" text-anchor="end">${stDate(L[L.length - 1].s, {day:'numeric', month:'short'})}</text></svg>
+    <p class="st-cap">${esc(stDate(x.s))} · ${esc(stTitle(x.s))} · <b>${x.A.fgm}/${x.A.fga} (${pc(x.A.fgm, x.A.fga)} %)</b></p>
+    ${both ? `<div class="st-leg"><span><i class="sw" style="background:${C_TR}"></i>Entraînement</span><span><i class="sw" style="background:${C_MA}"></i>Match</span></div>` : ''}
+  </section>`;
+}
+const stRows = list => `<div class="stack">${list.map(s => { const A = stAgg([s]); return `<button class="st-row" data-act="st-open" data-id="${esc(s.id)}"><i style="background:${s.kind === 'match' ? C_MA : C_TR}"></i><div><b>${esc(stTitle(s))}</b><small>${esc(stDate(s))}${s.kind === 'match' ? ' · ' + stPts(s) + ' pts' : ''}</small></div><span>${A.fga ? `${A.fgm}/${A.fga}<small>${pc(A.fgm, A.fga)} %</small>` : '—'}</span></button>`; }).join('')}</div>`;
+function vStats(){
+  const all = stList(), list = stFiltered(all), A = stAgg(list);
+  const chip = (act, k, cur, l) => `<button class="chip ${cur === k ? 'on' : ''}" data-act="${act}" data-v="${k}">${l}</button>`;
+  return `
+  <section class="vw-head">
+    <span class="eyebrow gold">Statistique</span>
+    <h1 class="coach-t">Chaque tir<em>compte</em></h1>
+    <p class="muted">À l’entraînement comme en match : touche le terrain à chaque tir. L’appli fait les comptes et dessine tes zones fortes.</p>
+    ${ST.live ? `<button class="st-resume" data-act="st-resume"><span class="eyebrow gold">Séance en cours</span><b>${esc(stTitle(ST.live))}</b><span>${ST.live.ev.length} action${ST.live.ev.length > 1 ? 's' : ''} · touche pour reprendre</span></button>` : ''}
+    <div class="st-new"><button class="btn" data-act="st-start" data-k="entrainement">${svg('ball')}Entraînement</button><button class="btn blue" data-act="st-start" data-k="match">${svg('target')}Match</button></div>
+  </section>
+  ${all.length ? `
+  <section class="stack">
+    <div class="chips" role="group" aria-label="Type de séance">${chip('st-filt','all',ST.filt,'Tout')}${chip('st-filt','entrainement',ST.filt,'Entraînements')}${chip('st-filt','match',ST.filt,'Matchs')}</div>
+    <div class="chips" role="group" aria-label="Période">${chip('st-per','7',ST.per,'7 jours')}${chip('st-per','30',ST.per,'30 jours')}${chip('st-per','all',ST.per,'Toute la saison')}</div>
+  </section>
+  ${list.length ? `
+  <section><div class="h-sec"><h2>Bilan</h2><span class="eyebrow">${list.length} séance${list.length > 1 ? 's' : ''}</span></div>${stTiles(A)}</section>
+  ${A.fga ? `<section><div class="h-sec"><h2>Mes tirs</h2><span class="eyebrow">${A.fga} tir${A.fga > 1 ? 's' : ''}</span></div>${stCharts(A, 'p')}</section>` : ''}
+  ${stEvo(list)}
+  <section><div class="h-sec"><h2>Historique</h2></div>${stRows(list)}</section>` : `<div class="empty">Aucune séance sur cette période.</div>`}`
+  : `<section>${courtSVG({mode:'carte', shots:[], id:'e'})}<p class="muted small" style="margin-top:10px">Ta première séance remplira ce terrain : un point vert pour chaque tir réussi, une croix pour chaque tir raté. Tes zones fortes apparaîtront ensuite.</p></section>`}
+  <section class="card stack"><div class="h-sec" style="margin:0"><h2>Adresse</h2><span class="eyebrow">LF · 3 pts</span></div><p class="muted small">Tes séries de lancers francs et le tour des 5 positions à 3 points.</p><div class="row"><a class="btn ghost" href="#adresse">${svg('target')}Ouvrir Adresse</a></div></section>`;
+}
+// Feuilles : choix du match, saisie en direct, détail d'une séance.
+function shStNew(){
+  const ms = ourMatches().filter(m => !m.note).map(m => ({m, d:Math.abs(matchTime(m) - Date.now())})).sort((a,b) => a.d - b.d).slice(0, 5).map(x => x.m).sort((a,b) => matchTime(a) - matchTime(b));
+  return `<section class="stack">
+    <h2 class="lib-t">Quel match ?</h2>
+    ${ms.map(m => `<button class="prompt" data-act="st-go" data-mid="${m.id}"><small class="eyebrow gold">J${m.j} · ${esc(cap(frDate(new Date(m.date), {weekday:'long', day:'numeric', month:'long'})))}</small><b>${esc(TEAMS[m.h][0])} – ${esc(TEAMS[m.a][0])}</b><span>${home(m) ? 'À domicile' : 'À l’extérieur'}</span></button>`).join('')}
+    <label for="st-opp" style="margin-top:8px">Autre match (amical, tournoi…)</label>
+    <div class="composer"><input id="st-opp" maxlength="40" placeholder="Adversaire" data-draft="st-opp" value="${esc(S.drafts['st-opp'] || '')}"><button class="btn" data-act="st-go" data-mid="" aria-label="Commencer">${svg('play')}</button></div>
+  </section>`;
+}
+const stEvTxt = e => e.t === 'tir' ? `Tir à ${e.v} pts ${e.ok ? 'réussi' : 'raté'} · ${ZNAME[shotInfo(e.x, e.y).z]}` : e.t === 'serie' ? `Série ${e.m}/${e.a} à ${e.v} pts · ${ZNAME[shotInfo(e.x, e.y).z]}` : e.t === 'lf' ? `Lancer franc ${e.ok ? 'réussi' : 'raté'}` : EVN[e.t] || '';
+function shStLive(){
+  const L = ST.live; if(!L) return '<div class="empty">Aucune séance en cours.</div>';
+  const A = stAgg([L]), m = L.kind === 'match', p = ST.pend;
+  const cnt = (l, v, s) => `<div><small>${l}</small><b>${v}</b>${s ? `<span>${s}</span>` : ''}</div>`;
+  const btn = (attrs, label, n, cls='') => `<button class="st-act ${cls}" data-act="st-ev" ${attrs}>${label}<b>${n}</b></button>`;
+  let panel;
+  if(p && ST.serie){
+    const st = (k, l) => `<div class="step"><small class="eyebrow">${l}</small><div><button data-act="st-sm" data-k="${k}" data-d="-1" aria-label="Moins">−</button><b>${ST.serie[k]}</b><button data-act="st-sm" data-k="${k}" data-d="1" aria-label="Plus">+</button></div></div>`;
+    panel = `<div class="st-pend"><b>Série · ${ZNAME[shotInfo(p.x, p.y).z]} · ${p.v} pts</b><div class="steps">${st('m', 'Réussis')}${st('a', 'Tentés')}</div>
+      <div class="row"><button class="btn" data-act="st-serie-ok">${svg('check')}Valider ${ST.serie.m}/${ST.serie.a}</button><button class="btn ghost" data-act="st-cancel">Annuler</button></div></div>`;
+  } else if(p){
+    panel = `<div class="st-pend"><div class="row" style="justify-content:space-between"><b>${ZNAME[shotInfo(p.x, p.y).z]}</b><div class="row" style="gap:6px">${[2,3].map(v => `<button class="chip ${p.v === v ? 'on' : ''}" data-act="st-v" data-v="${v}">${v} pts</button>`).join('')}</div></div>
+      <div class="st-okko"><button class="btn ok big" data-act="st-shot" data-ok="1">${svg('check')}Réussi</button><button class="btn ko big" data-act="st-shot" data-ok="0">${svg('x')}Raté</button></div>
+      <div class="row"><button class="chip" data-act="st-serie">Série (ex. 7 sur 10)</button><button class="chip" data-act="st-cancel">Annuler</button></div></div>`;
+  } else {
+    panel = `<div class="st-acts">${btn('data-t="lf" data-ok="1"', 'LF réussi', A.ftm, 'ok')}${btn('data-t="lf" data-ok="0"', 'LF raté', A.fta - A.ftm, 'ko')}${m ? Object.keys(EVN).map(k => btn(`data-t="${k}"`, EVN[k], A[k])).join('') : ''}</div>`;
+  }
+  const last = L.ev.slice(-3).reverse();
+  return `<section class="stack">
+    <div><span class="eyebrow gold">${esc(stDate(L, {weekday:'long', day:'numeric', month:'long'}))}</span><h2 class="lib-t">${esc(stTitle(L))}</h2></div>
+    <div class="st-count">${m ? cnt('Points', stPts(L)) : ''}${cnt('Tirs', `${A.fgm}/${A.fga}`, pcS(A.fgm, A.fga))}${cnt('3 pts', `${A.m3}/${A.a3}`, pcS(A.m3, A.a3))}${cnt('LF', `${A.ftm}/${A.fta}`, pcS(A.ftm, A.fta))}</div>
+    <p class="small muted">${p ? 'Réussi ou raté ? Tu peux aussi toucher un autre endroit.' : 'Touche le terrain à l’endroit du tir.'}</p>
+    ${courtSVG({mode:'live', shots:A.shots, pend:p, id:'l'})}
+    ${panel}
+    ${last.length ? `<div class="st-log">${last.map((e,i) => `<span>${i ? '' : 'Dernière action : '}${esc(stEvTxt(e))}</span>`).join('')}</div>` : ''}
+    <div class="row" style="justify-content:space-between"><button class="btn ghost" data-act="st-undo" ${L.ev.length ? '' : 'disabled'}>${svg('undo')}Annuler</button><button class="btn" data-act="st-end">${svg('check')}Terminer</button></div>
+  </section>`;
+}
+function stShareText(s, A){
+  return [`${stTitle(s)} · ${stDate(s, {weekday:'long', day:'numeric', month:'long'})}`, s.kind === 'match' ? `Points : ${stPts(s)}` : '',
+    `Tirs : ${A.fgm}/${A.fga} (${pcS(A.fgm, A.fga)})`, `2 pts : ${A.m2}/${A.a2}`, `3 pts : ${A.m3}/${A.a3}`, `Lancers francs : ${A.ftm}/${A.fta}`,
+    ...Object.keys(EVN).filter(k => A[k]).map(k => `${EVP[k]} : ${A[k]}`)].filter(Boolean).join('\n');
+}
+function shStSess(){
+  const s = S.stats[SH.id]; if(!s) return '<div class="empty">Séance introuvable.</div>';
+  const A = stAgg([s]), dur = s.end && s.start ? Math.round((s.end - s.start) / 60000) : null, mt = s.kind === 'match' && s.mid && findMatch(s.mid);
+  return `<section class="stack-lg">
+    <div><span class="eyebrow gold">${esc(stDate(s, {weekday:'long', day:'numeric', month:'long'}))}${dur ? ' · ' + dur + ' min' : ''}</span><h2 class="lib-t">${esc(stTitle(s))}</h2></div>
+    ${stTiles(A, true)}
+    ${A.fga ? `<div>${stCharts(A, 's')}</div>` : '<div class="empty">Aucun tir sur le terrain dans cette séance.</div>'}
+    <div class="stack">
+      ${mt ? `<button class="btn block" data-act="st-bilan" data-id="${esc(SH.id)}">${svg('ball')}Reporter dans mon bilan du match</button>` : ''}
+      <div class="row">${wa(stShareText(s, A))}</div>
+      <button class="btn ghost block" data-act="st-del" data-id="${esc(SH.id)}">${svg('trash')}Supprimer cette séance</button>
+    </div>
+  </section>`;
+}
+function stStart(kind, mid='', opp=''){
+  if(!guard()) return;
+  if(ST.live && ST.live.ev.length){ openSheet({type:'stlive'}); toast('Une séance est déjà en cours : termine-la d’abord.'); return; }
+  ST.live = {kind, mid:mid || null, opp:String(opp || '').trim().slice(0, 40), date:todayISO(), start:Date.now(), ev:[]};
+  ST.pend = null; ST.serie = null; stSaveLive(); openSheet({type:'stlive'}); rerender();
+}
+const stPush = e => { ST.live.ev.push(e); ST.pend = null; ST.serie = null; stSaveLive(); renderSheet(); };
 
 /* ---------- Vidéos ---------- */
 function allVideos(){
@@ -2044,7 +2450,7 @@ function vMental(){
 
 /* ---------- Mes phrases : au positif, sans négation ---------- */
 // Alice en écrit autant qu'elle veut (onglet Mental) et en coche 1 à 5 pour l'accueil, où elles défilent comme les pages d'un livre.
-const PHRASES = [
+const PH_BASE = [
   'Planifier le jour présent, c’est planifier sa réussite de demain.',
   'Chaque matin, je suis meilleure qu’hier, et je serai encore meilleure demain.',
   'C’est moi contre moi.',
@@ -2086,9 +2492,38 @@ const PHRASES = [
   'Chaque jour, je deviens la joueuse que je veux être.',
   'La lumière est au bout de chaque effort.',
 ];
+// Les 4 feuillets de phrases positives (bibliothèque), sans les phrases déjà dans la première liste.
+const PH_GROUPS = [
+  {t:'Mes idées', l:PH_BASE},
+  {t:'Je construis mon rêve', l:[
+    'Je construis mon rêve.', 'Chaque jour, j’avance.', 'Un pas après l’autre.', 'Chaque minute m’offre une occasion de construire mon avenir.',
+    'Je commence là où je suis, avec les moyens que j’ai.', 'Je consacre aujourd’hui du temps à mes objectifs.', 'Je choisis une intention précise pour ma journée.',
+    'Je transforme mes intentions en actions.', 'J’avance avec élan et patience.', 'Je pose aujourd’hui les actions qui me rapprochent de mon rêve.']},
+  {t:'J’ose et j’apprends', l:[
+    'Ose. Apprends. Recommence.', 'J’ose prendre des risques et voir grand.', 'J’avance avec confiance et courage.', 'Chaque essai m’aide à progresser.',
+    'Chaque expérience enrichit mon parcours.', 'Je développe mes capacités en explorant de nouvelles façons de faire.', 'J’essaie, j’ajuste et je rejoue avec envie.',
+    'Mes possibilités grandissent avec ma persévérance.', 'Je me prépare avec enthousiasme pour les prochaines occasions.', 'Je reste ouverte aux personnes, aux idées et aux nouveaux points de vue.',
+    'J’explore de nouvelles voies pour atteindre mes objectifs.', 'J’apprends à mieux connaître mes forces et mes besoins.', 'Je prends appui sur mes convictions et je nourris ma curiosité.',
+    'Je construis ma confiance en passant à l’action.']},
+  {t:'Je progresse avec plaisir', l:[
+    'J’apprends. Je progresse. Je grandis.', 'Mes pensées guident mes mots.', 'Mes mots nourrissent mes actions.', 'Mes actions font vivre mes valeurs.',
+    'Je m’entraîne avec exigence.', 'Je joue avec confiance et plaisir.', 'Je suis exigeante avec moi-même et bienveillante avec les autres.',
+    'Chaque entraînement m’apporte un nouvel apprentissage.', 'Je nourris ma confiance en reconnaissant mes progrès.', 'Je choisis ma place et je m’engage pleinement dans mon jeu.',
+    'Je consacre mon énergie à ma préparation et à ma progression.', 'Je crée un espace calme pour me concentrer sur ce qui compte pour moi.',
+    'Je choisis d’oser, d’apprendre et de revenir avec envie.', 'Je m’épanouis dans mon propre parcours.']},
+  {t:'Je partage et je grandis', l:[
+    'Le monde a besoin de tes talents.', 'Je donne le meilleur de moi-même.', 'J’exprime mes talents avec générosité.',
+    'Je mets mon temps, mes compétences et mon énergie au service de mes projets.', 'Je trouve ma voie en avançant.', 'Chaque étape ouvre de nouvelles possibilités.',
+    'Je grandis grâce aux rencontres et aux expériences.', 'Je m’ouvre à la vie et aux autres.', 'Je m’appuie sur mes valeurs, ma foi et les personnes qui m’accompagnent.',
+    'J’offre ma patience, ma gentillesse et mon attention.', 'J’aide mes coéquipières à progresser et je grandis avec elles.', 'Je célèbre mes progrès et ceux des autres.',
+    'Je partage mon énergie, mon amour et ma joie.', 'Le plaisir de construire.']},
+];
+const PHRASES = PH_GROUPS.flatMap(g => g.l);
 const PH_MAX = 5;
-const NEG_WORDS = new Set(['ne','pas','jamais','rien','aucun','aucune','sans','nul','nulle']);
-const hasNeg = s => (String(s).toLowerCase().match(/\p{L}+(?:['’]\p{L}+)?/gu) || []).some(w => NEG_WORDS.has(w) || /^n['’]/.test(w));
+const NEG_WORDS = new Set(['ne','jamais','rien','aucun','aucune','sans','nul','nulle']);
+// « pas » est une négation, sauf quand c'est une marche : « un pas », « chaque pas », « pas à pas », « pas après pas ».
+const PAS_OK = new Set(['un','le','ce','chaque','mon','ton','son','du','au','premier','petit','grand','à','après']);
+const hasNeg = s => { const w = String(s).toLowerCase().match(/\p{L}+(?:['’]\p{L}+)?/gu) || []; return w.some((x, i) => NEG_WORDS.has(x) || /^n['’]/.test(x) || (x === 'pas' && !PAS_OK.has(w[i - 1]) && !['à','après'].includes(w[i + 1]))); };
 const normTxt = s => String(s || '').toLowerCase().replace(/[«»"“”.,;:!?…’'\s]+/g, ' ').trim();
 const phraseId = t => { let h = 0; for(const c of normTxt(t)) h = (h * 31 + c.charCodeAt(0)) | 0; return 'p' + (h >>> 0).toString(36); };
 const phraseDocs = () => Object.entries(S.phrases).map(([id,p]) => ({id, ...p})).filter(p => p && p.text);
@@ -2127,7 +2562,7 @@ function phRow(text, id, own){
   </div>`;
 }
 function vPhrases(){
-  const home = phraseHome(), own = phraseOwn(), ideas = PHRASES.filter(t => !own.some(p => phraseId(p.text) === phraseId(t)));
+  const gi = S.phGroup || 0, home = phraseHome(), own = phraseOwn(), ideas = PH_GROUPS[gi].l.filter(t => !own.some(p => phraseId(p.text) === phraseId(t)));
   return `
   <section class="vw-head">
     <span class="eyebrow gold">Mes phrases</span>
@@ -2145,8 +2580,9 @@ function vPhrases(){
   </section>
   ${own.length ? `<section><div class="h-sec"><h2>Mes phrases à moi</h2><span class="eyebrow">${own.length}</span></div><div class="stack">${own.map(p => phRow(p.text, p.id, true)).join('')}</div></section>` : ''}
   <section>
-    <div class="h-sec"><h2>Idées de phrases</h2><span class="eyebrow">${ideas.length}</span></div>
-    <div class="stack">${ideas.map(t => phRow(t, phraseId(t), false)).join('')}</div>
+    <div class="h-sec"><h2>Idées de phrases</h2><span class="eyebrow">${PHRASES.length}</span></div>
+    <div class="chips" role="group" aria-label="Thème des idées">${PH_GROUPS.map((g,i) => `<button class="chip ${i === gi ? 'on' : ''}" data-act="ph-group" data-i="${i}">${esc(g.t)} · ${g.l.length}</button>`).join('')}</div>
+    <div class="stack" style="margin-top:12px">${ideas.map(t => phRow(t, phraseId(t), false)).join('')}</div>
   </section>`;
 }
 // Ajoute une phrase (écrite, proposée par le coach ou cochée dans la liste). Elle va à l'accueil s'il reste de la place.
@@ -2582,6 +3018,7 @@ function closeSheet(){
   }
   watchMsgs(null);
   if(SH && sheetTid()) markSeen(sheetTid());
+  if(SH && SH.type === 'stlive'){ ST.pend = null; ST.serie = null; setTimeout(rerender, 0); }
   SH = null; $('#sheet').hidden = true; if($('#moment').hidden) document.body.classList.remove('locked');
   motesKick();
 }
@@ -2610,6 +3047,9 @@ function renderSheet(){
   else if(SH.type === 'zoom'){ eb = 'Agrandir'; html = `<div class="zoom"><img src="${esc(SH.src)}" alt=""></div>`; }
   else if(SH.type === 'lire'){ eb = 'Ma bibliothèque'; html = shLire(); }
   else if(SH.type === 'bimg'){ eb = 'Ma bibliothèque'; html = shLibImg(); }
+  else if(SH.type === 'stnew'){ eb = 'Statistique · nouveau match'; html = shStNew(); }
+  else if(SH.type === 'stlive'){ eb = 'Statistique · séance en cours'; html = shStLive(); }
+  else if(SH.type === 'stsess'){ eb = 'Statistique'; html = shStSess(); }
   $('#sh-eyebrow').textContent = eb;
   patch($('#sh-main'), html);
   renderSheetMsgs();
@@ -3133,7 +3573,62 @@ const ACT = {
     if(phraseAdd(text, 'perso', el)){ S.drafts.ph = ''; S.phWarn = false; rerender(); }
   },
   'ph-coach': el => phraseAdd(el.dataset.t, 'coach', el),
+  'ph-group': el => { S.phGroup = +el.dataset.i; rerender(); },
   'ph-lib': el => phraseAdd(el.dataset.t, 'biblio', el),
+  // Statistique
+  'st-start': el => el.dataset.k === 'match' ? (ST.live && ST.live.ev.length ? stStart('match') : openSheet({type:'stnew'})) : stStart('entrainement'),
+  'st-go': el => stStart('match', el.dataset.mid, el.dataset.mid ? '' : (S.drafts['st-opp'] || $('#st-opp')?.value || '')),
+  'st-resume': () => openSheet({type:'stlive'}),
+  'st-tap': (el, e) => {
+    if(!ST.live || !el.getScreenCTM) return;
+    const pt = el.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+    const q = pt.matrixTransform(el.getScreenCTM().inverse());
+    const x = Math.round(Math.min(150, Math.max(0, q.x)) * 10) / 10, y = Math.round(Math.min(140, Math.max(0, q.y)) * 10) / 10;
+    ST.pend = {x, y, v:shotInfo(x, y).v}; ST.serie = null; buzz(8); renderSheet();
+  },
+  'st-v': el => { if(ST.pend){ ST.pend.v = +el.dataset.v; renderSheet(); } },
+  'st-shot': el => { const p = ST.pend; if(!p || !ST.live) return; buzz(+el.dataset.ok ? 18 : 8); stPush({t:'tir', x:p.x, y:p.y, v:p.v, ok:+el.dataset.ok}); },
+  'st-serie': () => { ST.serie = {m:5, a:10}; renderSheet(); },
+  'st-sm': el => {
+    const s = ST.serie, k = el.dataset.k; if(!s) return;
+    s[k] = Math.max(k === 'a' ? 1 : 0, Math.min(100, s[k] + +el.dataset.d));
+    if(s.m > s.a){ if(k === 'm') s.m = s.a; else s.m = s.a; }
+    renderSheet();
+  },
+  'st-serie-ok': () => { const p = ST.pend, s = ST.serie; if(!p || !s || !ST.live) return; buzz(18); stPush({t:'serie', x:p.x, y:p.y, v:p.v, m:s.m, a:s.a}); },
+  'st-cancel': () => { ST.pend = null; ST.serie = null; renderSheet(); },
+  'st-ev': el => { if(!ST.live) return; const t = el.dataset.t; buzz(12); stPush(t === 'lf' ? {t, ok:+el.dataset.ok} : {t}); },
+  'st-undo': () => { if(!ST.live || !ST.live.ev.length) return; const e = ST.live.ev.pop(); ST.pend = null; ST.serie = null; stSaveLive(); renderSheet(); toast('Annulé : ' + stEvTxt(e) + '.'); },
+  'st-end': el => {
+    const L = ST.live; if(!L || !guard()) return;
+    if(el.dataset.confirm !== '1'){ el.dataset.confirm = '1'; el.textContent = L.ev.length ? 'Confirmer : terminer' : 'Confirmer : abandonner'; setTimeout(() => { if(el.isConnected){ el.dataset.confirm = ''; el.innerHTML = svg('check') + 'Terminer'; } }, 3500); return; }
+    ST.live = null; ST.pend = null; ST.serie = null; stSaveLive();
+    if(!L.ev.length){ closeSheet(); rerender(); toast('Séance vide : rien n’a été enregistré.'); return; }
+    const id = 's' + Store.newId(), d = {...L, end:Date.now(), by:meId()}, A = stAgg([d]);
+    S.stats = {...S.stats, [id]:d}; save('stats', id, d);
+    if(S.tab !== 'stats'){ history.replaceState(null, '', '#stats'); S.tab = 'stats'; window.scrollTo(0, 0); }
+    openSheet({type:'stsess', id}); rerender();
+    audioInit(); chime(); setTimeout(() => burstAt($('#sh-main .st-tile.hero'), {n:46}), 200);
+    toast(A.fga ? `Séance enregistrée : ${A.fgm}/${A.fga} aux tirs.` : 'Séance enregistrée.');
+  },
+  'st-open': el => openSheet({type:'stsess', id:el.dataset.id}),
+  'st-filt': el => { ST.filt = el.dataset.v; ls.set('oal-stfilt', ST.filt); ST.bar = null; ST.zone = null; rerender(); },
+  'st-per': el => { ST.per = el.dataset.v; ST.bar = null; ST.zone = null; rerender(); },
+  'st-view': el => { ST.view = el.dataset.v; rerender(); },
+  'st-zone': el => { ST.zone = ST.zone === el.dataset.z ? null : el.dataset.z; rerender(); },
+  'st-bar': el => { ST.bar = +el.dataset.i; rerender(); },
+  'st-bilan': el => {
+    const s = S.stats[el.dataset.id]; if(!s || !s.mid || !guard()) return;
+    const A = stAgg([s]), v = {pts:stPts(s), reb:A.reb, pd:A.pd, int:A.int, bp:A.to, lfm:A.ftm, lft:A.fta};
+    Object.entries(v).forEach(([k, n]) => { S.drafts[`m-${s.mid}-stats.${k}`] = String(n); });
+    commitMatch(s.mid, buildMatch(s.mid), 50); burstAt(el, {n:30, v:.8}); toast('Reporté dans ton bilan du match.');
+  },
+  'st-del': async el => {
+    if(!guard()) return;
+    if(el.dataset.confirm !== '1'){ el.dataset.confirm = '1'; el.style.color = 'var(--warn)'; toast('Touche encore pour supprimer cette séance.'); setTimeout(() => { el.dataset.confirm = ''; el.style.color = ''; }, 3000); return; }
+    const id = el.dataset.id, prev = S.stats[id], nx = {...S.stats}; delete nx[id]; S.stats = nx; closeSheet(); rerender();
+    try{ await Store.del('stats', id); toast('Séance supprimée.'); }catch(e){ S.stats = {...S.stats, [id]:prev}; rerender(); writeFail(e); }
+  },
   // Ma bibliothèque
   'lib-txt': el => openSheet({type:'lire', id:el.dataset.id}),
   'lib-img': el => openSheet({type:'bimg', i:+el.dataset.i}),
@@ -3340,7 +3835,7 @@ document.addEventListener('change', e => {
 });
 
 /* ================= Navigation ================= */
-const ROUTES = ['accueil','programme','routine','bilan','chrono','videos','mental','victoires','pensees','adresse','profil','coach','phrases','biblio'];
+const ROUTES = ['accueil','programme','routine','bilan','chrono','videos','mental','victoires','pensees','adresse','profil','coach','phrases','biblio','stats'];
 function route(){
   const h = location.hash.replace('#','');
   const nt = ROUTES.includes(h) ? h : 'accueil';
@@ -3385,6 +3880,7 @@ function gateInit(){
   document.getElementById('gate-go').addEventListener('click', done);
 }
 async function boot(){
+  if(WAHOU()) document.body.insertAdjacentHTML('afterbegin', wallBgHTML());
   S.tab = ROUTES.includes(location.hash.replace('#','')) ? location.hash.replace('#','') : 'accueil';
   gateInit();
   subscribeAll(); renderAll(); loadFfbbFile();
@@ -3400,7 +3896,7 @@ async function boot(){
   S.cwKnown = cw !== null;
   Store.db = db;
   S.mode = cw === false ? 'readonly' : 'shared';
-  S.progress = {}; S.checkins = {}; S.shots = {}; S.threads = {}; S.videos = {}; S.msgs = {}; S.mots = {}; S.routines = {}; S.objectifs = {}; S.phrases = {};
+  S.progress = {}; S.checkins = {}; S.shots = {}; S.threads = {}; S.videos = {}; S.msgs = {}; S.mots = {}; S.routines = {}; S.objectifs = {}; S.phrases = {}; S.stats = {};
   subscribeAll();
   if(SH) openSheet(SH);
   rerender();
