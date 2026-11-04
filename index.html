@@ -414,9 +414,10 @@ html.theme-wahou .page p{text-shadow:0 0 22px rgb(255 61 127 / .35)}
 html.theme-wahou .st-tile.big b,html.theme-wahou .vw-count{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
 html.theme-wahou .chip.on{border-color:var(--pink);color:#fff;background:rgb(255 61 127 / .2)}
 .wall-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.wall-bg .bg-photo{position:absolute;inset:0;background:url(img/biblio/fond-alice10.jpg) 60% 30% / cover no-repeat}
-.wall-bg .bg-veil{position:absolute;inset:0;background:radial-gradient(90% 50% at 0% 0%,rgb(255 61 127 / .28),transparent 70%),radial-gradient(90% 50% at 100% 100%,rgb(47 217 185 / .22),transparent 70%),linear-gradient(180deg,rgb(13 9 38 / .62),rgb(13 9 38 / .4) 40%,rgb(13 9 38 / .62) 75%,rgb(13 9 38 / .88))}
-.wall-bg span{position:absolute;white-space:nowrap;font-family:var(--f-hand);opacity:.1;line-height:1}
+/* Photo agrandie, calée en bas à droite : Alice et le panier remontent dans l'écran (la largeur reste toujours couverte). */
+.wall-bg .bg-photo{position:absolute;inset:0;background:url(img/biblio/fond-alice10.jpg) 100% 100% / auto max(118%, 141.4vw) no-repeat}
+.wall-bg .bg-veil{position:absolute;inset:0;background:radial-gradient(90% 50% at 0% 0%,rgb(255 61 127 / .26),transparent 70%),radial-gradient(90% 50% at 100% 100%,rgb(47 217 185 / .2),transparent 70%),linear-gradient(180deg,rgb(13 9 38 / .6),rgb(13 9 38 / .3) 35%,rgb(13 9 38 / .4) 70%,rgb(13 9 38 / .85))}
+.wall-bg span{position:absolute;white-space:nowrap;font-family:var(--f-hand);opacity:.22;line-height:1;text-shadow:0 2px 14px rgb(0 0 0 / .35)}
 
 /* Ma bibliothèque */
 .lib-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -2084,7 +2085,7 @@ function vChrono(){
 /* ---------- Test de design « wahou » : la photo d'Alice en fond d'écran ---------- */
 // La photo (Alice de dos, maillot ALICE 10, dans la lumière du gymnase) en fond fixe partout, sous un voile coloré, avec quelques phrases taguées.
 function wallBgHTML(){
-  const W = [['Ose', 68, 16, 7, '#ff3d7f', 64], ['J’apprends · je progresse · je grandis', 2, 36, -3, '#3d7bff', 19], ['Un pas après l’autre', 26, 58, 5, '#2fd9b9', 24], ['Je construis mon rêve', 18, 86, -4, '#ffd23f', 24]];
+  const W = [['Ose', 6, 14, -7, '#ff3d7f', 72], ['Un pas après l’autre', 4, 50, 5, '#2fd9b9', 27], ['J’apprends · je progresse · je grandis', 2, 70, -3, '#5b95ff', 21], ['Je construis mon rêve', 10, 85, -4, '#ffd23f', 27]];
   return `<div class="wall-bg" aria-hidden="true"><div class="bg-photo"></div><div class="bg-veil"></div>
     ${W.map(([t, x, y, r, c, sz]) => `<span style="left:${x}%;top:${y}%;transform:rotate(${r}deg);color:${c};font-size:${sz}px">${t}</span>`).join('')}</div>`;
 }
