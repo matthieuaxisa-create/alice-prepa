@@ -415,7 +415,7 @@ html.theme-wahou .st-tile.big b,html.theme-wahou .vw-count{background:var(--grad
 html.theme-wahou .chip.on{border-color:var(--pink);color:#fff;background:rgb(255 61 127 / .2)}
 .wall-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
 /* Photo agrandie, calée en bas à droite : Alice et le panier remontent dans l'écran (la largeur reste toujours couverte). */
-.wall-bg .bg-photo{position:absolute;inset:0;background:url(img/biblio/fond-alice10.jpg) 100% 100% / auto max(118%, 141.4vw) no-repeat}
+.wall-bg .bg-photo{position:absolute;inset:0;background:url(img/biblio/fond-alice12.jpg) 100% 100% / auto max(118%, 141.4vw) no-repeat}
 .wall-bg .bg-veil{position:absolute;inset:0;background:radial-gradient(90% 50% at 0% 0%,rgb(255 61 127 / .26),transparent 70%),radial-gradient(90% 50% at 100% 100%,rgb(47 217 185 / .2),transparent 70%),linear-gradient(180deg,rgb(13 9 38 / .6),rgb(13 9 38 / .3) 35%,rgb(13 9 38 / .4) 70%,rgb(13 9 38 / .85))}
 .wall-bg span{position:absolute;white-space:nowrap;font-family:var(--f-hand);opacity:.22;line-height:1;text-shadow:0 2px 14px rgb(0 0 0 / .35)}
 .wall-bg span.long{white-space:normal;width:min(42%,520px);text-align:right;opacity:.36;line-height:1.25;transform-origin:right top;text-shadow:0 0 18px rgb(255 61 127 / .45),0 2px 10px rgb(0 0 0 / .5)}
@@ -2091,7 +2091,7 @@ function vChrono(){
 }
 
 /* ---------- Test de design « wahou » : la photo d'Alice en fond d'écran ---------- */
-// La photo (Alice de dos, maillot ALICE 10, dans la lumière du gymnase) en fond fixe partout, sous un voile coloré, avec quelques phrases taguées.
+// La photo (Alice de dos, maillot ALICE 12, dans la lumière du gymnase) en fond fixe partout, sous un voile coloré, avec quelques phrases taguées.
 function wallBgHTML(){
   const W = [
     {t:'Ose', x:'left:6%', y:14, r:-7, c:'#ff3d7f', s:'72px'},
@@ -2610,7 +2610,7 @@ const LIB_TEXTS = [
 const LIB_IMGS = [
   {k:'affiche', f:'je-construis-alice10.jpg', t:'Je construis mon rêve', s:'Affiche · Alice 10', alt:'Affiche « Je construis mon rêve » : Alice de dos, maillot 10, ballon sous le bras, dans un gymnase traversé par la lumière, avec ses phrases'},
   {k:'affiche', f:'je-construis-graffiti.png', t:'Je construis mon rêve', s:'Affiche · Graffiti', alt:'Affiche « Je construis mon rêve » en lettres graffiti colorées, avec ses phrases positives'},
-  {k:'fond', f:'fond-alice10.jpg', t:'Fond d’écran', s:'Alice 10 dans la lumière', alt:'Alice de dos, maillot 10, ballon sous le bras, face au panier dans la lumière du gymnase'},
+  {k:'fond', f:'fond-alice12.jpg', t:'Fond d’écran', s:'Alice 12 dans la lumière', alt:'Alice de dos, maillot 12, ballon sous le bras, face au panier dans la lumière du gymnase'},
   {k:'feuillet', f:'feuillet-1.png', t:'Je construis mon rêve.', s:'Feuillet 1 / 4', alt:'Feuillet de phrases positives : Je construis mon rêve'},
   {k:'feuillet', f:'feuillet-2.png', t:'J’ose et j’apprends.', s:'Feuillet 2 / 4', alt:'Feuillet de phrases positives : J’ose et j’apprends'},
   {k:'feuillet', f:'feuillet-3.png', t:'Je progresse avec plaisir.', s:'Feuillet 3 / 4', alt:'Feuillet de phrases positives : Je progresse avec plaisir'},
