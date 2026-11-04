@@ -413,18 +413,10 @@ html.theme-wahou .page{background:linear-gradient(90deg,rgb(0 0 0 / .3),rgb(0 0 
 html.theme-wahou .page p{text-shadow:0 0 22px rgb(255 61 127 / .35)}
 html.theme-wahou .st-tile.big b,html.theme-wahou .vw-count{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
 html.theme-wahou .chip.on{border-color:var(--pink);color:#fff;background:rgb(255 61 127 / .2)}
-.wh-hero{position:relative;margin:-4px calc(-1 * max(16px,env(safe-area-inset-left,0px))) 0;height:min(62vh,470px);display:flex;align-items:flex-start;padding:26px max(20px,env(safe-area-inset-left,0px));background:linear-gradient(180deg,rgb(13 9 38 / .1) 0%,rgb(13 9 38 / 0) 45%,var(--ink) 100%),linear-gradient(90deg,rgb(255 61 127 / .22),rgb(61 123 255 / .12) 60%,rgb(47 217 185 / .18)),url(img/biblio/fond-alice10.jpg) 58% 24% / cover no-repeat}
-.wh-hero-in{display:flex;flex-direction:column;gap:2px;transform:rotate(-5deg);transform-origin:left top}
-.wh-hero-in span{font:400 clamp(38px,11.5vw,56px)/1.05 var(--f-hand);-webkit-text-stroke:6px #120c2c;paint-order:stroke fill;text-shadow:0 6px 24px rgb(0 0 0 / .45)}
-.wh-hero-in .h-a{color:#ffd23f}
-.wh-hero-in .h-b{color:#ff3d7f;margin-left:18px}
 .wall-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
 .wall-bg .bg-photo{position:absolute;inset:0;background:url(img/biblio/fond-alice10.jpg) 60% 30% / cover no-repeat}
 .wall-bg .bg-veil{position:absolute;inset:0;background:radial-gradient(90% 50% at 0% 0%,rgb(255 61 127 / .28),transparent 70%),radial-gradient(90% 50% at 100% 100%,rgb(47 217 185 / .22),transparent 70%),linear-gradient(180deg,rgb(13 9 38 / .62),rgb(13 9 38 / .4) 40%,rgb(13 9 38 / .62) 75%,rgb(13 9 38 / .88))}
 .wall-bg span{position:absolute;white-space:nowrap;font-family:var(--f-hand);opacity:.1;line-height:1}
-.wall-bg .bb{position:absolute;width:min(80vw,440px);height:auto;opacity:.62}
-.wall-bg .bb.l{left:0;top:14%;transform:translateX(-48%) rotate(-12deg)}
-.wall-bg .bb.r{right:0;bottom:10%;transform:translateX(48%) rotate(16deg)}
 
 /* Ma bibliothèque */
 .lib-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -1378,7 +1370,6 @@ function vAccueil(){
   const threads = Object.entries(S.threads).filter(([,t]) => t.lastAt).sort((a,b) => b[1].lastAt - a[1].lastAt).slice(0,2);
   const lm = lastMatch();
   return `
-  ${WAHOU() ? heroHTML() : ''}
   ${bookHTML()}
   ${matchCard(nextMatch())}
   ${lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5 ? `<section><div class="h-sec"><h2>Dernier match</h2><span class="eyebrow">Ton bilan</span></div><button class="mrow" data-act="match" data-mid="${lm.id}" data-seg="apres">${mRowInner(lm)}</button></section>` : ''}
@@ -2082,39 +2073,10 @@ function vChrono(){
 }
 
 /* ---------- Test de design « wahou » : la photo d'Alice en fond d'écran ---------- */
-// La photo (Alice de dos, maillot ALICE 10, dans la lumière du gymnase) : en grand en haut de l'accueil, et en fond fixe partout, sous un voile coloré.
-const BG_PHOTO = 'img/biblio/fond-alice10.jpg';
-const heroHTML = () => `<section class="wh-hero" aria-label="Alice de dos, ballon sous le bras, dans la lumière du gymnase">
-    <div class="wh-hero-in"><span class="h-a">C’est moi</span><span class="h-b">contre moi</span></div>
-  </section>`;
-// Ballon en éclaboussure d'aquarelle (orange et bleu), dessiné ici : taches aux bords irréguliers, gouttes, traînées.
-function splashURL(seed, hot){
-  let s = seed; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
-  const O = ['#ff7a1a', '#ff9d2e', '#e8430c', '#ffc14a'], B = ['#2f6bff', '#58a6ff', '#1d3fb8', '#8fd0ff'];
-  const A = hot ? O : B, C = hot ? B : O, pick = L => L[Math.floor(rnd() * L.length)];
-  let blobs = '', drops = '', streaks = '';
-  for(let i = 0; i < 28; i++){ const a = rnd() * Math.PI * 2, d = 36 + rnd() * 92, r = 16 + rnd() * 46; blobs += `<circle cx="${(200 + Math.cos(a) * d).toFixed(1)}" cy="${(200 + Math.sin(a) * d).toFixed(1)}" r="${r.toFixed(1)}" fill="${pick(i % 3 === 2 ? C : A)}" opacity="${(.35 + rnd() * .4).toFixed(2)}"/>`; }
-  for(let i = 0; i < 16; i++){ const a = rnd() * 360, d = 100 + rnd() * 45, len = 22 + rnd() * 50; streaks += `<rect x="${(200 + d).toFixed(1)}" y="198" width="${len.toFixed(1)}" height="${(1.6 + rnd() * 3.4).toFixed(1)}" rx="1.6" transform="rotate(${a.toFixed(1)} 200 200)" fill="${pick(rnd() < .7 ? A : C)}" opacity=".7"/>`; }
-  for(let i = 0; i < 80; i++){ const a = rnd() * Math.PI * 2, d = 118 + rnd() * 78, r = .8 + rnd() * 4.2; drops += `<circle cx="${(200 + Math.cos(a) * d).toFixed(1)}" cy="${(200 + Math.sin(a) * d).toFixed(1)}" r="${r.toFixed(1)}" fill="${pick(rnd() < .65 ? A : C)}" opacity="${(.5 + rnd() * .45).toFixed(2)}"/>`; }
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-    <defs>
-      <filter id="w" x="-25%" y="-25%" width="150%" height="150%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="${seed}"/><feDisplacementMap in="SourceGraphic" scale="40"/><feGaussianBlur stdDeviation="1.1"/></filter>
-      <radialGradient id="b" cx="36%" cy="30%" r="78%"><stop offset="0" stop-color="#ffb867"/><stop offset=".55" stop-color="#ef6a12"/><stop offset="1" stop-color="#8f2d05"/></radialGradient>
-      <clipPath id="c"><circle cx="200" cy="200" r="76"/></clipPath>
-    </defs>
-    <g filter="url(#w)">${blobs}${streaks}</g>${drops}
-    <circle cx="200" cy="200" r="76" fill="url(#b)" stroke="#2a1206" stroke-width="3"/>
-    <g clip-path="url(#c)" fill="none" stroke="#2a1206" stroke-width="3.2" stroke-linecap="round" transform="rotate(-22 200 200)">
-      <path d="M118 196Q200 222 282 196"/><path d="M200 120V280"/><path d="M146 132Q186 200 146 268"/><path d="M254 132Q214 200 254 268"/>
-    </g>
-    <ellipse cx="170" cy="166" rx="30" ry="16" fill="#fff" opacity=".2" transform="rotate(-32 170 166)"/>
-  </svg>`;
-  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-}
+// La photo (Alice de dos, maillot ALICE 10, dans la lumière du gymnase) en fond fixe partout, sous un voile coloré, avec quelques phrases taguées.
 function wallBgHTML(){
-  const W = [['C’est moi contre moi', 4, 12, -8, '#ffd23f', 28], ['Un pas après l’autre', 26, 58, 5, '#2fd9b9', 24], ['Je construis mon rêve', 18, 86, -4, '#ffd23f', 24]];
+  const W = [['Ose', 68, 16, 7, '#ff3d7f', 64], ['J’apprends · je progresse · je grandis', 2, 36, -3, '#3d7bff', 19], ['Un pas après l’autre', 26, 58, 5, '#2fd9b9', 24], ['Je construis mon rêve', 18, 86, -4, '#ffd23f', 24]];
   return `<div class="wall-bg" aria-hidden="true"><div class="bg-photo"></div><div class="bg-veil"></div>
-    <img class="bb l" src="${splashURL(11, true)}" alt=""><img class="bb r" src="${splashURL(29, false)}" alt="">
     ${W.map(([t, x, y, r, c, sz]) => `<span style="left:${x}%;top:${y}%;transform:rotate(${r}deg);color:${c};font-size:${sz}px">${t}</span>`).join('')}</div>`;
 }
 
