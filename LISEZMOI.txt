@@ -47,7 +47,7 @@ Modifier l'appli
 - Remettre en ligne : dans le dépôt GitHub, ouvrir le fichier, crayon « Edit », ou
   « Add file » > « Upload files » pour écraser avec la nouvelle version, puis « Commit changes ».
 - Si Alice ne voit pas le changement : fermer et rouvrir l'appli (parfois deux fois).
-  Pour forcer, changer le numéro dans sw.js : const V='alice-v14' -> 'alice-v15'.
+  Pour forcer, changer le numéro dans sw.js : const V='alice-v15' -> 'alice-v16'.
 
 Mes phrases (04/11/2026)
 - En haut de l'accueil : un livre de 1 à 5 phrases positives, sans négation. Toucher la page la fait tourner.

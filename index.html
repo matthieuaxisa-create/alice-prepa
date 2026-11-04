@@ -418,6 +418,14 @@ html.theme-wahou .chip.on{border-color:var(--pink);color:#fff;background:rgb(255
 .wall-bg .bg-photo{position:absolute;inset:0;background:url(img/biblio/fond-alice10.jpg) 100% 100% / auto max(118%, 141.4vw) no-repeat}
 .wall-bg .bg-veil{position:absolute;inset:0;background:radial-gradient(90% 50% at 0% 0%,rgb(255 61 127 / .26),transparent 70%),radial-gradient(90% 50% at 100% 100%,rgb(47 217 185 / .2),transparent 70%),linear-gradient(180deg,rgb(13 9 38 / .6),rgb(13 9 38 / .3) 35%,rgb(13 9 38 / .4) 70%,rgb(13 9 38 / .85))}
 .wall-bg span{position:absolute;white-space:nowrap;font-family:var(--f-hand);opacity:.22;line-height:1;text-shadow:0 2px 14px rgb(0 0 0 / .35)}
+.wall-bg span.long{white-space:normal;width:min(42%,520px);text-align:right;opacity:.36;line-height:1.25;transform-origin:right top;text-shadow:0 0 18px rgb(255 61 127 / .45),0 2px 10px rgb(0 0 0 / .5)}
+/* Petit téléphone (iPhone SE…) : la longue phrase remonte un peu, plus large et plus petite. */
+@media (max-height: 700px) and (max-aspect-ratio: 4/5){ .wall-bg span.long{top:64% !important;width:52%;font-size:12px !important} }
+/* Écran large (ordinateur, tablette en paysage) : la photo garde sa forme, calée à droite sur toute la hauteur
+   (Alice en entier, le panier, le parquet), avec un fondu vers la gauche. */
+@media (min-aspect-ratio: 4/5){
+  .wall-bg .bg-photo{left:auto;width:76.4vh;background-size:cover;background-position:100% 100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 32%);mask-image:linear-gradient(90deg,transparent,#000 32%)}
+}
 
 /* Ma bibliothèque */
 .lib-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -2085,9 +2093,15 @@ function vChrono(){
 /* ---------- Test de design « wahou » : la photo d'Alice en fond d'écran ---------- */
 // La photo (Alice de dos, maillot ALICE 10, dans la lumière du gymnase) en fond fixe partout, sous un voile coloré, avec quelques phrases taguées.
 function wallBgHTML(){
-  const W = [['Ose', 6, 14, -7, '#ff3d7f', 72], ['Un pas après l’autre', 4, 50, 5, '#2fd9b9', 27], ['J’apprends · je progresse · je grandis', 2, 70, -3, '#5b95ff', 21], ['Je construis mon rêve', 10, 85, -4, '#ffd23f', 27]];
+  const W = [
+    {t:'Ose', x:'left:6%', y:14, r:-7, c:'#ff3d7f', s:'72px'},
+    {t:'Un pas après l’autre', x:'left:4%', y:46, r:5, c:'#2fd9b9', s:'27px'},
+    {t:'J’apprends · je progresse · je grandis', x:'left:2%', y:58, r:-3, c:'#5b95ff', s:'21px'},
+    {t:'Chaque jour, je me réveille prête à me dépasser, à repousser mes limites et à devenir la meilleure version de moi-même.', x:'right:3%', y:66, r:-4, c:'#fff6ea', s:'clamp(14px, 1.6vw + 8px, 28px)', cls:'long'},
+    {t:'Je construis mon rêve', x:'left:6%', y:86, r:-4, c:'#ffd23f', s:'27px'},
+  ];
   return `<div class="wall-bg" aria-hidden="true"><div class="bg-photo"></div><div class="bg-veil"></div>
-    ${W.map(([t, x, y, r, c, sz]) => `<span style="left:${x}%;top:${y}%;transform:rotate(${r}deg);color:${c};font-size:${sz}px">${t}</span>`).join('')}</div>`;
+    ${W.map(w => `<span${w.cls ? ` class="${w.cls}"` : ''} style="${w.x};top:${w.y}%;transform:rotate(${w.r}deg);color:${w.c};font-size:${w.s}">${w.t}</span>`).join('')}</div>`;
 }
 
 /* ---------- Statistique : tirs par position, entraînements et matchs ---------- */
