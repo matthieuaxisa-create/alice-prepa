@@ -305,11 +305,12 @@ p{margin:0}
 .phchk svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .phrow.on .phchk{border-color:var(--gold);background:var(--gold);color:var(--gold-ink)}
 
-/* Intersaison : Programme | Chrono */
-.subnav{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;background:var(--deck);border:1px solid var(--rule);border-radius:14px}
+/* Programme : Intersaison | Musculation | Chrono */
+.subnav{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:4px;background:var(--deck);border:1px solid var(--rule);border-radius:14px}
 .subnav a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:42px;border-radius:10px;text-decoration:none;font:700 14px/1 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--dust)}
 .subnav a[aria-current]{background:var(--gold);color:var(--gold-ink)}
 .subnav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:520px){ .subnav a{flex-direction:column;gap:4px;min-height:54px;font-size:12.5px;letter-spacing:.07em} }
 
 /* Statistique */
 .st-new{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -393,6 +394,224 @@ p{margin:0}
 .step button{width:46px;height:46px;border-radius:10px;background:var(--deck);font:700 24px/1 var(--f-num)}
 .step b{font:800 30px/1 var(--f-display);font-variant-numeric:tabular-nums}
 .st-log{display:flex;flex-direction:column;gap:3px;font-size:13px;color:var(--dust)}
+
+/* Musculation : la scène de l'hologramme */
+.mu3d{--sh:min(68vh,540px);position:relative;height:var(--sh);margin:0 -16px;overflow:hidden;isolation:isolate;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+  background:radial-gradient(55% 42% at 50% 40%,rgb(47 217 185 / .14),transparent 72%),radial-gradient(70% 40% at 50% 100%,rgb(61 123 255 / .3),transparent 75%),linear-gradient(180deg,#07061a,#0c0a2a 55%,#08071d);
+  border-block:1px solid rgb(47 217 185 / .25)}
+.mu3d::before{content:"";position:absolute;left:-60%;right:-60%;bottom:-2%;height:42%;z-index:0;pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgb(47 217 185 / .16) 0 1px,transparent 1px 34px),repeating-linear-gradient(0deg,rgb(47 217 185 / .16) 0 1px,transparent 1px 34px);
+  transform:perspective(260px) rotateX(64deg);transform-origin:50% 100%;-webkit-mask-image:linear-gradient(transparent,#000 70%);mask-image:linear-gradient(transparent,#000 70%)}
+.mu3d::after{content:"";position:absolute;left:50%;top:4%;width:min(92%,420px);height:80%;z-index:0;pointer-events:none;transform:translateX(-50%);
+  background:linear-gradient(0deg,rgb(47 217 185 / .32),rgb(61 123 255 / .1) 55%,transparent);clip-path:polygon(41% 100%,59% 100%,100% 0,0 0);filter:blur(5px);opacity:.75}
+.mu3d-cv{position:absolute;inset:0;z-index:2;width:100%;height:100%;display:block;cursor:grab}
+.mu3d-cv:active{cursor:grabbing}
+.mu3d-pad{position:absolute;left:50%;top:83.7%;z-index:1;width:calc(var(--sh) * .44);aspect-ratio:1;transform:translate(-50%,-50%) scaleY(.28);pointer-events:none;transition:opacity .4s}
+.mu3d-pad svg{width:100%;height:100%;overflow:visible;fill:none}
+.mu3d-pad .r0{stroke:rgb(47 217 185 / .9);stroke-width:2.5;filter:drop-shadow(0 0 6px #2fd9b9)}
+.mu3d-pad .r1{stroke:rgb(61 123 255 / .9);stroke-width:5;stroke-dasharray:18 10;transform-origin:50% 50%;animation:mu-spin 16s linear infinite}
+.mu3d-pad .r2{stroke:rgb(47 217 185 / .7);stroke-width:2;stroke-dasharray:3 7;transform-origin:50% 50%;animation:mu-spin 24s linear infinite reverse}
+.mu3d-pad .r3{stroke:rgb(255 61 127 / .55);stroke-width:1.5;stroke-dasharray:60 30 8 30;transform-origin:50% 50%;animation:mu-spin 11s linear infinite}
+.mu3d-pad .core{fill:url(#mu-core)}
+@keyframes mu-spin{to{transform:rotate(360deg)}}
+.mu3d.zoomed .mu3d-pad,.mu3d.zoomed::after{opacity:0}
+.mu3d-tags{position:absolute;inset:0;z-index:3;pointer-events:none}
+.mu3d-tags svg{position:absolute;inset:0;overflow:visible}
+.mu3d-tags path{fill:none;stroke-width:1.2;stroke-dasharray:3 3}
+.mu3d-tags .heat{stroke:#ffb43a;fill:none}
+.mu3d-tags circle.heat{fill:#ffb43a;stroke:none;filter:drop-shadow(0 0 4px #ff8a3d)}
+.mu3d-tags .sel{stroke:#ff3d7f}
+.mu3d-tags circle.sel{fill:#ff3d7f;stroke:none;filter:drop-shadow(0 0 5px #ff3d7f)}
+.mu3d-tag{position:absolute;width:118px;padding:6px 9px 7px;border:1px solid rgb(47 217 185 / .45);border-radius:4px;background:rgb(8 10 34 / .72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.mu3d-tag.l{left:10px}
+.mu3d-tag.r{right:10px}
+.mu3d-tag b{display:block;font:700 12.5px/1.15 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.mu3d-tag small{display:block;margin-top:2px;font:600 11px/1.2 var(--f-num);letter-spacing:.04em;color:#9feee0}
+.mu3d-tag.heat{border-color:rgb(255 180 58 / .6)}
+.mu3d-tag.heat small{color:#ffcf7a}
+.mu3d-tag.sel{border-color:rgb(255 61 127 / .75);box-shadow:inset 0 0 18px rgb(255 61 127 / .25)}
+.mu3d-tag.sel small{color:#ff9ec0}
+.mu3d-hud{position:absolute;top:10px;left:12px;right:12px;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;font:700 11px/1.2 var(--f-num);letter-spacing:.16em;text-transform:uppercase;color:#9feee0}
+.mu3d-hud b{display:block;font:800 22px/1 var(--f-display);letter-spacing:.04em;color:#fff;text-shadow:0 0 14px rgb(47 217 185 / .8)}
+.mu3d-hud > span:last-child{text-align:right}
+.mu3d-hint{position:absolute;left:0;right:0;bottom:12px;z-index:3;display:flex;justify-content:space-between;padding:0 12px;pointer-events:none;transition:opacity .6s}
+.mu3d-hint span{display:flex;align-items:center;gap:6px;font:700 11px/1.1 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:#9feee0;text-shadow:0 0 10px rgb(47 217 185 / .7)}
+.mu3d-hint svg{width:30px;height:30px;fill:none;stroke:#2fd9b9;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgb(47 217 185 / .8))}
+.mu3d.used .mu3d-hint{opacity:0}
+.mu3d-ctl{display:flex;justify-content:space-between;gap:8px;margin-top:10px}
+.mu3d-ctl div{display:flex;gap:6px}
+.mu3d-ctl button{min-width:46px;height:40px;padding:0 10px;border-radius:10px;border:1px solid rgb(47 217 185 / .45);background:rgb(8 10 34 / .7);color:#dffaf5;font:700 12px/1 var(--f-num);letter-spacing:.1em;text-transform:uppercase}
+.mu3d-ctl button[aria-pressed="true"]{border-color:#2fd9b9;color:#07201c;background:#2fd9b9}
+.mu3d-ctl button svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;vertical-align:-4px}
+.mu-leg{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:10px;font-size:13px;color:var(--dust)}
+.mu-leg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.mu-leg i.h{background:#ff8a3d;box-shadow:0 0 6px #ff8a3d}
+.mu-leg i.s{background:#ff3d7f;box-shadow:0 0 6px #ff3d7f}
+@media (min-width:632px){ .mu3d{margin:0;border:1px solid rgb(47 217 185 / .3);border-radius:18px} }
+.mu3d-host{position:absolute;inset:0;z-index:2}
+
+/* Musculation : listes, saisie, bilan */
+.mu-zc{flex-wrap:wrap;overflow:visible;margin-top:12px}
+.mu-flat{max-width:360px;margin:0 auto}
+.mu-body{display:block;width:100%;height:auto;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.mu-body .sil{fill:rgb(239 232 218 / .05);stroke:rgb(239 232 218 / .22);stroke-width:.5}
+.mu-body .hair{fill:#2e2463;stroke:rgb(192 184 224 / .3);stroke-width:.5;pointer-events:none}
+.mu-body .mz{fill:rgb(239 232 218 / .17);stroke:var(--ink);stroke-width:.6}
+.mu-body [data-act]{cursor:pointer}
+.mu-body .mz.w{fill:#ff8a3d}
+.mu-body .mz.p{fill:#ff3d5a}
+.mu-body .mz.s{fill:#ff9a4a;fill-opacity:.8}
+.mu-lbl{display:grid;grid-template-columns:1fr 1fr;margin-top:4px;text-align:center;font:600 11px var(--f-num);letter-spacing:.14em;text-transform:uppercase;color:var(--dust)}
+.mu-mini{width:104px;flex:none}
+.mu-head{display:flex;gap:12px;align-items:center;justify-content:space-between}
+.mu-head > div{min-width:0}
+.mu-circ{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;text-align:left;background:var(--deck);border:1px solid var(--rule);border-radius:var(--r)}
+.mu-circ div{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.mu-circ b{font:800 21px/1.05 var(--f-display);text-transform:uppercase}
+.mu-circ span{font-size:13px;color:var(--dust)}
+.mu-circ > svg{width:20px;height:20px;flex:none;fill:none;stroke:var(--dust);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mu-circ.today{border-color:rgb(244 180 58 / .6);background:var(--gold-soft)}
+.mu-ex{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;width:100%;padding:12px 14px;text-align:left;background:var(--deck);border:1px solid var(--rule);border-radius:var(--r)}
+.mu-ex > div{min-width:0}
+.mu-ex b{display:block;font-weight:600}
+.mu-ex small{display:block;margin-top:2px;font-size:13px;color:var(--dust)}
+.mu-ex small .tag{margin-right:6px;vertical-align:1px}
+.mu-ex > span{font:700 15px/1.15 var(--f-num);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mu-ex > span small{font:600 12px/1.2 var(--f-num);margin-top:4px}
+.mu-ex .go{display:inline-flex;align-items:center;gap:2px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+.mu-ex .go svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.mu-ex.done{border-color:rgb(22 163 127 / .7);box-shadow:inset 3px 0 0 #16a37f}
+.mu-ex .pr,.mu-ex > span.pr,.mu-ref .pr{color:var(--gold)}
+.mu-back{display:inline-flex;align-items:center;gap:4px;align-self:flex-start;padding:4px 0;font:700 13px/1 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--dust)}
+.mu-back svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.mu-ref{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mu-ref span{display:flex;flex-direction:column;gap:3px;padding:10px 12px;background:var(--deck);border:1px solid var(--rule);border-radius:12px;font:700 17px/1.15 var(--f-num);font-variant-numeric:tabular-nums}
+.mu-ref small{font:600 11px/1.2 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--dust)}
+.mu-ref em{font:400 12.5px/1.2 var(--f-body);font-style:normal;color:var(--dust)}
+.mu-sets{display:flex;flex-direction:column;gap:8px}
+.mu-set{display:grid;grid-template-columns:20px 1fr 1fr 32px;gap:8px;align-items:center}
+.mu-set > i{font:700 15px/1 var(--f-num);font-style:normal;color:var(--dust);text-align:center}
+.mu-set.hd small{font:600 11px/1.2 var(--f-num);letter-spacing:.08em;text-transform:uppercase;color:var(--dust);text-align:center}
+.mu-stp{display:grid;grid-template-columns:34px 1fr 34px;align-items:center;background:var(--deck-2);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.mu-stp button{height:48px;font:700 22px/1 var(--f-num);color:var(--chalk)}
+.mu-stp input{height:48px;padding:0;border:0;border-radius:0;background:transparent;text-align:center;font:800 24px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.mu-stp input::placeholder{color:var(--dim);font-size:16px;letter-spacing:.08em}
+.mu-x{display:grid;place-items:center;width:32px;height:36px;border-radius:10px;color:var(--dust)}
+.mu-x svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.mu-x:disabled{opacity:.25}
+.mu-bars{display:flex;flex-direction:column;gap:4px}
+.mu-bar{display:grid;grid-template-columns:118px 1fr 34px;gap:10px;align-items:center;width:100%;min-height:30px;text-align:left;font-size:14px}
+.mu-bar i{display:block;height:10px;min-width:4px;border-radius:0 4px 4px 0;background:var(--gold)}
+.mu-bar b{font:700 15px/1 var(--f-num);text-align:right;font-variant-numeric:tabular-nums}
+.mu-evo .mu-line{fill:none;stroke:var(--gold);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.mu-evo .mu-dot{fill:var(--gold);stroke:var(--ink);stroke-width:2}
+.mu-evo .mu-dot.on{fill:var(--chalk);stroke:var(--gold)}
+
+/* RPE de séance : le cadran de l'accueil et le bilan */
+.subnav.two{grid-template-columns:1fr 1fr}
+.rpe-card{position:relative;display:flex;flex-direction:column;gap:14px;padding:16px;border-radius:var(--r);overflow:hidden;
+  background:linear-gradient(180deg,#120e33,#0c0a26);
+  background:radial-gradient(110% 60% at 50% 0%,color-mix(in srgb,var(--rc,#7d86a8) 24%,transparent),transparent 72%),linear-gradient(180deg,#120e33,#0c0a26);
+  border:1px solid rgb(255 255 255 / .1);border-color:color-mix(in srgb,var(--rc,#7d86a8) 45%,transparent);box-shadow:0 12px 32px rgb(0 0 0 / .35);transition:border-color .25s}
+.rpe-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.rpe-head .eyebrow{color:#9feee0}
+.rpe-head h2{margin-top:4px;font:800 26px/1 var(--f-display);text-transform:uppercase}
+.rpe-streak{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;background:rgb(255 138 61 / .16);color:#ffb26b;font:700 12.5px/1 var(--f-num);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.rpe-streak svg{width:15px;height:15px;fill:#ff8a3d;stroke:none}
+.rpe-form{display:flex;flex-direction:column;gap:12px}
+.rpe-dial{display:block;width:100%;max-width:340px;margin:0 auto;touch-action:none;cursor:pointer;-webkit-user-select:none;user-select:none;outline:none}
+.rpe-dial .rtrack{fill:none;stroke:rgb(255 255 255 / .06);stroke-width:32}
+.rpe-dial .rseg{fill:none;stroke-width:24;opacity:.17;transition:opacity .15s}
+.rpe-dial .rseg.on{opacity:1;filter:url(#rpe-glow)}
+.rpe-dial .rtick{font:700 12px var(--f-num);fill:var(--dust);text-anchor:middle}
+.rpe-dial .rnum{font:900 84px var(--f-display);fill:var(--rc);text-anchor:middle;transition:fill .2s}
+.rpe-dial .rlab{font:700 15px var(--f-num);letter-spacing:.14em;text-transform:uppercase;fill:#fff;text-anchor:middle}
+.rpe-dial .rknob{pointer-events:none;transition:opacity .2s}
+.rpe-dial .rknob circle{fill:#fff;stroke:var(--rc);stroke-width:4}
+.rpe-dial .rknob .in{fill:var(--rc);stroke:none}
+.rpe-dial:focus-visible .rtrack{stroke:rgb(255 255 255 / .22)}
+.rpe-hint{min-height:2.7em;margin-top:-6px;text-align:center;font-size:15px;line-height:1.35;color:var(--chalk)}
+.rpe-line{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rpe-min{display:flex;align-items:center;gap:4px;padding:3px;border-radius:12px;background:rgb(255 255 255 / .06)}
+.rpe-min button{width:42px;height:40px;border-radius:9px;background:rgb(255 255 255 / .07);font:700 22px/1 var(--f-num);color:var(--chalk)}
+.rpe-min b{min-width:78px;text-align:center;font:800 26px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.rpe-min small{font:600 13px var(--f-num);color:var(--dust)}
+.rpe-chips{flex-wrap:wrap;overflow:visible}
+.rpe-chips .chip svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rpe-card .chip.on,.rpe-form .chip.on{border-color:var(--rc);color:#fff;background:rgb(255 255 255 / .08);box-shadow:0 0 14px -3px var(--rc)}
+.rpe-calc{display:flex;align-items:center;justify-content:center;gap:12px;min-height:62px;padding:8px 12px;border-radius:14px;background:rgb(255 255 255 / .045)}
+.rpe-calc b{font:900 48px/1 var(--f-display);color:var(--rc);text-shadow:0 0 24px var(--rc);font-variant-numeric:tabular-nums}
+.rpe-calc span{display:flex;flex-direction:column;font:700 13px/1.2 var(--f-num);letter-spacing:.08em;text-transform:uppercase;color:#fff}
+.rpe-calc small{margin-top:2px;font:600 12.5px var(--f-num);letter-spacing:.03em;text-transform:none;color:var(--dust)}
+.rpe-go:disabled{opacity:.4;box-shadow:none}
+.rpe-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rpe-acts .btn{min-height:44px;padding:0 10px;font-size:13px}
+.rpe-sum{display:flex;align-items:center;gap:16px}
+.rpe-ring{flex:none;display:grid;place-content:center;justify-items:center;gap:2px;width:100px;height:100px;border-radius:50%;text-align:center;
+  background:radial-gradient(circle,#0e0b2b 60%,transparent 61%),conic-gradient(var(--rc) calc(var(--p,100) * 1%),rgb(255 255 255 / .08) 0);box-shadow:0 0 28px -6px var(--rc)}
+.rpe-ring b{font:900 42px/1 var(--f-display);color:var(--rc)}
+.rpe-ring small{max-width:70px;font:700 9.5px/1.1 var(--f-num);letter-spacing:.06em;text-transform:uppercase;color:var(--dust)}
+.rpe-big{display:block;font:900 46px/1 var(--f-display);color:#fff}
+.rpe-big small{font-size:18px;color:var(--dust)}
+.rpe-sum p{margin-top:6px;font-size:14px;line-height:1.35;color:var(--dust)}
+.rpe-wk{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;height:74px;padding-top:4px}
+.rpe-wk span{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%}
+.rpe-wk i{display:block;width:100%;max-width:26px;border-radius:5px 5px 2px 2px}
+.rpe-wk em{font:700 10px/1 var(--f-num);font-style:normal;color:var(--dust)}
+.rpe-wk small{font:700 11px var(--f-num);text-transform:uppercase;color:var(--dust)}
+.rpe-wk .today small{color:#fff}
+.rpe-wk .today i{box-shadow:0 0 12px -1px var(--rc)}
+.rpe-hero{position:relative;padding:14px 14px 18px;border-radius:18px;overflow:hidden;
+  background:linear-gradient(180deg,#0b0a24,#100c30);
+  background:radial-gradient(70% 55% at 50% 72%,color-mix(in srgb,var(--zc) 24%,transparent),transparent 70%),linear-gradient(180deg,#0b0a24,#100c30);
+  border:1px solid rgb(255 255 255 / .1);border-color:color-mix(in srgb,var(--zc) 40%,transparent)}
+.rpe-hud{display:flex;justify-content:space-between;gap:12px}
+.rpe-hud > span{display:flex;flex-direction:column;font:700 11px/1.2 var(--f-num);letter-spacing:.14em;text-transform:uppercase;color:#9feee0}
+.rpe-hud > span:last-child{align-items:flex-end;text-align:right}
+.rpe-hud b{margin-top:4px;font:900 38px/1 var(--f-display);letter-spacing:.01em;color:#fff;text-shadow:0 0 16px rgb(47 217 185 / .5)}
+.rpe-hud b small{font-size:16px;color:var(--dust);text-shadow:none}
+.rpe-hud em{display:flex;align-items:center;gap:4px;margin-top:4px;font:600 12px/1.2 var(--f-num);letter-spacing:.03em;text-transform:none;font-style:normal;color:var(--dust)}
+.rpe-hud em.up{color:#ffac3a}
+.rpe-hud em svg{width:13px;height:13px;fill:#ff8a3d;stroke:none}
+.rpe-gauge{display:block;width:100%;max-width:340px;margin:2px auto 0}
+.rpe-gauge .gz{fill:none;stroke-width:16;opacity:.32}
+.rpe-gauge .gz.on{opacity:1;filter:url(#rpe-glow-g)}
+.rpe-gauge .gt{font:700 11px var(--f-num);fill:var(--dust);text-anchor:middle}
+.rpe-gauge .gv{font:900 44px var(--f-display);fill:#fff;text-anchor:middle}
+.rpe-gauge .needle{transform-box:view-box;transform-origin:150px 116px;transform:rotate(var(--na))}
+.rpe-hero.anim .needle{animation:rpe-needle 1.6s cubic-bezier(.25,1.5,.45,1)}
+@keyframes rpe-needle{from{transform:rotate(-90deg)}}
+@media (prefers-reduced-motion:reduce){ .rpe-hero.anim .needle{animation:none} }
+.rpe-zone{margin-top:2px;text-align:center}
+.rpe-zone b{display:block;font:800 22px/1.1 var(--f-display);text-transform:uppercase}
+.rpe-zone span{font-size:14px;color:var(--dust)}
+.rpe-days .wk{stroke:rgb(255 255 255 / .14);stroke-dasharray:2 3}
+.rpe-days [data-act]{cursor:pointer}
+.rpe-scale{display:grid;grid-template-columns:repeat(11,1fr);gap:2px;margin-top:12px}
+.rpe-scale i{height:8px;border-radius:2px}
+.rpe-scale-l{display:flex;justify-content:space-between;margin-top:4px;font-size:12px;color:var(--dust)}
+.rpe-weeks{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;align-items:end;height:140px}
+.rpe-weeks button{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;padding:0}
+.rpe-weeks i{display:block;width:100%;max-width:30px;border-radius:5px 5px 2px 2px;background:var(--gold);opacity:.5}
+.rpe-weeks .cur i{opacity:1;box-shadow:0 0 14px -2px var(--gold)}
+.rpe-weeks .on i{opacity:1;outline:2px solid var(--chalk);outline-offset:1px}
+.rpe-weeks b{font:700 11.5px/1 var(--f-num);font-variant-numeric:tabular-nums}
+.rpe-weeks small{font:600 10.5px/1 var(--f-num);color:var(--dust);white-space:nowrap}
+.mu-bar span svg{width:15px;height:15px;margin-right:6px;vertical-align:-2px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rpe-day{display:flex;flex-direction:column;gap:6px}
+.rpe-dh{display:flex;justify-content:space-between;gap:10px;font-size:14.5px}
+.rpe-dh span{font:700 14px var(--f-num);color:var(--dust);white-space:nowrap}
+.rpe-row{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;width:100%;padding:10px 12px;text-align:left;background:var(--deck);border:1px solid var(--rule);border-radius:12px}
+.rpe-row > i{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;font:900 20px/1 var(--f-display);font-style:normal;color:#0b0a24}
+.rpe-row b{display:block;font-size:15px;font-weight:600}
+.rpe-row small{font-size:13px;color:var(--dust)}
+.rpe-row em{font:800 19px/1 var(--f-display);font-style:normal;font-variant-numeric:tabular-nums}
+.rpe-legend{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.rpe-legend div{display:grid;grid-template-columns:30px 112px 1fr;gap:10px;align-items:center;font-size:13px;line-height:1.25}
+.rpe-legend i{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;font:800 15px/1 var(--f-display);font-style:normal;color:#0b0a24}
+.rpe-legend span{color:var(--dust)}
+.pad button[data-act="val-rpe"][aria-pressed="true"]{background:var(--rc);border-color:var(--rc);color:#0b0a24;box-shadow:0 0 14px -2px var(--rc)}
 
 /* Test de design « wahou » (lien ?theme=wahou) : couleurs de l'affiche graffiti, fresque, mots tagués en fond */
 html.theme-wahou{--ink:#0d0926;--deck:#191339;--deck-2:#241b4d;--rule:#3a2d6c;--chalk:#fff6ea;--dust:#c0b8e0;--dim:#8a80b8;--gold:#ffd23f;--gold-ink:#22104a;--gold-soft:rgb(255 210 63 / .15);--blue:#3d7bff;--blue-soft:rgb(61 123 255 / .16);--note:#2d2058;--note-2:#21184a;--note-line:#4d3c8c;--pink:#ff3d7f;--teal:#2fd9b9;--grad:linear-gradient(100deg,#ffd23f,#ff8a3d 50%,#ff3d7f);--grad-cool:linear-gradient(120deg,#2fd9b9,#3d7bff 55%,#ff3d7f)}
@@ -1179,6 +1398,7 @@ const ICON = {
   flame:'<path d="M12 21.5c-3.9 0-6.6-2.7-6.6-6.3 0-3.4 2.3-5.3 3.7-8 .4 1.8 1.4 2.9 2.6 3.5.2-3 1.6-5.5 3.9-7.2-.4 3 1.2 4.8 2.4 6.6.9 1.4 1.6 3 1.6 5.1 0 3.6-2.7 6.3-7.6 6.3z"/>',
   list:'<path d="M10 6.5h10M10 12h10M10 17.5h10"/><path d="m3.5 6.5 1.3 1.3L7.2 5.3M3.5 12l1.3 1.3 2.4-2.5M3.5 17.5l1.3 1.3 2.4-2.5"/>',
   spark:'<path d="M12 3.5l1.8 5.2 5.2 1.8-5.2 1.8L12 17.5l-1.8-5.2L5 10.5l5.2-1.8zM18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/>',
+  muscle:'<path d="M6.5 7v10M17.5 7v10M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/>',
   stats:'<path d="M4 20.5h16"/><rect x="5.5" y="12" width="3" height="5.5" rx="1"/><rect x="10.5" y="5" width="3" height="12.5" rx="1"/><rect x="15.5" y="9" width="3" height="8.5" rx="1"/>',
   undo:'<path d="M9 7 4.5 11.5 9 16"/><path d="M5 11.5h9a5 5 0 0 1 0 10h-2"/>',
 };
@@ -1205,7 +1425,7 @@ function platform(u){
 const S = {
   tab:'accueil', mode:'local', uid:null, isOwner:false, user:null, cwKnown:false,
   settings:{vma:14, start:DEFAULT_START, name:'Alice'},
-  progress:{}, checkins:{}, shots:{}, threads:{}, videos:{}, msgs:{}, matchs:{}, victoires:{}, mots:{}, motEdit:false, routines:{}, rtEdit:null, rtVidCat:'all', objectifs:{}, goalsWon:false, phrases:{}, phWarn:false, stats:{},
+  progress:{}, checkins:{}, shots:{}, threads:{}, videos:{}, msgs:{}, matchs:{}, victoires:{}, mots:{}, motEdit:false, routines:{}, rtEdit:null, rtVidCat:'all', objectifs:{}, goalsWon:false, phrases:{}, phWarn:false, stats:{}, muscu:{}, exos:{}, rpe:{},
   vCat:'seance', vFilter:'all', vDismissed:ls.get('oal-vdis',{}),
   sample:null, mSeg:'avant', jSel:null, ai:{},
   names:{}, drafts:{},
@@ -1285,7 +1505,7 @@ function subscribeAll(){
   unsubs.forEach(u => { try{ u(); }catch{} }); unsubs = [];
   unsubs.push(Store.watch('config', m => { if(m.main) S.settings = {...S.settings, ...m.main}; rerender(); }));
   unsubs.push(Store.watch('ffbb', m => { if(m.pouleA) applyFfbb(m.pouleA); rerender(); }));
-  for(const k of ['progress','checkins','shots','threads','videos','matchs','victoires','mots','routines','objectifs','phrases','stats']){
+  for(const k of ['progress','checkins','shots','threads','videos','matchs','victoires','mots','routines','objectifs','phrases','stats','muscu','exos','rpe']){
     unsubs.push(Store.watch(k, m => { S[k] = m; rerender(); }));
   }
 }
@@ -1351,8 +1571,10 @@ function renderAll(){
   document.documentElement.style.setProperty('--light', (0.07 + 0.38 * lightFrac()).toFixed(3));
   patch($('#top'), vTop());
   patch($('#tabs'), vTabs());
-  const V = {accueil:vAccueil, programme:vProgramme, chrono:vChrono, bilan:vBilan, videos:vVideos, mental:vMental, victoires:vVictoires, pensees:vPensees, routine:vRoutine, adresse:vAdresse, profil:vProfil, coach:vCoach, phrases:vPhrases, biblio:vBiblio, stats:vStats}[S.tab] || vAccueil;
+  const V = {accueil:vAccueil, programme:vProgramme, chrono:vChrono, bilan:vBilan, videos:vVideos, mental:vMental, victoires:vVictoires, pensees:vPensees, routine:vRoutine, adresse:vAdresse, profil:vProfil, coach:vCoach, phrases:vPhrases, biblio:vBiblio, stats:vStats, muscu:vMuscu, rpe:vRpe}[S.tab] || vAccueil;
   patch($('#view'), V());
+  if(S.tab === 'muscu'){ mu3dMount(MU.intro); MU.intro = false; }
+  RP.anim = false;
   if(SH) renderSheet();
   const ids = [...Object.values(S.threads).flatMap(t => [t.lastBy, t.createdBy]), ...Object.values(S.videos).map(v => v.by), ...Object.values(S.msgs).flatMap(m => Object.values(m).map(x => x.by))].filter(x => x && x !== 'local');
   resolveNames(ids);
@@ -1369,10 +1591,10 @@ function unreadCount(){
   return Object.entries(S.threads).filter(([id,t]) => t.lastAt && t.lastBy !== meId() && (S.seen[id] || 0) < t.lastAt).length;
 }
 function vTabs(){
-  const T = [['accueil','home','Accueil'],['routine','list','Routine'],['bilan','ball','Bilan'],['mental','mental','Mental'],['programme','prog','Intersaison'],['stats','stats','Statistique'],['videos','video','Vidéos']];
+  const T = [['accueil','home','Accueil'],['routine','list','Routine'],['bilan','ball','Bilan'],['mental','mental','Mental'],['programme','prog','Programme'],['stats','stats','Statistique'],['videos','video','Vidéos']];
   const un = unreadCount(), lm = lastMatch(), todo = lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5;
-  const cur = ['victoires','pensees','coach','phrases','biblio'].includes(S.tab) ? 'mental' : S.tab === 'chrono' ? 'programme' : S.tab;
-  return T.map(([k,i,l]) => `<a class="tab" href="#${k}" ${cur===k?'aria-current="page"':''}>${svg(i)}<span>${l}</span>${k==='mental'&&un?'<i class="badge" aria-label="Nouveaux messages"></i>':''}${k==='bilan'&&todo?'<i class="badge" aria-label="Bilan à faire"></i>':''}${k==='programme'&&TM.plan&&!TM.done?'<i class="badge run" aria-label="Chrono en cours"></i>':''}${k==='stats'&&ST.live?'<i class="badge run" aria-label="Séance de stats en cours"></i>':''}</a>`).join('');
+  const cur = ['victoires','pensees','coach','phrases','biblio'].includes(S.tab) ? 'mental' : ['chrono','muscu'].includes(S.tab) ? 'programme' : S.tab === 'rpe' ? 'bilan' : S.tab;
+  return T.map(([k,i,l]) => `<a class="tab" href="#${k}" ${cur===k?'aria-current="page"':''}>${svg(i)}<span>${l}</span>${k==='mental'&&un?'<i class="badge" aria-label="Nouveaux messages"></i>':''}${k==='bilan'&&todo?'<i class="badge" aria-label="Bilan à faire"></i>':''}${k==='accueil'&&rpeTodo()?'<i class="badge" aria-label="RPE du jour à noter"></i>':''}${k==='programme'&&TM.plan&&!TM.done?'<i class="badge run" aria-label="Chrono en cours"></i>':''}${k==='stats'&&ST.live?'<i class="badge run" aria-label="Séance de stats en cours"></i>':''}</a>`).join('');
 }
 
 function sesRow(sid, w, showDay){
@@ -1391,6 +1613,7 @@ function vAccueil(){
   const lm = lastMatch();
   return `
   ${bookHTML()}
+  ${rpeHomeHTML()}
   ${matchCard(nextMatch())}
   ${lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5 ? `<section><div class="h-sec"><h2>Dernier match</h2><span class="eyebrow">Ton bilan</span></div><button class="mrow" data-act="match" data-mid="${lm.id}" data-seg="apres">${mRowInner(lm)}</button></section>` : ''}
   <section>
@@ -1545,8 +1768,8 @@ function thrRow(id, t){
     <p>${t.lastText ? `${esc(nameOf(t.lastBy))} : ${esc(t.lastText)}` : esc(t.prompt || '')}</p></button>`;
 }
 
-// Intersaison : le programme et le chrono, côte à côte.
-const interNav = cur => `<nav class="subnav" aria-label="Intersaison">${[['programme','prog','Programme'],['chrono','chrono','Chrono']].map(([k,i,l]) => `<a href="#${k}" ${cur === k ? 'aria-current="page"' : ''}>${svg(i)}${l}</a>`).join('')}</nav>`;
+// Onglet Programme : l'intersaison, la musculation et le chrono, côte à côte.
+const interNav = cur => `<nav class="subnav" aria-label="Programme">${[['programme','prog','Intersaison'],['muscu','muscle','Musculation'],['chrono','chrono','Chrono']].map(([k,i,l]) => `<a href="#${k}" ${cur === k ? 'aria-current="page"' : ''}>${svg(i)}${l}</a>`).join('')}</nav>`;
 function vProgramme(){
   const wi = weekInfo();
   const w = S.viewWeek ?? wi.w, W = WEEKS[w];
@@ -1588,6 +1811,826 @@ function ficheHTML(f){
   if(f.chrono) body += `<button class="btn ghost" data-act="tm-start" data-k="${f.chrono}">${svg('chrono')}Lancer le chrono</button>`;
   return `<details class="fiche"><summary><i>${f.n}</i><b>${esc(f.t)}</b><span>${esc(f.v)}</span></summary><div>${body}</div></details>`;
 }
+
+// Le corps (face / dos) : silhouette et muscles, en tracés SVG (repère 100 × 236).
+const MU_BODY = {"sil":"M50 29C48.6 29 47.3 28.8 45.8 29.4C44.3 30 43.1 31.6 41 32.6C38.9 33.6 35.3 34.5 33 35.4C30.7 36.3 28.9 36.7 27.4 38.2C25.9 39.7 24.8 41.8 24 44.6C23.2 47.4 23.2 51.3 22.8 55C22.4 58.7 21.8 63 21.4 67C21 71 20.7 74.7 20.2 79C19.7 83.3 18.8 88.2 18.2 93C17.6 97.8 17.3 104.2 16.8 108C16.3 111.8 15.3 113.3 15 116C14.7 118.7 14.4 121.8 14.8 124C15.2 126.2 16.3 128.5 17.2 129C18.1 129.5 19.3 128.7 20 127C20.7 125.3 20.7 122 21.2 119C21.7 116 22.4 113 23.2 109C24 105 25.3 99.5 26.2 95C27.1 90.5 27.8 86.3 28.4 82C29 77.7 29.2 72.7 29.6 69C30 65.3 30.6 59.5 31 60C31.4 60.5 31.6 67.7 32.2 72C32.8 76.3 34.5 81.5 34.4 86C34.3 90.5 32.4 95 31.6 99C30.8 103 29.8 106.2 29.4 110C29 113.8 29.2 117.3 29.4 122C29.6 126.7 29.9 132.3 30.4 138C30.9 143.7 31.9 150.8 32.6 156C33.3 161.2 34.3 164.8 34.4 169C34.5 173.2 33.4 176.5 33.2 181C33 185.5 33 190.8 33.4 196C33.8 201.2 35 208 35.4 212C35.8 216 36.1 217.7 35.8 220C35.5 222.3 33.6 224.4 33.6 226C33.6 227.6 34.7 229 36 229.5C37.3 230 40.4 230.2 41.5 229C42.6 227.8 42.4 225 42.6 222C42.9 219 42.7 215.7 43 211C43.3 206.3 44.2 199.2 44.6 194C45 188.8 45.5 184.3 45.6 180C45.7 175.7 45.2 173 45.4 168C45.6 163 46.5 156.3 47 150C47.5 143.7 47.9 134.5 48.4 130C48.9 125.5 49.5 123 50 123C50.5 123 51.1 125.5 51.6 130C52.1 134.5 52.5 143.7 53 150C53.5 156.3 54.4 163 54.6 168C54.8 173 54.3 175.7 54.4 180C54.5 184.3 55 188.8 55.4 194C55.8 199.2 56.7 206.3 57 211C57.3 215.7 57.1 219 57.4 222C57.6 225 57.4 227.8 58.5 229C59.6 230.2 62.7 230 64 229.5C65.3 229 66.4 227.6 66.4 226C66.4 224.4 64.5 222.3 64.2 220C63.9 217.7 64.2 216 64.6 212C65 208 66.2 201.2 66.6 196C67 190.8 67 185.5 66.8 181C66.6 176.5 65.5 173.2 65.6 169C65.7 164.8 66.7 161.2 67.4 156C68.1 150.8 69.1 143.7 69.6 138C70.1 132.3 70.4 126.7 70.6 122C70.8 117.3 71 113.8 70.6 110C70.2 106.2 69.2 103 68.4 99C67.6 95 65.7 90.5 65.6 86C65.5 81.5 67.2 76.3 67.8 72C68.4 67.7 68.6 60.5 69 60C69.4 59.5 70 65.3 70.4 69C70.8 72.7 71 77.7 71.6 82C72.2 86.3 72.9 90.5 73.8 95C74.7 99.5 76 105 76.8 109C77.6 113 78.3 116 78.8 119C79.3 122 79.3 125.3 80 127C80.7 128.7 81.9 129.5 82.8 129C83.7 128.5 84.8 126.2 85.2 124C85.6 121.8 85.3 118.7 85 116C84.7 113.3 83.7 111.8 83.2 108C82.7 104.2 82.4 97.8 81.8 93C81.2 88.2 80.3 83.3 79.8 79C79.3 74.7 79 71 78.6 67C78.2 63 77.6 58.7 77.2 55C76.8 51.3 76.8 47.4 76 44.6C75.2 41.8 74.1 39.7 72.6 38.2C71.1 36.7 69.3 36.3 67 35.4C64.7 34.5 61.1 33.6 59 32.6C56.9 31.6 55.7 30 54.2 29.4C52.7 28.8 51.4 29 50 29Z","head":"M50 3.5C55.7 3.5 59.5 8.4 59.5 15C59.5 21.6 55.4 27 50 27C44.6 27 40.5 21.6 40.5 15C40.5 8.4 44.3 3.5 50 3.5Z","fringe":"M40.6 15.4C40.4 8 44.8 3.5 50 3.5C55.2 3.5 59.6 8 59.4 15.4C57.4 10.6 54 8.8 50 8.8C46 8.8 42.6 10.6 40.6 15.4Z","tail":"M47.6 20C46.4 26.5 47 33.5 50 40.5C53 33.5 53.6 26.5 52.4 20Z","front":[["epaules","M37 35.8C36.1 35.3 32.8 36.1 31 36.8C29.2 37.5 27.6 38.5 26.4 40C25.2 41.5 24.4 43.9 24 46C23.6 48.1 23.4 51.2 23.8 52.4C24.2 53.6 25.3 54 26.2 53.4C27.1 52.8 28.1 50.2 29.2 48.6C30.3 47 31.8 45.1 33 43.6C34.2 42.1 35.7 40.9 36.4 39.6C37.1 38.3 37.9 36.3 37 35.8Z"],["epaules","M63 35.8C63.9 35.3 67.2 36.1 69 36.8C70.8 37.5 72.4 38.5 73.6 40C74.8 41.5 75.6 43.9 76 46C76.4 48.1 76.6 51.2 76.2 52.4C75.8 53.6 74.7 54 73.8 53.4C72.9 52.8 71.9 50.2 70.8 48.6C69.7 47 68.2 45.1 67 43.6C65.8 42.1 64.3 40.9 63.6 39.6C62.9 38.3 62.1 36.3 63 35.8Z"],["pecs","M48.8 39.4C47.6 36.6 43.8 38.3 41.6 38.6C39.4 38.9 37.3 39.7 35.8 41C34.3 42.3 33.2 44.7 32.8 46.6C32.4 48.5 32.7 51 33.4 52.6C34.1 54.2 35.5 55.6 37 56.4C38.5 57.2 40.6 57.6 42.6 57.4C44.6 57.2 47.8 58.4 48.8 55.4C49.8 52.4 50 42.2 48.8 39.4Z"],["pecs","M51.2 39.4C52.4 36.6 56.2 38.3 58.4 38.6C60.6 38.9 62.7 39.7 64.2 41C65.7 42.3 66.8 44.7 67.2 46.6C67.6 48.5 67.3 51 66.6 52.6C65.9 54.2 64.5 55.6 63 56.4C61.5 57.2 59.4 57.6 57.4 57.4C55.4 57.2 52.2 58.4 51.2 55.4C50.2 52.4 50 42.2 51.2 39.4Z"],["bras","M30.2 52.8C29.8 51.9 28.4 53.7 27.4 54.6C26.4 55.5 25.2 56.3 24.4 58.2C23.6 60.1 23 63.4 22.8 66C22.6 68.6 22.7 71.8 23 74C23.3 76.2 23.8 78.6 24.4 79C25 79.4 26.1 78.2 26.8 76.4C27.5 74.6 27.9 70.7 28.4 68C28.9 65.3 29.7 62.5 30 60C30.3 57.5 30.6 53.7 30.2 52.8Z"],["bras","M69.8 52.8C70.2 51.9 71.6 53.7 72.6 54.6C73.6 55.5 74.8 56.3 75.6 58.2C76.4 60.1 77 63.4 77.2 66C77.4 68.6 77.3 71.8 77 74C76.7 76.2 76.2 78.6 75.6 79C75 79.4 73.9 78.2 73.2 76.4C72.5 74.6 72.1 70.7 71.6 68C71.1 65.3 70.3 62.5 70 60C69.7 57.5 69.4 53.7 69.8 52.8Z"],["bras","M26 84.2C25.6 82.8 23.4 82.5 22.4 83.4C21.4 84.3 20.5 87 19.8 89.6C19.1 92.2 18.6 96 18.2 99C17.8 102 17.2 105.9 17.6 107.6C18 109.3 19.6 110.2 20.4 109C21.2 107.8 21.9 103.2 22.6 100.4C23.3 97.6 24.2 94.7 24.8 92C25.4 89.3 26.4 85.6 26 84.2Z"],["bras","M74 84.2C74.4 82.8 76.6 82.5 77.6 83.4C78.6 84.3 79.5 87 80.2 89.6C80.9 92.2 81.4 96 81.8 99C82.2 102 82.8 105.9 82.4 107.6C82 109.3 80.4 110.2 79.6 109C78.8 107.8 78.1 103.2 77.4 100.4C76.7 97.6 75.8 94.7 75.2 92C74.6 89.3 73.6 85.6 74 84.2Z"],["abdos","M48.8 61.4C47.8 59.8 43.8 61 42.6 61.8C41.4 62.6 41.9 64.8 41.8 66.4C41.7 68 41 70.6 42.2 71.4C43.4 72.2 47.7 73.1 48.8 71.4C49.9 69.7 49.8 63 48.8 61.4Z"],["abdos","M51.2 61.4C52.2 59.8 56.2 61 57.4 61.8C58.6 62.6 58.1 64.8 58.2 66.4C58.3 68 59 70.6 57.8 71.4C56.6 72.2 52.3 73.1 51.2 71.4C50.1 69.7 50.2 63 51.2 61.4Z"],["abdos","M48.8 73.4C47.7 71.7 43.5 72.5 42.4 73.4C41.3 74.3 42.2 76.9 42.2 78.6C42.2 80.3 41.5 82.6 42.6 83.4C43.7 84.2 47.8 85.1 48.8 83.4C49.8 81.7 49.9 75.1 48.8 73.4Z"],["abdos","M51.2 73.4C52.3 71.7 56.5 72.5 57.6 73.4C58.7 74.3 57.8 76.9 57.8 78.6C57.8 80.3 58.5 82.6 57.4 83.4C56.3 84.2 52.2 85.1 51.2 83.4C50.2 81.7 50.1 75.1 51.2 73.4Z"],["abdos","M48.8 85.4C47.8 83.6 43.8 84.5 42.8 85.4C41.8 86.3 42.8 89.3 43 91C43.2 92.7 42.8 94.8 43.8 95.6C44.8 96.4 48 97.7 48.8 96C49.6 94.3 49.8 87.2 48.8 85.4Z"],["abdos","M51.2 85.4C52.2 83.6 56.2 84.5 57.2 85.4C58.2 86.3 57.2 89.3 57 91C56.8 92.7 57.2 94.8 56.2 95.6C55.2 96.4 52 97.7 51.2 96C50.4 94.3 50.2 87.2 51.2 85.4Z"],["abdos","M48.8 98C48.1 96.3 45 97.1 44.4 98C43.8 98.9 44.7 101.9 45.4 103.6C46.1 105.3 48.2 108.9 48.8 108C49.4 107.1 49.5 99.7 48.8 98Z"],["abdos","M51.2 98C51.9 96.3 55 97.1 55.6 98C56.2 98.9 55.3 101.9 54.6 103.6C53.9 105.3 51.8 108.9 51.2 108C50.6 107.1 50.5 99.7 51.2 98Z"],["abdos","M40 61.6C39.2 58.8 36 60.1 35 61.2C34 62.3 33.8 65.2 33.8 68C33.8 70.8 34.5 75 34.8 78C35.1 81 35.3 83.2 35.8 86C36.3 88.8 36.9 92.7 37.8 95C38.7 97.3 40.7 100.6 41.2 99.8C41.7 99 40.8 93.6 40.6 90C40.4 86.4 40.1 82.7 40 78C39.9 73.3 40.8 64.4 40 61.6Z"],["abdos","M60 61.6C60.8 58.8 64 60.1 65 61.2C66 62.3 66.2 65.2 66.2 68C66.2 70.8 65.5 75 65.2 78C64.9 81 64.7 83.2 64.2 86C63.7 88.8 63.1 92.7 62.2 95C61.3 97.3 59.3 100.6 58.8 99.8C58.3 99 59.2 93.6 59.4 90C59.6 86.4 59.9 82.7 60 78C60.1 73.3 59.2 64.4 60 61.6Z"],["cuisses","M31.4 112C30.5 112.8 30.6 119.7 30.6 124C30.6 128.3 31 133.7 31.4 138C31.8 142.3 32.4 146.4 33.2 150C34 153.6 35.2 158.3 36 159.6C36.8 160.9 37.9 160.3 38.2 158C38.5 155.7 37.8 150.3 37.6 146C37.4 141.7 37.4 136.5 37.2 132C37 127.5 37.2 122.3 36.2 119C35.2 115.7 32.3 111.2 31.4 112Z"],["cuisses","M68.6 112C69.5 112.8 69.4 119.7 69.4 124C69.4 128.3 69 133.7 68.6 138C68.2 142.3 67.6 146.4 66.8 150C66 153.6 64.8 158.3 64 159.6C63.2 160.9 62.1 160.3 61.8 158C61.5 155.7 62.2 150.3 62.4 146C62.6 141.7 62.6 136.5 62.8 132C63 127.5 62.8 122.3 63.8 119C64.8 115.7 67.7 111.2 68.6 112Z"],["cuisses","M37.8 112.4C37.2 114.1 38.5 119.7 38.8 124C39.1 128.3 39.6 133.7 39.8 138C40 142.3 40.2 146.6 40.2 150C40.2 153.4 39.6 158.3 39.8 158.6C40 158.9 40.9 155.4 41.4 152C41.9 148.6 42.2 142.7 42.6 138C43 133.3 43.6 128 43.6 124C43.6 120 43.4 115.9 42.4 114C41.4 112.1 38.4 110.7 37.8 112.4Z"],["cuisses","M62.2 112.4C62.8 114.1 61.5 119.7 61.2 124C60.9 128.3 60.4 133.7 60.2 138C60 142.3 59.8 146.6 59.8 150C59.8 153.4 60.4 158.3 60.2 158.6C60 158.9 59.1 155.4 58.6 152C58.1 148.6 57.8 142.7 57.4 138C57 133.3 56.4 128 56.4 124C56.4 120 56.6 115.9 57.6 114C58.6 112.1 61.6 110.7 62.2 112.4Z"],["cuisses","M44.6 141C45.2 140.5 46.3 145.5 46.6 148C46.9 150.5 47 153.7 46.6 156C46.2 158.3 44.8 161.3 44 162C43.2 162.7 41.8 162.2 41.6 160.4C41.4 158.6 42.3 154.2 42.8 151C43.3 147.8 44 141.5 44.6 141Z"],["cuisses","M55.4 141C54.8 140.5 53.7 145.5 53.4 148C53.1 150.5 53 153.7 53.4 156C53.8 158.3 55.2 161.3 56 162C56.8 162.7 58.2 162.2 58.4 160.4C58.6 158.6 57.7 154.2 57.2 151C56.7 147.8 56 141.5 55.4 141Z"],["cuisses","M45.4 117C45.8 116.2 47.1 122.2 47.4 125C47.7 127.8 47.6 131.6 47.4 134C47.2 136.4 46.4 140.3 46 139.6C45.6 138.9 44.9 133.8 44.8 130C44.7 126.2 45 117.8 45.4 117Z"],["cuisses","M54.6 117C54.2 116.2 52.9 122.2 52.6 125C52.3 127.8 52.4 131.6 52.6 134C52.8 136.4 53.6 140.3 54 139.6C54.4 138.9 55.1 133.8 55.2 130C55.3 126.2 55 117.8 54.6 117Z"],["mollets","M35.6 174.6C35 176.5 34.5 180.4 34.4 184C34.3 187.6 34.6 192.1 35 196C35.4 199.9 36.1 205 36.8 207.4C37.5 209.8 38.4 211.1 39 210.4C39.6 209.7 39.9 206.4 40.4 203C40.9 199.6 41.7 193.9 42.2 190C42.7 186.1 43.5 182.2 43.4 179.4C43.3 176.6 42.3 174.5 41.4 173.4C40.5 172.3 39.2 172.4 38.2 172.6C37.2 172.8 36.2 172.7 35.6 174.6Z"],["mollets","M64.4 174.6C65 176.5 65.5 180.4 65.6 184C65.7 187.6 65.4 192.1 65 196C64.6 199.9 63.9 205 63.2 207.4C62.5 209.8 61.6 211.1 61 210.4C60.4 209.7 60.1 206.4 59.6 203C59.1 199.6 58.3 193.9 57.8 190C57.3 186.1 56.5 182.2 56.6 179.4C56.7 176.6 57.7 174.5 58.6 173.4C59.5 172.3 60.8 172.4 61.8 172.6C62.8 172.8 63.8 172.7 64.4 174.6Z"]],"back":[["dos","M48.8 27.6C48.3 20.9 47.2 29 46 30C44.8 31 43.2 32.3 41.4 33.4C39.6 34.5 35.3 35.3 35 36.4C34.7 37.5 38.2 38.2 39.6 40C41 41.8 42.3 44 43.4 47C44.5 50 45.3 54.2 46.2 58C47.1 61.8 48.4 75.1 48.8 70C49.2 64.9 49.3 34.3 48.8 27.6Z"],["dos","M51.2 27.6C51.7 20.9 52.8 29 54 30C55.2 31 56.8 32.3 58.6 33.4C60.4 34.5 64.7 35.3 65 36.4C65.3 37.5 61.8 38.2 60.4 40C59 41.8 57.7 44 56.6 47C55.5 50 54.7 54.2 53.8 58C52.9 61.8 51.6 75.1 51.2 70C50.8 64.9 50.7 34.3 51.2 27.6Z"],["dos","M42.4 50.8C41.2 48 39.2 46.1 37.6 45C36 43.9 33.9 43.3 32.8 44.2C31.7 45.1 31.1 47.8 31 50.6C30.9 53.4 31.5 57.4 32 61C32.5 64.6 33.3 68.5 34.2 72C35.1 75.5 36.3 79.6 37.6 82C38.9 84.4 40.7 87.6 42 86.4C43.3 85.2 45.2 79.1 45.6 75C46 70.9 45.1 66 44.6 62C44.1 58 43.6 53.6 42.4 50.8Z"],["dos","M57.6 50.8C58.8 48 60.8 46.1 62.4 45C64 43.9 66.1 43.3 67.2 44.2C68.3 45.1 68.9 47.8 69 50.6C69.1 53.4 68.5 57.4 68 61C67.5 64.6 66.7 68.5 65.8 72C64.9 75.5 63.7 79.6 62.4 82C61.1 84.4 59.3 87.6 58 86.4C56.7 85.2 54.8 79.1 54.4 75C54 70.9 54.9 66 55.4 62C55.9 58 56.4 53.6 57.6 50.8Z"],["epaules","M34 37C33.5 36.2 30.4 37 29 37.6C27.6 38.2 26.5 39.1 25.6 40.6C24.7 42.1 24.1 44.4 23.8 46.4C23.5 48.4 23.2 51.3 23.6 52.4C24 53.5 25.4 53.9 26.4 53.2C27.4 52.5 28.4 50 29.4 48.2C30.4 46.4 31.4 44.5 32.2 42.6C33 40.7 34.5 37.8 34 37Z"],["epaules","M66 37C66.5 36.2 69.6 37 71 37.6C72.4 38.2 73.5 39.1 74.4 40.6C75.3 42.1 75.9 44.4 76.2 46.4C76.5 48.4 76.8 51.3 76.4 52.4C76 53.5 74.6 53.9 73.6 53.2C72.6 52.5 71.6 50 70.6 48.2C69.6 46.4 68.6 44.5 67.8 42.6C67 40.7 65.5 37.8 66 37Z"],["bras","M30.2 52.8C29.8 51.9 28.4 53.7 27.4 54.6C26.4 55.5 25.2 56.3 24.4 58.2C23.6 60.1 23 63.4 22.8 66C22.6 68.6 22.7 71.8 23 74C23.3 76.2 23.8 78.6 24.4 79C25 79.4 26.1 78.2 26.8 76.4C27.5 74.6 27.9 70.7 28.4 68C28.9 65.3 29.7 62.5 30 60C30.3 57.5 30.6 53.7 30.2 52.8Z"],["bras","M69.8 52.8C70.2 51.9 71.6 53.7 72.6 54.6C73.6 55.5 74.8 56.3 75.6 58.2C76.4 60.1 77 63.4 77.2 66C77.4 68.6 77.3 71.8 77 74C76.7 76.2 76.2 78.6 75.6 79C75 79.4 73.9 78.2 73.2 76.4C72.5 74.6 72.1 70.7 71.6 68C71.1 65.3 70.3 62.5 70 60C69.7 57.5 69.4 53.7 69.8 52.8Z"],["bras","M26 84.2C25.6 82.8 23.4 82.5 22.4 83.4C21.4 84.3 20.5 87 19.8 89.6C19.1 92.2 18.6 96 18.2 99C17.8 102 17.2 105.9 17.6 107.6C18 109.3 19.6 110.2 20.4 109C21.2 107.8 21.9 103.2 22.6 100.4C23.3 97.6 24.2 94.7 24.8 92C25.4 89.3 26.4 85.6 26 84.2Z"],["bras","M74 84.2C74.4 82.8 76.6 82.5 77.6 83.4C78.6 84.3 79.5 87 80.2 89.6C80.9 92.2 81.4 96 81.8 99C82.2 102 82.8 105.9 82.4 107.6C82 109.3 80.4 110.2 79.6 109C78.8 107.8 78.1 103.2 77.4 100.4C76.7 97.6 75.8 94.7 75.2 92C74.6 89.3 73.6 85.6 74 84.2Z"],["lombaires","M48.8 74C48.5 69.8 47.8 75.8 47 78C46.2 80.2 44.8 84.2 44 87C43.2 89.8 42.5 92.5 42.2 95C41.9 97.5 41.3 100.6 42.4 102C43.5 103.4 47.7 108.1 48.8 103.4C49.9 98.7 49.1 78.2 48.8 74Z"],["lombaires","M51.2 74C51.5 69.8 52.2 75.8 53 78C53.8 80.2 55.2 84.2 56 87C56.8 89.8 57.5 92.5 57.8 95C58.1 97.5 58.7 100.6 57.6 102C56.5 103.4 52.3 108.1 51.2 103.4C50.1 98.7 50.9 78.2 51.2 74Z"],["fessiers","M48.8 105.6C47.7 102.2 44.7 104.3 42.4 104.4C40.1 104.5 36.9 105.1 35 106.4C33.1 107.7 31.7 109.6 31 112C30.3 114.4 30.3 118.3 30.6 121C30.9 123.7 31.5 126.7 33 128.4C34.5 130.1 37.3 130.8 39.4 131C41.5 131.2 44 130.5 45.6 129.4C47.2 128.3 48.3 128.6 48.8 124.6C49.3 120.6 49.9 109 48.8 105.6Z"],["fessiers","M51.2 105.6C52.3 102.2 55.3 104.3 57.6 104.4C59.9 104.5 63.1 105.1 65 106.4C66.9 107.7 68.3 109.6 69 112C69.7 114.4 69.7 118.3 69.4 121C69.1 123.7 68.5 126.7 67 128.4C65.5 130.1 62.7 130.8 60.6 131C58.5 131.2 56 130.5 54.4 129.4C52.8 128.3 51.7 128.6 51.2 124.6C50.7 120.6 50.1 109 51.2 105.6Z"],["ischios","M39.4 133.6C38.6 131.8 36.1 132.3 35 133.4C33.9 134.5 32.9 137.2 32.6 140C32.3 142.8 32.5 146.7 33 150C33.5 153.3 34.5 157.3 35.4 159.6C36.3 161.9 37.7 164.2 38.4 163.6C39.1 163 39.2 159.3 39.4 156C39.6 152.7 39.8 147.7 39.8 144C39.8 140.3 40.2 135.4 39.4 133.6Z"],["ischios","M60.6 133.6C61.4 131.8 63.9 132.3 65 133.4C66.1 134.5 67.1 137.2 67.4 140C67.7 142.8 67.5 146.7 67 150C66.5 153.3 65.5 157.3 64.6 159.6C63.7 161.9 62.3 164.2 61.6 163.6C60.9 163 60.8 159.3 60.6 156C60.4 152.7 60.2 147.7 60.2 144C60.2 140.3 59.8 135.4 60.6 133.6Z"],["ischios","M46.6 133.6C45.8 132.3 42.7 131.9 41.8 133.6C40.9 135.3 41.5 140.4 41.4 144C41.3 147.6 41.3 151.8 41.2 155C41.1 158.2 40.2 162.5 40.6 163.4C41 164.3 42.6 162.5 43.4 160.4C44.2 158.3 45 154.1 45.6 151C46.2 147.9 46.6 144.5 46.8 141.6C47 138.7 47.4 134.9 46.6 133.6Z"],["ischios","M53.4 133.6C54.2 132.3 57.3 131.9 58.2 133.6C59.1 135.3 58.5 140.4 58.6 144C58.7 147.6 58.7 151.8 58.8 155C58.9 158.2 59.8 162.5 59.4 163.4C59 164.3 57.4 162.5 56.6 160.4C55.8 158.3 55 154.1 54.4 151C53.8 147.9 53.4 144.5 53.2 141.6C53 138.7 52.6 134.9 53.4 133.6Z"],["mollets","M39 172C38.3 170.8 36.5 172.3 35.6 174C34.7 175.7 33.9 179 33.6 182C33.3 185 33.6 189 34 192C34.4 195 35.2 198.2 36 200C36.8 201.8 38 203.8 38.6 202.6C39.2 201.4 39.4 196.6 39.6 193C39.8 189.4 39.9 184.5 39.8 181C39.7 177.5 39.7 173.2 39 172Z"],["mollets","M61 172C61.7 170.8 63.5 172.3 64.4 174C65.3 175.7 66.1 179 66.4 182C66.7 185 66.4 189 66 192C65.6 195 64.8 198.2 64 200C63.2 201.8 62 203.8 61.4 202.6C60.8 201.4 60.6 196.6 60.4 193C60.2 189.4 60.1 184.5 60.2 181C60.3 177.5 60.3 173.2 61 172Z"],["mollets","M41.4 171.6C41 172.9 41.6 177.4 41.6 181C41.6 184.6 41.5 189.3 41.4 193C41.3 196.7 40.5 202.4 40.8 203.4C41.1 204.4 42.5 201.4 43.2 199C43.9 196.6 44.5 192.3 44.8 189C45.1 185.7 45.3 181.6 45.2 179C45.1 176.4 44.6 174.6 44 173.4C43.4 172.2 41.8 170.3 41.4 171.6Z"],["mollets","M58.6 171.6C59 172.9 58.4 177.4 58.4 181C58.4 184.6 58.5 189.3 58.6 193C58.7 196.7 59.5 202.4 59.2 203.4C58.9 204.4 57.5 201.4 56.8 199C56.1 196.6 55.5 192.3 55.2 189C54.9 185.7 54.7 181.6 54.8 179C54.9 176.4 55.4 174.6 56 173.4C56.6 172.2 58.2 170.3 58.6 171.6Z"]]};
+/* ---------- Musculation ---------- */
+// Les parties du corps : l'ordre sert aussi de numéro aux zones de la 3D.
+const MU_Z = [['epaules','Épaules','Épaules'],['pecs','Pectoraux','Pectoraux'],['bras','Bras','Bras'],['dos','Dos','Dos'],['abdos','Abdos & gainage','Abdos'],['lombaires','Lombaires','Lombaires'],['fessiers','Fessiers','Fessiers'],['cuisses','Cuisses','Cuisses'],['ischios','Ischios','Ischios'],['mollets','Mollets & chevilles','Mollets']];
+const MU_ZK = MU_Z.map(z => z[0]), MU_ZN = Object.fromEntries(MU_Z.map(z => [z[0], z[1]])), MU_ZS = Object.fromEntries(MU_Z.map(z => [z[0], z[2]]));
+const MU_BACK = ['dos','lombaires','fessiers','ischios'], MU_FRONT = ['pecs','abdos','cuisses'];
+// Les ateliers : z = parties travaillées (la première est la principale), u:'s' = noté en secondes, ly = le mouvement sur Lyfta.
+const LY = s => 'https://www.lyfta.app/exercise/' + s;
+const MU_EX = [
+  {id:'ep-cote',n:'Épaules côté',d:'Élévations latérales',z:['epaules'],c:'Contrôle de l’amplitude.',ly:LY('lateral-raise-96')},
+  {id:'ep-face',n:'Épaules face',d:'Élévations frontales',z:['epaules'],c:'Gainage et contrôle.',ly:LY('front-raise-8u')},
+  {id:'ep-haut',n:'Épaules haut',d:'Développé épaules',z:['epaules','bras'],c:'Poussée propre, épaules stables.',ly:LY('seated-shoulder-press-9b')},
+  {id:'ep-oiseau',n:'Oiseau',d:'Élévations arrière, buste penché',z:['epaules','dos'],c:'Dos plat, coudes légèrement fléchis.',ly:LY('dumbbell-rear-delt-fly-7an')},
+  {id:'ep-facepull',n:'Face pull',d:'À l’élastique ou à la poulie',z:['epaules','dos'],c:'Tirer vers le visage, coudes hauts.'},
+  {id:'ep-rotext',n:'Rotations externes',d:'À l’élastique',z:['epaules'],c:'Coude collé au corps : l’épaule se protège.'},
+  {id:'ep-ytw',n:'Y-T-W',d:'Allongée sur le ventre',z:['epaules','dos'],c:'Omoplates serrées, pouces vers le haut.'},
+  {id:'pe-pompes',n:'Pompes',d:'Normales ou sur les genoux',z:['pecs','bras'],c:'Corps gainé, descente contrôlée.',ly:LY('push-up-1j')},
+  {id:'pe-pompstep',n:'Pompes genoux explosives',d:'Sur un step',z:['pecs','bras'],c:'Montée explosive, descente contrôlée.'},
+  {id:'pe-pompinc',n:'Pompes inclinées',d:'Mains sur un banc',z:['pecs','bras'],c:'Idéal pour faire du volume.'},
+  {id:'pe-dvhalt',n:'Développé couché haltères',z:['pecs','bras'],c:'Omoplates serrées, descente lente.',ly:LY('dumbbell-bench-press-84')},
+  {id:'pe-dvbarre',n:'Développé couché barre',z:['pecs','bras'],c:'Toujours avec une personne qui assure.',ly:LY('bench-press-7')},
+  {id:'pe-ecarte',n:'Écarté haltères',z:['pecs'],c:'Bras légèrement fléchis.',ly:LY('fly-8t')},
+  {id:'br-biceps',n:'Biceps',d:'Curl haltères',z:['bras'],c:'Contrôle de la montée et de la descente.',ly:LY('biceps-curl-8j')},
+  {id:'br-triceps',n:'Triceps',d:'Extension au-dessus de la tête',z:['bras'],c:'Coude stable, extension propre.',ly:LY('overhead-triceps-extension-7h')},
+  {id:'br-marteau',n:'Curl marteau',z:['bras'],c:'Pouces vers le haut.',ly:LY('hammer-curl-8v')},
+  {id:'br-dips',n:'Dips sur banc',z:['bras','pecs'],c:'Épaules basses, coudes vers l’arrière.',ly:LY('bench-dip-6p')},
+  {id:'br-tricelast',n:'Extension triceps',d:'À l’élastique ou à la poulie',z:['bras'],c:'Coudes collés au corps.',ly:LY('triceps-pushdown-7e')},
+  {id:'br-poignets',n:'Avant-bras',d:'Flexions des poignets',z:['bras'],c:'Pour une prise de balle solide.',ly:LY('revers-wrist-curl-b')},
+  {id:'do-elast',n:'Élastique dos',d:'Tirage',z:['dos','bras'],c:'Tirage contrôlé, omoplates fixées.'},
+  {id:'do-rowhalt',n:'Rowing haltère un bras',z:['dos','bras'],c:'Dos plat, coude le long du corps.',ly:LY('dumbbell-one-arm-bent-over-row-6hk')},
+  {id:'do-tirvert',n:'Tirage vertical',d:'Poulie haute',z:['dos','bras'],c:'Tirer vers le haut de la poitrine.',ly:LY('bar-lateral-pulldown-6r')},
+  {id:'do-tirhor',n:'Tirage horizontal',d:'Poulie basse',z:['dos','bras'],c:'Buste droit, omoplates serrées.',ly:LY('straight-back-seated-row-7c')},
+  {id:'do-tractions',n:'Tractions',d:'Assistées ou à l’élastique',z:['dos','bras'],c:'Menton au-dessus de la barre.',ly:LY('pull-up-1i')},
+  {id:'do-rowbarre',n:'Rowing barre',z:['dos','lombaires'],c:'Dos plat, barre vers le nombril.',ly:LY('bent-over-row-9')},
+  {id:'ab-abdos',n:'Abdos',d:'Crunch',z:['abdos'],c:'10 répétitions par tour.',ly:LY('crunch-floor-6gc')},
+  {id:'ab-gface',n:'Gainage face',z:['abdos'],u:'s',c:'45 s à 1 min.',ly:LY('front-plank-6m3')},
+  {id:'ab-gcote',n:'Gainage côté',z:['abdos'],u:'s',c:'45 s à 1 min par côté.'},
+  {id:'ab-releves',n:'Relevés de jambes',z:['abdos'],c:'Bas du dos plaqué au sol.'},
+  {id:'ab-russian',n:'Russian twist',d:'Avec un ballon lesté',z:['abdos'],c:'Rotation du buste, pieds décollés.',ly:LY('russian-twist-6sj')},
+  {id:'ab-mountain',n:'Mountain climbers',z:['abdos','cuisses'],u:'s',c:'Bassin stable, rythme rapide.'},
+  {id:'ab-deadbug',n:'Dead bug',z:['abdos'],c:'Bas du dos collé au sol.'},
+  {id:'ab-pallof',n:'Pallof press',d:'Anti-rotation, à l’élastique',z:['abdos'],c:'Le buste reste face à l’avant.'},
+  {id:'lo-natation',n:'Lombaires natation',d:'Superman',z:['lombaires','fessiers'],c:'Allonger le corps, regard vers le sol.'},
+  {id:'lo-ballon',n:'Lombaires sur ballon',z:['lombaires'],c:'Monter jusqu’à l’alignement du corps.'},
+  {id:'lo-buste',n:'Montée de buste au sol',z:['lombaires','fessiers'],c:'Chaîne postérieure.'},
+  {id:'lo-birddog',n:'Bird dog',z:['lombaires','abdos'],c:'Bras et jambe opposés, dos plat.'},
+  {id:'lo-hyper',n:'Extensions au banc à lombaires',z:['lombaires','fessiers','ischios'],c:'Remonter jusqu’à l’alignement.',ly:LY('hyperextension-6mb')},
+  {id:'fe-hipthrust',n:'Hip thrust',z:['fessiers','ischios'],c:'Pousser dans les talons, menton rentré.',ly:LY('hip-thrust-39')},
+  {id:'fe-pont',n:'Pont fessier une jambe',z:['fessiers','ischios'],c:'Bassin bien horizontal.'},
+  {id:'fe-elast',n:'Marche latérale',d:'Élastique aux genoux',z:['fessiers'],c:'Genoux vers l’extérieur.'},
+  {id:'fe-abduction',n:'Abduction',d:'Machine ou élastique',z:['fessiers'],c:'Mouvement lent et contrôlé.',ly:LY('lever-seated-hip-abduction-19')},
+  {id:'fe-kickback',n:'Extension de hanche',d:'À la poulie',z:['fessiers','ischios'],c:'Dos fixe, la jambe pousse vers l’arrière.'},
+  {id:'cu-squat',n:'Squat',z:['cuisses','fessiers'],c:'Posture basse, genoux alignés.',ly:LY('full-squat-n')},
+  {id:'cu-fente',n:'Fente avant',z:['cuisses','fessiers'],c:'Contrôle de la descente, puis poussée.'},
+  {id:'cu-caisse',n:'Montée de caisse',z:['cuisses','fessiers'],c:'Niveau bas, bassin stable.'},
+  {id:'cu-fentelat',n:'Fente latérale',z:['cuisses','fessiers'],c:'Appui large, genou aligné.'},
+  {id:'cu-overhead',n:'Overhead squat',d:'Bras tendus au-dessus de la tête',z:['cuisses','epaules','abdos'],c:'Buste droit, bras dans l’axe.'},
+  {id:'cu-reception',n:'Réception stabilisation',z:['cuisses','mollets'],c:'Progression moyenne, puis haute.'},
+  {id:'cu-sautsquat',n:'Saut squat une jambe',d:'Explosivité et stabilisation',z:['cuisses','fessiers','mollets'],c:'Réception stable, genou aligné.'},
+  {id:'cu-chariot',n:'Poussée de chariot',d:'6 × 10 m',z:['cuisses','fessiers','mollets'],c:'Tibias parallèles au sol.'},
+  {id:'cu-bulgare',n:'Squat bulgare',z:['cuisses','fessiers'],c:'Pied arrière sur un banc, buste droit.',ly:LY('dumbbell-bulgarian-split-squat-7v6')},
+  {id:'cu-goblet',n:'Goblet squat',z:['cuisses','fessiers'],c:'Haltère contre la poitrine.',ly:LY('goblet-squat-ge')},
+  {id:'cu-presse',n:'Presse à cuisses',z:['cuisses','fessiers'],c:'Genoux dans l’axe des pieds.',ly:LY('lever-seated-leg-press-7uk')},
+  {id:'cu-chaise',n:'Chaise',d:'Dos contre le mur',z:['cuisses'],u:'s',c:'Cuisses parallèles au sol.'},
+  {id:'cu-legext',n:'Leg extension',d:'Machine',z:['cuisses'],c:'Une seconde de pause en haut.',ly:LY('lever-leg-extension-0b')},
+  {id:'is-sdt',n:'Soulevé de terre',d:'1 jambe puis 2 jambes',z:['ischios','fessiers','lombaires'],c:'Dos plat, hanches vers l’arrière.',ly:LY('deadlift-2')},
+  {id:'is-roumain',n:'Soulevé de terre roumain',d:'Jambes presque tendues',z:['ischios','fessiers'],c:'Barre près des jambes.',ly:LY('romanian-deadlift-65')},
+  {id:'is-nordic',n:'Ischios nordiques',z:['ischios'],c:'Descente la plus lente possible.'},
+  {id:'is-legcurl',n:'Leg curl',d:'Machine',z:['ischios'],c:'Remonter vite, redescendre lentement.',ly:LY('lever-seated-leg-curl-11')},
+  {id:'is-ballon',n:'Leg curl sur ballon',d:'Pont, talons sur le ballon',z:['ischios','fessiers'],c:'Bassin haut pendant tout le mouvement.'},
+  {id:'mo-debout',n:'Mollets debout',z:['mollets'],c:'Monter haut, pause en haut.',ly:LY('standing-calf-raise-07')},
+  {id:'mo-marche',n:'Mollets une jambe',d:'Sur une marche',z:['mollets'],c:'Le talon descend sous la marche.'},
+  {id:'mo-waff',n:'Proprioception sur Waff',z:['mollets'],u:'s',c:'15 à 30 s par jambe.'},
+  {id:'mo-corde',n:'Corde à sauter',z:['mollets'],u:'s',c:'Petits rebonds sur l’avant du pied.'},
+  {id:'mo-tibias',n:'Releveurs du pied',d:'Tibias',z:['mollets'],c:'Chevilles et tibias solides.'},
+  {id:'mo-pogo',n:'Pogo jumps',d:'Petits sauts de chevilles',z:['mollets'],c:'Genoux presque tendus, contact bref.'},
+];
+const MU_BY = Object.fromEntries(MU_EX.map(e => [e.id, e]));
+// Les circuits musculation du programme, dans l'ordre des séances.
+const MU_CIRC = {
+  'lun-am':['cu-squat','cu-fente','cu-caisse','cu-fentelat','lo-buste','cu-overhead','is-sdt','cu-reception','cu-sautsquat','cu-chariot','mo-waff'],
+  'mar-am':['pe-pompes','do-elast','ep-cote','br-biceps','ep-face','br-triceps','ep-haut','lo-natation','ab-abdos','ab-gface','ab-gcote'],
+  'jeu-am':['pe-pompstep','do-elast','ep-cote','br-biceps','ep-face','br-triceps','ep-haut','lo-natation','ab-abdos','ab-gface'],
+};
+const MU = {per:'all', ex:null, pt:null, allPr:false, draft:null, intro:false};
+const muEx = id => MU_BY[id] || (S.exos[id] ? {id, n:S.exos[id].n, z:[S.exos[id].z], perso:true} : {id, n:'Exercice', z:['abdos']});
+const muList = () => Object.entries(S.muscu).map(([id, m]) => ({id, ...m})).filter(m => m && m.ex && Array.isArray(m.sets) && m.sets.length).sort((a, b) => a.d < b.d ? -1 : a.d > b.d ? 1 : (a.at || 0) - (b.at || 0));
+const muTop = m => m.sets.reduce((b, s) => !b || s.kg > b.kg || s.kg === b.kg && s.r > b.r ? s : b, null);
+const muVal = m => { const t = muTop(m); return t.kg > 0 ? [1, t.kg, t.r] : [0, t.r, 0]; };
+const muBetter = (a, b) => a[0] > b[0] || a[0] === b[0] && (a[1] > b[1] || a[1] === b[1] && a[2] > b[2]);
+const fmtKg = v => String(Math.round(v * 100) / 100).replace('.', ',');
+const muSince = n => iso(new Date(today0().getTime() - (n - 1) * 864e5));
+const muSetTxt = (s, e) => e.u === 's' ? `${s.r} s${s.kg ? ' · ' + fmtKg(s.kg) + ' kg' : ''}` : `${s.r}${s.kg ? ' × ' + fmtKg(s.kg) + ' kg' : ' rép.'}`;
+const muTopTxt = (m, e) => muSetTxt(muTop(m), e);
+function muSetsTxt(m, e){
+  const L = m.sets, u = e.u === 's' ? ' s' : '', kgs = [...new Set(L.map(s => s.kg))], kg = Math.max(...kgs);
+  const w = kg ? ' · ' + (kgs.length > 1 ? `${fmtKg(Math.min(...kgs))} à ${fmtKg(kg)}` : fmtKg(kg)) + ' kg' : '';
+  return L.every(s => s.r === L[0].r) ? `${L.length} × ${L[0].r}${u}${w}` : `${L.map(s => s.r).join(', ')}${u}${w}`;
+}
+function muAgo(d){
+  const n = Math.round((today0() - parseISO(d)) / 864e5);
+  return n <= 0 ? 'aujourd’hui' : n === 1 ? 'hier' : n < 7 ? `il y a ${n} jours` : frDate(parseISO(d), {day:'numeric', month:'short'});
+}
+// Records : une séance bat le record si sa meilleure série est plus lourde (ou, à charge égale, plus longue).
+function muRecords(L){
+  const best = {}, pr = new Set();
+  for(const m of L){
+    const v = muVal(m), b = best[m.ex];
+    if(!b) best[m.ex] = {m, v};
+    else if(muBetter(v, b.v)){ pr.add(m.id); best[m.ex] = {m, v}; }
+  }
+  return {pr, best};
+}
+function muAgg(L){
+  const A = {days:new Set(), sets:0, reps:0, ton:0, zones:{}};
+  for(const m of L){
+    const e = muEx(m.ex); A.days.add(m.d); A.sets += m.sets.length;
+    if(e.u !== 's') for(const s of m.sets){ A.reps += s.r; A.ton += s.r * s.kg; }
+    for(const z of e.z) A.zones[z] = (A.zones[z] || 0) + m.sets.length;
+  }
+  return A;
+}
+const muPlural = (n, w) => `${n} ${w}${n > 1 ? 's' : ''}`;
+function muTiles(A, prN, nEx){
+  const t = (l, v, s, c='') => `<div class="st-tile ${c}"><small>${l}</small><b>${v}</b>${s ? `<span>${s}</span>` : ''}</div>`;
+  const out = [A.ton ? t('Charge soulevée', `${Math.round(A.ton).toLocaleString('fr-FR')} kg`, `${A.reps.toLocaleString('fr-FR')} répétitions avec charge`, 'big') : t('Séries', A.sets, '', 'big'),
+    nEx != null ? t('Exercices', nEx, '') : t('Séances', A.days.size, ''), t(A.ton ? 'Séries' : 'Répétitions', A.ton ? A.sets : A.reps.toLocaleString('fr-FR'), '')];
+  if(prN != null) out.push(t('Records', prN, prN ? 'battus' : ''));
+  return `<div class="st-tiles">${out.join('')}</div>`;
+}
+// Ce qui s'allume sur le corps : les parties travaillées ces 7 derniers jours, et le muscle touché.
+function muHeat(wk){
+  const max = Math.max(1, ...Object.values(wk.zones));
+  MU_ZK.forEach((z, i) => { M3.heat[i] = wk.zones[z] ? .45 + .55 * wk.zones[z] / max : 0; });
+  const top = MU_ZK.map((z, k) => ({k, z, n:wk.zones[z] || 0})).filter(x => x.n && x.k !== M3.sel).sort((a, b) => b.n - a.n).slice(0, 3);
+  M3.tags = [...(M3.sel >= 0 ? [{k:M3.sel, t:MU_ZS[MU_ZK[M3.sel]], s:'Ton choix', c:'sel'}] : []), ...top.map(x => ({k:x.k, t:MU_ZS[x.z], s:muPlural(x.n, 'série'), c:'heat'}))];
+  M3.tagKey = '';
+}
+// Le corps à plat : solution de secours sans 3D, et petite carte des muscles ciblés dans la fiche d'un exercice.
+function muBodySVG(o={}){
+  const fig = (v, dx) => `<g transform="translate(${dx} 0)"><path class="sil" d="${MU_BODY.sil}"/><path class="sil" d="${MU_BODY.head}"/><path class="hair" d="${v === 'back' ? MU_BODY.head : MU_BODY.fringe}"/>${MU_BODY[v].map(([z, d]) => {
+    const c = o.prim?.includes(z) ? ' p' : o.sec?.includes(z) ? ' s' : o.heat?.[z] ? ' w' : '';
+    return `<path class="mz${c}"${o.act ? ` data-act="mu-zone" data-z="${z}"` : ''}${c === ' w' ? ` style="fill-opacity:${o.heat[z].toFixed(2)}"` : ''} d="${d}"/>`;
+  }).join('')}${v === 'back' ? `<path class="hair" d="${MU_BODY.tail}"/>` : ''}</g>`;
+  return `<svg class="mu-body${o.cls ? ' ' + o.cls : ''}" viewBox="0 0 212 236" ${o.act ? 'role="group" aria-label="Touche une partie du corps"' : 'aria-hidden="true"'}>${fig('front', 3)}${fig('back', 109)}</svg>`;
+}
+const MU_PAD = `<div class="mu3d-pad"><svg viewBox="0 0 200 200"><defs><radialGradient id="mu-core"><stop offset="0" stop-color="#2fd9b9" stop-opacity=".55"/><stop offset=".6" stop-color="#3d7bff" stop-opacity=".18"/><stop offset="1" stop-color="#3d7bff" stop-opacity="0"/></radialGradient></defs><circle class="core" cx="100" cy="100" r="98"/><circle class="r0" cx="100" cy="100" r="44"/><circle class="r1" cx="100" cy="100" r="62"/><circle class="r2" cx="100" cy="100" r="78"/><circle class="r3" cx="100" cy="100" r="94"/></svg></div>`;
+const MU_HINT = `<div class="mu3d-hint"><span><svg viewBox="0 0 32 32"><path d="M6 13a10 5 0 0 1 20 0M26 19a10 5 0 0 1-20 0"/><path d="M22 9l4 4-5 1M10 23l-4-4 5-1"/></svg>Glisse<br>pour tourner</span><span>Pince<br>pour zoomer<svg viewBox="0 0 32 32"><path d="M13 27v-9l-2.5-2.5a1.6 1.6 0 0 1 2.3-2.3L15 15V6.5a1.5 1.5 0 0 1 3 0V14l5 1.3a2.4 2.4 0 0 1 1.8 2.6L24 27"/><path d="M5 9l4-4M5 5h4v4M27 3l-4 4M27 7V3h-4"/></svg></span></div>`;
+function muStage(wk){
+  if(!mu3dSupported()){
+    const max = Math.max(1, ...Object.values(wk.zones)), heat = Object.fromEntries(Object.entries(wk.zones).map(([z, n]) => [z, .35 + .65 * n / max]));
+    return `<div class="mu-flat">${muBodySVG({act:true, heat})}<div class="mu-lbl"><span>Face</span><span>Dos</span></div></div>`;
+  }
+  const n = wk.days.size;
+  return `<div class="mu3d${M3.hinted ? ' used' : ''}${M3.zoom > 1 ? ' zoomed' : ''}"><div id="mu3d" class="mu3d-host"></div>${MU_PAD}<div class="mu3d-tags"></div>
+    <div class="mu3d-hud"><span>${esc(S.settings.name || 'Alice')}<b>N° 12</b></span><span>Ces 7 jours<b>${muPlural(n, 'séance')}</b></span></div>${MU_HINT}</div>
+  <div class="mu3d-ctl"><div><button data-act="mu3d-view" data-v="0">Face</button><button data-act="mu3d-view" data-v="1">Dos</button></div><div><button data-act="mu3d-zoom" data-d="-1" aria-label="Dézoomer">−</button><button data-act="mu3d-zoom" data-d="1" aria-label="Zoomer">+</button></div></div>
+  <p class="mu-leg"><span><i class="h"></i>Travaillé ces 7 jours</span><span><i class="s"></i>Ton choix</span></p>`;
+}
+function muCircRow(sid, today, L){
+  const s = SES[sid], ids = MU_CIRC[sid], done = today ? ids.filter(id => L.some(m => m.ex === id && m.d === todayISO())).length : 0;
+  return `<button class="mu-circ${today ? ' today' : ''}" data-act="mu-zone" data-z="${sid}"><div><small class="eyebrow${today ? ' gold' : ''}">${today ? 'Aujourd’hui · ' : ''}${s.day}</small><b>${esc(s.title)}</b><span>${ids.length} exercices${done ? ` · ${done} noté${done > 1 ? 's' : ''}` : ''}</span></div>${svg('next')}</button>`;
+}
+function muEvo(id, L, R){
+  const e = muEx(id), H = L.filter(m => m.ex === id).slice(-12);
+  if(H.length < 2) return `<p class="muted small">Ta courbe apparaît dès la deuxième séance de cet exercice.</p>`;
+  const kgMode = H.some(m => muTop(m).kg > 0), vs = H.map(m => kgMode ? muTop(m).kg : muTop(m).r), unit = kgMode ? 'kg' : e.u === 's' ? 's' : 'rép.';
+  const lo0 = Math.min(...vs), hi0 = Math.max(...vs), span = Math.max(hi0 - lo0, hi0 * .2, 1);
+  const step = [1, 2, 2.5, 5, 10, 20, 25, 50, 100].find(s => span / s <= 3) || 100;
+  const lo = Math.max(0, Math.floor((lo0 - span * .4) / step) * step), hi = Math.ceil((hi0 + span * .15) / step) * step;
+  const W = 320, HT = 160, X0 = 32, X1 = W - 12, Y0 = 128, HH = 100, gap = (X1 - X0 - 24) / (H.length - 1);
+  const x = i => X0 + 12 + i * gap, y = v => Y0 - (v - lo) / Math.max(step, hi - lo) * HH;
+  const ticks = []; for(let v = lo; v <= hi + 1e-9; v += step) ticks.push(v);
+  const sel = MU.pt != null && H[MU.pt] ? MU.pt : H.length - 1, m = H[sel];
+  const line = vs.map((v, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join('');
+  const sd = d => cap(frDate(parseISO(d), {day:'numeric', month:'short'}));
+  return `<svg class="st-evo mu-evo" viewBox="0 0 ${W} ${HT}" role="img" aria-label="Progression : ${esc(e.n)}">
+    <defs><linearGradient id="mu-ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--gold);stop-opacity:.3"/><stop offset="1" style="stop-color:var(--gold);stop-opacity:0"/></linearGradient></defs>
+    ${ticks.map(v => `<line class="gl" x1="${X0}" x2="${X1}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}"/><text x="${X0 - 6}" y="${(y(v) + 3).toFixed(1)}" text-anchor="end">${fmtKg(v)}</text>`).join('')}
+    <path d="${line}L${x(H.length - 1).toFixed(1)} ${Y0}L${x(0).toFixed(1)} ${Y0}Z" fill="url(#mu-ar)"/><path class="mu-line" d="${line}"/>
+    ${H.map((h, i) => `<g data-act="mu-pt" data-i="${i}"><rect x="${(x(i) - Math.max(gap, 22) / 2).toFixed(1)}" y="0" width="${Math.max(gap, 22).toFixed(1)}" height="${HT}" fill="transparent"/><circle class="mu-dot${i === sel ? ' on' : ''}" cx="${x(i).toFixed(1)}" cy="${y(vs[i]).toFixed(1)}" r="${i === sel ? 5.5 : 4}"/></g>`).join('')}
+    <text class="ev" x="${x(sel).toFixed(1)}" y="${(y(vs[sel]) - 11).toFixed(1)}" text-anchor="${sel === 0 ? 'start' : sel === H.length - 1 ? 'end' : 'middle'}">${fmtKg(vs[sel])} ${unit}</text>
+    <text x="${x(0).toFixed(1)}" y="${HT - 6}">${sd(H[0].d)}</text><text x="${x(H.length - 1).toFixed(1)}" y="${HT - 6}" text-anchor="end">${sd(H[H.length - 1].d)}</text></svg>
+  <p class="st-cap">${esc(cap(frDate(parseISO(m.d), {weekday:'short', day:'numeric', month:'short'})))} · <b>${esc(muSetsTxt(m, e))}</b>${R.pr.has(m.id) ? ' · record' : ''}</p>
+  ${vs[vs.length - 1] > vs[0] ? `<p class="st-cap">Depuis le ${esc(frDate(parseISO(H[0].d), {day:'numeric', month:'long'}))} : <b>+${fmtKg(vs[vs.length - 1] - vs[0])} ${unit}</b> sur ta meilleure série.</p>` : ''}`;
+}
+function vMuscu(){
+  const L = muList(), R = muRecords(L), wk = muAgg(L.filter(m => m.d >= muSince(7)));
+  const P = MU.per === 'all' ? L : L.filter(m => m.d >= muSince(+MU.per)), A = muAgg(P), prN = P.filter(m => R.pr.has(m.id)).length;
+  const tc = (DAYS.find(d => d.id === DAY_BY_JS[new Date().getDay()]) || {ses:[]}).ses.find(s => MU_CIRC[s]);
+  const chip = (k, l) => `<button class="chip ${MU.per === k ? 'on' : ''}" data-act="mu-per" data-v="${k}">${l}</button>`;
+  const zs = MU_ZK.filter(z => A.zones[z]).sort((a, b) => A.zones[b] - A.zones[a]), zmax = Math.max(1, ...zs.map(z => A.zones[z]));
+  const done = [...new Set(L.slice().reverse().map(m => m.ex))], ex = done.includes(MU.ex) ? MU.ex : done.find(id => L.filter(m => m.ex === id).length > 1) || done[0];
+  const recs = Object.values(R.best).sort((a, b) => b.m.d < a.m.d ? -1 : b.m.d > a.m.d ? 1 : 0), shown = MU.allPr ? recs : recs.slice(0, 6);
+  const days = [...new Set(L.map(m => m.d))].sort().reverse().slice(0, 30);
+  muHeat(wk);
+  return `${interNav('muscu')}
+  <section>
+    ${muStage(wk)}
+    <div class="chips mu-zc" role="group" aria-label="Parties du corps">${MU_Z.map(([k, l]) => `<button class="chip" data-act="mu-zone" data-z="${k}">${l}</button>`).join('')}</div>
+    <p class="muted small" style="margin-top:12px">Touche un muscle, choisis l’exercice, puis note tes répétitions et ta charge. L’appli garde tes records et trace ta progression.</p>
+  </section>
+  <section>
+    <div class="h-sec"><h2>Mes circuits</h2><span class="eyebrow">Programme</span></div>
+    <div class="stack">${Object.keys(MU_CIRC).map(sid => muCircRow(sid, sid === tc, L)).join('')}</div>
+  </section>
+  ${L.length ? `
+  <section class="stack">
+    <div class="h-sec" style="margin:0"><h2>Bilan</h2><span class="eyebrow">${muPlural(A.days.size, 'séance')}</span></div>
+    <div class="chips" role="group" aria-label="Période">${chip('7', '7 jours')}${chip('30', '30 jours')}${chip('all', 'Toute la saison')}</div>
+    ${P.length ? `${muTiles(A, prN)}
+    <div><div class="mu-bars">${zs.map(z => `<button class="mu-bar" data-act="mu-zone" data-z="${z}"><span>${MU_ZN[z]}</span><i style="width:${(100 * A.zones[z] / zmax).toFixed(1)}%"></i><b>${A.zones[z]}</b></button>`).join('')}</div>
+    <p class="small muted" style="margin-top:8px">Séries par partie du corps : un exercice compte pour chaque partie qu’il fait travailler.</p></div>` : '<div class="empty">Aucune séance sur cette période.</div>'}
+  </section>
+  <section id="mu-prog">
+    <div class="h-sec"><h2>Progression</h2><span class="eyebrow">Meilleure série</span></div>
+    <div class="chips" role="group" aria-label="Exercice">${done.slice(0, 16).map(id => `<button class="chip ${id === ex ? 'on' : ''}" data-act="mu-prog" data-id="${esc(id)}">${esc(muEx(id).n)}</button>`).join('')}</div>
+    <div style="margin-top:12px">${muEvo(ex, L, R)}</div>
+  </section>
+  <section>
+    <div class="h-sec"><h2>Mes records</h2><span class="eyebrow">${muPlural(recs.length, 'exercice')}</span></div>
+    <div class="stack">${shown.map(r => { const e = muEx(r.m.ex); return `<button class="mu-ex" data-act="mu-prog" data-id="${esc(r.m.ex)}"><div><b>${esc(e.n)}</b><small>${esc(muAgo(r.m.d))}</small></div><span class="pr">${esc(muTopTxt(r.m, e))}</span></button>`; }).join('')}</div>
+    ${recs.length > 6 ? `<button class="btn ghost block" style="margin-top:10px" data-act="mu-allpr">${MU.allPr ? 'Voir moins' : `Voir les ${recs.length} records`}</button>` : ''}
+  </section>
+  <section>
+    <div class="h-sec"><h2>Historique</h2></div>
+    <div class="stack">${days.map(d => { const Ld = L.filter(m => m.d === d), Ad = muAgg(Ld), pd = Ld.filter(m => R.pr.has(m.id)).length;
+      return `<button class="st-row" data-act="mu-day" data-d="${d}"><i style="background:var(--gold)"></i><div><b>${esc(cap(frDate(parseISO(d), {weekday:'long', day:'numeric', month:'long'})))}</b><small>${muPlural(Ld.length, 'exercice')} · ${muPlural(Ad.sets, 'série')}${pd ? ` · ${muPlural(pd, 'record')}` : ''}</small></div><span>${Ad.ton ? `${Math.round(Ad.ton).toLocaleString('fr-FR')}<small>kg</small>` : '—'}</span></button>`; }).join('')}</div>
+  </section>` : `<section class="note blue"><b>Ta première séance</b>Touche un muscle ou un circuit, puis note ta première série : ton bilan, tes records et ta courbe de progression apparaîtront ici.</section>`}`;
+}
+// Feuilles : liste des exercices (d'une partie du corps ou d'un circuit), saisie des séries, détail d'une journée.
+const muNewDraft = id => { const e = muEx(id), L = muList().filter(m => m.ex === id), last = L[L.length - 1];
+  return {id:null, ex:id, d:todayISO(), sets:last ? last.sets.map(s => ({r:s.r, kg:s.kg})) : [1, 2, 3].map(() => ({r:e.u === 's' ? 30 : 10, kg:0}))}; };
+function muExRow(id, L){
+  const e = muEx(id), mine = L.filter(m => m.ex === id), last = mine[mine.length - 1], today = last && last.d === todayISO();
+  const prog = Object.keys(MU_CIRC).filter(s => MU_CIRC[s].includes(id)).map(s => SES[s].day.slice(0, 3)).join(' · ');
+  return `<button class="mu-ex${today ? ' done' : ''}" data-act="mu-ex" data-id="${esc(id)}"><div><b>${esc(e.n)}</b><small>${prog ? `<span class="tag">${prog}</span>` : ''}${esc(e.d || e.c || (e.perso ? 'Mon exercice' : ''))}</small></div>
+    <span>${last ? `${esc(muSetsTxt(last, e))}<small>${today ? 'Noté aujourd’hui' : esc(muAgo(last.d))}</small>` : `<small class="go">Noter ${svg('next')}</small>`}</span></button>`;
+}
+function shMu(){
+  if(SH.ex) return shMuLog();
+  const L = muList(), circ = MU_CIRC[SH.z], z = SH.z;
+  const ids = circ || [...MU_EX.filter(e => e.z[0] === z), ...MU_EX.filter(e => e.z[0] !== z && e.z.includes(z))].map(e => e.id).concat(Object.entries(S.exos).filter(([, x]) => x.z === z).map(([id]) => id));
+  const s = circ && SES[z];
+  return `<section class="stack">
+    <div class="mu-head"><div><span class="eyebrow gold">${circ ? `${s.day} · circuit du programme` : muPlural(ids.length, 'exercice')}</span><h2 class="lib-t">${esc(circ ? s.title : MU_ZN[z])}</h2></div>${muBodySVG({cls:'mu-mini', prim:circ ? [...new Set(ids.map(id => muEx(id).z[0]))] : [z]})}</div>
+    ${circ ? `<div class="note"><b>Le circuit</b>${s.blocks.filter(b => b.r).map(b => `${esc(b.t)} : ${esc(b.v)}, ${esc(b.r)}.`).join('<br>')}</div>` : ''}
+    <div class="stack">${ids.map(id => muExRow(id, L)).join('')}</div>
+    ${circ ? '' : `<form class="stack" data-submit="mu-add" style="margin-top:6px"><label for="mu-new">Un autre exercice pour ${esc(MU_ZN[z].toLowerCase())} ?</label><div class="composer"><input id="mu-new" maxlength="50" placeholder="Nom de l’exercice" data-draft="mu-new" value="${esc(S.drafts['mu-new'] || '')}"><button class="btn" type="submit" aria-label="Ajouter l’exercice">${svg('plus')}</button></div></form>`}
+  </section>`;
+}
+const muStep = (i, k, v, sec) => `<div class="mu-stp"><button data-act="mu-st" data-i="${i}" data-k="${k}" data-d="-1" aria-label="Moins">−</button><input inputmode="${k === 'kg' ? 'decimal' : 'numeric'}" data-mu="${i}.${k}" value="${k === 'kg' && !v ? '' : fmtKg(v)}" placeholder="${k === 'kg' ? 'PDC' : '0'}" aria-label="${k === 'kg' ? 'Charge en kilos' : sec ? 'Secondes' : 'Répétitions'}, série ${i + 1}"><button data-act="mu-st" data-i="${i}" data-k="${k}" data-d="1" aria-label="Plus">+</button></div>`;
+function shMuLog(){
+  const e = muEx(SH.ex), D = MU.draft && MU.draft.ex === SH.ex ? MU.draft : (MU.draft = muNewDraft(SH.ex)), sec = e.u === 's';
+  const mine = muList().filter(m => m.ex === SH.ex && m.id !== D.id), last = mine[mine.length - 1], best = muRecords(mine).best[SH.ex];
+  const back = SH.from === 'day' ? cap(frDate(parseISO(SH.day), {weekday:'long', day:'numeric', month:'long'})) : MU_CIRC[SH.z] ? SES[SH.z].title : SH.z ? MU_ZN[SH.z] : '';
+  return `<section class="stack">
+    ${back ? `<button class="mu-back" data-act="mu-back">${svg('prev')}${esc(back)}</button>` : ''}
+    <div class="mu-head"><div><span class="eyebrow gold">${e.z.map(z => MU_ZS[z]).join(' · ')}</span><h2 class="lib-t">${esc(e.n)}</h2>${e.d ? `<p class="muted small">${esc(e.d)}</p>` : ''}</div>${muBodySVG({cls:'mu-mini', prim:e.z.slice(0, 1), sec:e.z.slice(1)})}</div>
+    ${e.c ? `<div class="note"><b>Le bon geste</b>${esc(e.c)}</div>` : ''}
+    ${last || best ? `<div class="mu-ref">${last ? `<span><small>La dernière fois</small>${esc(muSetsTxt(last, e))}<em>${esc(muAgo(last.d))}</em></span>` : ''}${best ? `<span class="pr"><small>Mon record</small>${esc(muTopTxt(best.m, e))}<em>${esc(muAgo(best.m.d))}</em></span>` : ''}</div>` : ''}
+    <div class="mu-sets">
+      <div class="mu-set hd"><i></i><small>${sec ? 'Secondes' : 'Répétitions'}</small><small>Charge (kg)</small><i></i></div>
+      ${D.sets.map((s, i) => `<div class="mu-set"><i>${i + 1}</i>${muStep(i, 'r', s.r, sec)}${muStep(i, 'kg', s.kg)}<button class="mu-x" data-act="mu-rm" data-i="${i}" aria-label="Retirer la série ${i + 1}" ${D.sets.length > 1 ? '' : 'disabled'}>${svg('x')}</button></div>`).join('')}
+    </div>
+    <div class="row" style="justify-content:space-between"><button class="btn ghost" data-act="mu-addset">${svg('plus')}Une série</button><span class="small muted">PDC = poids du corps</span></div>
+    <label for="mu-date">Date</label><input id="mu-date" type="date" data-mu-date max="${todayISO()}" value="${esc(D.d)}">
+    <button class="btn block" data-act="mu-save">${svg('check')}Enregistrer</button>
+    ${e.ly ? `<a class="btn ghost block" href="${e.ly}" target="_blank" rel="noopener noreferrer">${svg('play')}Voir le mouvement sur Lyfta</a>` : ''}
+    ${D.id ? `<button class="btn ghost block" data-act="mu-del">${svg('trash')}Supprimer</button>` : ''}
+  </section>`;
+}
+const muShareText = (d, L) => [`Musculation · ${cap(frDate(parseISO(d)))}`, ...L.map(m => { const e = muEx(m.ex); return `${e.n} : ${m.sets.map(s => muSetTxt(s, e)).join(', ')}`; })].join('\n');
+function shMuDay(){
+  const all = muList(), R = muRecords(all), L = all.filter(m => m.d === SH.d), A = muAgg(L);
+  if(!L.length) return '<div class="empty">Aucun exercice ce jour-là.</div>';
+  return `<section class="stack-lg">
+    <div><span class="eyebrow gold">${esc(cap(frDate(parseISO(SH.d))))}</span><h2 class="lib-t">Ma séance</h2></div>
+    ${muTiles(A, null, L.length)}
+    <div class="stack">${L.map(m => { const e = muEx(m.ex); return `<button class="mu-ex" data-act="mu-edit" data-id="${esc(m.id)}"><div><b>${esc(e.n)}</b><small>${esc(m.sets.map(s => muSetTxt(s, e)).join(' · '))}</small></div><span>${R.pr.has(m.id) ? '<small class="pr">Record</small>' : ''}<small class="go">Modifier</small></span></button>`; }).join('')}</div>
+    <div class="row">${wa(muShareText(SH.d, L))}</div>
+  </section>`;
+}
+function muInput(t, done){
+  const D = MU.draft; if(!D) return;
+  const [i, k] = t.dataset.mu.split('.'), s = D.sets[+i]; if(!s) return;
+  const v = parseFloat(String(t.value).replace(',', '.'));
+  s[k] = k === 'kg' ? Math.max(0, Math.min(400, Math.round((v || 0) * 4) / 4)) : Math.max(0, Math.min(999, Math.round(v || 0)));
+  if(done) renderSheet();
+}
+function mu3dFace(back){
+  if(back == null || !M3.cv) return;
+  const t = back ? Math.PI : 0, k = Math.round((M3.yaw - t) / (2 * Math.PI));
+  M3.snap = t + k * 2 * Math.PI; M3.vel = 0; M3.intro = 0; mu3dKick();
+}
+function mu3dTap(k){
+  M3.sel = k; M3.flash = 1; buzz(10); rerender(); mu3dKick();
+  setTimeout(() => { MU.draft = null; openSheet({type:'mu', z:MU_ZK[k]}); }, 380);
+}
+
+// Le corps en 3D : le dessin face / dos est « gonflé » en volume (plus le corps est large, plus il est épais),
+// les muscles sont sculptés en relief, puis tout est éclairé en WebGL. Rien à télécharger.
+const M3 = {hinted:!!ls.get('oal-mu3d', 0), tags:[], tagKey:'', cv:null, gl:null, ok:null, yaw:0, base:0, vel:0, drag:null, pts:new Map(), pinch:null, zoom:1, py:0, raf:0, intro:0, sel:-1, flash:0, heat:new Float32Array(10), t0:performance.now()};
+const M3_S = 2, M3_W = 200, M3_H = 472, M3_FOV = .62, M3_D = 470, M3_Y0 = -10;
+function mu3dSupported(){
+  if(M3.ok === null){ try{ const c = document.createElement('canvas'); M3.ok = !!(c.getContext('webgl') || c.getContext('experimental-webgl')); }catch{ M3.ok = false; } }
+  return M3.ok;
+}
+function mu3dBuild(){
+  const s = M3_S, W = M3_W, H = M3_H, N = W * H;
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const g = cv.getContext('2d', {willReadFrequently:true});
+  const raster = ds => {
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, W, H); g.setTransform(s, 0, 0, s, 0, 0); g.fillStyle = '#fff';
+    ds.forEach(d => g.fill(new Path2D(d)));
+    const a = g.getImageData(0, 0, W, H).data, m = new Float32Array(N);
+    for(let i = 0; i < N; i++) m[i] = a[i * 4 + 3] / 255;
+    return m;
+  };
+  const blur = (m, r, n=2) => {
+    let a = m, b = new Float32Array(N);
+    for(let k = 0; k < n; k++){
+      for(let y = 0; y < H; y++){ let acc = 0; const o = y * W;
+        for(let x = -r; x < W + r; x++){ if(x + r < W) acc += a[o + x + r]; if(x - r - 1 >= 0) acc -= a[o + x - r - 1]; if(x >= 0 && x < W) b[o + x] = acc / (2 * r + 1); } }
+      const c = new Float32Array(N);
+      for(let x = 0; x < W; x++){ let acc = 0;
+        for(let y = -r; y < H + r; y++){ if(y + r < H) acc += b[(y + r) * W + x]; if(y - r - 1 >= 0) acc -= b[(y - r - 1) * W + x]; if(y >= 0 && y < H) c[y * W + x] = acc / (2 * r + 1); } }
+      a = c;
+    }
+    return a;
+  };
+  const sil = raster([MU_BODY.sil, MU_BODY.head, 'M45.5 22h9v10h-9z']);
+  const IN = new Uint8Array(N);
+  for(let i = 0; i < N; i++) IN[i] = sil[i] > .5 ? 1 : 0;
+  // Distance au bord (chanfrein), en unités du dessin.
+  const d = new Float32Array(N);
+  for(let i = 0; i < N; i++) d[i] = IN[i] ? 1e6 : 0;
+  const R2 = Math.SQRT2;
+  for(let y = 0; y < H; y++) for(let x = 0; x < W; x++){ const i = y * W + x; if(!IN[i]) continue;
+    let v = d[i];
+    v = Math.min(v, x ? d[i - 1] + 1 : 1, y ? d[i - W] + 1 : 1, x && y ? d[i - W - 1] + R2 : R2, y && x < W - 1 ? d[i - W + 1] + R2 : R2);
+    d[i] = v; }
+  for(let y = H - 1; y >= 0; y--) for(let x = W - 1; x >= 0; x--){ const i = y * W + x; if(!IN[i]) continue;
+    d[i] = Math.min(d[i], x < W - 1 ? d[i + 1] + 1 : 1, y < H - 1 ? d[i + W] + 1 : 1, x < W - 1 && y < H - 1 ? d[i + W + 1] + R2 : R2, y < H - 1 && x ? d[i + W - 1] + R2 : R2); }
+  for(let i = 0; i < N; i++) d[i] /= s;
+  const db = blur(d, 2);
+  // Hauteur de base : racine de la distance (membres ronds, tronc plus plat), tête en ellipsoïde.
+  const base = new Float32Array(N);
+  for(let y = 0; y < H; y++) for(let x = 0; x < W; x++){ const i = y * W + x; if(!IN[i]) continue;
+    const X = (x + .5) / s, Y = (y + .5) / s;
+    let h = 2.25 * Math.sqrt(Math.max(0, Math.min(d[i], db[i]) - .1));
+    const ex = (X - 50) / 9.6, ey = (Y - 15.2) / 11.9, q = 1 - ex * ex - ey * ey;
+    if(Y < 31){ const hs = q > 0 ? 8.6 * Math.sqrt(q) : 0, k = Math.min(1, Math.max(0, (28 - Y) / 4)); h = Math.max(h * (1 - k), hs) * (q > 0 || Y > 24 ? 1 : 0) || h; }
+    base[i] = h; }
+  const views = {};
+  for(const v of ['front', 'back']){
+    const masks = MU_ZK.map(z => raster(MU_BODY[v].filter(p => p[0] === z).map(p => p[1])));
+    const U = new Float32Array(N), Z = new Int8Array(N).fill(-1);
+    for(let i = 0; i < N; i++){ let b = 0, bz = -1; for(let k = 0; k < masks.length; k++) if(masks[k][i] > b){ b = masks[k][i]; bz = k; } U[i] = b; if(b > .5) Z[i] = bz; }
+    const B = blur(U, 2), hair = raster(v === 'back' ? [MU_BODY.head, MU_BODY.tail] : [MU_BODY.fringe]), tail = v === 'back' ? blur(raster([MU_BODY.tail]), 2) : null;
+    const h = new Float32Array(N);
+    for(let i = 0; i < N; i++){ if(!IN[i]) continue;
+      const fade = Math.min(1, d[i] / 2.6);
+      h[i] = base[i] + .95 * B[i] * fade * fade + (tail ? 2.4 * tail[i] * Math.min(1, d[i] / 1.5) : 0); }
+    views[v] = {h, Z, B, hair};
+  }
+  // Maillage : une nappe devant (+z), une nappe derrière (−z), cousues sur le contour.
+  const vF = new Int32Array(N).fill(-1), vB = new Int32Array(N).fill(-1);
+  const P = [], ZO = [], MU = [], HA = [], AC = MU_ZK.map(() => [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]);
+  const push = (x, y, z, v, i) => {
+    const X = (x + .5) / s - 50, Y = 118 - (y + .5) / s, k = views[v].Z[i];
+    P.push(X, Y, z); ZO.push(k); MU.push(views[v].B[i]); HA.push(views[v].hair[i]);
+    if(k >= 0 && z !== 0){ const a = AC[k][(v === 'back' ? 2 : 0) + (X > 0 ? 1 : 0)]; a[0] += X; a[1] += Y; a[2] += z; a[3]++; }
+    return P.length / 3 - 1;
+  };
+  for(let y = 0; y < H; y++) for(let x = 0; x < W; x++){ const i = y * W + x; if(!IN[i]) continue;
+    const edge = x === 0 || y === 0 || x === W - 1 || y === H - 1 || !IN[i - 1] || !IN[i + 1] || !IN[i - W] || !IN[i + W];
+    if(edge){ vF[i] = vB[i] = push(x, y, 0, 'front', i); }
+    else { vF[i] = push(x, y, views.front.h[i], 'front', i); vB[i] = push(x, y, -views.back.h[i], 'back', i); } }
+  const EDGE = [];
+  for(let i = 0; i < N; i++) if(IN[i] && vF[i] === vB[i]) EDGE.push(i);
+  for(let it = 0; it < 4; it++){
+    const nx = new Float32Array(EDGE.length), ny = new Float32Array(EDGE.length);
+    EDGE.forEach((i, k) => { let sx = 0, sy = 0, n = 0; const x = i % W, y = (i - x) / W;
+      for(let oy = -1; oy <= 1; oy++) for(let ox = -1; ox <= 1; ox++){ const x2 = x + ox, y2 = y + oy; if((ox || oy) && x2 >= 0 && y2 >= 0 && x2 < W && y2 < H){ const j = y2 * W + x2; if(IN[j] && vF[j] === vB[j]){ sx += P[vF[j] * 3]; sy += P[vF[j] * 3 + 1]; n++; } } }
+      const v = vF[i] * 3; nx[k] = n ? (P[v] + sx / n) / 2 : P[v]; ny[k] = n ? (P[v + 1] + sy / n) / 2 : P[v + 1]; });
+    EDGE.forEach((i, k) => { P[vF[i] * 3] = nx[k]; P[vF[i] * 3 + 1] = ny[k]; });
+  }
+  const I = [];
+  for(let y = 0; y < H - 1; y++) for(let x = 0; x < W - 1; x++){
+    const a = y * W + x, b = a + 1, c = a + W, e = c + 1, n = IN[a] + IN[b] + IN[c] + IN[e];
+    if(n < 3) continue;
+    const tri = (p, q, r) => { I.push(vF[p], vF[q], vF[r]); I.push(vB[p], vB[r], vB[q]); };
+    if(n === 4){ tri(a, c, e); tri(a, e, b); }
+    else if(!IN[e]) tri(a, c, b); else if(!IN[a]) tri(b, c, e); else if(!IN[b]) tri(a, c, e); else tri(a, e, b);
+  }
+  const nv = P.length / 3, NR = new Float32Array(nv * 3);
+  for(let k = 0; k < I.length; k += 3){
+    const p = I[k] * 3, q = I[k + 1] * 3, r = I[k + 2] * 3;
+    const ux = P[q] - P[p], uy = P[q + 1] - P[p + 1], uz = P[q + 2] - P[p + 2], wx = P[r] - P[p], wy = P[r + 1] - P[p + 1], wz = P[r + 2] - P[p + 2];
+    const nx = uy * wz - uz * wy, ny = uz * wx - ux * wz, nz = ux * wy - uy * wx;
+    for(const o of [p, q, r]){ NR[o] += nx; NR[o + 1] += ny; NR[o + 2] += nz; }
+  }
+  for(let k = 0; k < nv * 3; k += 3){ const l = Math.hypot(NR[k], NR[k + 1], NR[k + 2]) || 1; NR[k] /= l; NR[k + 1] /= l; NR[k + 2] /= l; }
+  const anch = AC.map(z => z.filter(a => a[3]).map(a => [a[0] / a[3], a[1] / a[3], a[2] / a[3]]));
+  return {anch, P:new Float32Array(P), NR, ZO:new Float32Array(ZO), MU:new Float32Array(MU), HA:new Float32Array(HA), I:nv > 65535 ? new Uint32Array(I) : new Uint16Array(I), big:nv > 65535, IN, views, nv};
+}
+const M3_VS = `attribute vec3 p;attribute vec3 n;attribute float zo;attribute float mu;attribute float ha;
+uniform mat4 uM;uniform mat4 uVP;uniform float uHeat[10];uniform float uSel;
+varying vec3 vN;varying vec3 vW;varying vec3 vP;varying float vMu;varying float vHa;varying float vHeat;varying float vSel;
+void main(){
+  vec4 w=uM*vec4(p,1.);vW=w.xyz;vP=p;vN=mat3(uM)*n;gl_Position=uVP*w;
+  float heat=0.;int zi=int(zo+.5);
+  for(int k=0;k<10;k++){if(k==zi)heat=uHeat[k];}
+  vHeat=heat;vSel=(zo>-.5&&abs(zo-uSel)<.5)?1.:0.;vMu=mu;vHa=ha;
+}`;
+const M3_FS = d => `${d ? '#extension GL_OES_standard_derivatives : enable\n' : ''}precision highp float;
+varying vec3 vN;varying vec3 vW;varying vec3 vP;varying float vMu;varying float vHa;varying float vHeat;varying float vSel;
+uniform float uT;uniform vec3 uCam;uniform float uFlash;
+float line(float v){${d ? 'float w=fwidth(v);return 1.-smoothstep(0.,w*1.3,abs(fract(v)-.5)*1.-.5+w*1.3+(.5-w*1.3));' : 'return 1.-smoothstep(0.,.06,abs(fract(v)-.5)-.44);'}}
+void main(){
+  vec3 N=normalize(vN),V=normalize(uCam-vW);
+  float ndv=abs(dot(N,V)),fr=pow(1.-ndv,2.),k=clamp(vW.y/236.+.5,0.,1.);
+  vec3 cyan=vec3(.2,.9,1.),blue=vec3(.25,.45,1.),pink=vec3(1.,.22,.52),gold=vec3(1.,.78,.2);
+  vec3 holo=mix(blue,cyan,k);
+  float g=max(line(vP.y/2.6)*.9,line(vP.x/2.6)*.55);
+  float m=vMu,dif=.55+.6*max(dot(N,normalize(vec3(.35,.75,.55))),0.);
+  vec3 col=holo*(.08+.3*m)*dif+holo*g*(.18+.3*m)+mix(holo,vec3(.85,1.,1.),.35)*fr*1.15;
+  vec3 hot=mix(vec3(1.,.42,.1),gold,fr*.8+.2*sin(uT*2.2+vP.y*.15));col=mix(col,hot*(.7+.3*dif+.7*fr+.15*sin(uT*3.)),vHeat*m*.9);
+  col=mix(col,pink*(.6+.3*dif+.7*fr)*(1.+.25*sin(uT*5.)+uFlash),vSel*m);
+  col=mix(col,vec3(.5,.35,1.)*(.25+.7*fr),vHa*.7);
+  float sy=mod(uT*60.,560.)-280.;col+=cyan*exp(-pow((vW.y-sy)/2.4,2.))*.75;
+  float fl=.93+.07*step(.92,fract(sin(floor(uT*9.)*43.7)*4375.85));
+  gl_FragColor=vec4(col*fl,clamp(.4+.5*fr+.35*m+.3*g+vSel*m*.4,0.,1.));
+}`;
+const M3_PVS = `attribute vec3 sd;uniform mat4 uVP;uniform float uT;uniform float uPx;varying float vA;
+void main(){
+  float y=mod(sd.z*260.+uT*(14.+sd.x*6.),260.)-128.,t=(y+128.)/260.;
+  float r=24.+40.*t;vec4 w=vec4(cos(sd.x*40.)*r*sd.y,y,sin(sd.x*40.)*r*sd.y*.6,1.);
+  gl_Position=uVP*w;gl_PointSize=uPx*(1.2+2.2*fract(sd.z*17.))/gl_Position.w*300.;
+  vA=sin(t*3.1416)*(.35+.65*fract(sd.x*13.));
+}`;
+const M3_PFS = `precision mediump float;varying float vA;
+void main(){vec2 q=gl_PointCoord-.5;float a=smoothstep(.5,0.,length(q));gl_FragColor=vec4(vec3(.45,.95,1.)*a*vA,a*vA);}`;
+function mu3dInit(){
+  const cv = document.createElement('canvas'); cv.className = 'mu3d-cv';
+  const gl = cv.getContext('webgl', {antialias:true, alpha:true, premultipliedAlpha:false}) || cv.getContext('experimental-webgl');
+  if(!gl){ M3.ok = false; return false; }
+  const B = mu3dBuild();
+  if(B.big && !gl.getExtension('OES_element_index_uint')){ M3.ok = false; return false; }
+  const der = !!gl.getExtension('OES_standard_derivatives');
+  const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); if(!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+  const prog = (vs, fs) => { const p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p); if(!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p)); return p; };
+  const body = prog(M3_VS, M3_FS(der)), dust = prog(M3_PVS, M3_PFS);
+  const buf = data => { const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW); return b; };
+  const at = (p, name, size) => [gl.getAttribLocation(p, name), size];
+  const sd = new Float32Array(170 * 3); for(let i = 0; i < sd.length; i++) sd[i] = Math.random();
+  const ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, B.I, gl.STATIC_DRAW);
+  const U = (p, n) => gl.getUniformLocation(p, n);
+  Object.assign(M3, {cv, gl, B, n:B.I.length, it:B.big ? gl.UNSIGNED_INT : gl.UNSIGNED_SHORT, ib,
+    body:{p:body, a:[[buf(B.P), ...at(body, 'p', 3)], [buf(B.NR), ...at(body, 'n', 3)], [buf(B.ZO), ...at(body, 'zo', 1)], [buf(B.MU), ...at(body, 'mu', 1)], [buf(B.HA), ...at(body, 'ha', 1)]],
+      u:{M:U(body, 'uM'), VP:U(body, 'uVP'), heat:U(body, 'uHeat'), sel:U(body, 'uSel'), t:U(body, 'uT'), cam:U(body, 'uCam'), flash:U(body, 'uFlash')}},
+    dust:{p:dust, a:[[buf(sd), ...at(dust, 'sd', 3)]], u:{VP:U(dust, 'uVP'), t:U(dust, 'uT'), px:U(dust, 'uPx')}}});
+  mu3dEvents(cv);
+  return true;
+}
+function mu3dUse(o){
+  const gl = M3.gl; gl.useProgram(o.p);
+  for(let l = 0; l < 8; l++) gl.disableVertexAttribArray(l);
+  for(const [b, l, n] of o.a){ if(l < 0) continue; gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, n, gl.FLOAT, false, 0, 0); }
+}
+const m4mul = (a, b) => { const o = new Float32Array(16); for(let c = 0; c < 4; c++) for(let r = 0; r < 4; r++){ let v = 0; for(let k = 0; k < 4; k++) v += a[k * 4 + r] * b[c * 4 + k]; o[c * 4 + r] = v; } return o; };
+function mu3dCam(){ return {Dz:M3_D / M3.zoom, py:M3.py + M3_Y0}; }
+function mu3dDraw(t){
+  const {gl, cv} = M3, dpr = Math.min(2, devicePixelRatio || 1), w = Math.round(cv.clientWidth * dpr), h = Math.round(cv.clientHeight * dpr);
+  if(!w || !h) return;
+  if(cv.width !== w || cv.height !== h){ cv.width = w; cv.height = h; }
+  gl.viewport(0, 0, w, h); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  const {Dz, py} = mu3dCam(), a = w / h, f = 1 / Math.tan(M3_FOV / 2), nr = Math.max(10, Dz - 160), fr = Dz + 160;
+  const VP = m4mul(new Float32Array([f / a, 0, 0, 0, 0, f, 0, 0, 0, 0, (fr + nr) / (nr - fr), -1, 0, 0, 2 * fr * nr / (nr - fr), 0]), new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -py, -Dz, 1]));
+  const c = Math.cos(M3.yaw), s = Math.sin(M3.yaw), T = t / 1000;
+  gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+  gl.enable(gl.DEPTH_TEST); gl.depthMask(true); gl.enable(gl.CULL_FACE);
+  const B = M3.body; mu3dUse(B); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, M3.ib);
+  gl.uniformMatrix4fv(B.u.M, false, new Float32Array([c, 0, -s, 0, 0, 1, 0, 0, s, 0, c, 0, 0, 0, 0, 1]));
+  gl.uniformMatrix4fv(B.u.VP, false, VP); gl.uniform3f(B.u.cam, 0, py, Dz);
+  gl.uniform1fv(B.u.heat, M3.heat); gl.uniform1f(B.u.sel, M3.sel); gl.uniform1f(B.u.t, T); gl.uniform1f(B.u.flash, M3.flash);
+  gl.drawElements(gl.TRIANGLES, M3.n, M3.it, 0);
+  gl.disable(gl.DEPTH_TEST); gl.depthMask(false);
+  const P = M3.dust; mu3dUse(P);
+  gl.uniformMatrix4fv(P.u.VP, false, VP); gl.uniform1f(P.u.t, T); gl.uniform1f(P.u.px, dpr * f * .9);
+  gl.drawArrays(gl.POINTS, 0, 170);
+  gl.depthMask(true);
+  mu3dTags(VP, c, s);
+}
+function mu3dTags(VP, c, s){
+  const box = M3.cv.closest('.mu3d')?.querySelector('.mu3d-tags'); if(!box) return;
+  const W = M3.cv.clientWidth, H = M3.cv.clientHeight, tags = M3.zoom > 1.6 ? M3.tags.filter(t => t.c === 'sel') : M3.tags, out = [];
+  for(const t of tags){
+    let best = null;
+    for(const [x, y, z] of M3.B.anch[t.k] || []){
+      const wx = c * x + s * z, wz = -s * x + c * z, cw = VP[3] * wx + VP[7] * y + VP[11] * wz + VP[15];
+      const sx = (VP[0] * wx + VP[4] * y + VP[8] * wz + VP[12]) / cw, sy = (VP[1] * wx + VP[5] * y + VP[9] * wz + VP[13]) / cw;
+      const p = {x:(sx + 1) / 2 * W, y:(1 - sy) / 2 * H, z:wz};
+      if(!best || p.z > best.z + 2 || Math.abs(p.z - best.z) <= 2 && Math.abs(p.x - W / 2) > Math.abs(best.x - W / 2)) best = p;
+    }
+    if(best && best.z > -2) out.push({...t, ...best, left:best.x < W / 2});
+  }
+  for(const side of [true, false]){
+    const L = out.filter(o => o.left === side).sort((a, b) => a.y - b.y);
+    let y0 = 14; for(const o of L){ o.ty = Math.max(y0, Math.min(H - 60, o.y - 16)); y0 = o.ty + 44; }
+  }
+  const key = out.map(o => `${o.k}${o.c}${o.left}${Math.round(o.x)}${Math.round(o.y)}${o.ty}`).join('|');
+  if(key === M3.tagKey) return; M3.tagKey = key;
+  box.innerHTML = `<svg width="${W}" height="${H}">${out.map(o => { const lx = o.left ? 128 : W - 128; return `<path class="${o.c}" d="M${lx} ${o.ty + 16}H${(lx + o.x) / 2}L${o.x} ${o.y}"/><circle class="${o.c}" cx="${o.x}" cy="${o.y}" r="3.2"/>`; }).join('')}</svg>`
+    + out.map(o => `<div class="mu3d-tag ${o.c} ${o.left ? 'l' : 'r'}" style="top:${o.ty}px"><b>${o.t}</b><small>${o.s}</small></div>`).join('');
+}
+function mu3dPick(cx, cy){
+  const r = M3.cv.getBoundingClientRect(), nx = (cx - r.left) / r.width * 2 - 1, ny = 1 - (cy - r.top) / r.height * 2, tf = Math.tan(M3_FOV / 2);
+  let dx = nx * tf * r.width / r.height, dy = ny * tf, dz = -1; const l = Math.hypot(dx, dy, dz); dx /= l; dy /= l; dz /= l;
+  const c = Math.cos(-M3.yaw), s = Math.sin(-M3.yaw);
+  const {Dz, py} = mu3dCam(), ox = s * Dz, oz = c * Dz, rx = c * dx + s * dz, rz = -s * dx + c * dz;
+  const {IN, views} = M3.B;
+  for(let t = Math.max(1, Dz - 70); t < Dz + 70; t += .25){
+    const X = ox + rx * t, Y = py + dy * t, Z = oz + rz * t, gx = Math.floor((X + 50) * M3_S), gy = Math.floor((118 - Y) * M3_S);
+    if(gx < 0 || gy < 0 || gx >= M3_W || gy >= M3_H) continue;
+    const i = gy * M3_W + gx; if(!IN[i]) continue;
+    const V = Z >= 0 ? views.front : views.back;
+    if(Math.abs(Z) > V.h[i]) continue;
+    if(V.Z[i] >= 0) return V.Z[i];
+    for(let rad = 1; rad <= 8; rad++) for(let oy = -rad; oy <= rad; oy++) for(let ox2 = -rad; ox2 <= rad; ox2++){
+      const x2 = gx + ox2, y2 = gy + oy; if(x2 < 0 || y2 < 0 || x2 >= M3_W || y2 >= M3_H) continue;
+      const z = V.Z[y2 * M3_W + x2]; if(z >= 0) return z; }
+    return -1;
+  }
+  return -1;
+}
+function mu3dZoom(z, keepY){
+  M3.zoom = Math.max(1, Math.min(3.2, z));
+  if(M3.zoom < 1.04){ M3.zoom = 1; M3.py = 0; }
+  const lim = 118 * (1 - 1 / M3.zoom); M3.py = Math.max(-lim, Math.min(lim, keepY ?? M3.py));
+  M3.cv.style.touchAction = M3.zoom > 1 ? 'none' : 'pan-y';
+  M3.cv.closest('.mu3d')?.classList.toggle('zoomed', M3.zoom > 1);
+  mu3dHint(); mu3dKick();
+}
+function mu3dHint(){ if(!M3.hinted){ M3.hinted = true; ls.set('oal-mu3d', 1); M3.cv.closest('.mu3d')?.classList.add('used'); } }
+function mu3dEvents(cv){
+  cv.style.touchAction = 'pan-y';
+  cv.addEventListener('pointerdown', e => {
+    M3.pts.set(e.pointerId, {x:e.clientX, y:e.clientY});
+    if(M3.pts.size === 2){ const [p, q] = [...M3.pts.values()]; M3.pinch = {d:Math.hypot(p.x - q.x, p.y - q.y), z:M3.zoom, y:(p.y + q.y) / 2, py:M3.py}; M3.drag = null; return; }
+    M3.drag = {x:e.clientX, y:e.clientY, t:performance.now(), moved:false, id:e.pointerId}; M3.vel = 0; M3.intro = 0; M3.snap = null;
+  });
+  cv.addEventListener('pointermove', e => {
+    if(!M3.pts.has(e.pointerId)) return;
+    M3.pts.set(e.pointerId, {x:e.clientX, y:e.clientY});
+    const r = cv.clientHeight || 1, unit = 2 * M3_D * Math.tan(M3_FOV / 2) / r;
+    if(M3.pinch && M3.pts.size === 2){
+      const [p, q] = [...M3.pts.values()], d = Math.hypot(p.x - q.x, p.y - q.y), z = M3.pinch.z * d / Math.max(20, M3.pinch.d);
+      mu3dZoom(z, M3.pinch.py + ((p.y + q.y) / 2 - M3.pinch.y) * unit / z); return;
+    }
+    const D = M3.drag; if(!D || D.id !== e.pointerId) return;
+    const dx = e.clientX - D.x, dy = e.clientY - D.y, now = performance.now();
+    if(!D.moved && (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy) || M3.zoom > 1 && Math.abs(dy) > 6)){ D.moved = true; try{ cv.setPointerCapture(e.pointerId); }catch{} mu3dHint(); }
+    if(D.moved){
+      const k = 2 * Math.PI / Math.max(260, cv.clientWidth * 1.2); M3.yaw += dx * k; M3.vel = dx * k / Math.max(8, now - D.t) * 16;
+      if(M3.zoom > 1) mu3dZoom(M3.zoom, M3.py + dy * unit / M3.zoom);
+      D.x = e.clientX; D.y = e.clientY; D.t = now; mu3dKick();
+    }
+  });
+  const up = e => {
+    M3.pts.delete(e.pointerId);
+    if(M3.pinch){ if(M3.pts.size < 2) M3.pinch = null; M3.drag = null; return; }
+    const D = M3.drag; M3.drag = null; if(!D) return;
+    if(!D.moved && e.type === 'pointerup'){ const z = mu3dPick(e.clientX, e.clientY); if(z >= 0) mu3dTap(z); }
+    M3.base = M3.yaw; mu3dKick();
+  };
+  cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+  cv.addEventListener('wheel', e => { if(!e.ctrlKey) return; e.preventDefault(); mu3dZoom(M3.zoom * Math.exp(-e.deltaY * .01)); }, {passive:false});
+  cv.addEventListener('dblclick', () => mu3dZoom(M3.zoom > 1 ? 1 : 2));
+}
+function mu3dLoop(t){
+  M3.raf = 0;
+  if(!M3.cv || !M3.cv.isConnected || document.hidden || SH) return;
+  const calm = CALM.matches;
+  if(M3.intro){ const k = Math.min(1, (t - M3.intro) / 2400), e = 1 - Math.pow(1 - k, 3); M3.yaw = M3.base - (1 - e) * 2 * Math.PI; if(k >= 1){ M3.intro = 0; M3.yaw = M3.base; } }
+  else if(!M3.drag && Math.abs(M3.vel) > .0005){ M3.yaw += M3.vel; M3.vel *= .94; M3.base = M3.yaw; }
+  else if(!M3.drag && M3.snap != null){ const dd = M3.snap - M3.yaw; M3.yaw += dd * .12; if(Math.abs(dd) < .002){ M3.yaw = M3.snap; M3.base = M3.snap; M3.snap = null; } }
+  else if(!M3.drag && !calm){ M3.yaw += ((M3.base + .2 * Math.sin((t - M3.t0) / 1700)) - M3.yaw) * .05; }
+  M3.flash *= .9;
+  mu3dDraw(t);
+  if(!calm || M3.intro || M3.drag || Math.abs(M3.vel) > .0005 || M3.snap != null || M3.sel >= 0 || M3.flash > .01) M3.raf = requestAnimationFrame(mu3dLoop);
+}
+function mu3dKick(){ if(!M3.raf) M3.raf = requestAnimationFrame(mu3dLoop); }
+// Placé dans la page à chaque rendu : le même canevas est réutilisé, la 3D n'est construite qu'une fois.
+function mu3dMount(intro){
+  const host = document.getElementById('mu3d'); if(!host) return;
+  if(!M3.cv){ try{ if(!mu3dInit()) return; }catch(e){ console.warn('3D', e); M3.ok = false; return; } }
+  if(M3.cv.parentNode !== host){ host.appendChild(M3.cv); M3.tagKey = ''; if(intro && !CALM.matches){ M3.intro = performance.now(); M3.yaw = M3.base - 2 * Math.PI; } }
+  mu3dKick();
+}
+
+/* ---------- RPE de séance (méthode de Foster) ---------- */
+// Échelle CR-10 de Borg modifiée par Foster : 0 = repos, 10 = maximal. Charge de la séance = RPE × durée en minutes.
+const RPE_C = ['#7d86a8','#2fd9b9','#41dca0','#7fe070','#c3e25a','#ffd23f','#ffac3a','#ff7f3d','#ff5257','#ff3d7f','#c13dff'];
+const RPE_L = ['Repos','Très très facile','Facile','Modéré','Un peu difficile','Difficile','Difficile +','Très difficile','Très difficile +','Presque maximal','Maximal'];
+const RPE_H = ['Jour de récupération : le corps se reconstruit.','Tout en douceur, la respiration reste calme.','Je parle sans effort.','Je respire plus fort, je parle encore facilement.','Ça commence à demander de l’effort.','Je respire fort, je parle par phrases courtes.','Exigeant : je reste concentrée pour tenir.','Très dur : je parle par quelques mots.','Très dur et long : je puise dans mes réserves.','Presque tout donné.','Tout donné : le maximum de mes forces.'];
+const RPE_T = [['club','Club','ball'],['prepa','Prépa','prog'],['muscu','Muscu','muscle'],['match','Match','target'],['autre','Autre','spark']];
+const RPE_TN = Object.fromEntries([...RPE_T.map(t => [t[0], t[1]]), ['repos', 'Repos']]);
+// Équilibre de charge : charge des 7 derniers jours ÷ moyenne hebdomadaire des 28 derniers jours.
+const ACWR_Z = [[0, .8, 'Charge basse', '#5b95ff', 'Tu peux augmenter progressivement.'], [.8, 1.3, 'Zone idéale', '#2fd9b9', 'Charge bien dosée : continue comme ça.'], [1.3, 1.5, 'Hausse rapide', '#ffac3a', 'Garde de la fraîcheur et soigne ta récupération.'], [1.5, 9, 'Hausse très rapide', '#ff3d7f', 'Priorité à la récupération : sommeil, hydratation, séances plus légères.']];
+const RP = {home:null, more:false, edit:null, sel:null, wsel:null};
+const rpeTodo = () => new Date().getHours() >= 17 && !rpeAll().some(r => r.d === todayISO());
+const sesMin = s => { const h = s.dur.match(/(\d+)\s*h(?:\s*(\d+))?/); if(h) return +h[1] * 60 + +(h[2] || 0); const n = (s.dur.match(/\d+/g) || [60]).map(Number); return Math.round(n.reduce((a, b) => a + b, 0) / n.length / 5) * 5; };
+// Toutes les séances : celles notées ici, plus l'effort donné en validant une séance du programme.
+function rpeAll(){
+  const docs = Object.entries(S.rpe).map(([id, r]) => ({id, ...r})).filter(r => r && /^\d{4}-\d{2}-\d{2}$/.test(r.d || ''));
+  const bySrc = new Set(docs.filter(r => r.src).map(r => r.src));
+  const prog = Object.entries(S.progress).filter(([k, p]) => p && p.done && p.rpe && !bySrc.has(k)).map(([k, p]) => {
+    const s = SES[k.replace(/^S\d-/, '')];
+    return s && {id:'p' + k, src:k, virt:true, d:iso(new Date(p.at || Date.now())), rpe:p.rpe, min:sesMin(s), type:s.tag[0] === 'Muscu' ? 'muscu' : 'prepa', at:p.at, t:s.title};
+  }).filter(Boolean);
+  return [...docs.filter(r => !r.del), ...prog].sort((a, b) => a.d < b.d ? -1 : a.d > b.d ? 1 : (a.at || 0) - (b.at || 0));
+}
+const rpeLoad = r => (r.rpe || 0) * (r.min || 0);
+const rpeDayOf = (L, d) => L.filter(r => r.d === d);
+const isoAdd = (d, n) => { const x = parseISO(d); x.setDate(x.getDate() + n); return iso(x); };
+const monday = d => { const x = parseISO(d); x.setDate(x.getDate() - (x.getDay() + 6) % 7); return iso(x); };
+function rpeStreak(L){
+  const days = new Set(L.map(r => r.d)); let d = todayISO(), n = 0;
+  if(!days.has(d)) d = isoAdd(d, -1);
+  while(days.has(d)){ n++; d = isoAdd(d, -1); }
+  return n;
+}
+// Les chiffres de la charge sur une fenêtre qui finit à « end » (jours sans note = 0, comme un repos).
+function rpeWin(L, end, n){
+  const loads = [];
+  for(let i = n - 1; i >= 0; i--){ const d = isoAdd(end, -i); loads.push(rpeDayOf(L, d).reduce((a, r) => a + rpeLoad(r), 0)); }
+  const sum = loads.reduce((a, b) => a + b, 0), mean = sum / n, sd = Math.sqrt(loads.reduce((a, v) => a + (v - mean) ** 2, 0) / n);
+  return {loads, sum, mono:sd > 0 ? mean / sd : null};
+}
+function rpeAcwr(L){
+  if(!L.length) return null;
+  const t = todayISO(), span = Math.round((parseISO(t) - parseISO(L[0].d)) / 864e5) + 1;
+  const a = rpeWin(L, t, 7).sum, c = rpeWin(L, t, 28).sum / 4;
+  return {span, v:c > 0 && span >= 21 ? a / c : null, left:Math.max(0, 21 - span)};
+}
+const acwrZone = v => ACWR_Z.find(z => v >= z[0] && v < z[1]) || ACWR_Z[3];
+const monoTxt = m => m == null ? ['—', 'var(--dust)', ''] : m < 1.5 ? ['Bonne variété', '#2fd9b9', 'Tu alternes bien jours durs et jours légers.'] : m <= 2 ? ['À surveiller', '#ffac3a', 'Pense à varier : un jour dur, un jour léger.'] : ['Très répétitif', '#ff3d7f', 'Alterne davantage les intensités pour bien récupérer.'];
+const rpeNew = (o={}) => {
+  const t = todayISO(), m = POULE.find(x => (x.h === US || x.a === US) && iso(new Date(x.date)) === t);
+  const prog = (DAYS.find(d => d.id === DAY_BY_JS[new Date().getDay()]) || {ses:[]}).ses.length;
+  return {v:null, min:m ? 90 : 60, type:m ? 'match' : prog && weekInfo().diff >= 0 && !weekInfo().after ? 'prepa' : 'club', d:t, ...o};
+};
+// Le cadran : un arc de 11 segments, du turquoise (repos) au violet (maximal).
+const RD = {cx:150, cy:142, r:112, a0:200, span:220};
+const rpeXY = (a, r=RD.r) => [RD.cx + r * Math.cos(a * Math.PI / 180), RD.cy - r * Math.sin(a * Math.PI / 180)];
+const rpeAng = v => RD.a0 - (v + .5) * RD.span / 11;
+function rpeDial(v, key){
+  const st = RD.span / 11, P = (a, r) => rpeXY(a, r).map(n => n.toFixed(1)).join(' ');
+  const segs = RPE_C.map((c, i) => { const a1 = RD.a0 - i * st - 1.3, a2 = RD.a0 - (i + 1) * st + 1.3; return `<path class="rseg${v != null && i <= v ? ' on' : ''}" data-v="${i}" stroke="${c}" d="M${P(a1, RD.r)}A${RD.r} ${RD.r} 0 0 1 ${P(a2, RD.r)}"/>`; }).join('');
+  const nums = RPE_C.map((c, i) => { const [x, y] = rpeXY(rpeAng(i), RD.r + 25); return `<text class="rtick" x="${x.toFixed(1)}" y="${(y + 4).toFixed(1)}">${i}</text>`; }).join('');
+  const [kx, ky] = v != null ? rpeXY(rpeAng(v)) : [RD.cx, RD.cy];
+  return `<svg class="rpe-dial" data-rpe-dial="${key}" viewBox="0 -8 300 208" role="slider" tabindex="0" aria-label="RPE, effort de la séance" aria-valuemin="0" aria-valuemax="10" aria-valuenow="${v ?? ''}" aria-valuetext="${v != null ? `${v}, ${RPE_L[v]}` : 'à choisir'}">
+    <defs><filter id="rpe-glow" filterUnits="userSpaceOnUse" x="-20" y="-30" width="340" height="250"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="rpe-core"><stop offset="0" style="stop-color:var(--rc);stop-opacity:.32"/><stop offset="1" style="stop-color:var(--rc);stop-opacity:0"/></radialGradient></defs>
+    <circle class="rcore" cx="${RD.cx}" cy="${RD.cy - 14}" r="92" fill="url(#rpe-core)"/>
+    <path class="rtrack" d="M${P(RD.a0, RD.r)}A${RD.r} ${RD.r} 0 1 1 ${P(RD.a0 - RD.span, RD.r)}"/>${segs}${nums}
+    <text class="rnum" x="${RD.cx}" y="${RD.cy - 8}">${v ?? '?'}</text><text class="rlab" x="${RD.cx}" y="${RD.cy + 22}">${v != null ? RPE_L[v] : 'Touche le cadran'}</text>
+    <g class="rknob" transform="translate(${kx.toFixed(1)} ${ky.toFixed(1)})" style="opacity:${v != null ? 1 : 0}"><circle r="15"/><circle class="in" r="6"/></g></svg>`;
+}
+const rpeDraft = key => key === 'edit' ? RP.edit : (RP.home || (RP.home = rpeNew()));
+const rpeCalc = D => D.v == null ? '<span class="muted small">La charge de ta séance s’affiche ici.</span>' : `<b>${D.v * D.min}</b><span>points de charge<small>RPE ${D.v} × ${D.min} min</small></span>`;
+function rpeForm(D, key){
+  const t = todayISO(), y = isoAdd(t, -1);
+  return `<div class="rpe-form" style="--rc:${D.v != null ? RPE_C[D.v] : '#7d86a8'}">
+    ${rpeDial(D.v, key)}
+    <p class="rpe-hint">${D.v != null ? RPE_H[D.v] : 'Fais glisser ton doigt sur le cadran, de 0 (repos) à 10 (maximal). Pense à toute la séance, pas seulement à la fin.'}</p>
+    <div class="rpe-line"><span class="eyebrow">Durée</span><div class="rpe-min"><button data-act="rpe-min" data-k="${key}" data-d="-5" aria-label="5 minutes de moins">−</button><b>${D.min}<small> min</small></b><button data-act="rpe-min" data-k="${key}" data-d="5" aria-label="5 minutes de plus">+</button></div></div>
+    <div class="chips rpe-chips">${[30, 45, 60, 75, 90, 120].map(m => `<button class="chip ${D.min === m ? 'on' : ''}" data-act="rpe-min" data-k="${key}" data-m="${m}">${m < 60 ? m + ' min' : Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + (m % 60) : '')}</button>`).join('')}</div>
+    <span class="eyebrow">Séance</span>
+    <div class="chips rpe-chips">${RPE_T.map(([k, l, i]) => `<button class="chip ${D.type === k ? 'on' : ''}" data-act="rpe-type" data-k="${key}" data-t="${k}">${svg(i)}${l}</button>`).join('')}</div>
+    ${key === 'edit' ? `<label for="rpe-date">Date</label><input id="rpe-date" type="date" data-rpe-date max="${t}" value="${esc(D.d)}">`
+      : `<div class="chips rpe-chips">${[[t, 'Aujourd’hui'], [y, 'Hier']].map(([d, l]) => `<button class="chip ${D.d === d ? 'on' : ''}" data-act="rpe-day" data-d="${d}">${l}</button>`).join('')}</div>`}
+    <div class="rpe-calc">${rpeCalc(D)}</div>
+    <button class="btn block rpe-go" data-act="rpe-save" data-k="${key}" ${D.v == null ? 'disabled' : ''}>${svg('check')}${key === 'edit' && D.id ? 'Enregistrer' : 'Valider mon RPE'}</button>
+  </div>`;
+}
+function rpeWeekBars(L){
+  const t = todayISO(), days = Array.from({length:7}, (_, i) => isoAdd(t, i - 6)), loads = days.map(d => rpeDayOf(L, d)), max = Math.max(1, ...loads.map(x => x.reduce((a, r) => a + rpeLoad(r), 0)));
+  return `<div class="rpe-wk">${days.map((d, i) => { const x = loads[i], l = x.reduce((a, r) => a + rpeLoad(r), 0), mx = x.length ? Math.max(...x.map(r => r.rpe || 0)) : null;
+    return `<span class="${d === t ? 'today' : ''}"><i style="height:${x.length ? Math.max(6, 50 * l / max) : 0}px;background:${mx != null ? RPE_C[mx] : 'transparent'}"></i>${x.length && !l ? '<em>R</em>' : ''}<small>${frDate(parseISO(d), {weekday:'narrow'})}</small></span>`; }).join('')}</div>`;
+}
+function rpeHomeHTML(){
+  const L = rpeAll(), t = todayISO(), today = rpeDayOf(L, t), streak = rpeStreak(L);
+  const st = streak > 1 ? `<span class="rpe-streak">${svg('flame')}${streak} jours d’affilée</span>` : '';
+  if(today.length && !RP.more){
+    const load = today.reduce((a, r) => a + rpeLoad(r), 0), mx = Math.max(...today.map(r => r.rpe || 0));
+    return `<section class="rpe-card done" style="--rc:${RPE_C[mx]}">
+      <div class="rpe-head"><span class="eyebrow">Mon RPE du jour</span>${st}</div>
+      <div class="rpe-sum"><div class="rpe-ring" style="--p:${mx * 10}"><b>${mx}</b><small>${esc(RPE_L[mx])}</small></div>
+        <div><b class="rpe-big">${load ? load : 'Repos'}${load ? '<small> pts</small>' : ''}</b>
+        <p>${today.map(r => r.type === 'repos' ? 'Jour de récupération' : `${esc(RPE_TN[r.type] || 'Séance')} · RPE ${r.rpe} · ${r.min} min`).join('<br>')}</p></div></div>
+      ${rpeWeekBars(L)}
+      <div class="rpe-acts"><button class="btn ghost" data-act="rpe-more">${svg('plus')}Une séance</button><a class="btn ghost" href="#rpe">${svg('stats')}Mon bilan</a></div>
+    </section>`;
+  }
+  const D = rpeDraft('home');
+  return `<section class="rpe-card" style="--rc:${D.v != null ? RPE_C[D.v] : '#7d86a8'}">
+    <div class="rpe-head"><div><span class="eyebrow">Mon RPE du jour</span><h2>Comment était ta séance ?</h2></div>${st}</div>
+    ${rpeForm(D, 'home')}
+    <div class="rpe-acts">${RP.more ? `<button class="btn ghost" data-act="rpe-less">Fermer</button>` : `<button class="btn ghost" data-act="rpe-rest">Jour de repos</button>`}<a class="btn ghost" href="#rpe">${svg('stats')}Mon bilan</a></div>
+  </section>`;
+}
+// Bilan RPE
+const bilanNav = cur => `<nav class="subnav two" aria-label="Bilan">${[['bilan','ball','Matchs'],['rpe','flame','RPE']].map(([k, i, l]) => `<a href="#${k}" ${cur === k ? 'aria-current="page"' : ''}>${svg(i)}${l}</a>`).join('')}</nav>`;
+function acwrGauge(A){
+  const cx = 150, cy = 116, r = 100, ang = v => 180 - Math.min(2, Math.max(0, v)) / 2 * 180, P = (a, rr) => [cx + rr * Math.cos(a * Math.PI / 180), cy - rr * Math.sin(a * Math.PI / 180)].map(n => n.toFixed(1)).join(' ');
+  const arcs = ACWR_Z.map(([a, b, , c]) => `<path stroke="${c}" class="gz${A.v != null && A.v >= a && A.v < b ? ' on' : ''}" d="M${P(ang(a) - .8, r)}A${r} ${r} 0 0 1 ${P(ang(Math.min(b, 2)) + .8, r)}"/>`).join('');
+  const ticks = [0, .8, 1.3, 1.5, 2].map(v => { const [x, y] = P(ang(v), r + 19).split(' '); return `<text class="gt" x="${x}" y="${+y + 4}">${String(v).replace('.', ',')}</text>`; }).join('');
+  const z = A.v != null ? acwrZone(A.v) : null, na = A.v != null ? ang(A.v) : 90;
+  return `<svg class="rpe-gauge" viewBox="0 -8 300 180"><defs><filter id="rpe-glow-g" filterUnits="userSpaceOnUse" x="-20" y="-30" width="340" height="230"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g role="img" aria-label="Équilibre de charge ${A.v != null ? A.v.toFixed(2).replace('.', ',') + ', ' + z[2] : 'bientôt calculé'}">${arcs}${ticks}
+    ${A.v != null ? `<g class="needle" style="--na:${(90 - na).toFixed(1)}deg"><path d="M${cx - 5} ${cy}L${cx} ${cy - r + 16}L${cx + 5} ${cy}Z" fill="${z[3]}"/></g><circle cx="${cx}" cy="${cy}" r="9" fill="var(--ink)" stroke="${z[3]}" stroke-width="3"/>` : ''}
+    <text class="gv" x="${cx}" y="${cy + 52}">${A.v != null ? A.v.toFixed(2).replace('.', ',') : '—'}</text></g></svg>`;
+}
+function rpeDaysChart(L){
+  const t = todayISO(), N = 28, days = Array.from({length:N}, (_, i) => isoAdd(t, i - N + 1));
+  const X = days.map(d => { const x = rpeDayOf(L, d); return {d, x, l:x.reduce((a, r) => a + rpeLoad(r), 0), mx:x.length ? Math.max(...x.map(r => r.rpe || 0)) : null}; });
+  const max = Math.max(100, ...X.map(x => x.l)), step = [100, 200, 250, 500, 1000, 2000].find(s => max / s <= 4) || 2000, top = Math.ceil(max / step) * step;
+  const W = 320, H = 170, X0 = 30, X1 = W - 6, Y0 = 138, HH = 118, bw = (X1 - X0) / N, sel = RP.sel != null && X[RP.sel] ? RP.sel : N - 1, s = X[sel];
+  const grid = []; for(let v = 0; v <= top; v += step) grid.push(`<line class="gl" x1="${X0}" x2="${X1}" y1="${(Y0 - v / top * HH).toFixed(1)}" y2="${(Y0 - v / top * HH).toFixed(1)}"/><text x="${X0 - 5}" y="${(Y0 - v / top * HH + 3).toFixed(1)}" text-anchor="end">${v}</text>`);
+  const bars = X.map((b, i) => { const x = X0 + i * bw, h = b.l ? Math.max(3, b.l / top * HH) : 0, mon = parseISO(b.d).getDay() === 1;
+    return `${mon ? `<line class="wk" x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${Y0 - HH - 6}" y2="${Y0 + 4}"/><text x="${(x + 2).toFixed(1)}" y="${H - 8}">${frDate(parseISO(b.d), {day:'numeric', month:'short'})}</text>` : ''}
+      <g data-act="rpe-bar" data-i="${i}"><rect x="${x.toFixed(1)}" y="${Y0 - HH - 8}" width="${bw.toFixed(1)}" height="${HH + 22}" fill="transparent"/>
+      ${h ? `<path d="M${(x + 1.5).toFixed(1)} ${Y0}V${(Y0 - h + 2).toFixed(1)}q0 -2 2 -2h${(bw - 7).toFixed(1)}q2 0 2 2V${Y0}Z" fill="${RPE_C[b.mx]}"${i === sel ? ' stroke="#fff" stroke-width="1.2"' : ''}/>` : b.x.length ? `<circle cx="${(x + bw / 2).toFixed(1)}" cy="${Y0 - 3}" r="2.4" fill="${RPE_C[0]}"/>` : ''}</g>`; }).join('');
+  return `<svg class="st-evo rpe-days" viewBox="0 0 ${W} ${H}" role="img" aria-label="Charge jour par jour, 28 derniers jours">${grid.join('')}${bars}
+    ${s.l ? `<text class="ev" x="${Math.min(X1 - 4, Math.max(X0 + 4, X0 + sel * bw + bw / 2)).toFixed(1)}" y="${(Y0 - s.l / top * HH - 6).toFixed(1)}" text-anchor="middle">${s.l}</text>` : ''}</svg>
+    <p class="st-cap"><b>${esc(cap(frDate(parseISO(s.d), {weekday:'long', day:'numeric', month:'long'})))}</b> · ${s.x.length ? s.x.map(r => r.type === 'repos' ? 'repos' : `${esc(RPE_TN[r.type] || 'séance')} RPE ${r.rpe} × ${r.min} min`).join(' + ') + (s.l ? ` = <b>${s.l} pts</b>` : '') : 'rien de noté ce jour-là'}</p>`;
+}
+function vRpe(){
+  const L = rpeAll(), t = todayISO(), A = rpeAcwr(L), W7 = rpeWin(L, t, 7), Wp = rpeWin(L, isoAdd(t, -7), 7), streak = rpeStreak(L);
+  const last7 = L.filter(r => r.d > isoAdd(t, -7) && r.type !== 'repos'), mins = last7.reduce((a, r) => a + (r.min || 0), 0), avg = mins ? last7.reduce((a, r) => a + rpeLoad(r), 0) / mins : null;
+  const delta = Wp.sum ? Math.round(100 * (W7.sum - Wp.sum) / Wp.sum) : null, z = A && A.v != null ? acwrZone(A.v) : null, mt = monoTxt(W7.mono);
+  const weeks = Array.from({length:8}, (_, i) => monday(isoAdd(t, -7 * (7 - i)))).map(m => { const end = isoAdd(m, 6) > t ? t : isoAdd(m, 6), w = rpeWin(L, isoAdd(m, 6), 7); return {m, end, ...w, cur:end === t}; });
+  const wmax = Math.max(1, ...weeks.map(w => w.sum));
+  const L28 = L.filter(r => r.d > isoAdd(t, -28)), byT = RPE_T.map(([k, l, i]) => ({k, l, i, n:L28.filter(r => r.type === k).reduce((a, r) => a + rpeLoad(r), 0)})).filter(x => x.n).sort((a, b) => b.n - a.n), tmax = Math.max(1, ...byT.map(x => x.n));
+  const hist = [...new Set(L.map(r => r.d))].sort().reverse().slice(0, 21);
+  return `${bilanNav('rpe')}
+  ${L.length ? `
+  <section class="rpe-hero${RP.anim ? ' anim' : ''}" style="--zc:${z ? z[3] : '#5b95ff'}">
+    <div class="rpe-hud"><span>Cette semaine<b>${W7.sum.toLocaleString('fr-FR')}<small> pts</small></b>${delta != null ? `<em class="${delta > 15 ? 'up' : ''}">${delta > 0 ? '+' : ''}${delta} % sur 7 jours</em>` : ''}</span><span>Série<b>${streak}<small> j</small></b><em>${svg('flame')}jours notés</em></span></div>
+    ${acwrGauge(A || {v:null})}
+    <div class="rpe-zone">${z ? `<b style="color:${z[3]}">${z[2]}</b><span>${z[4]}</span>` : `<b>Équilibre de charge</b><span>Disponible après 3 semaines de suivi${A && A.left ? ` : encore ${muPlural(A.left, 'jour')}` : ''}. Continue à noter chaque jour.</span>`}</div>
+  </section>
+  <section><div class="st-tiles">
+    <div class="st-tile"><small>RPE moyen · 7 j</small><b style="color:${avg != null ? RPE_C[Math.round(avg)] : 'inherit'}">${avg != null ? avg.toFixed(1).replace('.', ',') : '—'}</b><span>${avg != null ? RPE_L[Math.round(avg)] : ''}</span></div>
+    <div class="st-tile"><small>Temps · 7 j</small><b>${Math.floor(mins / 60)} h ${String(mins % 60).padStart(2, '0')}</b><span>${muPlural(last7.length, 'séance')}</span></div>
+    <div class="st-tile"><small>Monotonie</small><b>${W7.mono != null ? W7.mono.toFixed(1).replace('.', ',') : '—'}</b><span style="color:${mt[1]}">${mt[0]}</span></div>
+    <div class="st-tile"><small>Contrainte</small><b>${W7.mono != null ? Math.round(W7.sum * W7.mono).toLocaleString('fr-FR') : '—'}</b><span>charge × monotonie</span></div>
+  </div>${mt[2] ? `<p class="small muted" style="margin-top:8px">${mt[2]}</p>` : ''}</section>
+  <section><div class="h-sec"><h2>28 derniers jours</h2><span class="eyebrow">Charge par jour</span></div>${rpeDaysChart(L)}
+    <div class="rpe-scale">${RPE_C.map((c, i) => `<i style="background:${c}" title="${i} · ${RPE_L[i]}"></i>`).join('')}</div><div class="rpe-scale-l"><span>0 repos</span><span>5 difficile</span><span>10 maximal</span></div></section>
+  <section><div class="h-sec"><h2>Semaine par semaine</h2><span class="eyebrow">8 semaines</span></div>
+    <div class="rpe-weeks">${weeks.map((w, i) => `<button class="${w.cur ? 'cur' : ''}${RP.wsel === i ? ' on' : ''}" data-act="rpe-wk" data-i="${i}"><i style="height:${w.sum ? Math.max(4, 96 * w.sum / wmax) : 0}px"></i><b>${w.sum ? (w.sum >= 1000 ? (w.sum / 1000).toFixed(1).replace('.', ',') + 'k' : w.sum) : ''}</b><small>${frDate(parseISO(w.m), {day:'numeric', month:'short'})}</small></button>`).join('')}</div>
+    ${(() => { const w = weeks[RP.wsel ?? 7], m = monoTxt(w.mono); return `<p class="st-cap">Semaine du <b>${esc(frDate(parseISO(w.m), {day:'numeric', month:'long'}))}</b>${w.cur ? ' (en cours)' : ''} : <b>${w.sum.toLocaleString('fr-FR')} pts</b> · monotonie ${w.mono != null ? w.mono.toFixed(1).replace('.', ',') : '—'} <span style="color:${m[1]}">${m[0] !== '—' ? '(' + m[0].toLowerCase() + ')' : ''}</span>${w.mono != null ? ` · contrainte ${Math.round(w.sum * w.mono).toLocaleString('fr-FR')}` : ''}</p>`; })()}
+  </section>
+  ${byT.length ? `<section><div class="h-sec"><h2>Répartition</h2><span class="eyebrow">28 jours</span></div><div class="mu-bars">${byT.map(x => `<div class="mu-bar"><span>${svg(x.i)}${x.l}</span><i style="width:${(100 * x.n / tmax).toFixed(1)}%;background:var(--grad,var(--gold))"></i><b>${Math.round(100 * x.n / L28.reduce((a, r) => a + rpeLoad(r), 0))} %</b></div>`).join('')}</div></section>` : ''}
+  <section><div class="h-sec"><h2>Historique</h2><button class="chip" data-act="rpe-add">${svg('plus')}Séance oubliée</button></div>
+    <div class="stack">${hist.map(d => { const x = rpeDayOf(L, d), l = x.reduce((a, r) => a + rpeLoad(r), 0); return `<div class="rpe-day"><div class="rpe-dh"><b>${esc(cap(frDate(parseISO(d), {weekday:'long', day:'numeric', month:'long'})))}</b><span>${l ? l + ' pts' : 'Repos'}</span></div>
+      ${x.map(r => `<button class="rpe-row" data-act="rpe-edit" data-id="${esc(r.id)}"><i style="background:${RPE_C[r.rpe || 0]}">${r.rpe || 0}</i><span><b>${r.type === 'repos' ? 'Jour de récupération' : esc(r.t || RPE_TN[r.type] || 'Séance')}</b><small>${r.type === 'repos' ? 'Repos' : `${esc(RPE_L[r.rpe])} · ${r.min} min${r.src ? ' · programme' : ''}`}</small></span><em>${rpeLoad(r) || ''}</em></button>`).join('')}</div>`; }).join('')}</div>
+  </section>`
+  : `<section class="rpe-card"><div class="rpe-head"><div><span class="eyebrow">Bilan RPE</span><h2>Ton premier RPE</h2></div></div><p class="muted">Note l’effort de chaque séance sur l’accueil, chaque jour : ici apparaîtront ta charge, ta série de jours, l’équilibre de charge et ta progression semaine après semaine.</p><a class="btn block" href="#accueil" style="margin-top:12px">${svg('home')}Noter mon RPE du jour</a></section>`}
+  <section><details class="fiche"><summary><i>?</i><b>Comprendre mon RPE</b><span>La méthode</span></summary><div>
+    <p class="small">Le <b>RPE de séance</b> (méthode de Foster) est l’outil de référence du sport de haut niveau. Environ 30 minutes après la séance, tu notes l’effort de toute la séance de 0 à 10.</p>
+    <div class="rpe-legend">${RPE_C.map((c, i) => `<div><i style="background:${c}">${i}</i><b>${RPE_L[i]}</b><span>${RPE_H[i]}</span></div>`).join('')}</div>
+    <p class="small"><b>Charge</b> = RPE × durée en minutes (60 min à RPE 7 = 420 points).<br><b>Monotonie</b> = charge moyenne par jour ÷ écart entre les jours, sur 7 jours. Au-dessus de 2, les journées se ressemblent trop : alterne jours durs et jours légers.<br><b>Contrainte</b> = charge de la semaine × monotonie.<br><b>Équilibre de charge</b> = charge des 7 derniers jours ÷ moyenne des 4 dernières semaines. Entre 0,8 et 1,3 : zone idéale. Au-dessus de 1,5 : la charge monte trop vite, priorité à la récupération.</p>
+    <p class="small muted">Les jours sans note comptent comme du repos. L’effort donné en validant une séance du programme est repris automatiquement.</p>
+  </div></details></section>`;
+}
+function shRpe(){
+  const D = RP.edit; if(!D) return '<div class="empty">Séance introuvable.</div>';
+  return `<section class="stack"><div><span class="eyebrow gold">${D.id ? 'Modifier' : 'Ajouter'}</span><h2 class="lib-t">${D.t ? esc(D.t) : 'Ma séance'}</h2></div>
+    ${rpeForm(D, 'edit')}
+    ${D.id || D.src ? `<button class="btn ghost block" data-act="rpe-del">${svg('trash')}Supprimer</button>` : ''}</section>`;
+}
+// Le cadran se règle au doigt : on repeint directement, sans tout redessiner, pour suivre le doigt sans à-coup.
+function rpePaint(svg, v){
+  const f = svg.closest('.rpe-form'), D = rpeDraft(svg.dataset.rpeDial); if(!f || !D) return;
+  f.style.setProperty('--rc', RPE_C[v]); f.closest('.rpe-card')?.style.setProperty('--rc', RPE_C[v]);
+  svg.querySelectorAll('.rseg').forEach(p => p.classList.toggle('on', +p.dataset.v <= v));
+  const k = svg.querySelector('.rknob'), [x, y] = rpeXY(rpeAng(v));
+  k.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`); k.style.opacity = 1;
+  svg.querySelector('.rnum').textContent = v; svg.querySelector('.rlab').textContent = RPE_L[v];
+  svg.setAttribute('aria-valuenow', v); svg.setAttribute('aria-valuetext', `${v}, ${RPE_L[v]}`);
+  f.querySelector('.rpe-hint').textContent = RPE_H[v]; f.querySelector('.rpe-calc').innerHTML = rpeCalc(D);
+  const b = f.querySelector('.rpe-go'); if(b) b.disabled = false;
+}
+function rpeSet(svg, v){ const D = rpeDraft(svg.dataset.rpeDial); if(!D || D.v === v) return; D.v = v; buzz(6); rpePaint(svg, v); }
+function rpeFromPoint(svg, cx, cy){
+  const pt = svg.createSVGPoint(); pt.x = cx; pt.y = cy;
+  const q = pt.matrixTransform(svg.getScreenCTM().inverse());
+  let a = Math.atan2(RD.cy - q.y, q.x - RD.cx) * 180 / Math.PI; if(a < -90) a += 360;
+  return Math.max(0, Math.min(10, Math.floor((RD.a0 - a) / (RD.span / 11))));
+}
+let rpeDrag = null;
+document.addEventListener('pointerdown', e => {
+  const svg = e.target.closest && e.target.closest('svg[data-rpe-dial]'); if(!svg) return;
+  e.preventDefault(); rpeDrag = svg; try{ svg.setPointerCapture(e.pointerId); }catch{}
+  rpeSet(svg, rpeFromPoint(svg, e.clientX, e.clientY));
+});
+document.addEventListener('pointermove', e => { if(rpeDrag && rpeDrag.isConnected) rpeSet(rpeDrag, rpeFromPoint(rpeDrag, e.clientX, e.clientY)); });
+const rpeEnd = () => { if(rpeDrag){ rpeDrag = null; rerender(); } };
+document.addEventListener('pointerup', rpeEnd); document.addEventListener('pointercancel', rpeEnd);
+document.addEventListener('keydown', e => {
+  const svg = e.target.closest && e.target.closest('svg[data-rpe-dial]'); if(!svg) return;
+  const d = {ArrowRight:1, ArrowUp:1, ArrowLeft:-1, ArrowDown:-1}[e.key]; if(!d) return;
+  e.preventDefault(); const D = rpeDraft(svg.dataset.rpeDial); rpeSet(svg, Math.max(0, Math.min(10, (D.v ?? 4) + d)));
+});
 
 /* ---------- Matchs & bilan ---------- */
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
@@ -1656,6 +2699,7 @@ function vBilan(){
   const v = ms.filter(m => { const s = scoreOf(m); return s && !m.note && s.us > s.them; }).length;
   const l = ms.filter(m => { const s = scoreOf(m); return s && (m.note || s.us < s.them); }).length;
   return `
+  ${bilanNav('bilan')}
   ${matchCard(nm)}
   <section>
     <div class="h-sec"><h2>Mes matchs</h2><span class="eyebrow">${v} V · ${l} D</span></div>
@@ -2997,7 +4041,7 @@ function closeSheet(){
   if(SH && sheetTid()) markSeen(sheetTid());
   if(SH && SH.type === 'stlive'){ ST.pend = null; ST.serie = null; setTimeout(rerender, 0); }
   SH = null; $('#sheet').hidden = true; if($('#moment').hidden) document.body.classList.remove('locked');
-  motesKick();
+  motesKick(); if(S.tab === 'muscu') mu3dKick();
 }
 function sheetTid(){
   if(!SH) return null;
@@ -3027,6 +4071,9 @@ function renderSheet(){
   else if(SH.type === 'stnew'){ eb = 'Statistique · nouveau match'; html = shStNew(); }
   else if(SH.type === 'stlive'){ eb = 'Statistique · séance en cours'; html = shStLive(); }
   else if(SH.type === 'stsess'){ eb = 'Statistique'; html = shStSess(); }
+  else if(SH.type === 'mu'){ eb = 'Musculation'; html = shMu(); }
+  else if(SH.type === 'muday'){ eb = 'Musculation'; html = shMuDay(); }
+  else if(SH.type === 'rpe'){ eb = 'RPE de séance'; html = shRpe(); }
   $('#sh-eyebrow').textContent = eb;
   patch($('#sh-main'), html);
   renderSheetMsgs();
@@ -3057,6 +4104,7 @@ function shSession(sid, w){
   if(s.chrono) tools.push(`<button class="btn" data-act="tm-start" data-k="${s.chrono}">${svg('chrono')}Lancer le chrono</button>`);
   if(s.tools?.includes('lf')) tools.push(`<a class="btn ghost" href="#adresse" data-act="close">${svg('target')}Noter mes LF</a>`);
   if(s.tools?.includes('tp')) tools.push(`<a class="btn ghost" href="#adresse" data-act="close">${svg('target')}Noter mes 3 pts</a>`);
+  if(MU_CIRC[sid]) tools.push(`<button class="btn ghost" data-act="mu-zone" data-z="${sid}">${svg('muscle')}Noter mes charges</button>`);
   return `
   <div class="sh-title"><span class="tag ${s.tag[1]}">${s.tag[0]}</span><h2>${esc(s.title)}</h2><p>${esc(s.dur)} · Semaine ${W.n}, ${W.name}</p></div>
   ${wk}
@@ -3092,7 +4140,7 @@ function validHTML(sid, w, p){
   }
   const v = S.val;
   return `<div class="h-sec" style="margin:0"><h2>Valider la séance</h2></div>
-    <div><label>Effort ressenti (1 = facile, 10 = maximal)</label><div class="pad" style="grid-template-columns:repeat(5,1fr)">${[1,2,3,4,5,6,7,8,9,10].map(n => `<button data-act="val-rpe" data-n="${n}" aria-pressed="${v.rpe===n}">${n}</button>`).join('')}</div></div>
+    <div><label>Effort ressenti (1 = facile, 10 = maximal)</label><div class="pad" style="grid-template-columns:repeat(5,1fr)">${[1,2,3,4,5,6,7,8,9,10].map(n => `<button data-act="val-rpe" data-n="${n}" aria-pressed="${v.rpe===n}" style="--rc:${RPE_C[n]}">${n}</button>`).join('')}</div>${v.rpe ? `<p class="small" style="margin-top:8px"><b style="color:${RPE_C[v.rpe]}">${RPE_L[v.rpe]}</b> · ${RPE_H[v.rpe]} Cet effort rejoint ton bilan RPE.</p>` : ''}</div>
     <div><label>Sensations</label><div class="chips" style="flex-wrap:wrap">${FEELS.map(([k,l]) => `<button class="chip ${v.feel===k?'on':''}" data-act="val-feel" data-k="${k}">${l}</button>`).join('')}</div></div>
     <div><label for="val-note">Un mot sur la séance (facultatif)</label><textarea id="val-note" rows="2" maxlength="600" data-draft="val-note" placeholder="Ce qui a marché, ce qui a été dur…">${esc(S.drafts['val-note']||'')}</textarea></div>
     <button class="btn block" data-act="val-save">${svg('check')}C’est fait</button>`;
@@ -3263,6 +4311,7 @@ function motesKick(){
   if(!MOTES.raf && !document.hidden && !SH){ MOTES.last = 0; MOTES.raf = requestAnimationFrame(motesLoop); }
 }
 document.addEventListener('visibilitychange', motesKick);
+document.addEventListener('visibilitychange', () => { if(S.tab === 'muscu') mu3dKick(); });
 addEventListener('resize', () => { if(CALM.matches) motesDraw(0); });
 
 // Éclats : étincelles depuis un bouton, pluie de lumière ou confettis or et bleu.
@@ -3606,6 +4655,95 @@ const ACT = {
     const id = el.dataset.id, prev = S.stats[id], nx = {...S.stats}; delete nx[id]; S.stats = nx; closeSheet(); rerender();
     try{ await Store.del('stats', id); toast('Séance supprimée.'); }catch(e){ S.stats = {...S.stats, [id]:prev}; rerender(); writeFail(e); }
   },
+  // RPE de séance
+  'rpe-min': el => { const D = rpeDraft(el.dataset.k); if(!D) return; D.min = el.dataset.m ? +el.dataset.m : Math.max(5, Math.min(300, D.min + +el.dataset.d)); el.dataset.k === 'edit' ? renderSheet() : rerender(); },
+  'rpe-type': el => { const D = rpeDraft(el.dataset.k); if(!D) return; D.type = el.dataset.t; if(D.type === 'match' && D.min === 60) D.min = 90; el.dataset.k === 'edit' ? renderSheet() : rerender(); },
+  'rpe-day': el => { rpeDraft('home').d = el.dataset.d; rerender(); },
+  'rpe-save': el => {
+    const k = el.dataset.k, D = rpeDraft(k); if(!D || D.v == null || !guard()) return;
+    const id = D.id || (D.src ? 'p' + D.src : 'r' + Store.newId());
+    const doc = {d:/^\d{4}-\d{2}-\d{2}$/.test(D.d || '') ? D.d : todayISO(), rpe:D.v, min:D.v ? D.min : 0, type:D.v ? (D.type === 'repos' ? 'club' : D.type) : 'repos', at:D.at || Date.now(), by:meId(), ...(D.src ? {src:D.src} : {}), ...(D.t ? {t:D.t} : {})};
+    const r = el.getBoundingClientRect();
+    S.rpe = {...S.rpe, [id]:doc}; save('rpe', id, doc);
+    if(k === 'edit'){ RP.edit = null; closeSheet(); } else { RP.home = null; RP.more = false; }
+    rerender(); audioInit(); chime([784, 988, 1175, 1568]); burst(r.left + r.width / 2, r.top, {n:50});
+    const n = rpeStreak(rpeAll());
+    toast(doc.rpe ? `RPE noté : ${rpeLoad(doc)} points de charge.${n > 1 ? ` ${n} jours d’affilée !` : ''}` : 'Jour de récupération noté.');
+  },
+  'rpe-rest': () => {
+    if(!guard()) return;
+    const D = rpeDraft('home'), id = 'r' + Store.newId(), doc = {d:D.d, rpe:0, min:0, type:'repos', at:Date.now(), by:meId()};
+    S.rpe = {...S.rpe, [id]:doc}; save('rpe', id, doc); RP.home = null; rerender();
+    toast('Jour de récupération noté : le corps se reconstruit.');
+  },
+  'rpe-more': () => { RP.more = true; RP.home = rpeNew(); rerender(); },
+  'rpe-less': () => { RP.more = false; RP.home = null; rerender(); },
+  'rpe-edit': el => {
+    const r = rpeAll().find(x => x.id === el.dataset.id); if(!r) return;
+    RP.edit = {id:r.virt ? null : r.id, src:r.src || null, v:r.rpe || 0, min:r.min || 60, type:r.type, d:r.d, at:r.at, t:r.t || null};
+    openSheet({type:'rpe'});
+  },
+  'rpe-add': () => { RP.edit = rpeNew({d:todayISO()}); openSheet({type:'rpe'}); },
+  'rpe-del': async el => {
+    const D = RP.edit; if(!D || !(D.id || D.src) || !guard()) return;
+    if(el.dataset.confirm !== '1'){ el.dataset.confirm = '1'; el.style.color = 'var(--warn)'; toast('Touche encore pour supprimer.'); setTimeout(() => { el.dataset.confirm = ''; el.style.color = ''; }, 3000); return; }
+    RP.edit = null; closeSheet();
+    if(D.src){ const id = 'p' + D.src, doc = {src:D.src, del:true, d:D.d, at:Date.now(), by:meId()}; S.rpe = {...S.rpe, [id]:doc}; save('rpe', id, doc); rerender(); toast('Supprimé.'); return; }
+    const prev = S.rpe[D.id], nx = {...S.rpe}; delete nx[D.id]; S.rpe = nx; rerender();
+    try{ await Store.del('rpe', D.id); toast('Supprimé.'); }catch(e){ S.rpe = {...S.rpe, [D.id]:prev}; rerender(); writeFail(e); }
+  },
+  'rpe-bar': el => { RP.sel = +el.dataset.i; rerender(); },
+  'rpe-wk': el => { RP.wsel = +el.dataset.i; rerender(); },
+  // Musculation
+  'mu-zone': el => {
+    const z = el.dataset.z; MU.draft = null;
+    if(!MU_CIRC[z]){ M3.sel = MU_ZK.indexOf(z); mu3dFace(MU_BACK.includes(z) ? true : MU_FRONT.includes(z) ? false : null); rerender(); }
+    openSheet({type:'mu', z});
+  },
+  'mu-ex': el => { MU.draft = muNewDraft(el.dataset.id); SH.ex = el.dataset.id; renderSheet(); $('#sheet').scrollTo({top:0}); },
+  'mu-back': () => {
+    MU.draft = null;
+    if(SH.from === 'day') openSheet({type:'muday', d:SH.day});
+    else { SH.ex = null; renderSheet(); $('#sheet').scrollTo({top:0}); }
+  },
+  'mu-st': el => {
+    const D = MU.draft, s = D && D.sets[+el.dataset.i]; if(!s) return;
+    const k = el.dataset.k, sec = muEx(D.ex).u === 's', step = k === 'kg' ? (s.kg >= 20 ? 2.5 : 1) : sec ? 5 : 1;
+    s[k] = Math.max(0, Math.min(k === 'kg' ? 400 : 999, Math.round((s[k] + step * +el.dataset.d) * 4) / 4)); buzz(6); renderSheet();
+  },
+  'mu-addset': () => { const D = MU.draft; if(!D || D.sets.length >= 12) return; const l = D.sets[D.sets.length - 1]; D.sets.push({r:l ? l.r : 10, kg:l ? l.kg : 0}); renderSheet(); },
+  'mu-rm': el => { const D = MU.draft; if(!D || D.sets.length < 2) return; D.sets.splice(+el.dataset.i, 1); renderSheet(); },
+  'mu-save': el => {
+    const D = MU.draft; if(!D || !guard()) return;
+    const sets = D.sets.filter(s => s.r > 0).map(s => ({r:s.r, kg:s.kg || 0}));
+    if(!sets.length){ toast('Note au moins une série.'); return; }
+    const e = muEx(D.ex), id = D.id || 'm' + Store.newId(), doc = {ex:D.ex, d:/^\d{4}-\d{2}-\d{2}$/.test(D.d || '') ? D.d : todayISO(), at:D.at || Date.now(), sets, by:meId()};
+    const prev = muRecords(muList().filter(m => m.ex === D.ex && m.id !== id)).best[D.ex], rec = prev && muBetter(muVal(doc), prev.v);
+    const r = el.getBoundingClientRect();
+    S.muscu = {...S.muscu, [id]:doc}; save('muscu', id, doc);
+    if(muList().filter(m => m.ex === D.ex).length > 1) MU.ex = D.ex;
+    MU.pt = null; MU.draft = null;
+    if(SH.from === 'day') openSheet({type:'muday', d:doc.d}); else { SH.ex = null; renderSheet(); $('#sheet').scrollTo({top:0}); }
+    rerender();
+    if(rec){ audioInit(); chime(); burst(r.left + r.width / 2, r.top, {n:60}); toast(`Nouveau record : ${muTopTxt(doc, e)} · ${e.n} !`); }
+    else { buzz(15); toast(`Enregistré : ${e.n}, ${muPlural(sets.length, 'série')}.`); }
+  },
+  'mu-del': async el => {
+    const D = MU.draft; if(!D || !D.id || !guard()) return;
+    if(el.dataset.confirm !== '1'){ el.dataset.confirm = '1'; el.style.color = 'var(--warn)'; toast('Touche encore pour supprimer.'); setTimeout(() => { el.dataset.confirm = ''; el.style.color = ''; }, 3000); return; }
+    const id = D.id, prev = S.muscu[id], nx = {...S.muscu}; delete nx[id]; S.muscu = nx; MU.draft = null;
+    if(SH.from === 'day') openSheet({type:'muday', d:SH.day}); else closeSheet();
+    rerender();
+    try{ await Store.del('muscu', id); toast('Supprimé.'); }catch(e){ S.muscu = {...S.muscu, [id]:prev}; rerender(); writeFail(e); }
+  },
+  'mu-edit': el => { const m = S.muscu[el.dataset.id]; if(!m) return; MU.draft = {id:el.dataset.id, ex:m.ex, d:m.d, at:m.at, sets:m.sets.map(s => ({r:s.r, kg:s.kg}))}; openSheet({type:'mu', ex:m.ex, from:'day', day:m.d}); },
+  'mu-day': el => openSheet({type:'muday', d:el.dataset.d}),
+  'mu-per': el => { MU.per = el.dataset.v; rerender(); },
+  'mu-prog': el => { MU.ex = el.dataset.id; MU.pt = null; rerender(); requestAnimationFrame(() => $('#mu-prog')?.scrollIntoView({behavior:CALM.matches ? 'auto' : 'smooth', block:'start'})); },
+  'mu-pt': el => { MU.pt = +el.dataset.i; rerender(); },
+  'mu-allpr': () => { MU.allPr = !MU.allPr; rerender(); },
+  'mu3d-view': el => mu3dFace(el.dataset.v === '1'),
+  'mu3d-zoom': el => { if(M3.cv) mu3dZoom(M3.zoom * (+el.dataset.d > 0 ? 1.45 : 1 / 1.45)); },
   // Ma bibliothèque
   'lib-txt': el => openSheet({type:'lire', id:el.dataset.id}),
   'lib-img': el => openSheet({type:'bimg', i:+el.dataset.i}),
@@ -3749,6 +4887,14 @@ const ACT = {
   },
 };
 const SUBMIT = {
+  'mu-add': () => {
+    if(!guard() || !SH || !SH.z) return;
+    const n = (S.drafts['mu-new'] || $('#mu-new')?.value || '').trim().slice(0, 50);
+    if(!n){ toast('Écris le nom de l’exercice.'); return; }
+    const id = 'x' + Store.newId(), d = {n, z:SH.z, at:Date.now()};
+    S.exos = {...S.exos, [id]:d}; save('exos', id, d); S.drafts['mu-new'] = '';
+    MU.draft = muNewDraft(id); SH.ex = id; renderSheet(); $('#sheet').scrollTo({top:0});
+  },
   'coach-send': () => coachSend(S.drafts.coach || $('#coach-in')?.value),
   'vid-save': async () => {
     if(!guard()) return;
@@ -3798,10 +4944,14 @@ document.addEventListener('input', e => {
   const k = e.target.dataset && e.target.dataset.draft;
   if(k) S.drafts[k] = e.target.value;
   if(k === 'ph') S.phWarn = false;
+  if(e.target.dataset && e.target.dataset.mu) muInput(e.target, false);
 });
 document.addEventListener('change', e => {
   const t = e.target, k = t.dataset && t.dataset.change;
   if(t.dataset && t.dataset.draft) S.drafts[t.dataset.draft] = t.value;
+  if(t.dataset && t.dataset.mu) muInput(t, true);
+  if(t.dataset && t.dataset.rpeDate !== undefined && RP.edit && /^\d{4}-\d{2}-\d{2}$/.test(t.value)) RP.edit.d = t.value;
+  if(t.dataset && t.dataset.muDate !== undefined && MU.draft && /^\d{4}-\d{2}-\d{2}$/.test(t.value)) MU.draft.d = t.value;
   if(t.dataset && t.dataset.mf && canWrite()) commitMatch(t.dataset.mf, buildMatch(t.dataset.mf), 800);
   if(k === 'start' && /^\d{4}-\d{2}-\d{2}$/.test(t.value)) setSetting({start:t.value});
   if(k === 'name') setSetting({name:t.value.trim().slice(0,30) || 'Alice'});
@@ -3812,11 +4962,11 @@ document.addEventListener('change', e => {
 });
 
 /* ================= Navigation ================= */
-const ROUTES = ['accueil','programme','routine','bilan','chrono','videos','mental','victoires','pensees','adresse','profil','coach','phrases','biblio','stats'];
+const ROUTES = ['accueil','programme','routine','bilan','chrono','videos','mental','victoires','pensees','adresse','profil','coach','phrases','biblio','stats','muscu','rpe'];
 function route(){
   const h = location.hash.replace('#','');
   const nt = ROUTES.includes(h) ? h : 'accueil';
-  if(nt !== S.tab){ S.tab = nt; S.motEdit = false; S.rtEdit = null; window.scrollTo(0,0); if(nt === 'coach' && CO.msgs.length) coachScroll(); }
+  if(nt !== S.tab){ if(nt === 'muscu') MU.intro = true; if(nt === 'rpe'){ RP.anim = true; RP.sel = null; RP.wsel = null; } S.tab = nt; S.motEdit = false; S.rtEdit = null; window.scrollTo(0,0); if(nt === 'coach' && CO.msgs.length) coachScroll(); }
   if(SH && SH.type !== 'zoom') closeSheet();
   rerender();
 }
@@ -3873,7 +5023,7 @@ async function boot(){
   S.cwKnown = cw !== null;
   Store.db = db;
   S.mode = cw === false ? 'readonly' : 'shared';
-  S.progress = {}; S.checkins = {}; S.shots = {}; S.threads = {}; S.videos = {}; S.msgs = {}; S.mots = {}; S.routines = {}; S.objectifs = {}; S.phrases = {}; S.stats = {};
+  S.progress = {}; S.checkins = {}; S.shots = {}; S.threads = {}; S.videos = {}; S.msgs = {}; S.mots = {}; S.routines = {}; S.objectifs = {}; S.phrases = {}; S.stats = {}; S.muscu = {}; S.exos = {}; S.rpe = {};
   subscribeAll();
   if(SH) openSheet(SH);
   rerender();

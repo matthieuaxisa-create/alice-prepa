@@ -47,7 +47,7 @@ Modifier l'appli
 - Remettre en ligne : dans le dépôt GitHub, ouvrir le fichier, crayon « Edit », ou
   « Add file » > « Upload files » pour écraser avec la nouvelle version, puis « Commit changes ».
 - Si Alice ne voit pas le changement : fermer et rouvrir l'appli (parfois deux fois).
-  Pour forcer, changer le numéro dans sw.js : const V='alice-v20' -> 'alice-v21'.
+  Pour forcer, changer le numéro dans sw.js : const V='alice-v21' -> 'alice-v22'.
 
 Mes phrases (04/11/2026)
 - En haut de l'accueil : un livre de 1 à 5 phrases positives, sans négation. Toucher la page la fait tourner.
@@ -81,3 +81,20 @@ Coach mental (IA)
 Limites hors claude.ai
 - Les conseils générés par Claude et la base partagée ne fonctionnent pas.
 - Les données d'Alice restent sur son téléphone.
+
+Musculation (05/11/2026)
+- Onglet du bas « Programme » (ex-Intersaison), avec trois boutons en haut : Intersaison · Musculation · Chrono.
+- Musculation : un corps en 3D façon hologramme. On le fait tourner au doigt, on zoome en pinçant (ou + / −),
+  et toucher un muscle ouvre ses exercices : 66 exercices sur 10 parties du corps, plus les 3 circuits muscu
+  du programme (lundi, mardi, jeudi).
+- Pour chaque exercice : les séries (répétitions, ou secondes pour le gainage) et la charge en kg.
+  Records (éclat de lumière à chaque record battu), bilan, courbe de progression et historique.
+- Les muscles travaillés ces 7 derniers jours s'allument en orange sur le corps.
+- Sur un téléphone sans 3D, le corps s'affiche à plat et se touche de la même façon.
+
+RPE du jour (05/11/2026)
+- Accueil, sous « Mes phrases » : le RPE de séance (méthode de Foster). Un cadran de 0 (repos) à 10 (maximal),
+  la durée et le type de séance. Charge = RPE × minutes (60 min à RPE 7 = 420 points).
+- Onglet Bilan > RPE : charge de la semaine, équilibre de charge (zone idéale de 0,8 à 1,3, après 3 semaines),
+  monotonie et contrainte, les 28 derniers jours, les semaines, la répartition et l'historique.
+- L'effort donné en validant une séance du programme est repris automatiquement.
