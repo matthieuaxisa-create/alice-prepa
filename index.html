@@ -515,6 +515,22 @@ p{margin:0}
   background:radial-gradient(110% 60% at 50% 0%,color-mix(in srgb,var(--rc,#7d86a8) 24%,transparent),transparent 72%),linear-gradient(180deg,#120e33,#0c0a26);
   border:1px solid rgb(255 255 255 / .1);border-color:color-mix(in srgb,var(--rc,#7d86a8) 45%,transparent);box-shadow:0 12px 32px rgb(0 0 0 / .35);transition:border-color .25s}
 .rpe-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.rpe-tog{display:flex;align-items:center;gap:12px;width:100%;margin:-4px 0;padding:2px 0;text-align:left;color:inherit}
+.rpe-mini{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;font:900 22px/1 var(--f-display);color:var(--rc);background:radial-gradient(circle,#0e0b2b 58%,transparent 60%),conic-gradient(var(--rc) calc(var(--p,0) * 1%),rgb(255 255 255 / .1) 0);box-shadow:0 0 18px -6px var(--rc)}
+.rpe-tog-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.rpe-tog-t .eyebrow{color:#9feee0}
+.rpe-tog-t b{font:800 22px/1.05 var(--f-display);text-transform:uppercase;color:var(--chalk)}
+.rpe-todo{flex:none;padding:6px 10px;border-radius:999px;background:var(--gold-soft);color:var(--gold);font:700 12px/1 var(--f-num);letter-spacing:.08em;text-transform:uppercase}
+.rpe-tog .rpe-streak{flex:none;padding:6px 8px}
+.rpe-chev{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgb(255 255 255 / .06);border:1px solid rgb(255 255 255 / .1)}
+.rpe-chev svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transform:rotate(90deg);transition:transform .3s}
+.rpe-tog[aria-expanded="true"] .rpe-chev svg{transform:rotate(-90deg)}
+.rpe-card.fold{padding-block:14px}
+.rpe-card.opening > :not(.rpe-tog){animation:rpe-unfold .45s cubic-bezier(.2,.8,.3,1) both}
+.rpe-card.opening > :nth-child(3){animation-delay:.05s}
+.rpe-card.opening > :nth-child(n+4){animation-delay:.1s}
+@keyframes rpe-unfold{from{opacity:0;transform:translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){.rpe-card.opening > *{animation:none}}
 .rpe-head .eyebrow{color:#9feee0}
 .rpe-head h2{margin-top:4px;font:800 26px/1 var(--f-display);text-transform:uppercase}
 .rpe-streak{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;background:rgb(255 138 61 / .16);color:#ffb26b;font:700 12.5px/1 var(--f-num);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
@@ -966,6 +982,78 @@ body.swell .rays{opacity:1}
 @keyframes i-on{to{opacity:1}}
 @keyframes i-flicker{0%{opacity:0}7%{opacity:.85}11%{opacity:.08}20%{opacity:.7}24%{opacity:.2}30%{opacity:.95}34%{opacity:.5}45%,100%{opacity:1;text-shadow:0 0 34px rgb(244 180 58 / .65)}}
 @keyframes i-out{to{opacity:0;transform:scale(1.04)}}
+
+/* La pensée : une phrase qui arrive comme une notification, sous les projecteurs d'une salle de basket */
+.spots{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;border-radius:inherit}
+.spots::before{content:"";position:absolute;top:9px;right:12px;width:96px;height:5px;border-radius:3px;background:linear-gradient(90deg,transparent,rgb(255 255 255 / .16) 22%,rgb(255 255 255 / .22));box-shadow:0 1px 0 rgb(0 0 0 / .4)}
+.spots .lp{position:absolute;top:6px;width:15px;height:15px;margin-right:-7.5px;border-radius:50%;background:radial-gradient(circle,#fff 0 28%,#ffeec4 42%,rgb(255 214 140 / .85) 58%,rgb(255 200 110 / 0) 72%);box-shadow:0 0 14px 5px rgb(255 222 150 / .55),0 0 42px 16px rgb(255 190 80 / .22);opacity:0;animation:sp-on 1.3s linear .35s forwards}
+.spots .lp:nth-of-type(1){right:24px}
+.spots .lp:nth-of-type(2){right:56px;animation-delay:.55s}
+.spots .lp:nth-of-type(3){right:88px;animation-delay:.75s}
+.spots .bm{position:absolute;top:13px;width:150px;height:460px;margin-right:-75px;transform-origin:50% 0;transform:rotate(var(--a));background:linear-gradient(180deg,rgb(255 238 196 / .62),rgb(255 216 150 / .2) 42%,rgb(255 200 120 / 0) 82%);clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);filter:blur(5px);mix-blend-mode:screen;opacity:0;animation:sp-on 1.3s linear .4s forwards,sp-sway var(--t) ease-in-out 1.8s infinite alternate}
+.spots .bm:nth-of-type(1){right:24px;--a:30deg;--t:7s}
+.spots .bm:nth-of-type(2){right:56px;--a:46deg;--t:9s;animation-delay:.6s,1.8s}
+.spots .bm:nth-of-type(3){right:88px;--a:62deg;--t:8s;animation-delay:.8s,1.8s;height:400px}
+.spots .dust{position:absolute;top:0;right:0;width:80%;height:100%;background-image:radial-gradient(circle,rgb(255 236 190 / .9) 0 1px,transparent 1.6px),radial-gradient(circle,rgb(255 236 190 / .7) 0 .8px,transparent 1.4px),radial-gradient(circle,rgb(255 255 255 / .8) 0 .7px,transparent 1.2px);background-size:46px 52px,71px 63px,33px 41px;background-position:0 0,17px 29px,9px 13px;-webkit-mask-image:linear-gradient(215deg,#000 8%,transparent 62%);mask-image:linear-gradient(215deg,#000 8%,transparent 62%);opacity:0;animation:sp-on 1.2s ease-out 1.2s forwards,sp-dust 16s linear infinite}
+@keyframes sp-on{0%{opacity:0}8%{opacity:.9}13%{opacity:.1}24%{opacity:.75}29%{opacity:.25}38%{opacity:1}44%{opacity:.6}58%,100%{opacity:1}}
+@keyframes sp-sway{from{transform:rotate(calc(var(--a) - 5deg))}to{transform:rotate(calc(var(--a) + 5deg))}}
+@keyframes sp-dust{to{background-position:-46px -104px,-54px -97px,-24px -110px}}
+.ntf-wrap{display:block}
+.ntf{position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:flex-start;gap:9px;width:100%;padding:15px 18px 16px;border-radius:24px;overflow:hidden;text-align:left;color:var(--chalk);background:radial-gradient(110% 80% at 100% 0,rgb(255 206 120 / .17),transparent 58%),linear-gradient(165deg,var(--deck-2),var(--ink) 92%);border:1px solid rgb(255 214 140 / .38);box-shadow:0 16px 38px rgb(0 0 0 / .45),0 0 30px rgb(255 190 80 / .16);animation:ntf-in .75s cubic-bezier(.2,.9,.3,1.15) both,ntf-glow 3.2s ease-in-out 1.6s infinite;transition:transform .15s}
+.ntf:active{transform:scale(.985)}
+.ntf > :not(.spots){position:relative;z-index:1}
+.ntf-app{display:flex;align-items:center;gap:8px;padding-right:104px;font:600 11px/1.2 var(--f-num);letter-spacing:.14em;text-transform:uppercase;color:var(--dust)}
+.ntf-app img,.maj-in > img{width:22px;height:22px;border-radius:6px;flex:none;box-shadow:0 0 0 1px rgb(255 255 255 / .12)}
+.ntf-t{padding-right:96px;font:900 26px/1 var(--f-display);text-transform:uppercase;letter-spacing:.01em;background:var(--grad,linear-gradient(100deg,var(--gold),#ffe7a8));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ntf-p{font:400 25px/1.3 var(--f-hand);color:#fff;text-shadow:0 0 24px rgb(255 200 110 / .5);overflow-wrap:anywhere}
+.ntf-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%}
+.ntf-hint{display:inline-flex;align-items:center;gap:7px;font:700 12px/1.2 var(--f-num);letter-spacing:.12em;text-transform:uppercase;color:var(--teal,var(--gold));animation:ntf-hint 2.4s ease-in-out 1.6s infinite}
+.ntf-hint svg{width:15px;height:15px;fill:currentColor;flex:none}
+.ntf-foot small{font:600 11px/1 var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.ntf.keep{animation:none;box-shadow:0 16px 38px rgb(0 0 0 / .45),0 0 54px rgb(255 206 120 / .55)}
+.ntf.keep .bm{opacity:1;animation:none;filter:blur(4px) brightness(1.7)}
+.ntf.keep .lp{opacity:1;animation:none;box-shadow:0 0 22px 10px rgb(255 230 170 / .8),0 0 70px 26px rgb(255 190 80 / .4)}
+.ntf.hey{animation:ntf-hey .7s ease-in-out 2}
+html.theme-wahou .ntf{border-color:transparent;background:radial-gradient(110% 80% at 100% 0,rgb(255 206 120 / .18),transparent 58%),linear-gradient(165deg,rgb(44 31 92 / .9),rgb(16 11 42 / .92) 92%);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3)}
+html.theme-wahou .ntf::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;padding:1.5px;background:linear-gradient(120deg,#ffd23f,#ff8a3d 40%,#ff3d7f 70%,#3d7bff);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes ntf-in{from{opacity:0;transform:translateY(-18px) scale(.96)}}
+@keyframes ntf-glow{50%{box-shadow:0 16px 38px rgb(0 0 0 / .45),0 0 46px rgb(255 120 140 / .32)}}
+@keyframes ntf-hint{50%{opacity:.55}}
+@keyframes ntf-hey{50%{transform:scale(1.025);box-shadow:0 0 0 3px var(--gold),0 0 50px rgb(255 206 120 / .5)}}
+.ntf-fly{position:fixed;z-index:76;pointer-events:none;padding:12px 16px;border-radius:16px;background:rgb(36 27 77 / .94);border:1px solid rgb(255 214 140 / .6);color:#fff;font:400 19px/1.3 var(--f-hand);text-align:center;box-shadow:0 0 34px rgb(255 200 110 / .55);transform-origin:50% 50%}
+.tab.pop svg{animation:tab-pop .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes tab-pop{40%{transform:scale(1.45);stroke:var(--gold)}}
+/* Mes phrases : celles qui arrivent par « La pensée » sont signées, la nouvelle brille à la première visite */
+.ph-from{display:flex;align-items:center;gap:5px;margin-bottom:4px;font:700 11px/1 var(--f-num);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.ph-from svg{width:13px;height:13px;fill:currentColor}
+.phrow.fresh{animation:ph-fresh 1.1s ease-in-out 3}
+@keyframes ph-fresh{50%{box-shadow:0 0 0 2px var(--gold),0 0 30px rgb(255 206 120 / .45)}}
+.ph-new{display:block;text-decoration:none;color:inherit;padding:12px 14px;border-radius:14px;background:var(--gold-soft);border:1px solid rgb(255 214 140 / .45)}
+.ph-new p{font:400 20px/1.3 var(--f-hand);color:var(--chalk)}
+
+/* Bannière « Appli à jour », comme une notification du téléphone */
+.maj{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;z-index:72;width:min(560px,calc(100% - 20px));transform:translate(-50%,-160%);transition:transform .6s cubic-bezier(.2,1.25,.4,1)}
+.maj.in{transform:translate(-50%,0)}
+.maj.out{transform:translate(-50%,-160%);transition:transform .4s ease-in}
+.maj-in{position:relative;isolation:isolate;display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;width:100%;padding:12px 14px 14px;border-radius:22px;overflow:hidden;text-align:left;color:var(--chalk);background:radial-gradient(90% 120% at 100% 0,rgb(255 206 120 / .16),transparent 60%),rgb(28 20 62 / .88);-webkit-backdrop-filter:blur(20px) saturate(1.4);backdrop-filter:blur(20px) saturate(1.4);border:1px solid rgb(255 255 255 / .14);box-shadow:0 18px 44px rgb(0 0 0 / .55)}
+.maj-in > :not(.spots){position:relative;z-index:1}
+.maj-in > img{width:42px;height:42px;border-radius:11px}
+.maj-txt{display:flex;flex-direction:column;gap:3px;min-width:0;padding-right:40px}
+.maj-txt small{font:600 11px/1.2 var(--f-num);letter-spacing:.12em;text-transform:uppercase;color:var(--dust)}
+.maj-txt b{font:800 17px/1.15 var(--f-body)}
+.maj-txt span{font-size:14.5px;line-height:1.3;color:var(--chalk)}
+.maj-in i.bar{position:absolute;left:0;bottom:0;height:3px;width:100%;transform-origin:0 50%;background:var(--grad,linear-gradient(90deg,var(--gold),#ffe7a8))}
+.maj.in .maj-in i.bar{animation:maj-bar 7s linear forwards}
+@keyframes maj-bar{to{transform:scaleX(0)}}
+.spots.sm .bm{width:110px;height:200px;margin-right:-55px}
+.spots.sm::before{width:64px}
+.spots.sm .lp:nth-of-type(3),.spots.sm .bm:nth-of-type(3){display:none}
+@media (prefers-reduced-motion:reduce){
+  .spots .lp,.spots .bm,.spots .dust{animation:none;opacity:1}
+  .ntf,.ntf-hint,.phrow.fresh,.ntf.hey{animation:none}
+  .maj,.maj.out{transition:none}
+  .maj.in .maj-in i.bar{animation:none;display:none}
+}
 </style>
 
 <div class="glow" aria-hidden="true"></div>
@@ -986,6 +1074,7 @@ body.swell .rays{opacity:1}
   </div>
 </section>
 <div class="toast" id="toast" hidden role="status"></div>
+<div class="maj" id="maj" hidden role="status" aria-live="polite"></div>
 <div class="gate" id="gate" hidden role="dialog" aria-modal="true" aria-label="Accès à l’appli">
   <div class="gate-in" id="gate-code">
     <span class="eyebrow gold">De l’ombre à la lumière</span>
@@ -1282,11 +1371,13 @@ function applyFfbb(doc){
 }
 // Le même relevé est publié à côté de la page (ffbb.json) : lisible aussi sans compte Claude.
 const FFBB_EMBED = {"asOf":"2026-10-30T16:16:29+00:00","source":"https://competitions.ffbb.com/competitions/nfu18-elite-b","matches":{"200000014603050":{"d":"2026-09-12T18:00","sh":62,"sa":58},"200000014603048":{"d":"2026-09-13T13:30","sh":67,"sa":47},"200000014603049":{"d":"2026-09-13T15:30","sh":0,"sa":0},"200000014603060":{"d":"2026-09-19T17:00","sh":80,"sa":57},"200000014603062":{"d":"2026-09-19T18:00","sh":59,"sa":72},"200000014603061":{"d":"2026-09-20T15:30","sh":58,"sa":65},"200000014603072":{"d":"2026-09-26T16:00","sh":67,"sa":77},"200000014603073":{"d":"2026-09-26T18:00","sh":76,"sa":69},"200000014603074":{"d":"2026-09-27T15:30","sh":79,"sa":52},"200000014603084":{"d":"2026-10-03T17:30","sh":56,"sa":75},"200000014603085":{"d":"2026-10-03T18:00","sh":38,"sa":64},"200000014603086":{"d":"2026-10-04T15:30","sh":59,"sa":67},"200000014603097":{"d":"2026-10-10T16:00","sh":75,"sa":62},"200000014603098":{"d":"2026-10-10T17:00","sh":68,"sa":74},"200000014603096":{"d":"2026-10-10T17:00","sh":71,"sa":53},"200000014603109":{"d":"2026-10-18T15:30","sh":70,"sa":73},"200000014603110":{"d":"2026-10-31T17:15","sh":null,"sa":null},"200000014603108":{"d":"2026-11-01T13:30","sh":null,"sa":null},"200000014603122":{"d":"2026-11-07T18:00","sh":null,"sa":null},"200000014603120":{"d":"2026-11-08T15:30","sh":null,"sa":null},"200000014603121":{"d":"2026-11-08T15:30","sh":null,"sa":null},"200000014603132":{"d":"2026-11-14T17:30","sh":null,"sa":null},"200000014603133":{"d":"2026-11-15T15:30","sh":null,"sa":null},"200000014603134":{"d":"2026-11-15T15:30","sh":null,"sa":null},"200000014603146":{"d":"2026-11-28T17:00","sh":null,"sa":null},"200000014603144":{"d":"2026-11-28T18:00","sh":null,"sa":null},"200000014603145":{"d":"2026-11-29T15:30","sh":null,"sa":null},"200000014603156":{"d":"2026-12-06T11:00","sh":null,"sa":null},"200000014603158":{"d":"2026-12-06T15:30","sh":null,"sa":null},"200000014603157":{"d":"2026-12-06T15:30","sh":null,"sa":null}},"standings":[{"t":"LSB","pts":10,"j":6,"v":4,"d":2,"pm":329,"pe":315},{"t":"BEA","pts":9,"j":5,"v":4,"d":1,"pm":346,"pe":305},{"t":"STC","pts":9,"j":5,"v":4,"d":1,"pm":334,"pe":326},{"t":"CRB","pts":8,"j":6,"v":3,"d":2,"pm":364,"pe":315},{"t":"MON","pts":6,"j":5,"v":1,"d":4,"pm":270,"pe":337},{"t":"SGO","pts":5,"j":5,"v":0,"d":5,"pm":307,"pe":352}]};
+// La bannière « Appli à jour » attend les derniers résultats : une victoire de Canet passe avant elle.
+let FFBB_DONE = false;
 async function loadFfbbFile(){
   let ok = false;
   try{ const r = await fetch('ffbb.json', {cache:'no-store'}); if(r.ok){ applyFfbb(await r.json()); ok = true; } }catch{}
   if(!ok) applyFfbb(FFBB_EMBED);
-  rerender(); checkWin();
+  FFBB_DONE = true; rerender(); checkWin();
 }
 function asOfLabel(){
   const a = STANDINGS.asOf;
@@ -1574,7 +1665,7 @@ function renderAll(){
   const V = {accueil:vAccueil, programme:vProgramme, chrono:vChrono, bilan:vBilan, videos:vVideos, mental:vMental, victoires:vVictoires, pensees:vPensees, routine:vRoutine, adresse:vAdresse, profil:vProfil, coach:vCoach, phrases:vPhrases, biblio:vBiblio, stats:vStats, muscu:vMuscu, rpe:vRpe}[S.tab] || vAccueil;
   patch($('#view'), V());
   if(S.tab === 'muscu'){ mu3dMount(MU.intro); MU.intro = false; }
-  RP.anim = false;
+  RP.anim = false; RP.foldAnim = false;
   if(SH) renderSheet();
   const ids = [...Object.values(S.threads).flatMap(t => [t.lastBy, t.createdBy]), ...Object.values(S.videos).map(v => v.by), ...Object.values(S.msgs).flatMap(m => Object.values(m).map(x => x.by))].filter(x => x && x !== 'local');
   resolveNames(ids);
@@ -1594,7 +1685,7 @@ function vTabs(){
   const T = [['accueil','home','Accueil'],['routine','list','Routine'],['bilan','ball','Bilan'],['mental','mental','Mental'],['programme','prog','Programme'],['stats','stats','Statistique'],['videos','video','Vidéos']];
   const un = unreadCount(), lm = lastMatch(), todo = lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5;
   const cur = ['victoires','pensees','coach','phrases','biblio'].includes(S.tab) ? 'mental' : ['chrono','muscu'].includes(S.tab) ? 'programme' : S.tab === 'rpe' ? 'bilan' : S.tab;
-  return T.map(([k,i,l]) => `<a class="tab" href="#${k}" ${cur===k?'aria-current="page"':''}>${svg(i)}<span>${l}</span>${k==='mental'&&un?'<i class="badge" aria-label="Nouveaux messages"></i>':''}${k==='bilan'&&todo?'<i class="badge" aria-label="Bilan à faire"></i>':''}${k==='accueil'&&rpeTodo()?'<i class="badge" aria-label="RPE du jour à noter"></i>':''}${k==='programme'&&TM.plan&&!TM.done?'<i class="badge run" aria-label="Chrono en cours"></i>':''}${k==='stats'&&ST.live?'<i class="badge run" aria-label="Séance de stats en cours"></i>':''}</a>`).join('');
+  return T.map(([k,i,l]) => `<a class="tab" href="#${k}" ${cur===k?'aria-current="page"':''}>${svg(i)}<span>${l}</span>${k==='mental'&&un?'<i class="badge" aria-label="Nouveaux messages"></i>':k==='mental'&&ls.get('oal-ph-new','')?'<i class="badge" aria-label="Nouvelle phrase"></i>':''}${k==='bilan'&&todo?'<i class="badge" aria-label="Bilan à faire"></i>':''}${k==='accueil'&&rpeTodo()?'<i class="badge" aria-label="RPE du jour à noter"></i>':''}${k==='programme'&&TM.plan&&!TM.done?'<i class="badge run" aria-label="Chrono en cours"></i>':''}${k==='stats'&&ST.live?'<i class="badge run" aria-label="Séance de stats en cours"></i>':''}</a>`).join('');
 }
 
 function sesRow(sid, w, showDay){
@@ -1612,6 +1703,7 @@ function vAccueil(){
   const threads = Object.entries(S.threads).filter(([,t]) => t.lastAt).sort((a,b) => b[1].lastAt - a[1].lastAt).slice(0,2);
   const lm = lastMatch();
   return `
+  ${ntfHTML()}
   ${bookHTML()}
   ${rpeHomeHTML()}
   ${matchCard(nextMatch())}
@@ -2424,7 +2516,7 @@ const RPE_T = [['club','Club','ball'],['prepa','Prépa','prog'],['muscu','Muscu'
 const RPE_TN = Object.fromEntries([...RPE_T.map(t => [t[0], t[1]]), ['repos', 'Repos']]);
 // Équilibre de charge : charge des 7 derniers jours ÷ moyenne hebdomadaire des 28 derniers jours.
 const ACWR_Z = [[0, .8, 'Charge basse', '#5b95ff', 'Tu peux augmenter progressivement.'], [.8, 1.3, 'Zone idéale', '#2fd9b9', 'Charge bien dosée : continue comme ça.'], [1.3, 1.5, 'Hausse rapide', '#ffac3a', 'Garde de la fraîcheur et soigne ta récupération.'], [1.5, 9, 'Hausse très rapide', '#ff3d7f', 'Priorité à la récupération : sommeil, hydratation, séances plus légères.']];
-const RP = {home:null, more:false, edit:null, sel:null, wsel:null};
+const RP = {home:null, more:false, edit:null, sel:null, wsel:null, open:false, foldAnim:false};
 const rpeTodo = () => new Date().getHours() >= 17 && !rpeAll().some(r => r.d === todayISO());
 const sesMin = s => { const h = s.dur.match(/(\d+)\s*h(?:\s*(\d+))?/); if(h) return +h[1] * 60 + +(h[2] || 0); const n = (s.dur.match(/\d+/g) || [60]).map(Number); return Math.round(n.reduce((a, b) => a + b, 0) / n.length / 5) * 5; };
 // Toutes les séances : celles notées ici, plus l'effort donné en validant une séance du programme.
@@ -2506,13 +2598,27 @@ function rpeWeekBars(L){
   return `<div class="rpe-wk">${days.map((d, i) => { const x = loads[i], l = x.reduce((a, r) => a + rpeLoad(r), 0), mx = x.length ? Math.max(...x.map(r => r.rpe || 0)) : null;
     return `<span class="${d === t ? 'today' : ''}"><i style="height:${x.length ? Math.max(6, 50 * l / max) : 0}px;background:${mx != null ? RPE_C[mx] : 'transparent'}"></i>${x.length && !l ? '<em>R</em>' : ''}<small>${frDate(parseISO(d), {weekday:'narrow'})}</small></span>`; }).join('')}</div>`;
 }
+// Sur l'accueil, la carte est repliée : un toucher sur « Mon RPE du jour » la déroule.
+function rpeFoldHead(today, st){
+  const load = today.reduce((a, r) => a + rpeLoad(r), 0), mx = today.length ? Math.max(...today.map(r => r.rpe || 0)) : null;
+  const line = !today.length ? 'Comment était ta séance ?' : load ? `${load} pts · RPE ${mx}` : 'Jour de récupération';
+  return `<button class="rpe-tog" data-act="rpe-tog" aria-expanded="${RP.open}">
+    <span class="rpe-mini" style="--rc:${mx != null ? RPE_C[mx] : '#7d86a8'};--p:${mx != null ? mx * 10 : 0}">${mx != null ? mx : '?'}</span>
+    <span class="rpe-tog-t"><span class="eyebrow">Mon RPE du jour</span><b>${line}</b></span>
+    ${today.length ? st.replace(/ jours d’affilée/, ' j') : '<span class="rpe-todo">À noter</span>'}
+    <i class="rpe-chev">${svg('next')}</i>
+  </button>`;
+}
 function rpeHomeHTML(){
   const L = rpeAll(), t = todayISO(), today = rpeDayOf(L, t), streak = rpeStreak(L);
   const st = streak > 1 ? `<span class="rpe-streak">${svg('flame')}${streak} jours d’affilée</span>` : '';
+  const mx0 = today.length ? Math.max(...today.map(r => r.rpe || 0)) : null;
+  if(!RP.open) return `<section class="rpe-card fold ${today.length ? 'done' : ''}" style="--rc:${mx0 != null ? RPE_C[mx0] : '#7d86a8'}">${rpeFoldHead(today, st)}</section>`;
+  const open = RP.foldAnim ? ' opening' : '';
   if(today.length && !RP.more){
     const load = today.reduce((a, r) => a + rpeLoad(r), 0), mx = Math.max(...today.map(r => r.rpe || 0));
-    return `<section class="rpe-card done" style="--rc:${RPE_C[mx]}">
-      <div class="rpe-head"><span class="eyebrow">Mon RPE du jour</span>${st}</div>
+    return `<section class="rpe-card done${open}" style="--rc:${RPE_C[mx]}">
+      ${rpeFoldHead(today, st)}
       <div class="rpe-sum"><div class="rpe-ring" style="--p:${mx * 10}"><b>${mx}</b><small>${esc(RPE_L[mx])}</small></div>
         <div><b class="rpe-big">${load ? load : 'Repos'}${load ? '<small> pts</small>' : ''}</b>
         <p>${today.map(r => r.type === 'repos' ? 'Jour de récupération' : `${esc(RPE_TN[r.type] || 'Séance')} · RPE ${r.rpe} · ${r.min} min`).join('<br>')}</p></div></div>
@@ -2521,8 +2627,8 @@ function rpeHomeHTML(){
     </section>`;
   }
   const D = rpeDraft('home');
-  return `<section class="rpe-card" style="--rc:${D.v != null ? RPE_C[D.v] : '#7d86a8'}">
-    <div class="rpe-head"><div><span class="eyebrow">Mon RPE du jour</span><h2>Comment était ta séance ?</h2></div>${st}</div>
+  return `<section class="rpe-card${open}" style="--rc:${D.v != null ? RPE_C[D.v] : '#7d86a8'}">
+    ${rpeFoldHead(today, st)}
     ${rpeForm(D, 'home')}
     <div class="rpe-acts">${RP.more ? `<button class="btn ghost" data-act="rpe-less">Fermer</button>` : `<button class="btn ghost" data-act="rpe-rest">Jour de repos</button>`}<a class="btn ghost" href="#rpe">${svg('stats')}Mon bilan</a></div>
   </section>`;
@@ -3471,6 +3577,7 @@ function vMental(){
 const PH_BASE = [
   'Planifier le jour présent, c’est planifier sa réussite de demain.',
   'Chaque matin, je suis meilleure qu’hier, et je serai encore meilleure demain.',
+  'Aucun être humain n’a de limites, Just Do It',
   'C’est moi contre moi.',
   'Chaque jour, je me réveille prête à me dépasser.',
   'C’est dans le présent que se forge ma réussite de demain.',
@@ -3549,8 +3656,8 @@ const phraseOwn = () => phraseDocs().filter(p => p.src !== 'liste').sort((a,b) =
 const phraseHome = () => phraseDocs().filter(p => p.home).sort((a,b) => (a.hAt || 0) - (b.hAt || 0));
 const phraseOn = t => !!(S.phrases[phraseId(t)] || {}).home;
 const phraseHas = t => !!S.phrases[phraseId(t)];
-// Rien de coché : les 5 premières idées de la liste.
-const phraseBook = () => { const h = phraseHome().map(p => p.text); return h.length ? h : PHRASES.slice(0, PH_MAX); };
+// Rien de coché : les 5 premières idées de la liste (celles sans négation).
+const phraseBook = () => { const h = phraseHome().map(p => p.text); return h.length ? h : PHRASES.filter(t => !hasNeg(t)).slice(0, PH_MAX); };
 const PH = {i: ls.get('oal-ph', 0), turning:false};
 
 function bookHTML(){
@@ -3564,18 +3671,19 @@ function bookHTML(){
   </section>`;
 }
 function phrasesTeaser(){
-  const h = phraseHome().length, own = phraseOwn().length;
+  const h = phraseHome().length, own = phraseOwn().length, nw = S.phrases[ls.get('oal-ph-new', '')];
   return `<section class="card stack">
     <div class="h-sec" style="margin:0"><h2>Mes phrases</h2><span class="eyebrow gold">${h ? `${h} / ${PH_MAX} à l’accueil` : 'À choisir'}</span></div>
+    ${nw ? `<a class="ph-new" href="#phrases"><small class="ph-from">${svg('spark')}Nouveau · ${esc(nw.from || NOTIF_TITLE)}</small><p>« ${esc(nw.text)} »</p></a>` : ''}
     <p class="muted small">Écris tes phrases au positif, autant que tu veux, et coche jusqu’à ${PH_MAX} phrases pour ton accueil.${own ? ` Tu en as écrit ${own}.` : ''}</p>
     <div class="row"><a class="btn" href="#phrases">${svg('list')}Écrire et choisir</a></div>
   </section>`;
 }
 function phRow(text, id, own){
-  const on = phraseOn(text);
-  return `<div class="phrow ${on ? 'on' : ''}">
+  const on = phraseOn(text), doc = S.phrases[id] || {}, from = own && doc.src === 'mot' ? doc.from || NOTIF_TITLE : '';
+  return `<div class="phrow ${on ? 'on' : ''} ${own && S.phFresh === id ? 'fresh' : ''}">
     <button class="phchk" data-act="ph-home" data-t="${esc(text)}" aria-pressed="${on}" aria-label="${on ? 'Retirer de l’accueil' : 'Afficher à l’accueil'}">${svg('check')}</button>
-    <p>${esc(text)}</p>
+    <p>${from ? `<small class="ph-from">${svg('spark')}${esc(from)}</small>` : ''}${esc(text)}</p>
     ${own ? `<button class="vdel" data-act="ph-del" data-id="${esc(id)}" aria-label="Supprimer cette phrase">${svg('trash')}</button>` : ''}
   </div>`;
 }
@@ -3617,6 +3725,114 @@ function phraseAdd(text, src, el){
   rerender(); save('phrases', id, d);
   toast(room ? 'Ajoutée, et affichée sur ton accueil.' : `Ajoutée à tes phrases. Ton accueil en a déjà ${PH_MAX} : décoche-en une pour faire de la place.`);
   return true;
+}
+
+/* ---------- La pensée : une phrase qui arrive sur l'accueil comme une notification ---------- */
+// Alice la touche : elle s'envole vers l'onglet Mental et rejoint « Mes phrases à moi », signée « La pensée ».
+// Pour en envoyer une autre : ajouter une ligne avec un nouvel id (n2, n3…) et la date du jour.
+const NOTIF_TITLE = 'La pensée';
+const NOTIFS = [
+  {id:'n1', d:'2026-11-10', text:'Réveille-toi avec motivation, endors-toi avec satisfaction.'},
+];
+const ntfDone = () => ls.get('oal-notifs', []);
+const ntfNext = () => { const lus = ntfDone(); return NOTIFS.find(n => !lus.includes(n.id)); };
+function ntfWhen(d){
+  const n = Math.round((today0() - parseISO(d)) / 864e5);
+  return n <= 0 ? 'Aujourd’hui' : n === 1 ? 'Hier' : `Il y a ${n} jours`;
+}
+const spotsHTML = (c='') => `<span class="spots ${c}" aria-hidden="true"><i class="bm"></i><i class="bm"></i><i class="bm"></i><b class="lp"></b><b class="lp"></b><b class="lp"></b><em class="dust"></em></span>`;
+function ntfHTML(){
+  const n = ntfNext(); if(!n) return '';
+  return `<section class="ntf-wrap">
+    <button class="ntf" data-act="ntf-keep" data-id="${n.id}" aria-label="${esc(NOTIF_TITLE)} : ${esc(n.text)} Touche pour le garder dans Mes phrases.">
+      ${spotsHTML()}
+      <span class="ntf-app"><img src="icons/icon-192.png" alt="">De l’ombre à la lumière</span>
+      <span class="ntf-t">${esc(NOTIF_TITLE)}</span>
+      <p class="ntf-p">« ${esc(n.text)} »</p>
+      <span class="ntf-foot"><span class="ntf-hint">${svg('spark')}Touche pour la garder</span><small>${ntfWhen(n.d)}</small></span>
+    </button>
+  </section>`;
+}
+// La phrase vole jusqu'à l'onglet Mental, puis l'onglet s'illumine.
+function ntfFly(from, text){
+  const tab = document.querySelector('.tab[href="#mental"]');
+  if(!tab || !from || CALM.matches || !from.animate) return Promise.resolve();
+  const a = from.getBoundingClientRect(), b = tab.getBoundingClientRect();
+  const f = document.createElement('div'); f.className = 'ntf-fly'; f.textContent = text;
+  f.style.cssText = `left:${a.left}px;top:${a.top}px;width:${a.width}px`;
+  document.body.appendChild(f);
+  const dx = b.left + b.width / 2 - (a.left + a.width / 2), dy = b.top + b.height / 2 - (a.top + f.offsetHeight / 2);
+  return f.animate([
+    {transform:'translate(0,0) scale(1)', opacity:1},
+    {transform:`translate(${dx * .25}px,${dy * .3 - 30}px) scale(.82) rotate(-3deg)`, opacity:1, offset:.35},
+    {transform:`translate(${dx}px,${dy}px) scale(.06) rotate(6deg)`, opacity:.3},
+  ], {duration:950, easing:'cubic-bezier(.45,0,.65,1)', fill:'forwards'}).finished.catch(() => {}).then(() => {
+    f.remove();
+    const t = document.querySelector('.tab[href="#mental"]');
+    if(t){ burstAt(t, {n:30, v:.6}); t.classList.add('pop'); setTimeout(() => t.classList.remove('pop'), 700); }
+  });
+}
+function ntfKeep(el){
+  const n = NOTIFS.find(x => x.id === el.dataset.id);
+  if(!n || el.classList.contains('keep') || !guard()) return;
+  el.classList.add('keep');
+  burstAt(el, {n:40, v:.8}); chime([1047,1319,1568,2093], .07, .11); buzz([30,40,60]);
+  const wrap = el.closest('.ntf-wrap'), p = el.querySelector('.ntf-p');
+  const commit = () => {
+    const id = phraseId(n.text), cur = S.phrases[id];
+    if(!cur || cur.src === 'liste'){
+      const d = {text:n.text, src:'mot', from:NOTIF_TITLE, at:Date.now(), by:meId(), home:!!(cur && cur.home), hAt:cur && cur.home ? cur.hAt : null};
+      S.phrases = {...S.phrases, [id]:d}; save('phrases', id, d);
+    }
+    ls.set('oal-notifs', [...new Set([...ntfDone(), n.id])]); ls.set('oal-ph-new', id);
+    rerender();
+    toast('Rangée dans Mes phrases, onglet Mental. Coche-la si tu veux la voir sur ton accueil.');
+  };
+  if(CALM.matches || !el.animate){ commit(); return; }
+  setTimeout(() => {
+    ntfFly(p, `« ${n.text} »`).then(commit);
+    p.style.visibility = 'hidden';
+    const h = wrap.offsetHeight;
+    wrap.animate([{height:h + 'px', opacity:1, marginBottom:'0px'}, {height:'0px', opacity:0, marginBottom:'-28px'}], {duration:650, delay:250, easing:'cubic-bezier(.4,0,.2,1)', fill:'forwards'});
+    wrap.style.overflow = 'hidden';
+  }, 280);
+}
+
+// Bannière « Appli à jour » : une fois par nouvelle version, après l'allumage des projecteurs.
+// À chaque mise en ligne : APP_V = le numéro de sw.js (alice-v22 → 22), et la phrase MAJ_TXT.
+const APP_V = 22;
+const MAJ_TXT = () => ntfNext() ? `${NOTIF_TITLE} t’attend sur ton accueil.` : 'La nouvelle version est installée.';
+// Quelqu'un qui ouvre l'appli pour la première fois n'a pas besoin de cette bannière.
+const MAJ_OLD = (() => { try{ return localStorage.getItem('oal-intro') != null || Object.values(Local.data).some(c => c && Object.keys(c).length); }catch{ return false; } })();
+function majCheck(){
+  if(!FFBB_DONE || ls.get('oal-maj', 0) >= APP_V) return;
+  ls.set('oal-maj', APP_V);
+  if(MAJ_OLD) setTimeout(majShow, 450);
+}
+function majShow(){
+  const el = $('#maj');
+  el.innerHTML = `<button class="maj-in" data-act="maj-go">${spotsHTML('sm')}<img src="icons/icon-192.png" alt=""><span class="maj-txt"><small>De l’ombre à la lumière</small><b>Appli à jour</b><span>${MAJ_TXT()}</span></span><i class="bar" aria-hidden="true"></i></button>`;
+  el.classList.remove('out', 'in'); el.hidden = false;
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in')));
+  chime([1568, 2093], .12, .09); buzz([25, 50, 25]);
+  clearTimeout(majShow.t); majShow.t = setTimeout(() => majClose(), 7000);
+  // Glisser vers le haut pour la fermer, comme sur le téléphone.
+  const b = el.firstElementChild; let y0 = null;
+  b.addEventListener('pointerdown', e => { y0 = e.clientY; }, {passive:true});
+  b.addEventListener('pointerup', e => { if(y0 != null && e.clientY - y0 < -24){ b.dataset.swiped = '1'; majClose(); } y0 = null; }, {passive:true});
+}
+function majClose(go){
+  const el = $('#maj'); if(el.hidden) return;
+  clearTimeout(majShow.t);
+  el.classList.remove('in'); el.classList.add('out');
+  setTimeout(() => { el.hidden = true; el.classList.remove('out'); el.innerHTML = ''; }, 420);
+  if(!go) return;
+  if(S.tab !== 'accueil') location.hash = '#accueil';
+  setTimeout(() => {
+    const c = $('.ntf'); if(!c) return;
+    c.scrollIntoView({behavior:CALM.matches ? 'auto' : 'smooth', block:'center'});
+    c.classList.add('hey'); setTimeout(() => c.classList.remove('hey'), 1500);
+  }, 380);
 }
 
 /* ---------- Ma bibliothèque : textes à relire, affiches, feuillets ---------- */
@@ -4428,9 +4644,8 @@ function intro(force){
 // Victoire de Canet relevée sur le site FFBB : on la fête une fois, dans la semaine qui suit le match.
 function checkWin(){
   if(!$('#gate').hidden || !$('#intro').hidden || !$('#moment').hidden) return;
-  const m = ourMatches().filter(x => x.sh != null && !x.note && ended(x)).at(-1); if(!m) return;
-  const s = scoreOf(m);
-  if(!s || s.us <= s.them || Date.now() - matchTime(m) > 7 * 864e5 || ls.get('oal-win', '') === m.id) return;
+  const m = ourMatches().filter(x => x.sh != null && !x.note && ended(x)).at(-1), s = m && scoreOf(m);
+  if(!s || s.us <= s.them || Date.now() - matchTime(m) > 7 * 864e5 || ls.get('oal-win', '') === m.id){ majCheck(); return; }
   ls.set('oal-win', m.id); moment('win', m);
 }
 
@@ -4447,6 +4662,8 @@ function setSetting(patchObj){
 }
 
 const ACT = {
+  'ntf-keep': el => ntfKeep(el),
+  'maj-go': el => { if(el.dataset.swiped) return; majClose(true); },
   open: el => openSheet({type:'session', sid:el.dataset.sid, w:+el.dataset.w}),
   match: el => { const m = findMatch(el.dataset.mid); if(!m) return; S.mSeg = el.dataset.seg || (ended(m) ? 'apres' : 'avant'); openSheet({type:'match', mid:m.id}); },
   mseg: el => { S.mSeg = el.dataset.seg; renderSheet(); $('#sheet').scrollTo({top:0}); },
@@ -4676,6 +4893,7 @@ const ACT = {
     S.rpe = {...S.rpe, [id]:doc}; save('rpe', id, doc); RP.home = null; rerender();
     toast('Jour de récupération noté : le corps se reconstruit.');
   },
+  'rpe-tog': () => { RP.open = !RP.open; RP.foldAnim = RP.open; if(!RP.open){ RP.more = false; } rerender(); },
   'rpe-more': () => { RP.more = true; RP.home = rpeNew(); rerender(); },
   'rpe-less': () => { RP.more = false; RP.home = null; rerender(); },
   'rpe-edit': el => {
@@ -4966,6 +5184,10 @@ const ROUTES = ['accueil','programme','routine','bilan','chrono','videos','menta
 function route(){
   const h = location.hash.replace('#','');
   const nt = ROUTES.includes(h) ? h : 'accueil';
+  if(nt !== S.tab && nt === 'phrases'){
+    S.phFresh = ls.get('oal-ph-new', ''); ls.set('oal-ph-new', '');
+    if(S.phFresh) setTimeout(() => $('.phrow.fresh')?.scrollIntoView({behavior:CALM.matches ? 'auto' : 'smooth', block:'center'}), 300);
+  }
   if(nt !== S.tab){ if(nt === 'muscu') MU.intro = true; if(nt === 'rpe'){ RP.anim = true; RP.sel = null; RP.wsel = null; } S.tab = nt; S.motEdit = false; S.rtEdit = null; window.scrollTo(0,0); if(nt === 'coach' && CO.msgs.length) coachScroll(); }
   if(SH && SH.type !== 'zoom') closeSheet();
   rerender();

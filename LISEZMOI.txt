@@ -47,7 +47,8 @@ Modifier l'appli
 - Remettre en ligne : dans le dépôt GitHub, ouvrir le fichier, crayon « Edit », ou
   « Add file » > « Upload files » pour écraser avec la nouvelle version, puis « Commit changes ».
 - Si Alice ne voit pas le changement : fermer et rouvrir l'appli (parfois deux fois).
-  Pour forcer, changer le numéro dans sw.js : const V='alice-v21' -> 'alice-v22'.
+  Pour forcer, changer le numéro dans sw.js : const V='alice-v22' -> 'alice-v23',
+  et le même numéro dans index.html : const APP_V = 23 (c'est lui qui affiche la bannière « Appli à jour »).
 
 Mes phrases (04/11/2026)
 - En haut de l'accueil : un livre de 1 à 5 phrases positives, sans négation. Toucher la page la fait tourner.
@@ -98,3 +99,15 @@ RPE du jour (05/11/2026)
 - Onglet Bilan > RPE : charge de la semaine, équilibre de charge (zone idéale de 0,8 à 1,3, après 3 semaines),
   monotonie et contrainte, les 28 derniers jours, les semaines, la répartition et l'historique.
 - L'effort donné en validant une séance du programme est repris automatiquement.
+
+La pensée, Appli à jour, RPE replié, nouvelle icône (10/11/2026)
+- En haut de l'accueil, « La pensée » arrive comme une notification, sous trois projecteurs de salle.
+  Alice la touche : la phrase s'envole vers l'onglet Mental et rejoint « Mes phrases à moi », signée « La pensée ».
+  Elle peut ensuite la cocher pour la voir dans le livre de l'accueil.
+- Pour envoyer une autre pensée : dans index.html, ajouter une ligne à NOTIFS avec un nouvel id (n2, n3…).
+- Icône de l'appli : la photo d'Alice 12 (icons/). Sur iPhone, l'icône déjà installée ne change pas toute seule.
+- À la première ouverture d'une nouvelle version, une bannière « Appli à jour » descend du haut de l'écran
+  (après l'allumage des projecteurs et une éventuelle victoire de Canet). Toucher la bannière mène à la pensée.
+- « Mes idées » (Mental > Mes phrases) : « Aucun être humain n'a de limites, Just Do It » en 3e position.
+- Le RPE du jour est replié sur l'accueil : toucher « Mon RPE du jour » le déroule. Replié, il montre déjà
+  « À noter », ou la charge et le RPE du jour.
