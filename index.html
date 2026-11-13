@@ -859,6 +859,7 @@ details.fiche > div{padding:0 16px 16px;display:flex;flex-direction:column;gap:1
 .res i{display:block;font:700 11px/1 var(--f-num);font-style:normal;letter-spacing:.1em;margin-bottom:4px;color:var(--dim);text-transform:uppercase}
 .res i.v{color:var(--ok)}
 .res i.d{color:var(--warn)}
+.res .mr-ev{display:block;width:max-content;margin:7px 0 0 auto;padding:4px 7px;border-radius:7px;font:800 13px/1 var(--f-num);letter-spacing:.06em;text-transform:uppercase;color:var(--gold);background:var(--gold-soft);border:1px solid rgb(255 210 63 / .35)}
 .flags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
 .flag{font:600 10.5px/1 var(--f-num);letter-spacing:.08em;text-transform:uppercase;padding:4px 6px;border-radius:5px;background:var(--deck-2);color:var(--dim)}
 .flag.on{background:var(--gold-soft);color:var(--gold)}
@@ -3121,9 +3122,12 @@ function mRowInner(m){
   if(hasBilan(m.id)) flags.push('<span class="flag on">Bilan</span>');
   else if(ended(m) && !m.note) flags.push('<span class="flag todo">Bilan à faire</span>');
   if(d.analyse) flags.push('<span class="flag on">Analyse</span>');
+  const xe = matchEntries().find(e => e.mid === m.id);
+  if(xe && xe.box) flags.push('<span class="flag on">Stats rentrées</span>');
+  else if((sc || ended(m)) && !m.note) flags.push('<span class="flag todo">Stats en attente</span>');
   return `<span class="j">J${m.j}<small>${home(m) ? 'Dom.' : 'Ext.'}</small></span>
     <span class="mm"><b>${home(m) ? '' : '@ '}${esc(TEAMS[o][1])}</b><small>${esc(frDate(dt,{weekday:'short',day:'numeric',month:'short'}))} · ${hm(dt)}${m.note ? ' · ' + esc(m.note) : ''}</small>${flags.length ? `<span class="flags">${flags.join('')}</span>` : ''}</span>
-    <span class="res">${sc ? `<i class="${res}">${m.note ? 'Pénalité' : res === 'v' ? 'Victoire' : 'Défaite'}</i>${sc.us}–${sc.them}` : '<i>À venir</i>'}</span>`;
+    <span class="res">${sc ? `<i class="${res}">${m.note ? 'Pénalité' : res === 'v' ? 'Victoire' : 'Défaite'}</i>${sc.us}–${sc.them}` : '<i>À venir</i>'}${xe && xe.eff ? `<b class="mr-ev">Éval ${xe.eff.v}</b>` : ''}</span>`;
 }
 function vBilan(){
   const nm = nextMatch(), ms = ourMatches();
@@ -4426,7 +4430,8 @@ function matchEntries(){
     if(m.note && !sess.length && !man) continue;
     const A = sess.length ? stAgg(sess) : null;
     const box = A || man ? {...(A ? boxOfAgg(A, sess.reduce((n, s) => n + stPts(s), 0)) : {}), ...(man || {})} : null;
-    out.push({key:'m' + m.id, m, mid:m.id, t:matchTime(m), sess, A, box, eff:effOf(box), vid:d.video || '', sc});
+    const real = box && ['pts','reb','pd','int','ct','bp','tt','lft'].some(k => nOrNull(box[k]) != null);
+    out.push({key:'m' + m.id, m, mid:m.id, t:matchTime(m), sess, A, box:real ? box : null, eff:real ? effOf(box) : null, vid:d.video || '', sc});
   }
   for(const s of all.filter(s => !s.mid)){
     const A = stAgg([s]), box = boxOfAgg(A, stPts(s));
@@ -4477,7 +4482,7 @@ function evCard(x){
     <b class="evc-opp">${m ? (home(m) ? '' : '@ ') + esc(TEAMS[opp(m)][0]) : esc(x.opp)}</b>
     ${x.sc ? `<span class="evc-res ${res}">${m.note ? 'Pénalité' : res === 'v' ? 'Victoire' : 'Défaite'} ${x.sc.us}–${x.sc.them}</span>` : `<span class="evc-res">${m ? 'Score à venir' : 'Match amical'}</span>`}
     <span class="evc-ring ${F && F.v < 0 ? 'neg' : ''}" style="--p:${p.toFixed(0)}"><span><b>${F ? F.v : '—'}</b><small>Éval</small></span></span>
-    <span class="evc-line">${b ? `${b.pts ?? 0} pts · ${b.reb ?? 0} reb · ${b.pd ?? 0} pd` : 'Stats à saisir'}</span>
+    <span class="evc-line">${b ? `${b.pts ?? 0} pts · ${b.reb ?? 0} reb · ${b.pd ?? 0} pd` : '<span class="flag todo">Stats en attente</span>'}</span>
     <span class="evc-line dim">${b && nOrNull(b.tt) ? `Tirs ${b.tm || 0}/${b.tt} · ${pc(b.tm || 0, b.tt)} %` : b ? '&nbsp;' : 'Touche pour les ajouter'}</span>
     <span class="evc-foot">${x.vid ? `<span class="evc-vid">${PF[platform(x.vid)[0]]}Vidéo</span>` : '<span>+ Vidéo</span>'}<span>Détail →</span></span>
   </button>`;
@@ -5534,8 +5539,8 @@ function ntfKeep(el){
 
 // Bannière « Appli à jour » : une fois par nouvelle version, après l'allumage des projecteurs.
 // À chaque mise en ligne : APP_V = le numéro de sw.js (alice-v22 → 22), et la phrase MAJ_TXT.
-const APP_V = 23;
-const MAJ_TXT = () => ntfNext() ? `${NOTIF_TITLE} t’attend sur ton accueil.` : 'Nouveau : ton planning, tes photos de fond, ton éval FIBA et la préparation de tes matchs.';
+const APP_V = 24;
+const MAJ_TXT = () => ntfNext() ? `${NOTIF_TITLE} t’attend sur ton accueil.` : 'Nouveau : ton éval FIBA s’affiche dans chacun de tes matchs.';
 // Quelqu'un qui ouvre l'appli pour la première fois n'a pas besoin de cette bannière.
 const MAJ_OLD = (() => { try{ return localStorage.getItem('oal-intro') != null || Object.values(Local.data).some(c => c && Object.keys(c).length); }catch{ return false; } })();
 function majCheck(){
