@@ -111,3 +111,40 @@ La pensée, Appli à jour, RPE replié, nouvelle icône (10/11/2026)
 - « Mes idées » (Mental > Mes phrases) : « Aucun être humain n'a de limites, Just Do It » en 3e position.
 - Le RPE du jour est replié sur l'accueil : toucher « Mon RPE du jour » le déroule. Replié, il montre déjà
   « À noter », ou la charge et le RPE du jour.
+
+Version 23 (13/11/2026)
+- En-tête : le titre au milieu, sans la pastille VMA. Les réglages (VMA, sauvegarde, photos de fond)
+  sont en bas de l'Accueil : « Réglages et sauvegarde ».
+- Onglet Programme : quatre grandes cartes. Planning école · Planning entraînements · Programme intersaison
+  (programme de 4 semaines, Musculation, Chrono) · Systèmes de jeu.
+- Planning école : l'emploi du temps, en vue Jour ou Semaine. Un cours qui revient plusieurs jours s'ajoute
+  en une fois. Lecture d'une photo de l'emploi du temps : prête, mais cachée tant que EDT_RELAIS est vide
+  dans index.html (il faut le relais en ligne, voir le dossier « Coach IA »).
+- Planning entraînements : les entraînements de chaque semaine (ou d'une seule fois), avec, jour par jour,
+  les cours, les séances du programme et les matchs. « Annulé ce jour-là » pour une séance sautée.
+  Toucher un entraînement ouvre sa préparation, comme pour les matchs : Avant (routine avant l'entraînement
+  à cocher, 3 ou 4 mots-clés, 4 objectifs) et Après (objectifs atteints, séance de 1 à 5, ce que j'ai appris,
+  ce que je garde, RPE). Sur l'accueil, l'entraînement du jour a sa carte « Préparer mon entraînement ».
+- Systèmes de jeu : les systèmes offensifs et défensifs de l'équipe. Nom, annonce, schéma sur demi-terrain
+  (à partir d'un modèle : 5 dehors, 1-4 haut, corne, box, 1-3-1, homme à homme, zones 2-3, 3-2, 1-3-1,
+  box and one ; joueuses à placer, courses, passes et écrans tracés au doigt), déroulement, points clés, vidéo.
+- Routine et Vidéos : « Avant un entraînement » envoie une partie de la routine de la semaine, ou une vidéo,
+  dans la routine d'avant-entraînement de la séance choisie.
+- Photos de fond : une photo par onglet si Alice le souhaite (bouton « Photo de fond » en bas des onglets,
+  ou Réglages > Mes photos de fond). Elles restent sur le téléphone et ne sont pas dans la sauvegarde.
+- Bilan > Matchs : « Mes évaluations » (éval FIBA de chaque match) puis le carrousel « Match par match ».
+  Toucher un match : le détail de l'éval, toutes les stats, la carte des tirs et le lien de la vidéo.
+  Éval FIBA = points + rebonds + passes décisives + interceptions + contres
+              − tirs manqués − lancers francs manqués − balles perdues.
+  Statistique : bouton « Contre » en match et éval en direct. Le bilan du match a maintenant tirs réussis /
+  tentés, contres et fautes.
+- Préparation de match : Avant · Pendant · Après.
+  Avant : 3 ou 4 mots-clés, 3 ou 4 points forts de l'adversaire (repris du match aller), le PLAN DE JEU
+  (les systèmes du match, en visuel), les objectifs, la préparation individuelle et collective, le discours
+  d'avant-match, les mots du groupe et 3 à 5 repères pour les temps morts.
+  Pendant : les mots-clés en grand, chaque repère noté Oui / Moyen / À reprendre à chaque temps mort,
+  et le plan de jeu. Après : le bilan des temps morts, repère par repère.
+- Mental > Les mots du jeu : le guide « Les mots du jeu » en 6 parties (entraînement, avant le match, pendant
+  le match, mi-temps et fin de match, après le match, synonymes). Toucher un mot ou une phrase l'ajoute au
+  prochain match (mots-clés, mots du groupe, repères) ou à un entraînement (mots-clés). Depuis une préparation,
+  « Piocher dans Les mots du jeu ». L'affiche A3 est dans Ma bibliothèque (img/biblio/mots-du-jeu.jpg).
