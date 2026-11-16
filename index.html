@@ -2038,6 +2038,7 @@ function patch(el, html){
 let raf = 0;
 function rerender(){ cancelAnimationFrame(raf); raf = requestAnimationFrame(renderAll); }
 function renderAll(){
+  ntfFix();
   document.documentElement.style.setProperty('--light', (0.07 + 0.38 * lightFrac()).toFixed(3));
   patch($('#top'), vTop());
   patch($('#tabs'), vTabs());
@@ -5634,14 +5635,27 @@ const NOTIF_TITLE = 'La pensée';
 const NOTIFS = [
   {id:'n1', d:'2026-11-10', text:'Réveille-toi avec motivation, endors-toi avec satisfaction.'},
   {id:'n2', d:'2026-11-16', t:'YES DAY', text:`Grâce à la victoire, mon envie d’apprendre d’hier dépasse ma déception.
-Je suis énervé : OUI.
+Je suis énervée : OUI.
 Je sais pourquoi : OUI.
-Je suis déçu de ma prestation qui n’était pas à la hauteur de mon engagement : OUI.
+Je suis déçue de ma prestation qui n’était pas à la hauteur de mon engagement : OUI.
 Mais mon mental reste intact : OUI. Il va m’aider à continuer à m’entraîner dur, avec le plaisir de défendre dur et d’attaquer dur.
 “Je nourris l’attaque grâce à ma défense et j’attaque la défense pour nourrir l’équipe.”
 La vie est belle : j’apprends d’hier et je profite d’aujourd’hui pour construire mon rêve de demain.`},
 ];
 const ntfTitle = n => (n && n.t) || NOTIF_TITLE;
+// Texte corrigé après coup (YES DAY au féminin, 16 novembre) : une copie déjà gardée dans Mes phrases est remplacée par
+// le nouveau texte, avec ses réglages (épinglée, livre). Clé = l'identifiant de l'ancien texte, valeur = l'id du message.
+const NTF_FIX = {p10p2atd:'n2'};
+function ntfFix(){
+  if(!canWrite()) return;
+  for(const [old, nid] of Object.entries(NTF_FIX)){
+    const d = S.phrases[old], n = NOTIFS.find(x => x.id === nid); if(!d || !n) continue;
+    const id = phraseId(n.text); if(id === old) continue;
+    const nx = {...S.phrases}; delete nx[old]; nx[id] = {...(nx[id] || {}), ...d, text:n.text}; S.phrases = nx;
+    save('phrases', id, nx[id]); Store.del('phrases', old).catch(() => {});
+    if(ls.get('oal-ph-new', '') === old) ls.set('oal-ph-new', id);
+  }
+}
 // Le texte du message, mis en page s'il fait plusieurs lignes.
 function ntfBody(text){
   const L = String(text).split('\n').map(s => s.trim()).filter(Boolean);

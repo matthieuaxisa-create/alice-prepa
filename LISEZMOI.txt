@@ -183,3 +183,7 @@ Version 25 (16/11/2026)
 - Pour le message d'un autre lundi : ajouter une ligne à NOTIFS avec un nouvel id (n3, n4…), la date (d), un titre
   (t) et le texte (une ligne par phrase ; « … : OUI » et la citation entre “ ” sont mis en page tout seuls).
   Seul le dernier message est proposé. Un message sans titre garde le fonctionnement de « La pensée ».
+- Correction du 16/11/2026 (sans changer de numéro de version) : YES DAY au féminin (« énervée », « déçue »).
+  Pour corriger le texte d'un message déjà envoyé : changer le texte dans NOTIFS, et ajouter à NTF_FIX
+  l'identifiant de l'ancien texte (phraseId) : une copie déjà gardée dans Mes phrases est remplacée,
+  en gardant ses réglages (épinglée sur l'accueil, livre).
