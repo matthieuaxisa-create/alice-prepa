@@ -1034,6 +1034,58 @@ html.theme-wahou .ntf::after{content:"";position:absolute;inset:0;z-index:2;bord
 .ntf-p.peek{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:22px}
 .ntf-open{display:flex;flex-direction:column;align-items:flex-start;gap:9px;width:100%;padding:0;text-align:left;color:inherit;background:none;border:0}
 .ntf.read{animation:none;gap:12px;padding:18px 18px 22px;margin-bottom:16px}
+/* Vidéo souvenir sur l'accueil : cœur 3D qui tourne sur lui-même, miniature YouTube, « La ranger dans mes vidéos » */
+.souv-wrap{display:block}
+.souv{position:relative;isolation:isolate;display:flex;flex-direction:column;gap:13px;padding:15px 16px 16px;border-radius:24px;overflow:hidden;color:var(--chalk);background:radial-gradient(85% 60% at 0 0,rgb(255 50 90 / .24),transparent 62%),linear-gradient(165deg,var(--deck-2),var(--ink) 92%);border:1px solid rgb(255 110 140 / .42);box-shadow:0 16px 38px rgb(0 0 0 / .45),0 0 30px rgb(255 50 90 / .16);animation:ntf-in .75s cubic-bezier(.2,.9,.3,1.15) both,souv-glow 3.6s ease-in-out 1.6s infinite}
+.souv > *{position:relative;z-index:1}
+html.theme-wahou .souv{border-color:transparent;background:radial-gradient(85% 60% at 0 0,rgb(255 50 100 / .28),transparent 62%),linear-gradient(165deg,rgb(44 31 92 / .9),rgb(16 11 42 / .92) 92%);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3)}
+html.theme-wahou .souv::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;padding:1.5px;background:linear-gradient(120deg,#ff3d7f,#ff1f3d 40%,#ffd23f 72%,#3d7bff);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.souv-top{display:flex;align-items:center;gap:12px}
+.souv-txt{display:flex;flex-direction:column;gap:7px;min-width:0}
+.souv .ntf-app{padding-right:0}
+.souv-msg{font:400 26px/1.2 var(--f-hand);color:#fff;text-shadow:0 0 24px rgb(255 90 120 / .55);overflow-wrap:anywhere}
+.souv-when{display:inline-flex;align-items:center;gap:7px;font:700 11.5px/1.25 var(--f-num);letter-spacing:.12em;text-transform:uppercase;color:#ff9fb4}
+.souv-when svg{width:14px;height:14px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.souv-vid{position:relative;display:block;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:radial-gradient(circle at 50% 45%,#3a1240,#120a26);border:1px solid rgb(255 255 255 / .14);box-shadow:0 10px 26px rgb(0 0 0 / .45);text-decoration:none}
+.souv-vid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.souv-vid::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgb(0 0 0 / 0) 50%,rgb(0 0 0 / .5))}
+.souv-play{position:absolute;left:50%;top:50%;z-index:1;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;display:grid;place-items:center;background:rgb(232 0 31 / .92);box-shadow:0 0 0 6px rgb(255 255 255 / .16),0 8px 24px rgb(0 0 0 / .5);animation:souv-pulse 2.4s ease-in-out infinite}
+.souv-play svg{width:26px;height:26px;fill:#fff;margin-left:3px}
+.souv-dur,.souv-seen{position:absolute;z-index:1;font:700 12px/1 var(--f-num);letter-spacing:.06em;padding:5px 7px;border-radius:7px;color:#fff;background:rgb(0 0 0 / .72)}
+.souv-dur{right:8px;bottom:8px}
+.souv-seen{left:8px;top:8px;display:inline-flex;align-items:center;gap:5px;text-transform:uppercase;background:rgb(22 163 127 / .9)}
+.souv-seen svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.souv-meta b{display:block;font:600 16px/1.3 var(--f-body);overflow-wrap:anywhere}
+.souv-meta small{display:block;margin-top:3px;font-size:12.5px;color:var(--dust)}
+.souv-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.souv-foot .btn{flex:1 1 170px}
+.souv-foot .chip{flex:1 1 170px;justify-content:center;min-height:46px;border-radius:12px}
+.souv-foot .chip svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.souv.vu .souv-foot .chip{color:var(--chalk);border-color:rgb(255 110 140 / .6);background:rgb(255 50 90 / .16)}
+.souv.keep{animation:none;box-shadow:0 16px 38px rgb(0 0 0 / .45),0 0 54px rgb(255 80 120 / .55)}
+.souv.hey{animation:ntf-hey .7s ease-in-out 2}
+.souv-fly{position:fixed;z-index:76;pointer-events:none;margin:0;border-radius:16px;box-shadow:0 14px 40px rgb(0 0 0 / .5),0 0 30px rgb(255 60 100 / .5)}
+@keyframes souv-glow{50%{box-shadow:0 16px 38px rgb(0 0 0 / .45),0 0 46px rgb(255 60 100 / .34)}}
+@keyframes souv-pulse{50%{transform:scale(1.07);box-shadow:0 0 0 10px rgb(255 255 255 / .1),0 8px 24px rgb(0 0 0 / .5)}}
+/* Le cœur : 15 couches en relief (bombé), face avant et arrière brillantes, qui tourne autour de son axe */
+.hrt3d{--hrt:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 92'%3E%3Cpath d='M50 89C45 85 3 59 3 29 3 14 14 3 28 3c10 0 17 6 22 14C55 9 62 3 72 3c14 0 25 11 25 26 0 30-42 56-47 60z'/%3E%3C/svg%3E");position:relative;flex:none;width:86px;height:86px;display:grid;place-items:center;perspective:520px}
+.hrt3d::before{content:"";position:absolute;inset:2px;border-radius:50%;background:radial-gradient(circle,rgb(255 50 90 / .5),rgb(255 50 90 / 0) 66%);animation:hrt-glow 1.8s ease-in-out infinite}
+.hrt-spin{position:relative;width:62px;height:57px;transform-style:preserve-3d;animation:hrt-spin 3.6s linear infinite}
+.hrt-spin i{position:absolute;inset:0;-webkit-mask:var(--hrt) center/contain no-repeat;mask:var(--hrt) center/contain no-repeat;background:linear-gradient(90deg,#4f0007,#a8001a 30%,#d1102c 50%,#a8001a 70%,#4f0007);transform:translateZ(var(--z)) scale(var(--s))}
+.hrt-spin i.f,.hrt-spin i.b{background:radial-gradient(60% 40% at 56% 80%,rgb(255 120 140 / .35),rgb(255 120 140 / 0) 70%),radial-gradient(130% 110% at 32% 22%,#ff5a6c 0,#ec0a26 32%,#b5000f 64%,#5e0009 100%)}
+.hrt-spin i.b{transform:translateZ(var(--z)) rotateY(180deg) scale(var(--s))}
+.hrt-spin i.f::after,.hrt-spin i.b::after{content:"";position:absolute;inset:0;background:radial-gradient(20% 13% at 31% 27%,rgb(255 255 255 / .95),rgb(255 255 255 / 0) 78%),radial-gradient(9% 21% at 73% 31%,rgb(255 255 255 / .7),rgb(255 255 255 / 0) 78%),linear-gradient(118deg,rgb(255 255 255 / 0) 52%,rgb(255 255 255 / .28) 57%,rgb(255 255 255 / 0) 63%);animation:hrt-gl 3.6s linear infinite}
+.hrt-spin i.b::after{animation-delay:-1.8s}
+.hrt-sh{position:absolute;left:50%;bottom:0;width:46px;height:9px;margin-left:-23px;border-radius:50%;background:radial-gradient(closest-side,rgb(0 0 0 / .6),rgb(0 0 0 / 0));animation:hrt-sh 1.8s ease-in-out infinite}
+.hrt3d.sm{width:44px;height:44px;perspective:300px}
+.hrt3d.sm .hrt-spin{width:30px;height:28px}
+.hrt3d.sm .hrt-sh{width:24px;height:5px;margin-left:-12px}
+@keyframes hrt-spin{from{transform:rotateX(-8deg) rotateY(0)}to{transform:rotateX(-8deg) rotateY(360deg)}}
+@keyframes hrt-gl{0%,100%{opacity:1}20%,80%{opacity:.2}28%,72%{opacity:0}}
+@keyframes hrt-sh{50%{transform:scaleX(.45);opacity:.7}}
+@keyframes hrt-glow{50%{transform:scale(1.12);opacity:.7}}
+.pf.souv-pf{background:rgb(255 50 90 / .14);overflow:visible}
+.souv-badge{display:inline-flex;align-items:center;gap:4px;font:700 10px/1 var(--f-num);letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(100deg,#ff3d7f,#e8001f);padding:3px 6px;border-radius:4px;margin-left:6px;vertical-align:2px}
 .ntf.read.big .ntf-t{font-size:clamp(56px,17vw,84px)}
 .ntf.read .ntf-p.rich{font-size:21.5px;gap:12px}
 .ntf.read .ntf-q{font-size:25px}
@@ -1676,6 +1728,7 @@ const VIDS = [
   {u:FB('383589781132842'),t:'Attaque à 45° · 3 (+ pivot)',a:'Facebook',c:'1c1',s:['jeu-pm']},
   {u:FB('1088373685780901'),t:'Attaque à 45° · 4',a:'Facebook',c:'1c1',s:['jeu-pm']},
   {u:FB('396051383364191'),t:'Attaque à 45° · 5',a:'Facebook',c:'1c1',s:['jeu-pm']},
+  {u:YT('FTB-sUXtp-k'),t:'Dribble et finitions : la séance complète de Jewell Loyd',a:'Phil Handy',c:'dribble',s:[],fresh:true,souv:'s1'},
   {u:'https://www.youtube.com/shorts/8JNX9DDJrUM',t:'10 appuis que toute joueuse doit maîtriser',a:'Danny Cooper · Short',c:'appuis',s:[],fresh:true},
   {u:'https://www.youtube.com/shorts/SJ6VXQ-PewQ',t:'Hip swivel contre la prise à deux, puis pull-up à 3 pts',a:'Danny Cooper · Short',c:'1c1',s:[],fresh:true},
 ];
@@ -2084,6 +2137,7 @@ function vAccueil(){
   const lm = lastMatch();
   return `
   ${ntfHTML() || ntfPinHTML()}
+  ${souvHTML()}
   ${bookHTML()}
   ${rpeHomeHTML()}
   ${matchCard(nextMatch())}
@@ -5388,8 +5442,8 @@ function vidCard(v){
   const sub = [v.a || (v.by ? `Ajoutée par ${nameOf(v.by)}` : pfName), CATS[v.c] || '', sesNames.join(', ')].filter(Boolean).join(' · ');
   const del = v.id && (v.by === meId() || S.isOwner) ? `<button class="vid-x" data-act="vid-del" data-id="${esc(v.id)}" aria-label="Supprimer cette vidéo">${svg('trash')}</button>` : '';
   return `<div class="vid-wrap"><a class="vid" href="${esc(url)}" target="_blank" rel="noopener noreferrer">
-    <span class="pf ${pf}">${PF[pf]}</span>
-    <span class="vid-main"><b>${esc(v.t || v.title || 'Vidéo')}${v.fresh || (v.at && Date.now() - v.at < 7*864e5) ? '<span class="new-badge">Nouveau</span>' : ''}</b><small>${esc(sub)}</small></span>
+    ${v.souv ? `<span class="pf souv-pf">${hrtHTML('sm')}</span>` : `<span class="pf ${pf}">${PF[pf]}</span>`}
+    <span class="vid-main"><b>${esc(v.t || v.title || 'Vidéo')}${v.souv ? `<span class="souv-badge">Souvenir</span>` : v.fresh || (v.at && Date.now() - v.at < 7*864e5) ? '<span class="new-badge">Nouveau</span>' : ''}</b><small>${esc(sub)}</small></span>
   </a><button class="vid-x" data-act="vid-send" data-u="${esc(url)}" aria-label="Ajouter avant un entraînement">${svg('send')}</button>${del}</div>`;
 }
 function vVideos(){
@@ -5800,10 +5854,99 @@ function ntfKeep(el, nid){
   }, 280);
 }
 
+// Vidéo souvenir : une carte sur l'accueil (cœur qui tourne), puis « La ranger dans mes vidéos » l'envoie dans l'onglet Vidéos,
+// où elle reste (catégorie Dribble, avec le cœur). Pour en proposer une autre : un nouvel id (s2…), la vidéo dans VIDS avec souv:'s2',
+// et pub = la date de mise en ligne sur YouTube (« il y a … » se calcule tout seul, comme sur YouTube).
+const SOUVS = [
+  {id:'s1', yt:'FTB-sUXtp-k', pub:'2026-11-09T21:35:14+01:00', dur:'14 min', msg:'Regarde, ça va te rappeler des souvenirs'},
+];
+const souvDone = () => ls.get('oal-souv', []), souvVu = () => ls.get('oal-souv-vu', []);
+const souvNext = () => { const s = SOUVS.at(-1); return s && !souvDone().includes(s.id) ? s : null; };
+const souvVid = s => VIDS.find(v => v.souv === s.id) || {};
+function souvAgo(pub){
+  const d = Math.floor((Date.now() - Date.parse(pub)) / 864e5);
+  return d < 1 ? 'aujourd’hui' : d < 7 ? `il y a ${d} jour${d > 1 ? 's' : ''}` : d < 30 ? `il y a ${Math.floor(d / 7)} semaine${d >= 14 ? 's' : ''}` : `il y a ${Math.floor(d / 30)} mois`;
+}
+// Le cœur en relief : 15 couches, les plus proches des faces un peu plus petites pour le bombé.
+const hrtHTML = (c='') => `<span class="hrt3d ${c}" aria-hidden="true"><span class="hrt-spin">${Array.from({length:15}, (_, k) => { const t = (k - 7) / 7; return `<i class="${k === 14 ? 'f' : k === 0 ? 'b' : ''}" style="--z:${(t * 11).toFixed(1)}px;--s:${(1 - .16 * t * t).toFixed(3)}"></i>`; }).join('')}</span><b class="hrt-sh"></b></span>`;
+function souvHTML(){
+  const s = souvNext(); if(!s) return '';
+  const v = souvVid(s), url = YT(s.yt), vu = souvVu().includes(s.id);
+  return `<section class="souv-wrap">
+    <article class="souv ${vu ? 'vu' : ''}" data-s="${s.id}">
+      <div class="souv-top">
+        ${hrtHTML()}
+        <div class="souv-txt">
+          <span class="ntf-app"><img src="icons/icon-192.png" alt="">Une vidéo pour toi</span>
+          <h2 class="souv-msg">${esc(s.msg)}</h2>
+          <span class="souv-when">${svg('video')}Vidéo mise en ligne ${souvAgo(s.pub)}</span>
+        </div>
+      </div>
+      <a class="souv-vid" href="${esc(url)}" target="_blank" rel="noopener noreferrer" data-souv="${s.id}" aria-label="Regarder la vidéo sur YouTube">
+        <img src="https://i.ytimg.com/vi/${esc(s.yt)}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <span class="souv-play">${svg('play')}</span>
+        ${s.dur ? `<span class="souv-dur">${esc(s.dur)}</span>` : ''}
+        ${vu ? `<span class="souv-seen">${svg('check')}Vue</span>` : ''}
+      </a>
+      ${v.t ? `<div class="souv-meta"><b>${esc(v.t)}</b><small>${esc([v.a, 'YouTube'].filter(Boolean).join(' · '))}</small></div>` : ''}
+      <div class="souv-foot">
+        <a class="btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer" data-souv="${s.id}">${svg('play')}${vu ? 'La revoir' : 'Regarder la vidéo'}</a>
+        <button class="chip" data-act="souv-range" data-id="${s.id}">${svg('video')}La ranger dans mes vidéos</button>
+      </div>
+    </article>
+  </section>`;
+}
+// Ouvrir la vidéo (lien normal, l'appli YouTube s'ouvre) : la carte se souvient qu'elle a été vue.
+document.addEventListener('click', e => {
+  const a = e.target.closest && e.target.closest('a[data-souv]'); if(!a) return;
+  const id = a.dataset.souv; if(!souvVu().includes(id)) ls.set('oal-souv-vu', [...souvVu(), id]);
+  setTimeout(() => { if(S.tab === 'accueil') rerender(); }, 600);
+});
+// La miniature s'envole jusqu'à l'onglet Vidéos, qui s'illumine.
+function souvFly(from){
+  const tab = document.querySelector('.tab[href="#videos"]');
+  if(!tab || !from || CALM.matches || !from.animate) return Promise.resolve();
+  const a = from.getBoundingClientRect(), b = tab.getBoundingClientRect();
+  const f = from.cloneNode(true); f.classList.add('souv-fly'); f.removeAttribute('href'); f.removeAttribute('data-souv');
+  f.style.cssText = `left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px`;
+  document.body.appendChild(f);
+  const dx = b.left + b.width / 2 - (a.left + a.width / 2), dy = b.top + b.height / 2 - (a.top + a.height / 2);
+  return f.animate([
+    {transform:'translate(0,0) scale(1)', opacity:1},
+    {transform:`translate(${dx * .25}px,${dy * .3 - 30}px) scale(.7) rotate(-3deg)`, opacity:1, offset:.35},
+    {transform:`translate(${dx}px,${dy}px) scale(.05) rotate(6deg)`, opacity:.3},
+  ], {duration:950, easing:'cubic-bezier(.45,0,.65,1)', fill:'forwards'}).finished.catch(() => {}).then(() => {
+    f.remove();
+    const t = document.querySelector('.tab[href="#videos"]');
+    if(t){ burstAt(t, {n:30, v:.6}); t.classList.add('pop'); setTimeout(() => t.classList.remove('pop'), 700); }
+  });
+}
+function souvRange(el){
+  const s = SOUVS.find(x => x.id === el.dataset.id); if(!s) return;
+  const card = el.closest('.souv'); if(card && card.classList.contains('keep')) return;
+  const wrap = card && card.closest('.souv-wrap'), th = card && card.querySelector('.souv-vid');
+  const commit = () => {
+    ls.set('oal-souv', [...new Set([...souvDone(), s.id])]);
+    rerender();
+    toast('Rangée dans Vidéos, avec le cœur (catégorie Dribble). Tu peux aussi la mettre dans ta routine.');
+  };
+  burstAt(el, {n:40, v:.8}); chime([1047, 1319, 1568, 2093], .07, .11); buzz([30, 40, 60]);
+  if(!card || !wrap || CALM.matches || !card.animate){ commit(); return; }
+  card.classList.add('keep');
+  setTimeout(() => {
+    souvFly(th).then(commit);
+    if(th) th.style.visibility = 'hidden';
+    const h = wrap.offsetHeight;
+    wrap.style.overflow = 'hidden';
+    wrap.animate([{height:h + 'px', opacity:1, marginBottom:'0px'}, {height:'0px', opacity:0, marginBottom:'-28px'}], {duration:650, delay:250, easing:'cubic-bezier(.4,0,.2,1)', fill:'forwards'});
+  }, 280);
+}
+
 // Bannière « Appli à jour » : une fois par nouvelle version, après l'allumage des projecteurs.
 // À chaque mise en ligne : APP_V = le numéro de sw.js (alice-v22 → 22), et la phrase MAJ_TXT.
-const APP_V = 25;
-const MAJ_TXT = () => ntfNext() ? `${ntfTitle(ntfNext())} t’attend sur ton accueil.` : 'Nouveau : tes cours du jour sur l’accueil, ton RPE relié à tes entraînements, et les semaines A et B.';
+const APP_V = 26;
+const MAJ_TXT = () => souvNext() ? (ntfNext() ? `${ntfTitle(ntfNext())} et une vidéo souvenir t’attendent sur ton accueil.` : 'Une vidéo souvenir t’attend sur ton accueil.')
+  : ntfNext() ? `${ntfTitle(ntfNext())} t’attend sur ton accueil.` : 'Nouveau : tes cours du jour sur l’accueil, ton RPE relié à tes entraînements, et les semaines A et B.';
 // Quelqu'un qui ouvre l'appli pour la première fois n'a pas besoin de cette bannière.
 const MAJ_OLD = (() => { try{ return localStorage.getItem('oal-intro') != null || Object.values(Local.data).some(c => c && Object.keys(c).length); }catch{ return false; } })();
 function majCheck(){
@@ -5831,7 +5974,7 @@ function majClose(go){
   if(!go) return;
   if(S.tab !== 'accueil') location.hash = '#accueil';
   setTimeout(() => {
-    const c = $('.ntf'); if(!c) return;
+    const c = (ntfNext() && $('.ntf')) || $('.souv') || $('.ntf'); if(!c) return;
     c.scrollIntoView({behavior:CALM.matches ? 'auto' : 'smooth', block:'center'});
     c.classList.add('hey'); setTimeout(() => c.classList.remove('hey'), 1500);
   }, 380);
@@ -6683,6 +6826,7 @@ function setSetting(patchObj){
 
 const ACT = {
   'ntf-keep': el => ntfKeep(el),
+  'souv-range': el => souvRange(el),
   'ntf-where': el => ntfWhere(el),
   'ntf-read': el => openSheet({type:'ntfread', nid:el.dataset.n || null, pid:el.dataset.p || null}),
   'ntf-keepread': el => ntfKeepRead(el),
