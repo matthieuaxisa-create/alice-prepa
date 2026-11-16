@@ -1021,6 +1021,32 @@ html.theme-wahou .ntf::after{content:"";position:absolute;inset:0;z-index:2;bord
 @keyframes ntf-glow{50%{box-shadow:0 16px 38px rgb(0 0 0 / .45),0 0 46px rgb(255 120 140 / .32)}}
 @keyframes ntf-hint{50%{opacity:.55}}
 @keyframes ntf-hey{50%{transform:scale(1.025);box-shadow:0 0 0 3px var(--gold),0 0 50px rgb(255 206 120 / .5)}}
+/* Message à titre (YES DAY…) : titre en grand, lignes « OUI », citation, carte épinglée sur l'accueil */
+.ntf.big .ntf-t{padding-right:0;margin-top:2px;font-size:clamp(44px,13vw,60px);line-height:.88}
+.ntf-p.rich{display:flex;flex-direction:column;gap:10px;width:100%;font-size:19.5px;line-height:1.35}
+.ntf-l{display:block}
+.ntf-oui{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 12px;border-radius:12px;background:rgb(255 255 255 / .05);border:1px solid rgb(255 214 140 / .2)}
+.ntf-oui > span{min-width:0}
+.ntf-oui b{flex:none;padding:7px 11px 5px;border-radius:9px;font:900 24px/1 var(--f-display);letter-spacing:.05em;color:var(--gold-ink,#22104a);background:var(--grad,linear-gradient(100deg,var(--gold),#ffe7a8));box-shadow:0 0 20px rgb(255 190 80 / .45);text-shadow:none}
+.ntf-q{display:block;padding:12px 14px;border-left:4px solid var(--gold);border-radius:4px 14px 14px 4px;background:var(--gold-soft);font-size:23px;line-height:1.3;color:var(--gold)}
+.ntf-l.end{font-size:22px;background:var(--grad-cool,linear-gradient(100deg,var(--gold),#ffe7a8));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+.ntf.pin{animation:none}
+.ntf-p.peek{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:22px}
+.ntf-open{display:flex;flex-direction:column;align-items:flex-start;gap:9px;width:100%;padding:0;text-align:left;color:inherit;background:none;border:0}
+.ntf.read{animation:none;gap:12px;padding:18px 18px 22px;margin-bottom:16px}
+.ntf.read.big .ntf-t{font-size:clamp(56px,17vw,84px)}
+.ntf.read .ntf-p.rich{font-size:21.5px;gap:12px}
+.ntf.read .ntf-q{font-size:25px}
+.ntf.read .ntf-l.end{font-size:24px}
+.ntf-go{margin-bottom:8px}
+.ntf.pin .ntf-foot{justify-content:flex-end;margin-top:2px}
+.ask2{display:grid;gap:12px;margin-bottom:14px}
+.ask-b{display:grid;grid-template-columns:48px 1fr;gap:5px 14px;align-items:center;width:100%;padding:16px;text-align:left;color:var(--chalk);border-radius:18px;background:var(--deck);border:1px solid rgb(255 214 140 / .35);box-shadow:0 0 24px -12px rgb(255 190 80 / .6);transition:transform .15s}
+.ask-b:active{transform:scale(.98)}
+.ask-b > svg{grid-row:1 / 3;width:42px;height:42px;fill:none;stroke:var(--gold);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ask-b b{font:800 26px/1 var(--f-display);text-transform:uppercase}
+.ask-b small{font-size:14px;line-height:1.35;color:var(--dust)}
+.phrow p,.ph-new p,.book .page p{white-space:pre-line}
 .ntf-fly{position:fixed;z-index:76;pointer-events:none;padding:12px 16px;border-radius:16px;background:rgb(36 27 77 / .94);border:1px solid rgb(255 214 140 / .6);color:#fff;font:400 19px/1.3 var(--f-hand);text-align:center;box-shadow:0 0 34px rgb(255 200 110 / .55);transform-origin:50% 50%}
 .tab.pop svg{animation:tab-pop .6s cubic-bezier(.3,1.6,.5,1)}
 @keyframes tab-pop{40%{transform:scale(1.45);stroke:var(--gold)}}
@@ -1140,6 +1166,33 @@ input[type="time"]{min-height:46px;-webkit-appearance:none;appearance:none}
 .st-tile b.tr-nx{font-size:22px;line-height:1.1}
 .tr-home{display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:20px;border:1px solid var(--c);background:radial-gradient(80% 120% at 100% 0%,rgb(255 255 255 / .07),transparent 60%),var(--deck)}
 .tr-home-t{font:900 28px/1 var(--f-display);text-transform:uppercase}
+.tr-it.past{opacity:.6}
+.tr-it.now{border-color:var(--c);box-shadow:0 0 18px -8px var(--c)}
+/* Accueil : Aujourd'hui (les cours du jour, puis demain) */
+.td-cours{background:var(--deck);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.td-cours > .tr-it{border:0;border-radius:0;background:transparent}
+.td-ch > svg{transition:transform .25s}
+.td-ch[aria-expanded="true"] > svg{transform:rotate(90deg)}
+.td-cours.over .td-ch .tr-main b{color:var(--dust)}
+.td-list{display:flex;flex-direction:column;padding:0 10px 10px 6px}
+.td-c{display:grid;grid-template-columns:50px 4px 1fr auto;gap:12px;align-items:center;padding:8px 0;border-top:1px solid var(--rule)}
+.td-c > b{font:700 14px/1 var(--f-num);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.td-c > i{align-self:stretch;min-height:22px;border-radius:2px;background:var(--c)}
+.td-c span{min-width:0;font-size:15px;font-weight:600;line-height:1.25}
+.td-c small{display:block;font-size:12.5px;font-weight:400;color:var(--dust)}
+.td-c.past{opacity:.5}
+.td-c.now span{color:var(--gold)}
+.td-c em{font:700 10.5px/1 var(--f-num);font-style:normal;letter-spacing:.08em;text-transform:uppercase;padding:4px 6px;border-radius:5px;background:var(--gold-soft);color:var(--gold)}
+.td-link{align-self:flex-end;display:inline-flex;align-items:center;gap:4px;margin-top:10px;font:600 12.5px/1 var(--f-num);letter-spacing:.08em;text-transform:uppercase;color:var(--gold);text-decoration:none}
+.td-link svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.td-next{display:grid;grid-template-columns:1fr auto;gap:5px 10px;align-items:center;margin-top:10px;padding:12px 14px;border:1px dashed var(--rule);border-radius:12px;text-decoration:none;color:var(--chalk);font-size:14.5px;line-height:1.35}
+.td-next > svg{grid-column:2;grid-row:1 / 3;width:18px;height:18px;fill:none;stroke:var(--dim);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* RPE relié à l'entraînement */
+.tp-rpe{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;width:100%;padding:12px;text-align:left;background:var(--deck);border:1px solid var(--rc);border-radius:12px;box-shadow:0 0 18px -10px var(--rc)}
+.tp-rpe-t b{display:block;font-size:16px;font-weight:700;margin-top:3px}
+.tp-rpe-t small{font-size:13px;color:var(--dust)}
+.flag.rpe{background:rgb(255 255 255 / .06);color:var(--rc);box-shadow:inset 0 0 0 1px var(--rc)}
+.ab-row{margin-bottom:10px}
 .tp-it{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:start;padding:12px;background:var(--deck);border:1px solid var(--rule);border-radius:12px}
 .tp-it.done{border-color:rgb(255 210 63 / .4)}
 .tp-it.done .tp-body > b{color:var(--dust);text-decoration:line-through}
@@ -2029,16 +2082,13 @@ function vAccueil(){
   const threads = Object.entries(S.threads).filter(([,t]) => t.lastAt).sort((a,b) => b[1].lastAt - a[1].lastAt).slice(0,2);
   const lm = lastMatch();
   return `
-  ${ntfHTML()}
+  ${ntfHTML() || ntfPinHTML()}
   ${bookHTML()}
   ${rpeHomeHTML()}
   ${matchCard(nextMatch())}
   ${trHomeHTML()}
   ${lm && !hasBilan(lm.id) && Date.now() - matchTime(lm) < 14 * 864e5 ? `<section><div class="h-sec"><h2>Dernier match</h2><span class="eyebrow">Ton bilan</span></div><button class="mrow" data-act="match" data-mid="${lm.id}" data-seg="apres">${mRowInner(lm)}</button></section>` : ''}
-  <section>
-    <div class="h-sec"><h2>Aujourd’hui</h2><span class="eyebrow">${wi.before ? 'Aperçu S1' : day.name}</span></div>
-    <div class="stack">${day.ses.length ? day.ses.map(sid => sesRow(sid, wi.w)).join('') : `<div class="rest"><b style="color:var(--chalk)">Repos.</b> Récupère, hydrate-toi, dors bien. Une séance de respiration ou un mot dans « Mental » si tu en as envie.</div>`}</div>
-  </section>
+  ${todayHTML()}
 
   <section>
     <div class="tiles ${COACH_URL ? 'four' : ''}">
@@ -2063,6 +2113,41 @@ function vAccueil(){
     <div class="h-sec"><h2>Échanges</h2><a class="eyebrow gold" href="#mental">Tout voir</a></div>
     <div class="stack">${threads.length ? threads.map(([id,t]) => thrRow(id,t)).join('') : `<button class="empty" data-act="prompts" style="text-align:left;width:100%">Aucune discussion pour l’instant. Lance la première : objectif de la semaine, avant ou après match, visualisation…</button>`}</div>
   </section>`;
+}
+/* ---------- Accueil : « Aujourd'hui », toute la journée dans l'ordre (cours, entraînements, match, séances du programme) ---------- */
+const TD = {open:ls.get('oal-td-open', true)};
+function todayHTML(){
+  const t0 = todayISO(), nm = nowMin(), wi = weekInfo(), day = DAYS.find(x => x.id === DAY_BY_JS[new Date().getDay()]) || {ses:[], name:''};
+  const cs = ecOn(t0), trs = trOn(t0), ms = ourMatches().filter(m => iso(new Date(m.date)) === t0), w = abOf(t0), items = [];
+  if(cs.length) items.push({k:tmin(cs[0].s), h:tdCoursHTML(cs, nm)});
+  trs.forEach(t => items.push({k:tmin(t.s), h:trItHTML(t, t0, tmin(t.e) <= nm ? 'past' : tmin(t.s) <= nm ? 'now' : '')}));
+  ms.forEach(m => { const mt = new Date(m.date); items.push({k:mt.getHours() * 60 + mt.getMinutes(), h:matchItHTML(m)}); });
+  day.ses.forEach(sid => { const s = SES[sid]; items.push({k:s.slot === 'Matin' ? 600 : s.slot === 'Après-midi' ? 900 : 720, h:sesRow(sid, wi.w)}); });
+  items.sort((a, b) => a.k - b.k);
+  const ends = [...cs, ...trs].map(x => tmin(x.e)), eb = [day.name, w ? 'Semaine ' + w : '', wi.before && day.ses.length ? 'Aperçu S1' : ''].filter(Boolean).join(' · ');
+  return `<section class="td">
+    <div class="h-sec"><h2>Aujourd’hui</h2><span class="eyebrow">${esc(eb)}</span></div>
+    <div class="stack">${items.length ? items.map(x => x.h).join('') : `<div class="rest"><b style="color:var(--chalk)">Repos.</b> Récupère, hydrate-toi, dors bien. Une séance de respiration ou un mot dans « Mental » si tu en as envie.</div>`}</div>
+    ${nm >= 18 * 60 || (ends.length && nm >= Math.max(...ends)) ? tdTomorrowHTML() : ''}
+  </section>`;
+}
+// Les cours du jour : une ligne qui dit où on en est, et la liste qui se replie d'un toucher.
+function tdCoursHTML(cs, nm){
+  const first = cs[0], last = cs[cs.length - 1], cur = cs.find(c => tmin(c.s) <= nm && nm < tmin(c.e)), nx = cs.find(c => tmin(c.s) > nm);
+  const st = nm >= tmin(last.e) ? 'Cours terminés' : cur ? `En cours : ${ecAbbr(cur.m)}` : nm < tmin(first.s) ? `Premier cours : ${ecAbbr(first.m)}` : nx ? `Ensuite : ${ecAbbr(nx.m)} à ${hhm(nx.s)}` : '';
+  return `<div class="td-cours ${nm >= tmin(last.e) ? 'over' : ''}">
+    <button class="tr-it td-ch" data-act="td-tog" aria-expanded="${TD.open}" style="--c:#8a80b8"><span class="tr-time"><b>${hhm(first.s)}</b><small>${hhm(last.e)}</small></span><i></i><span class="tr-main"><b>Mes cours</b><small>${cs.length} cours${st ? ' · ' + esc(st) : ''}</small></span>${svg('next')}</button>
+    ${TD.open ? `<div class="td-list">${cs.map(c => { const p = tmin(c.e) <= nm, n = !p && tmin(c.s) <= nm; return `<div class="td-c ${p ? 'past' : ''} ${n ? 'now' : ''}" style="--c:${ecCol(c.m)}"><b>${hhm(c.s)}</b><i></i><span>${esc(c.m)}${c.r ? `<small>Salle ${esc(c.r)}</small>` : ''}</span>${n ? '<em>En cours</em>' : ''}</div>`; }).join('')}
+      <a class="td-link" href="#ecole">Planning école${svg('next')}</a></div>` : ''}
+  </div>`;
+}
+// Le soir (ou quand la journée est finie) : un coup d'œil sur demain.
+function tdTomorrowHTML(){
+  const t1 = isoAdd(todayISO(), 1), cs = ecOn(t1), trs = trOn(t1), ms = ourMatches().filter(m => iso(new Date(m.date)) === t1), w = abOf(t1), parts = [];
+  if(cs.length) parts.push(`cours de ${hhm(cs[0].s)} à ${hhm(cs[cs.length - 1].e)}`);
+  trs.forEach(t => parts.push(`${trTitle(t).toLowerCase()} à ${hhm(t.s)}`));
+  ms.forEach(m => parts.push(`match ${home(m) ? 'contre' : 'à'} ${TEAMS[opp(m)][0]} à ${hm(new Date(m.date))}`));
+  return `<a class="td-next" href="#entrainements"><span class="eyebrow gold">Demain${w ? ' · semaine ' + w : ''}</span><span>${parts.length ? esc(cap(parts.join(' · '))) : 'Rien de prévu : journée libre.'}</span>${svg('next')}</a>`;
 }
 // Mon mot de la semaine : une phrase par semaine (du lundi au dimanche), affichée en grand à l'accueil.
 const weekKeyOf = off => { const d = today0(); d.setDate(d.getDate() - (d.getDay() + 6) % 7 + 7 * off); return iso(d); };
@@ -2884,8 +2969,29 @@ const monoTxt = m => m == null ? ['—', 'var(--dust)', ''] : m < 1.5 ? ['Bonne 
 const rpeNew = (o={}) => {
   const t = todayISO(), m = POULE.find(x => (x.h === US || x.a === US) && iso(new Date(x.date)) === t);
   const prog = (DAYS.find(d => d.id === DAY_BY_JS[new Date().getDay()]) || {ses:[]}).ses.length;
-  return {v:null, min:m ? 90 : 60, type:m ? 'match' : prog && weekInfo().diff >= 0 && !weekInfo().after ? 'prepa' : 'club', d:t, ...o};
+  const D = {v:null, min:m ? 90 : 60, type:m ? 'match' : prog && weekInfo().diff >= 0 && !weekInfo().after ? 'prepa' : 'club', d:t, tp:null, t:null, ...o};
+  if(!m && !('tp' in o)) rpeLink(D, rpeAutoTp(D.d));
+  return D;
 };
+// RPE relié au planning : un RPE peut porter la clé de l'entraînement (tp = « date_id », la même que sa préparation).
+const rpeOfTp = k => k ? rpeAll().find(r => r.tp === k) || null : null;
+const trRpeType = t => ({club:'club', prepa:'prepa', muscu:'muscu', match:'match'})[t.type] || 'autre';
+const trDur = t => Math.max(5, Math.min(300, Math.round((tmin(t.e) - tmin(t.s)) / 5) * 5));
+function rpeLink(D, k){
+  const t = k && S.planning[k.slice(11)];
+  if(!t){ if(D.tp) D.t = null; D.tp = null; return; }
+  Object.assign(D, {tp:k, t:trTitle(t), type:trRpeType(t), min:trDur(t)});
+}
+// Les entraînements de ce jour-là qu'on peut relier : pas encore notés (sauf celui de ce RPE), déjà commencés si c'est aujourd'hui.
+function rpeTpChoices(D){
+  const used = new Set(rpeAll().filter(r => r.tp && r.id !== D.id).map(r => r.tp)), nm = D.d === todayISO() ? nowMin() : 24 * 60;
+  return trOn(D.d).filter(t => { const k = tpKey(D.d, t.id); return k === D.tp || (!used.has(k) && tmin(t.s) <= nm); });
+}
+// Choix tout seul : le dernier entraînement commencé ce jour-là et pas encore noté.
+function rpeAutoTp(d){
+  const L = rpeTpChoices({d, id:null, tp:null});
+  return L.length ? tpKey(d, L[L.length - 1].id) : '';
+}
 // Le cadran : un arc de 11 segments, du turquoise (repos) au violet (maximal).
 const RD = {cx:150, cy:142, r:112, a0:200, span:220};
 const rpeXY = (a, r=RD.r) => [RD.cx + r * Math.cos(a * Math.PI / 180), RD.cy - r * Math.sin(a * Math.PI / 180)];
@@ -2906,15 +3012,18 @@ function rpeDial(v, key){
 const rpeDraft = key => key === 'edit' ? RP.edit : (RP.home || (RP.home = rpeNew()));
 const rpeCalc = D => D.v == null ? '<span class="muted small">La charge de ta séance s’affiche ici.</span>' : `<b>${D.v * D.min}</b><span>points de charge<small>RPE ${D.v} × ${D.min} min</small></span>`;
 function rpeForm(D, key){
-  const t = todayISO(), y = isoAdd(t, -1);
+  const t = todayISO(), y = isoAdd(t, -1), trs = D.src ? [] : rpeTpChoices(D);
   return `<div class="rpe-form" style="--rc:${D.v != null ? RPE_C[D.v] : '#7d86a8'}">
+    ${trs.length ? `<span class="eyebrow">Mon entraînement</span>
+    <div class="chips rpe-chips rpe-tp">${trs.map(x => { const k = tpKey(D.d, x.id); return `<button class="chip ${D.tp === k ? 'on' : ''}" data-act="rpe-tp" data-k="${key}" data-v="${esc(k)}" aria-pressed="${D.tp === k}">${svg((TRK[x.type] || TRK.autre)[2])}${esc(trTitle(x))} · ${hhm(x.s)}</button>`; }).join('')}<button class="chip ${D.tp ? '' : 'on'}" data-act="rpe-tp" data-k="${key}" data-v="" aria-pressed="${!D.tp}">Autre séance</button></div>` : ''}
     ${rpeDial(D.v, key)}
     <p class="rpe-hint">${D.v != null ? RPE_H[D.v] : 'Fais glisser ton doigt sur le cadran, de 0 (repos) à 10 (maximal). Pense à toute la séance, pas seulement à la fin.'}</p>
     <div class="rpe-line"><span class="eyebrow">Durée</span><div class="rpe-min"><button data-act="rpe-min" data-k="${key}" data-d="-5" aria-label="5 minutes de moins">−</button><b>${D.min}<small> min</small></b><button data-act="rpe-min" data-k="${key}" data-d="5" aria-label="5 minutes de plus">+</button></div></div>
     <div class="chips rpe-chips">${[30, 45, 60, 75, 90, 120].map(m => `<button class="chip ${D.min === m ? 'on' : ''}" data-act="rpe-min" data-k="${key}" data-m="${m}">${m < 60 ? m + ' min' : Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + (m % 60) : '')}</button>`).join('')}</div>
     <span class="eyebrow">Séance</span>
     <div class="chips rpe-chips">${RPE_T.map(([k, l, i]) => `<button class="chip ${D.type === k ? 'on' : ''}" data-act="rpe-type" data-k="${key}" data-t="${k}">${svg(i)}${l}</button>`).join('')}</div>
-    ${key === 'edit' ? `<label for="rpe-date">Date</label><input id="rpe-date" type="date" data-rpe-date max="${t}" value="${esc(D.d)}">`
+    ${key === 'edit' && D.tp ? `<p class="small muted">${esc(cap(frDate(parseISO(D.d), {weekday:'long', day:'numeric', month:'long'})))} · relié à ton planning d’entraînements</p>`
+      : key === 'edit' ? `<label for="rpe-date">Date</label><input id="rpe-date" type="date" data-rpe-date max="${t}" value="${esc(D.d)}">`
       : `<div class="chips rpe-chips">${[[t, 'Aujourd’hui'], [y, 'Hier']].map(([d, l]) => `<button class="chip ${D.d === d ? 'on' : ''}" data-act="rpe-day" data-d="${d}">${l}</button>`).join('')}</div>`}
     <div class="rpe-calc">${rpeCalc(D)}</div>
     <button class="btn block rpe-go" data-act="rpe-save" data-k="${key}" ${D.v == null ? 'disabled' : ''}>${svg('check')}${key === 'edit' && D.id ? 'Enregistrer' : 'Valider mon RPE'}</button>
@@ -2928,7 +3037,8 @@ function rpeWeekBars(L){
 // Sur l'accueil, la carte est repliée : un toucher sur « Mon RPE du jour » la déroule.
 function rpeFoldHead(today, st){
   const load = today.reduce((a, r) => a + rpeLoad(r), 0), mx = today.length ? Math.max(...today.map(r => r.rpe || 0)) : null;
-  const line = !today.length ? 'Comment était ta séance ?' : load ? `${load} pts · RPE ${mx}` : 'Jour de récupération';
+  const ak = !today.length && rpeAutoTp(todayISO()), at = ak && S.planning[ak.slice(11)];
+  const line = at ? `Comment était ${({club:'ton entraînement', prepa:'ta prépa physique', muscu:'ta séance de muscu', shoot:'ton shooting', match:'ton match amical'})[at.type] || 'ta séance'} ?` : !today.length ? 'Comment était ta séance ?' : load ? `${load} pts · RPE ${mx}` : 'Jour de récupération';
   return `<button class="rpe-tog" data-act="rpe-tog" aria-expanded="${RP.open}">
     <span class="rpe-mini" style="--rc:${mx != null ? RPE_C[mx] : '#7d86a8'};--p:${mx != null ? mx * 10 : 0}">${mx != null ? mx : '?'}</span>
     <span class="rpe-tog-t"><span class="eyebrow">Mon RPE du jour</span><b>${line}</b></span>
@@ -2948,7 +3058,7 @@ function rpeHomeHTML(){
       ${rpeFoldHead(today, st)}
       <div class="rpe-sum"><div class="rpe-ring" style="--p:${mx * 10}"><b>${mx}</b><small>${esc(RPE_L[mx])}</small></div>
         <div><b class="rpe-big">${load ? load : 'Repos'}${load ? '<small> pts</small>' : ''}</b>
-        <p>${today.map(r => r.type === 'repos' ? 'Jour de récupération' : `${esc(RPE_TN[r.type] || 'Séance')} · RPE ${r.rpe} · ${r.min} min`).join('<br>')}</p></div></div>
+        <p>${today.map(r => r.type === 'repos' ? 'Jour de récupération' : `${esc(r.t || RPE_TN[r.type] || 'Séance')} · RPE ${r.rpe} · ${r.min} min`).join('<br>')}</p></div></div>
       ${rpeWeekBars(L)}
       <div class="rpe-acts"><button class="btn ghost" data-act="rpe-more">${svg('plus')}Une séance</button><a class="btn ghost" href="#rpe">${svg('stats')}Mon bilan</a></div>
     </section>`;
@@ -3015,7 +3125,7 @@ function vRpe(){
   ${byT.length ? `<section><div class="h-sec"><h2>Répartition</h2><span class="eyebrow">28 jours</span></div><div class="mu-bars">${byT.map(x => `<div class="mu-bar"><span>${svg(x.i)}${x.l}</span><i style="width:${(100 * x.n / tmax).toFixed(1)}%;background:var(--grad,var(--gold))"></i><b>${Math.round(100 * x.n / L28.reduce((a, r) => a + rpeLoad(r), 0))} %</b></div>`).join('')}</div></section>` : ''}
   <section><div class="h-sec"><h2>Historique</h2><button class="chip" data-act="rpe-add">${svg('plus')}Séance oubliée</button></div>
     <div class="stack">${hist.map(d => { const x = rpeDayOf(L, d), l = x.reduce((a, r) => a + rpeLoad(r), 0); return `<div class="rpe-day"><div class="rpe-dh"><b>${esc(cap(frDate(parseISO(d), {weekday:'long', day:'numeric', month:'long'})))}</b><span>${l ? l + ' pts' : 'Repos'}</span></div>
-      ${x.map(r => `<button class="rpe-row" data-act="rpe-edit" data-id="${esc(r.id)}"><i style="background:${RPE_C[r.rpe || 0]}">${r.rpe || 0}</i><span><b>${r.type === 'repos' ? 'Jour de récupération' : esc(r.t || RPE_TN[r.type] || 'Séance')}</b><small>${r.type === 'repos' ? 'Repos' : `${esc(RPE_L[r.rpe])} · ${r.min} min${r.src ? ' · programme' : ''}`}</small></span><em>${rpeLoad(r) || ''}</em></button>`).join('')}</div>`; }).join('')}</div>
+      ${x.map(r => `<button class="rpe-row" data-act="rpe-edit" data-id="${esc(r.id)}"><i style="background:${RPE_C[r.rpe || 0]}">${r.rpe || 0}</i><span><b>${r.type === 'repos' ? 'Jour de récupération' : esc(r.t || RPE_TN[r.type] || 'Séance')}</b><small>${r.type === 'repos' ? 'Repos' : `${esc(RPE_L[r.rpe])} · ${r.min} min${r.src ? ' · programme' : r.tp ? ' · planning' : ''}`}</small></span><em>${rpeLoad(r) || ''}</em></button>`).join('')}</div>`; }).join('')}</div>
   </section>`
   : `<section class="rpe-card"><div class="rpe-head"><div><span class="eyebrow">Bilan RPE</span><h2>Ton premier RPE</h2></div></div><p class="muted">Note l’effort de chaque séance sur l’accueil, chaque jour : ici apparaîtront ta charge, ta série de jours, l’équilibre de charge et ta progression semaine après semaine.</p><a class="btn block" href="#accueil" style="margin-top:12px">${svg('home')}Noter mon RPE du jour</a></section>`}
   <section><details class="fiche"><summary><i>?</i><b>Comprendre mon RPE</b><span>La méthode</span></summary><div>
@@ -3876,7 +3986,7 @@ function vProgHub(){
   ${card({c:'c-ecole', h:'ecole', logo:`<svg viewBox="0 0 64 64" aria-hidden="true">${PH_ICON.ecole}</svg>`, t:'Planning école',
     p:'Mon emploi du temps de la semaine, pour caler les cours, le sport et le repos.',
     chips:[['ecole','Emploi du temps']],
-    f1: ec.n ? `${ec.hours} de cours par semaine` : 'Emploi du temps à remplir',
+    f1: ec.n ? (ec.w ? `Semaine ${ec.w} · ${ec.hours} de cours` : `${ec.hours} de cours par semaine`) : 'Emploi du temps à remplir',
     f2: ec.today.length ? `Aujourd’hui ${hhm(ec.today[0].s)} – ${hhm(ec.today[ec.today.length - 1].e)}` : ec.n ? 'Journée libre aujourd’hui' : 'À compléter',
     cta:'Ouvrir mon planning'})}
   ${card({c:'c-entr', h:'entrainements', logo:`<svg viewBox="0 0 64 64" aria-hidden="true">${PH_ICON.entr}</svg>`, t:'Planning entraînements',
@@ -3908,17 +4018,28 @@ const ecCol = m => { let h = 0; for(const c of String(m).toLowerCase()) h = (h *
 const EC_AB = {'Mathématiques':'Maths', 'Histoire-géographie':'Histoire-géo', 'Physique-chimie':'Phys.-chimie', 'Philosophie':'Philo', 'Sciences numériques':'SNT', 'Spécialité':'Spé'};
 const ecAbbr = m => EC_AB[m] || m;
 const ecList = () => Object.entries(S.ecole).map(([id, c]) => ({id, ...c})).filter(c => c && c.day && c.s && c.e).sort((a, b) => tmin(a.s) - tmin(b.s));
-const ecDay = day => ecList().filter(c => c.day === day);
-function ecoleStats(){
-  const L = ecList(), T = L.filter(c => c.day === DAY_BY_JS[new Date().getDay()]);
-  const min = L.reduce((n, c) => n + Math.max(0, tmin(c.e) - tmin(c.s)), 0);
-  return {n:L.length, hours:fmtMin(min), today:T};
+// Semaines A et B : réglage S.settings.ab = {mon:'lundi de référence', w:'A' ou 'B'}, puis l'appli alterne toute seule.
+// Un cours peut porter w:'A' ou w:'B' ; sans w, il revient toutes les semaines. Sans réglage, toutes les semaines se ressemblent.
+const abOn = () => !!(S.settings.ab && /^\d{4}-\d{2}-\d{2}$/.test(S.settings.ab.mon || ''));
+function abOf(d){
+  if(!abOn()) return '';
+  const R = S.settings.ab, n = Math.round((parseISO(monday(d)) - parseISO(R.mon)) / 6048e5);
+  return (n % 2 === 0) === (R.w !== 'B') ? 'A' : 'B';
 }
-const EC = {day:null, view:ls.get('oal-ec-view', 'jour'), form:null};
+const ecIn = (c, w) => !w || !c.w || c.w === w;
+const ecDay = (day, w) => ecList().filter(c => c.day === day && ecIn(c, w));
+const ecOn = d => ecDay(dowOf(d), abOf(d));
+function ecoleStats(){
+  const t = todayISO(), w = abOf(t), L = ecList().filter(c => ecIn(c, w)), T = ecOn(t);
+  const min = L.reduce((n, c) => n + Math.max(0, tmin(c.e) - tmin(c.s)), 0);
+  return {n:L.length, hours:fmtMin(min), today:T, w};
+}
+const EC = {day:null, view:ls.get('oal-ec-view', 'jour'), form:null, wk:null};
 function vEcole(){
-  const L = ecList(), td = DAY_BY_JS[new Date().getDay()];
-  const days = DOW.slice(0, 5).concat(L.some(c => c.day === 'sam') ? [DOW[5]] : []);
-  const cur = EC.day && days.some(d => d[0] === EC.day) ? EC.day : days.some(d => d[0] === td) ? td : 'lun';
+  const L = ecList(), td0 = DAY_BY_JS[new Date().getDay()], ab = abOn(), cw = abOf(todayISO()), wk = ab ? (EC.wk || cw) : '';
+  const td = wk === cw ? td0 : '';
+  const days = DOW.slice(0, 5).concat(L.some(c => c.day === 'sam' && ecIn(c, wk)) ? [DOW[5]] : []);
+  const cur = EC.day && days.some(d => d[0] === EC.day) ? EC.day : days.some(d => d[0] === td0) ? td0 : 'lun';
   return `${crumb('programme', 'Programme')}
   <section class="vw-head">
     <span class="eyebrow gold">Planning école</span>
@@ -3926,31 +4047,46 @@ function vEcole(){
     <p class="muted">Ton emploi du temps jour par jour. Il apparaît aussi dans ton planning d’entraînements, pour voir toute ta journée d’un coup d’œil.</p>
   </section>
   <section>
+    ${ab ? `<div class="chips ab-row" role="group" aria-label="Semaine A ou B">${['A', 'B'].map(x => `<button class="chip ${wk === x ? 'on' : ''}" data-act="ec-wk" data-v="${x}" aria-pressed="${wk === x}">Semaine ${x}${x === cw ? ' · cette semaine' : ''}</button>`).join('')}</div>` : ''}
     ${L.length ? `<div class="seg2" role="group" aria-label="Affichage">${[['jour','Jour'],['semaine','Semaine']].map(([k, l]) => `<button data-act="ec-view" data-v="${k}" aria-pressed="${EC.view === k}">${l}</button>`).join('')}</div>
-    ${EC.view === 'semaine' ? ecWeekGrid(days, td) : `<div class="chips" role="group" aria-label="Jour">${days.map(([k,, s]) => `<button class="chip ${k === cur ? 'on' : ''}" data-act="ec-day" data-d="${k}">${s}${k === td ? ' · auj.' : ''}</button>`).join('')}</div>${ecDayList(cur)}`}`
+    ${EC.view === 'semaine' ? ecWeekGrid(days, td, wk) : `<div class="chips" role="group" aria-label="Jour">${days.map(([k,, s]) => `<button class="chip ${k === cur ? 'on' : ''}" data-act="ec-day" data-d="${k}">${s}${k === td ? ' · auj.' : ''}</button>`).join('')}</div>${ecDayList(cur, wk)}`}`
     : `<div class="empty">${edtUrl() ? 'Prends ton emploi du temps en photo : l’appli le remplit toute seule. Ou ajoute tes cours un par un' : 'Ajoute tes cours un par un'} : la matière, le jour et l’heure. Un cours qui revient plusieurs jours s’ajoute en une seule fois.</div>`}
     ${edtUrl() ? `<div style="margin-top:14px">${edtFileBtn('Prendre en photo mon emploi du temps', 'blue')}</div>` : ''}
     <button class="btn ${edtUrl() ? 'ghost' : ''} block" data-act="ec-add" style="margin-top:10px">${svg('plus')}Ajouter un cours</button>
+    <div class="row" style="justify-content:center;margin-top:12px"><button class="chip" data-act="ab-open">${svg('prog')}${ab ? `Semaines A et B · réglage` : 'Mon lycée a des semaines A et B'}</button></div>
   </section>`;
 }
-function ecDayList(day){
-  const L = ecDay(day);
-  if(!L.length) return `<div class="rest" style="margin-top:10px">${dowName(day)} : journée sans cours.</div>`;
-  return `<div class="ec-day">${L.map(c => `<button class="ec-row" data-act="ec-edit" data-id="${esc(c.id)}" style="--c:${ecCol(c.m)}"><span class="ec-t"><b>${hhm(c.s)}</b><small>${hhm(c.e)}</small></span><i></i><span class="ec-m"><b>${esc(c.m)}</b>${c.r ? `<small>Salle ${esc(c.r)}</small>` : ''}</span></button>`).join('')}
+function ecDayList(day, wk){
+  const L = ecDay(day, wk);
+  if(!L.length) return `<div class="rest" style="margin-top:10px">${dowName(day)} : journée sans cours${wk ? ` en semaine ${wk}` : ''}.</div>`;
+  return `<div class="ec-day">${L.map(c => `<button class="ec-row" data-act="ec-edit" data-id="${esc(c.id)}" style="--c:${ecCol(c.m)}"><span class="ec-t"><b>${hhm(c.s)}</b><small>${hhm(c.e)}</small></span><i></i><span class="ec-m"><b>${esc(c.m)}</b>${c.r || c.w ? `<small>${esc([c.r ? 'Salle ' + c.r : '', c.w ? 'Semaine ' + c.w + ' seulement' : ''].filter(Boolean).join(' · '))}</small>` : ''}</span></button>`).join('')}
     <p class="small muted">${L.length} cours · de ${hhm(L[0].s)} à ${hhm(L[L.length - 1].e)}</p></div>`;
 }
-function ecWeekGrid(days, td){
-  const L = ecList(), PX = .8;
+function ecWeekGrid(days, td, wk){
+  const L = ecList().filter(c => ecIn(c, wk)), PX = .8;
+  if(!L.length) return `<div class="rest" style="margin-top:10px">Aucun cours${wk ? ` en semaine ${wk}` : ''}.</div>`;
   const t0 = Math.floor(Math.min(...L.map(c => tmin(c.s))) / 60) * 60, t1 = Math.ceil(Math.max(...L.map(c => tmin(c.e))) / 60) * 60, H = (t1 - t0) * PX;
   const hours = []; for(let h = t0 / 60; h <= t1 / 60; h++) hours.push(h);
   return `<div class="ec-week" style="--n:${days.length}">
     <div class="ec-hours" style="height:${H}px">${hours.map(h => `<span style="top:${(h * 60 - t0) * PX}px">${h} h</span>`).join('')}</div>
-    ${days.map(([k,, s]) => `<div class="ec-col ${k === td ? 'today' : ''}"><b>${s}</b><div class="ec-colb" style="height:${H}px;--hr:${60 * PX}px">${ecDay(k).map(c => `<button class="ec-blk" data-act="ec-edit" data-id="${esc(c.id)}" style="top:${(tmin(c.s) - t0) * PX}px;height:${Math.max(18, (tmin(c.e) - tmin(c.s)) * PX - 2)}px;--c:${ecCol(c.m)}" aria-label="${esc(c.m)}, ${hhm(c.s)} à ${hhm(c.e)}"><b>${esc(ecAbbr(c.m))}</b><small>${hhm(c.s)}</small></button>`).join('')}</div></div>`).join('')}
+    ${days.map(([k,, s]) => `<div class="ec-col ${k === td ? 'today' : ''}"><b>${s}</b><div class="ec-colb" style="height:${H}px;--hr:${60 * PX}px">${ecDay(k, wk).map(c => `<button class="ec-blk" data-act="ec-edit" data-id="${esc(c.id)}" style="top:${(tmin(c.s) - t0) * PX}px;height:${Math.max(18, (tmin(c.e) - tmin(c.s)) * PX - 2)}px;--c:${ecCol(c.m)}" aria-label="${esc(c.m)}, ${hhm(c.s)} à ${hhm(c.e)}"><b>${esc(ecAbbr(c.m))}</b><small>${hhm(c.s)}</small></button>`).join('')}</div></div>`).join('')}
   </div>`;
 }
 function ecFormNew(){
-  const day = EC.day || (DAY_BY_JS[new Date().getDay()] === 'dim' ? 'lun' : DAY_BY_JS[new Date().getDay()]), last = ecDay(day).at(-1);
-  return {id:null, m:'', days:[day], s:last ? last.e : '08:00', e:last ? addMin(last.e, 60) : '09:00', r:''};
+  const day = EC.day || (DAY_BY_JS[new Date().getDay()] === 'dim' ? 'lun' : DAY_BY_JS[new Date().getDay()]), last = ecDay(day, abOn() ? EC.wk || abOf(todayISO()) : '').at(-1);
+  return {id:null, m:'', days:[day], s:last ? last.e : '08:00', e:last ? addMin(last.e, 60) : '09:00', r:'', w:''};
+}
+// Le réglage des semaines A et B : quelle lettre pour cette semaine, et l'appli alterne ensuite.
+function shAb(){
+  const on = abOn(), cw = abOf(todayISO()), mon = monday(todayISO()), nW = ecList().filter(c => c.w).length;
+  return `<div class="sh-title"><h2>Semaines A et B</h2><p>Si ton lycée alterne deux emplois du temps, l’appli te montre chaque semaine les bons cours : sur l’accueil, dans ton planning école et dans ton planning d’entraînements.</p></div>
+  <section class="stack-lg">
+    <div><label>Cette semaine, du ${esc(frDate(parseISO(mon), {day:'numeric', month:'long'}))} au ${esc(frDate(parseISO(isoAdd(mon, 6)), {day:'numeric', month:'long'}))}</label>
+      <div class="seg2" role="group" aria-label="Cette semaine">${['A', 'B'].map(x => `<button data-act="ab-set" data-v="${x}" aria-pressed="${cw === x}">Semaine ${x}</button>`).join('')}</div>
+      <p class="small muted">Ensuite, l’appli alterne toute seule : A, B, A, B… Si après des vacances le lycée ne repart pas sur la bonne lettre, reviens ici et touche la bonne.</p></div>
+    <div class="note blue"><b>Pour chaque cours</b>Touche un cours dans ton planning et choisis «&nbsp;Toutes&nbsp;», «&nbsp;Semaine A&nbsp;» ou «&nbsp;Semaine B&nbsp;». Un nouveau cours revient toutes les semaines, sauf si tu choisis une lettre.</div>
+    ${on ? `<button class="btn ghost block" data-act="ab-off">${svg('x')}Mon lycée n’a pas de semaines A et B</button>${nW ? `<p class="small muted">Tes ${nW} cours marqués A ou B s’afficheront alors toutes les semaines.</p>` : ''}` : ''}
+  </section>`;
 }
 function shEcc(){
   const F = EC.form; if(!F) return '<div class="empty">Rien à modifier.</div>';
@@ -3960,6 +4096,7 @@ function shEcc(){
     <div><label for="ecf-m">Matière</label><input id="ecf-m" type="text" maxlength="40" autocomplete="off" value="${esc(F.m)}" data-ecf="m" placeholder="Ex. : Mathématiques">
       <div class="sugg" style="margin-top:8px">${sugg.map(s => `<button data-act="ecf-subj" data-v="${esc(s)}" aria-pressed="${F.m === s}">${esc(s)}</button>`).join('')}</div></div>
     <div><label>${F.id ? 'Jour' : 'Jours (un ou plusieurs)'}</label><div class="day-pick">${DOW.slice(0, 6).map(([k,, s]) => `<button data-act="ecf-day" data-d="${k}" aria-pressed="${F.days.includes(k)}">${s}</button>`).join('')}</div></div>
+    ${abOn() || F.w ? `<div><label>Semaine</label><div class="seg2 three" role="group" aria-label="Semaine">${[['', 'Toutes'], ['A', 'Semaine A'], ['B', 'Semaine B']].map(([k, l]) => `<button data-act="ecf-w" data-v="${k}" aria-pressed="${(F.w || '') === k}">${l}</button>`).join('')}</div></div>` : ''}
     <div class="fields two"><div><label for="ecf-s">Début</label><input id="ecf-s" type="time" step="300" value="${esc(F.s)}" data-ecf="s"></div><div><label for="ecf-e">Fin</label><input id="ecf-e" type="time" step="300" value="${esc(F.e)}" data-ecf="e"></div></div>
     <div><label for="ecf-r">Salle (facultatif)</label><input id="ecf-r" type="text" maxlength="20" value="${esc(F.r)}" data-ecf="r" placeholder="Ex. : B12"></div>
     <button class="btn block" data-act="ecf-save">${svg('check')}${F.id ? 'Enregistrer' : 'Ajouter'}</button>
@@ -4008,8 +4145,8 @@ async function edtScan(file){
   if(!EDT.err && out){
     const L = edtClean(out.cours);
     EDT.res = {ok:out.lisible !== false && L.length > 0, alt:!!out.semaines_alternees || L.some(c => c.w), note:String(out.remarque || '').slice(0, 300), list:L};
-    EDT.week = 'A'; EDT.mode = ecList().length ? 'remplacer' : 'ajouter';
-    L.forEach((c, i) => { EDT.keep[i] = !c.w || c.w === 'A'; });
+    EDT.week = EDT.res.alt ? 'AB' : 'A'; EDT.mode = ecList().length ? 'remplacer' : 'ajouter';
+    L.forEach((c, i) => { EDT.keep[i] = true; });
     if(EDT.res.ok) chime([1319, 1568, 2093]);
   }
   if(SH && SH.type === 'edt') renderSheet();
@@ -4042,9 +4179,11 @@ const EDT_ACT = {
     const R = EDT.res; if(!R || !guard()) return;
     const L = R.list.filter((_, i) => EDT.keep[i]); if(!L.length) return;
     const old = EDT.mode === 'remplacer' ? Object.keys(S.ecole) : [];
-    const add = L.map(c => ['c' + Store.newId(), {day:c.day, s:c.s, e:c.e, m:c.m, r:c.r, at:Date.now(), by:meId()}]);
+    // « Les deux » garde les lettres A et B de chaque cours ; une seule semaine choisie = les mêmes cours toutes les semaines.
+    const add = L.map(c => ['c' + Store.newId(), {day:c.day, s:c.s, e:c.e, m:c.m, r:c.r, ...(EDT.week === 'AB' && c.w ? {w:c.w} : {}), at:Date.now(), by:meId()}]);
     const nx = {...S.ecole}; old.forEach(id => { delete nx[id]; }); add.forEach(([id, d]) => { nx[id] = d; });
-    S.ecole = nx; EC.view = 'semaine'; ls.set('oal-ec-view', 'semaine'); EDT.res = null; closeSheet(); rerender();
+    if(add.some(([, d]) => d.w) && !abOn()) setSetting({ab:{mon:monday(todayISO()), w:'A'}});
+    S.ecole = nx; EC.view = 'semaine'; EC.wk = null; ls.set('oal-ec-view', 'semaine'); EDT.res = null; closeSheet(); rerender();
     add.forEach(([id, d]) => save('ecole', id, d));
     old.forEach(id => Store.del('ecole', id).catch(writeFail));
     chime(); setTimeout(() => burstAt($('.ec-week'), {n:40}), 200); toast(`${add.length} cours enregistrés. Touche un cours pour le corriger.`);
@@ -4096,9 +4235,12 @@ function tpCommit(k, doc, ms=400){
   doc.d = doc.d || k.slice(0, 10); doc.tid = doc.tid || k.slice(11); doc.updatedAt = Date.now(); doc.by = meId();
   S.entrprep = {...S.entrprep, [k]:doc}; rerender(); setLater('entrprep', k, doc, ms);
 }
-function tpFlags(p){
-  if(!p) return '';
+function tpFlags(p, k){
+  const r = rpeOfTp(k);
+  if(!p && !r) return '';
+  p = p || {};
   const A = p.avant || [], n = A.filter(x => x.done).length, f = [];
+  if(r) f.push(`<span class="flag rpe" style="--rc:${RPE_C[r.rpe || 0]}">RPE ${r.rpe}</span>`);
   if(A.length) f.push(`<span class="flag ${n === A.length ? 'on' : ''}">Routine ${n}/${A.length}</span>`);
   if(tpObjN(p) || tpCles(p).length) f.push('<span class="flag on">Objectifs</span>');
   if(tpHasBilan(p)) f.push('<span class="flag on">Bilan</span>');
@@ -4116,20 +4258,26 @@ function vEntr(){
   </section>
   ${rec.length ? `<div class="st-tiles"><div class="st-tile"><small>Chaque semaine</small><b>${rec.length}</b><span>${fmtMin(wkMin)} d’entraînement</span></div><div class="st-tile"><small>Prochain</small><b class="tr-nx">${nx ? esc(dayWord(nx.d).replace(/ \d.*$/, '')) + ' ' + hhm(nx.t.s) : '—'}</b><span>${nx ? esc(trTitle(nx.t)) : 'Rien de prévu'}</span></div></div>` : ''}
   <section>
-    <div class="tr-wk"><button class="rbtn" data-act="tr-wk" data-d="-1" aria-label="Semaine précédente">${svg('prev')}</button><div><b>${wl}</b><small>du ${esc(frDate(parseISO(mon), {day:'numeric', month:'short'}))} au ${esc(frDate(parseISO(end), {day:'numeric', month:'short'}))}</small></div><button class="rbtn" data-act="tr-wk" data-d="1" aria-label="Semaine suivante">${svg('next')}</button></div>
+    <div class="tr-wk"><button class="rbtn" data-act="tr-wk" data-d="-1" aria-label="Semaine précédente">${svg('prev')}</button><div><b>${wl}</b><small>du ${esc(frDate(parseISO(mon), {day:'numeric', month:'short'}))} au ${esc(frDate(parseISO(end), {day:'numeric', month:'short'}))}${abOn() ? ` · semaine ${abOf(mon)}` : ''}</small></div><button class="rbtn" data-act="tr-wk" data-d="1" aria-label="Semaine suivante">${svg('next')}</button></div>
     ${TR.off ? `<div class="row" style="justify-content:center;margin:-4px 0 12px"><button class="chip" data-act="tr-wk" data-d="0">Revenir à cette semaine</button></div>` : ''}
     <div class="tr-days">${DOW.map((x, i) => trDayHTML(isoAdd(mon, i), t0)).join('')}</div>
   </section>
   <button class="btn block" data-act="tr-add">${svg('plus')}Ajouter un entraînement</button>`;
 }
+// Une séance du planning, telle qu'elle apparaît dans la semaine et dans « Aujourd'hui » sur l'accueil.
+function trItHTML(t, d, cls=''){
+  const T = TRK[t.type] || TRK.autre, k = tpKey(d, t.id);
+  return `<button class="tr-it ${t.off ? 'off' : ''} ${cls}" data-act="tp-open" data-id="${esc(t.id)}" data-d="${d}" style="--c:${T[3]}"><span class="tr-time"><b>${hhm(t.s)}</b><small>${hhm(t.e)}</small></span><i></i><span class="tr-main"><b>${esc(trTitle(t))}</b><small>${t.off ? 'Annulé ce jour-là' : esc([t.lieu, trTitle(t) !== T[1] ? T[1] : ''].filter(Boolean).join(' · ') || 'Touche pour préparer')}</small>${t.off ? '' : tpFlags(S.entrprep[k], k)}</span>${svg('next')}</button>`;
+}
+function matchItHTML(m){
+  const mt = new Date(m.date);
+  return `<button class="tr-it match" data-act="match" data-mid="${m.id}" style="--c:#3d7bff"><span class="tr-time"><b>${hm(mt)}</b><small>J${m.j}</small></span><i></i><span class="tr-main"><b>Match ${home(m) ? 'contre' : 'à'} ${esc(TEAMS[opp(m)][0])}</b><small>${esc(m.salle || '')}</small></span>${svg('next')}</button>`;
+}
 function trDayHTML(d, t0){
   const dw = dowOf(d), dt = parseISO(d), items = [];
-  const cs = ecDay(dw);
+  const cs = ecOn(d);
   if(cs.length) items.push({k:tmin(cs[0].s), h:`<a class="tr-it sch" href="#ecole" style="--c:#8a80b8"><span class="tr-time"><b>${hhm(cs[0].s)}</b><small>${hhm(cs[cs.length - 1].e)}</small></span><i></i><span class="tr-main"><b>Cours</b><small>${cs.length} cours · Planning école</small></span>${svg('next')}</a>`});
-  for(const t of trOn(d, true)){
-    const T = TRK[t.type] || TRK.autre, p = S.entrprep[tpKey(d, t.id)];
-    items.push({k:tmin(t.s), h:`<button class="tr-it ${t.off ? 'off' : ''}" data-act="tp-open" data-id="${esc(t.id)}" data-d="${d}" style="--c:${T[3]}"><span class="tr-time"><b>${hhm(t.s)}</b><small>${hhm(t.e)}</small></span><i></i><span class="tr-main"><b>${esc(trTitle(t))}</b><small>${t.off ? 'Annulé ce jour-là' : esc([t.lieu, trTitle(t) !== T[1] ? T[1] : ''].filter(Boolean).join(' · ') || 'Touche pour préparer')}</small>${t.off ? '' : tpFlags(p)}</span>${svg('next')}</button>`});
-  }
+  for(const t of trOn(d, true)) items.push({k:tmin(t.s), h:trItHTML(t, d)});
   const diff = Math.round((dt - parseISO(S.settings.start || DEFAULT_START)) / 864e5);
   if(diff >= 0 && diff < 28){
     const w = Math.floor(diff / 7);
@@ -4138,10 +4286,7 @@ function trDayHTML(d, t0){
       items.push({k:s.slot === 'Matin' ? 600 : s.slot === 'Après-midi' ? 900 : 720, h:`<button class="tr-it prog ${dn ? 'done' : ''}" data-act="open" data-sid="${sid}" data-w="${w}" style="--c:var(--gold)"><span class="tr-time"><b>${s.slot === 'Séance courte' ? 'Court' : s.slot === 'Après-midi' ? 'Aprèm' : 'Matin'}</b><small>S${w + 1}</small></span><i></i><span class="tr-main"><b>${esc(s.title)}</b><small>Intersaison · ${esc(s.dur)}</small></span><span class="check ${dn ? 'on' : ''}">${svg('check')}</span></button>`});
     });
   }
-  ourMatches().filter(m => iso(new Date(m.date)) === d).forEach(m => {
-    const mt = new Date(m.date);
-    items.push({k:mt.getHours() * 60 + mt.getMinutes(), h:`<button class="tr-it match" data-act="match" data-mid="${m.id}" style="--c:#3d7bff"><span class="tr-time"><b>${hm(mt)}</b><small>J${m.j}</small></span><i></i><span class="tr-main"><b>Match ${home(m) ? 'contre' : 'à'} ${esc(TEAMS[opp(m)][0])}</b><small>${esc(m.salle || '')}</small></span>${svg('next')}</button>`});
-  });
+  ourMatches().filter(m => iso(new Date(m.date)) === d).forEach(m => { const mt = new Date(m.date); items.push({k:mt.getHours() * 60 + mt.getMinutes(), h:matchItHTML(m)}); });
   items.sort((a, b) => a.k - b.k);
   return `<div class="tr-day ${d === t0 ? 'today' : ''} ${d < t0 ? 'past' : ''}"><div class="tr-dh"><b>${esc(cap(frDate(dt, {weekday:'long'})))}</b><span>${esc(frDate(dt, {day:'numeric', month:'short'}))}${d === t0 ? ' · aujourd’hui' : ''}</span></div>
     <div class="stack">${items.length ? items.map(x => x.h).join('') : '<div class="rest">Repos</div>'}</div></div>`;
@@ -4231,7 +4376,7 @@ function tpAvant(k, p){
   ${A.length || tpObjN(p) ? `<div class="row">${wa(tpText(k), 'Envoyer ma préparation')}</div>` : ''}`;
 }
 function tpApres(k, p, t, d){
-  const objs = TP_OBJ.filter(f => String(tpdv(k, 'obj.' + f.k)).trim()), t0 = todayISO(), canRpe = d === t0 || d === isoAdd(t0, -1);
+  const objs = TP_OBJ.filter(f => String(tpdv(k, 'obj.' + f.k)).trim()), t0 = todayISO(), rpe = rpeOfTp(k), fin = d < t0 || (d === t0 && tmin(t.s) <= nowMin());
   return `
   ${d > t0 || (d === t0 && tmin(t.e) > nowMin()) ? '<div class="note blue"><b>Pas encore fini</b>Reviens ici après l’entraînement pour faire ton bilan.</div>' : ''}
   <section>
@@ -4240,13 +4385,14 @@ function tpApres(k, p, t, d){
     : `<button class="empty" style="width:100%;text-align:left" data-act="tp-seg" data-seg="avant">Aucun objectif noté pour cet entraînement. Touche ici pour en écrire, même après coup.</button>`}
   </section>
   <section class="obj"><div class="obj-h"><b>Ma séance</b><span>De 1 à 5</span></div><div class="scale" role="group" aria-label="Ma séance, de 1 à 5">${[1, 2, 3, 4, 5].map(v => `<button data-act="tp-set" data-k="${esc(k)}" data-f="note" data-v="${v}" aria-pressed="${p.note === v}">${v}</button>`).join('')}</div></section>
+  ${rpe ? `<button class="tp-rpe" data-act="tp-rpe" data-id="${esc(k.slice(11))}" data-d="${d}" style="--rc:${RPE_C[rpe.rpe || 0]}"><span class="rpe-mini" style="--p:${(rpe.rpe || 0) * 10}">${rpe.rpe || 0}</span><span class="tp-rpe-t"><span class="eyebrow">Mon RPE</span><b>${esc(RPE_L[rpe.rpe || 0])}</b><small>${rpe.min} min · ${rpeLoad(rpe)} points de charge</small></span><span class="chip">Modifier</span></button>`
+    : fin ? `<button class="btn ghost block" data-act="tp-rpe" data-id="${esc(k.slice(11))}" data-d="${d}">${svg('flame')}Noter mon RPE de cette séance</button>` : ''}
   <section class="stack">
     ${dictHint}
     <div><label for="tp-${esc(k)}-appris">Ce que j’ai appris</label><textarea id="tp-${esc(k)}-appris" rows="3" maxlength="1500" data-draft="tp-${esc(k)}-appris" data-tpf="${esc(k)}" placeholder="Un geste, une consigne, une sensation…">${esc(tpdv(k, 'appris'))}</textarea></div>
     <div><label for="tp-${esc(k)}-garder">Ce que je garde pour la prochaine fois</label><textarea id="tp-${esc(k)}-garder" rows="3" maxlength="1500" data-draft="tp-${esc(k)}-garder" data-tpf="${esc(k)}" placeholder="Ce que je refais, ce que je travaille…">${esc(tpdv(k, 'garder'))}</textarea></div>
   </section>
   <button class="btn block" data-act="tp-save" data-k="${esc(k)}">${svg('check')}Enregistrer mon bilan</button>
-  ${canRpe ? `<button class="btn ghost block" data-act="tp-rpe" data-id="${esc(t.id)}" data-d="${d}">${svg('flame')}Noter mon RPE de cette séance</button>` : ''}
   ${tpHasBilan(p) ? `<div class="row">${wa(tpText(k, true), 'Envoyer mon bilan')}</div>` : ''}`;
 }
 function tpText(k, bilan){
@@ -4275,16 +4421,18 @@ function trHomeHTML(){
   const t0 = todayISO(), nm = nowMin(), L = trOn(t0); if(!L.length) return '';
   const up = L.find(t => tmin(t.e) > nm);
   if(up){
-    const p = S.entrprep[tpKey(t0, up.id)], T = TRK[up.type] || TRK.autre;
+    const k = tpKey(t0, up.id), p = S.entrprep[k], T = TRK[up.type] || TRK.autre;
     return `<section class="tr-home" style="--c:${T[3]}"><div class="mc-top"><span class="eyebrow gold">${tmin(up.s) <= nm ? 'Entraînement en cours' : 'Entraînement aujourd’hui'}</span><span class="mc-cd">${hhm(up.s)}</span></div>
-      <b class="tr-home-t">${esc(trTitle(up))}</b><p class="small muted">${esc([`${hhm(up.s)} – ${hhm(up.e)}`, up.lieu].filter(Boolean).join(' · '))}</p>${tpFlags(p)}
+      <b class="tr-home-t">${esc(trTitle(up))}</b><p class="small muted">${esc([`${hhm(up.s)} – ${hhm(up.e)}`, up.lieu].filter(Boolean).join(' · '))}</p>${tpFlags(p, k)}
       <div class="row"><button class="btn" data-act="tp-open" data-id="${esc(up.id)}" data-d="${t0}">${svg('target')}Préparer mon entraînement</button></div></section>`;
   }
-  const last = L[L.length - 1], p = S.entrprep[tpKey(t0, last.id)];
-  if(tpHasBilan(p)) return '';
+  // Après l'entraînement : le bilan et le RPE, reliés à la séance. La carte s'efface quand les deux sont faits.
+  const last = L[L.length - 1], k = tpKey(t0, last.id), p = S.entrprep[k], bil = tpHasBilan(p), rpe = rpeOfTp(k);
+  if(bil && rpe) return '';
+  const txt = !bil && !rpe ? 'Ton RPE environ 30 minutes après la séance, puis deux minutes pour ton bilan.' : rpe ? 'Deux minutes pour ton bilan : tes objectifs, ce que tu as appris, ce que tu gardes.' : 'Ton bilan est fait. Il reste ton RPE : l’effort de toute la séance, de 0 à 10.';
   return `<section class="tr-home" style="--c:${(TRK[last.type] || TRK.autre)[3]}"><div class="mc-top"><span class="eyebrow gold">Après l’entraînement</span></div>
-    <b class="tr-home-t">${esc(trTitle(last))}</b><p class="small muted">Deux minutes pour ton bilan : tes objectifs, ce que tu as appris, ce que tu gardes.</p>
-    <div class="row"><button class="btn" data-act="tp-open" data-id="${esc(last.id)}" data-d="${t0}" data-seg="apres">${svg('check')}Mon bilan d’entraînement</button></div></section>`;
+    <b class="tr-home-t">${esc(trTitle(last))}</b><p class="small muted">${txt}</p>${tpFlags(p, k)}
+    <div class="row">${rpe ? '' : `<button class="btn" data-act="tp-rpe" data-id="${esc(last.id)}" data-d="${t0}">${svg('flame')}Noter mon RPE</button>`}${bil ? '' : `<button class="btn ${rpe ? '' : 'ghost'}" data-act="tp-open" data-id="${esc(last.id)}" data-d="${t0}" data-seg="apres">${svg('check')}Mon bilan</button>`}</div></section>`;
 }
 
 /* ---------- Mes photos de fond : une photo par onglet, gardée sur ce téléphone ---------- */
@@ -4684,7 +4832,13 @@ const NEW_ACT = {
   'ec-view': el => { EC.view = el.dataset.v; ls.set('oal-ec-view', EC.view); rerender(); },
   'ec-day': el => { EC.day = el.dataset.d; rerender(); },
   'ec-add': () => { if(!guard()) return; EC.form = ecFormNew(); openSheet({type:'ecc'}); },
-  'ec-edit': el => { const c = S.ecole[el.dataset.id]; if(!c) return; EC.form = {id:el.dataset.id, m:c.m || '', days:[c.day], s:c.s, e:c.e, r:c.r || ''}; openSheet({type:'ecc'}); },
+  'ec-edit': el => { const c = S.ecole[el.dataset.id]; if(!c) return; EC.form = {id:el.dataset.id, m:c.m || '', days:[c.day], s:c.s, e:c.e, r:c.r || '', w:c.w || ''}; openSheet({type:'ecc'}); },
+  'ecf-w': el => { blurField(); EC.form.w = el.dataset.v; renderSheet(); },
+  'ec-wk': el => { EC.wk = el.dataset.v; rerender(); },
+  'ab-open': () => openSheet({type:'ab'}),
+  'ab-set': el => { if(!guard()) return; const w = el.dataset.v; setSetting({ab:{mon:monday(todayISO()), w}}); EC.wk = null; closeSheet(); toast(`C’est noté : cette semaine est une semaine ${w}.`); },
+  'ab-off': () => { if(!guard()) return; setSetting({ab:null}); EC.wk = null; closeSheet(); toast('Semaines A et B retirées : les mêmes cours chaque semaine.'); },
+  'td-tog': () => { TD.open = !TD.open; ls.set('oal-td-open', TD.open); rerender(); },
   'ecf-subj': el => { blurField(); EC.form.m = el.dataset.v; renderSheet(); },
   'ecf-day': el => { blurField(); const F = EC.form, d = el.dataset.d; F.days = F.id ? [d] : F.days.includes(d) ? F.days.filter(x => x !== d) : [...F.days, d]; renderSheet(); },
   'ecf-save': () => {
@@ -4693,7 +4847,7 @@ const NEW_ACT = {
     if(!m){ toast('Écris la matière.'); $('#ecf-m')?.focus(); return; }
     if(!F.days.length){ toast('Choisis au moins un jour.'); return; }
     if(!/^\d{2}:\d{2}$/.test(F.s) || !/^\d{2}:\d{2}$/.test(F.e) || tmin(F.e) <= tmin(F.s)){ toast('L’heure de fin doit être après l’heure de début.'); return; }
-    const base = {m, s:F.s, e:F.e, r:String(F.r || '').trim().slice(0, 20), at:Date.now(), by:meId()};
+    const base = {m, s:F.s, e:F.e, r:String(F.r || '').trim().slice(0, 20), ...(F.w === 'A' || F.w === 'B' ? {w:F.w} : {}), at:Date.now(), by:meId()};
     const add = F.id ? [[F.id, {...base, day:F.days[0]}]] : F.days.map(day => ['c' + Store.newId(), {...base, day}]);
     S.ecole = {...S.ecole, ...Object.fromEntries(add)}; EC.day = F.days[0]; EC.form = null; closeSheet(); rerender();
     add.forEach(([id, d]) => save('ecole', id, d));
@@ -4787,11 +4941,13 @@ const NEW_ACT = {
     const d = tpBuild(k); setPath(d, f, getPath(d, f) === v ? null : v); tpCommit(k, d, 300);
   },
   'tp-save': el => { if(!guard()) return; blurField(); const k = el.dataset.k; tpCommit(k, tpBuild(k), 10); burstAt(el, {n:26, v:.7}); toast('Enregistré.'); },
+  // Le RPE d'un entraînement se note sur place, déjà relié à la séance (type et durée remplis).
   'tp-rpe': el => {
-    const t = S.planning[el.dataset.id]; if(!t) return;
-    const ty = {club:'club', prepa:'prepa', muscu:'muscu', match:'match'}[t.type] || 'autre', min = Math.max(5, Math.min(300, Math.round((tmin(t.e) - tmin(t.s)) / 5) * 5));
-    RP.home = rpeNew({type:ty, min, d:el.dataset.d}); RP.open = true; RP.foldAnim = true; closeSheet();
-    location.hash = '#accueil'; setTimeout(() => $('.rpe-card')?.scrollIntoView({behavior:CALM.matches ? 'auto' : 'smooth', block:'start'}), 350);
+    const id = el.dataset.id, d = el.dataset.d, t = S.planning[id]; if(!t || !guard()) return;
+    const k = tpKey(d, id), r = rpeOfTp(k), back = SH && SH.type === 'trp' ? {type:'trp', id:SH.id, d:SH.d} : null;
+    if(r) RP.edit = {id:r.id, tp:k, v:r.rpe || 0, min:r.min || trDur(t), type:r.type, d:r.d, at:r.at, t:r.t || trTitle(t)};
+    else { RP.edit = rpeNew({d, tp:null}); rpeLink(RP.edit, k); }
+    openSheet({type:'rpe', back});
   },
   // Envoyer une routine ou une vidéo avant un entraînement
   'rt-send': el => openSheet({type:'trsend', src:{k:'rt', part:el.dataset.k}}),
@@ -5419,9 +5575,11 @@ function phrasesTeaser(){
   </section>`;
 }
 function phRow(text, id, own){
-  const on = phraseOn(text), doc = S.phrases[id] || {}, from = own && doc.src === 'mot' ? doc.from || NOTIF_TITLE : '';
+  const doc = S.phrases[id] || {}, from = own && doc.src === 'mot' ? doc.from || NOTIF_TITLE : '';
+  // Un message sur plusieurs lignes (YES DAY…) ne va pas dans le livre : la case l'épingle en haut de l'accueil.
+  const rich = own && String(text).includes('\n'), on = rich ? !!doc.pin : phraseOn(text);
   return `<div class="phrow ${on ? 'on' : ''} ${own && S.phFresh === id ? 'fresh' : ''}">
-    <button class="phchk" data-act="ph-home" data-t="${esc(text)}" aria-pressed="${on}" aria-label="${on ? 'Retirer de l’accueil' : 'Afficher à l’accueil'}">${svg('check')}</button>
+    <button class="phchk" ${rich ? `data-act="ntf-where" data-v="${on ? 'mental' : 'home'}" data-id="${esc(id)}"` : `data-act="ph-home" data-t="${esc(text)}"`} aria-pressed="${on}" aria-label="${on ? 'Retirer de l’accueil' : 'Afficher à l’accueil'}">${svg('check')}</button>
     <p>${from ? `<small class="ph-from">${svg('spark')}${esc(from)}</small>` : ''}${esc(text)}</p>
     ${own ? `<button class="vdel" data-act="ph-del" data-id="${esc(id)}" aria-label="Supprimer cette phrase">${svg('trash')}</button>` : ''}
   </div>`;
@@ -5469,28 +5627,116 @@ function phraseAdd(text, src, el){
 /* ---------- La pensée : une phrase qui arrive sur l'accueil comme une notification ---------- */
 // Alice la touche : elle s'envole vers l'onglet Mental et rejoint « Mes phrases à moi », signée « La pensée ».
 // Pour en envoyer une autre : ajouter une ligne avec un nouvel id (n2, n3…) et la date du jour.
+// Un titre à soi (t) remplace « La pensée ». Un message sur plusieurs lignes est mis en page : chaque « … : OUI » sur sa ligne
+// avec le OUI en grand, la citation entre “ ” mise en avant, la dernière ligne en couleur.
+// Après l'envol vers Mental, l'appli demande si le message reste sur l'accueil (en haut, épinglé) ou seulement dans Mental.
 const NOTIF_TITLE = 'La pensée';
 const NOTIFS = [
   {id:'n1', d:'2026-11-10', text:'Réveille-toi avec motivation, endors-toi avec satisfaction.'},
+  {id:'n2', d:'2026-11-16', t:'YES DAY', text:`Grâce à la victoire, mon envie d’apprendre d’hier dépasse ma déception.
+Je suis énervé : OUI.
+Je sais pourquoi : OUI.
+Je suis déçu de ma prestation qui n’était pas à la hauteur de mon engagement : OUI.
+Mais mon mental reste intact : OUI. Il va m’aider à continuer à m’entraîner dur, avec le plaisir de défendre dur et d’attaquer dur.
+“Je nourris l’attaque grâce à ma défense et j’attaque la défense pour nourrir l’équipe.”
+La vie est belle : j’apprends d’hier et je profite d’aujourd’hui pour construire mon rêve de demain.`},
 ];
+const ntfTitle = n => (n && n.t) || NOTIF_TITLE;
+// Le texte du message, mis en page s'il fait plusieurs lignes.
+function ntfBody(text){
+  const L = String(text).split('\n').map(s => s.trim()).filter(Boolean);
+  if(L.length < 2) return `<span class="ntf-p">« ${esc(text)} »</span>`;
+  return `<span class="ntf-p rich">${L.map((l, i) => {
+    const pre = i === 0 ? '« ' : '', post = i === L.length - 1 ? ' »' : '', m = l.match(/^(.*?)\s*:\s*OUI\.?\s*(.*)$/);
+    if(/^[“"].*[”"]\.?$/.test(l)) return `<span class="ntf-q">${esc(l)}</span>`;
+    if(m) return `<span class="ntf-oui"><span>${esc(pre + m[1])}</span><b>OUI</b></span>${m[2] ? `<span class="ntf-l">${esc(m[2] + post)}</span>` : ''}`;
+    return `<span class="ntf-l ${i === L.length - 1 ? 'end' : ''}">${esc(pre + l + post)}</span>`;
+  }).join('')}</span>`;
+}
 const ntfDone = () => ls.get('oal-notifs', []);
-const ntfNext = () => { const lus = ntfDone(); return NOTIFS.find(n => !lus.includes(n.id)); };
+// Seul le message le plus récent est proposé (celui du lundi) : un ancien message pas encore touché laisse sa place.
+const ntfNext = () => { const n = NOTIFS.at(-1); return n && !ntfDone().includes(n.id) ? n : null; };
 function ntfWhen(d){
   const n = Math.round((today0() - parseISO(d)) / 864e5);
   return n <= 0 ? 'Aujourd’hui' : n === 1 ? 'Hier' : `Il y a ${n} jours`;
 }
 const spotsHTML = (c='') => `<span class="spots ${c}" aria-hidden="true"><i class="bm"></i><i class="bm"></i><i class="bm"></i><b class="lp"></b><b class="lp"></b><b class="lp"></b><em class="dust"></em></span>`;
+// Un message trop long pour la carte : l'accueil n'en montre que le début, un toucher l'ouvre en plein écran.
+const ntfLong = t => String(t).includes('\n') || String(t).length > 160;
+const ntfPeek = t => `<span class="ntf-p peek">« ${esc(String(t).split('\n')[0].trim())} …</span>`;
 function ntfHTML(){
   const n = ntfNext(); if(!n) return '';
+  const lg = ntfLong(n.text);
   return `<section class="ntf-wrap">
-    <button class="ntf" data-act="ntf-keep" data-id="${n.id}" aria-label="${esc(NOTIF_TITLE)} : ${esc(n.text)} Touche pour le garder dans Mes phrases.">
+    <button class="ntf ${n.t ? 'big' : ''}" data-act="${lg ? 'ntf-read' : 'ntf-keep'}" data-id="${n.id}" data-n="${n.id}" aria-label="${esc(ntfTitle(n))} : ${esc(lg ? 'touche pour lire le message en plein écran.' : n.text + ' Touche pour le garder dans Mes phrases.')}">
       ${spotsHTML()}
       <span class="ntf-app"><img src="icons/icon-192.png" alt="">De l’ombre à la lumière</span>
-      <span class="ntf-t">${esc(NOTIF_TITLE)}</span>
-      <p class="ntf-p">« ${esc(n.text)} »</p>
-      <span class="ntf-foot"><span class="ntf-hint">${svg('spark')}Touche pour la garder</span><small>${ntfWhen(n.d)}</small></span>
+      <span class="ntf-t">${esc(ntfTitle(n))}</span>
+      ${lg ? ntfPeek(n.text) : ntfBody(n.text)}
+      <span class="ntf-foot"><span class="ntf-hint">${svg('spark')}${lg ? 'Touche pour lire' : `Touche pour ${n.t ? 'le' : 'la'} garder`}</span><small>${ntfWhen(n.d)}</small></span>
     </button>
   </section>`;
+}
+// Le message qu'Alice a choisi de garder sur l'accueil : en haut, jusqu'à ce qu'elle le range dans Mental.
+function ntfPinHTML(){
+  const p = phraseDocs().filter(x => x.pin).sort((a, b) => b.pin - a.pin)[0]; if(!p) return '';
+  const n = NOTIFS.find(x => phraseId(x.text) === p.id);
+  return `<section class="ntf-wrap">
+    <article class="ntf pin ${(p.from || '') !== NOTIF_TITLE ? 'big' : ''}">
+      ${spotsHTML()}
+      <span class="ntf-app"><img src="icons/icon-192.png" alt="">Mon message${n ? ' · ' + esc(frDate(parseISO(n.d), {weekday:'long', day:'numeric', month:'long'})) : ''}</span>
+      ${ntfLong(p.text) ? `<button class="ntf-open" data-act="ntf-read" data-p="${esc(p.id)}" aria-label="Lire le message en plein écran"><span class="ntf-t">${esc(p.from || NOTIF_TITLE)}</span>${ntfPeek(p.text)}<span class="ntf-hint">${svg('spark')}Touche pour lire</span></button>`
+        : `<h2 class="ntf-t">${esc(p.from || NOTIF_TITLE)}</h2>${ntfBody(p.text)}`}
+      <span class="ntf-foot"><button class="chip" data-act="ntf-where" data-v="mental" data-id="${esc(p.id)}">${svg('mental')}Le ranger dans Mental</button></span>
+    </article>
+  </section>`;
+}
+// Le message en plein écran : depuis la notification (« Je le garde ») ou depuis la carte épinglée.
+function shNtfRead(){
+  const n = SH.nid ? NOTIFS.find(x => x.id === SH.nid) : null, p = SH.pid ? S.phrases[SH.pid] : null, text = n ? n.text : p && p.text;
+  if(!text) return '<div class="empty">Ce message n’est plus là.</div>';
+  const nn = n || NOTIFS.find(x => phraseId(x.text) === SH.pid), t = n ? ntfTitle(n) : p.from || NOTIF_TITLE;
+  return `<div class="ntf read ${t !== NOTIF_TITLE ? 'big' : ''}">${spotsHTML()}
+      <span class="ntf-app"><img src="icons/icon-192.png" alt="">De l’ombre à la lumière${nn ? ' · ' + esc(frDate(parseISO(nn.d), {weekday:'long', day:'numeric', month:'long'})) : ''}</span>
+      <h2 class="ntf-t">${esc(t)}</h2>${ntfBody(text)}
+    </div>
+    ${n ? `<button class="btn block ntf-go" data-act="ntf-keepread" data-id="${n.id}">${svg('spark')}Je le garde</button>`
+      : `<button class="btn ghost block ntf-go" data-act="ntf-where" data-v="mental" data-id="${esc(SH.pid)}">${svg('mental')}Le ranger dans Mental</button>`}`;
+}
+// « Je le garde » : le plein écran se ferme, le message s'envole vers Mental, puis la question.
+function ntfKeepRead(el){
+  const id = el.dataset.id; closeSheet();
+  if(S.tab !== 'accueil') location.hash = '#accueil';
+  setTimeout(() => { const c = document.querySelector(`.ntf[data-n="${id}"]`); ntfKeep(c, id); }, 160);
+}
+// Après l'envol : « Veux-tu que je reste sur ta page d'accueil, ou dans Mental ? »
+function shNtfAsk(){
+  const p = S.phrases[SH.id]; if(!p) return '<div class="empty">Ce message n’est plus dans tes phrases.</div>';
+  return `<div class="sh-title"><span class="eyebrow gold">${esc(p.from || NOTIF_TITLE)}</span><h2>Accueil ou Mental ?</h2><p>Veux-tu que je reste sur ta page d’accueil, ou dans Mental ?</p></div>
+  <section class="ask2">
+    <button class="ask-b" data-act="ntf-where" data-v="home" data-id="${esc(SH.id)}">${svg('home')}<b>Sur mon accueil</b><small>En grand, tout en haut, chaque fois que j’ouvre l’appli.</small></button>
+    <button class="ask-b" data-act="ntf-where" data-v="mental" data-id="${esc(SH.id)}">${svg('mental')}<b>Dans Mental</b><small>Rangé dans Mes phrases, à relire quand je veux.</small></button>
+  </section>
+  <p class="small muted" style="text-align:center">Dans les deux cas, je suis gardé dans Mental › Mes phrases. Tu pourras changer d’avis.</p>`;
+}
+function ntfWhere(el){
+  const id = el.dataset.id, d = S.phrases[id]; if(!d || !guard()) return;
+  const home = el.dataset.v === 'home', nx = {...S.phrases};
+  // Un seul message épinglé à la fois : le nouveau remplace l'ancien.
+  if(home) Object.entries(nx).forEach(([k, x]) => { if(k !== id && x && x.pin){ nx[k] = {...x, pin:null}; save('phrases', k, nx[k]); } });
+  nx[id] = {...d, pin:home ? Date.now() : null}; S.phrases = nx; save('phrases', id, nx[id]);
+  const ask = SH && SH.type === 'ntfask';
+  if(ask || (SH && SH.type === 'ntfread')) closeSheet();
+  if(home && !ask){ rerender(); toast('Affiché en haut de ton accueil.'); }
+  else if(home){
+    if(S.tab !== 'accueil') location.hash = '#accueil';
+    rerender(); audioInit(); chime([1047, 1319, 1568, 2093], .07, .11);
+    setTimeout(() => { window.scrollTo({top:0, behavior:CALM.matches ? 'auto' : 'smooth'}); const c = $('.ntf.pin'); if(c) burstAt(c, {n:44, v:.8}); }, 260);
+    toast('Je reste en haut de ton accueil.');
+  } else {
+    rerender();
+    toast('Je reste dans Mental, avec tes phrases.');
+  }
 }
 // La phrase vole jusqu'à l'onglet Mental, puis l'onglet s'illumine.
 function ntfFly(from, text){
@@ -5511,25 +5757,28 @@ function ntfFly(from, text){
     if(t){ burstAt(t, {n:30, v:.6}); t.classList.add('pop'); setTimeout(() => t.classList.remove('pop'), 700); }
   });
 }
-function ntfKeep(el){
-  const n = NOTIFS.find(x => x.id === el.dataset.id);
-  if(!n || el.classList.contains('keep') || !guard()) return;
-  el.classList.add('keep');
-  burstAt(el, {n:40, v:.8}); chime([1047,1319,1568,2093], .07, .11); buzz([30,40,60]);
-  const wrap = el.closest('.ntf-wrap'), p = el.querySelector('.ntf-p');
+function ntfKeep(el, nid){
+  const n = NOTIFS.find(x => x.id === (nid || (el && el.dataset.id)));
+  if(!n || (el && el.classList.contains('keep')) || !guard()) return;
+  const wrap = el && el.closest('.ntf-wrap'), p = el && el.querySelector('.ntf-p');
   const commit = () => {
     const id = phraseId(n.text), cur = S.phrases[id];
     if(!cur || cur.src === 'liste'){
-      const d = {text:n.text, src:'mot', from:NOTIF_TITLE, at:Date.now(), by:meId(), home:!!(cur && cur.home), hAt:cur && cur.home ? cur.hAt : null};
+      const d = {text:n.text, src:'mot', from:ntfTitle(n), at:Date.now(), by:meId(), home:!!(cur && cur.home), hAt:cur && cur.home ? cur.hAt : null};
       S.phrases = {...S.phrases, [id]:d}; save('phrases', id, d);
     }
     ls.set('oal-notifs', [...new Set([...ntfDone(), n.id])]); ls.set('oal-ph-new', id);
     rerender();
-    toast('Rangée dans Mes phrases, onglet Mental. Coche-la si tu veux la voir sur ton accueil.');
+    // Un message à titre (YES DAY…) demande où il doit rester ; « La pensée » garde son fonctionnement.
+    if(n.t) setTimeout(() => openSheet({type:'ntfask', id}), CALM.matches ? 0 : 250);
+    else toast('Rangée dans Mes phrases, onglet Mental. Coche-la si tu veux la voir sur ton accueil.');
   };
+  if(!el || !p){ commit(); return; }
+  el.classList.add('keep');
+  burstAt(el, {n:40, v:.8}); chime([1047,1319,1568,2093], .07, .11); buzz([30,40,60]);
   if(CALM.matches || !el.animate){ commit(); return; }
   setTimeout(() => {
-    ntfFly(p, `« ${n.text} »`).then(commit);
+    ntfFly(p, n.t ? n.t : `« ${n.text} »`).then(commit);
     p.style.visibility = 'hidden';
     const h = wrap.offsetHeight;
     wrap.animate([{height:h + 'px', opacity:1, marginBottom:'0px'}, {height:'0px', opacity:0, marginBottom:'-28px'}], {duration:650, delay:250, easing:'cubic-bezier(.4,0,.2,1)', fill:'forwards'});
@@ -5539,8 +5788,8 @@ function ntfKeep(el){
 
 // Bannière « Appli à jour » : une fois par nouvelle version, après l'allumage des projecteurs.
 // À chaque mise en ligne : APP_V = le numéro de sw.js (alice-v22 → 22), et la phrase MAJ_TXT.
-const APP_V = 24;
-const MAJ_TXT = () => ntfNext() ? `${NOTIF_TITLE} t’attend sur ton accueil.` : 'Nouveau : ton éval FIBA s’affiche dans chacun de tes matchs.';
+const APP_V = 25;
+const MAJ_TXT = () => ntfNext() ? `${ntfTitle(ntfNext())} t’attend sur ton accueil.` : 'Nouveau : tes cours du jour sur l’accueil, ton RPE relié à tes entraînements, et les semaines A et B.';
 // Quelqu'un qui ouvre l'appli pour la première fois n'a pas besoin de cette bannière.
 const MAJ_OLD = (() => { try{ return localStorage.getItem('oal-intro') != null || Object.values(Local.data).some(c => c && Object.keys(c).length); }catch{ return false; } })();
 function majCheck(){
@@ -6035,6 +6284,9 @@ function renderSheet(){
   else if(SH.type === 'muday'){ eb = 'Musculation'; html = shMuDay(); }
   else if(SH.type === 'rpe'){ eb = 'RPE de séance'; html = shRpe(); }
   else if(SH.type === 'ecc'){ eb = 'Planning école'; html = shEcc(); }
+  else if(SH.type === 'ab'){ eb = 'Planning école'; html = shAb(); }
+  else if(SH.type === 'ntfask'){ eb = 'Mon message'; html = shNtfAsk(); }
+  else if(SH.type === 'ntfread'){ eb = 'Mon message'; html = shNtfRead(); }
   else if(SH.type === 'tr'){ eb = 'Planning entraînements'; html = shTr(); }
   else if(SH.type === 'trp'){ eb = TR.seg === 'avant' ? 'Préparation de l’entraînement' : 'Bilan de l’entraînement'; html = shTrp(); }
   else if(SH.type === 'trsend'){ eb = 'Ma routine'; html = shTrSend(); }
@@ -6412,11 +6664,14 @@ function guard(){ if(!canWrite()){ toast('Lecture seule : demande un accès Édi
 function setSetting(patchObj){
   S.settings = {...S.settings, ...patchObj};
   rerender();
-  if(canWrite()) setLater('config', 'main', {vma:S.settings.vma, start:S.settings.start, name:S.settings.name}, 600);
+  if(canWrite()) setLater('config', 'main', {vma:S.settings.vma, start:S.settings.start, name:S.settings.name, ab:S.settings.ab || null}, 600);
 }
 
 const ACT = {
   'ntf-keep': el => ntfKeep(el),
+  'ntf-where': el => ntfWhere(el),
+  'ntf-read': el => openSheet({type:'ntfread', nid:el.dataset.n || null, pid:el.dataset.p || null}),
+  'ntf-keepread': el => ntfKeepRead(el),
   'maj-go': el => { if(el.dataset.swiped) return; majClose(true); },
   open: el => openSheet({type:'session', sid:el.dataset.sid, w:+el.dataset.w}),
   match: el => { const m = findMatch(el.dataset.mid); if(!m) return; S.mSeg = el.dataset.seg || (ended(m) ? 'apres' : Date.now() >= matchTime(m) - 15 * 60e3 ? 'pendant' : 'avant'); openSheet({type:'match', mid:m.id}); },
@@ -6629,14 +6884,15 @@ const ACT = {
   // RPE de séance
   'rpe-min': el => { const D = rpeDraft(el.dataset.k); if(!D) return; D.min = el.dataset.m ? +el.dataset.m : Math.max(5, Math.min(300, D.min + +el.dataset.d)); el.dataset.k === 'edit' ? renderSheet() : rerender(); },
   'rpe-type': el => { const D = rpeDraft(el.dataset.k); if(!D) return; D.type = el.dataset.t; if(D.type === 'match' && D.min === 60) D.min = 90; el.dataset.k === 'edit' ? renderSheet() : rerender(); },
-  'rpe-day': el => { rpeDraft('home').d = el.dataset.d; rerender(); },
+  'rpe-day': el => { const D = rpeDraft('home'); D.d = el.dataset.d; if(D.tp ? D.tp.slice(0, 10) !== D.d : !D.noTp) rpeLink(D, rpeAutoTp(D.d)); rerender(); },
+  'rpe-tp': el => { const D = rpeDraft(el.dataset.k); if(!D) return; rpeLink(D, el.dataset.v); D.noTp = !el.dataset.v; el.dataset.k === 'edit' ? renderSheet() : rerender(); },
   'rpe-save': el => {
     const k = el.dataset.k, D = rpeDraft(k); if(!D || D.v == null || !guard()) return;
     const id = D.id || (D.src ? 'p' + D.src : 'r' + Store.newId());
-    const doc = {d:/^\d{4}-\d{2}-\d{2}$/.test(D.d || '') ? D.d : todayISO(), rpe:D.v, min:D.v ? D.min : 0, type:D.v ? (D.type === 'repos' ? 'club' : D.type) : 'repos', at:D.at || Date.now(), by:meId(), ...(D.src ? {src:D.src} : {}), ...(D.t ? {t:D.t} : {})};
+    const doc = {d:/^\d{4}-\d{2}-\d{2}$/.test(D.d || '') ? D.d : todayISO(), rpe:D.v, min:D.v ? D.min : 0, type:D.v ? (D.type === 'repos' ? 'club' : D.type) : 'repos', at:D.at || Date.now(), by:meId(), ...(D.src ? {src:D.src} : {}), ...(D.tp ? {tp:D.tp} : {}), ...(D.t ? {t:D.t} : {})};
     const r = el.getBoundingClientRect();
     S.rpe = {...S.rpe, [id]:doc}; save('rpe', id, doc);
-    if(k === 'edit'){ RP.edit = null; closeSheet(); } else { RP.home = null; RP.more = false; }
+    if(k === 'edit'){ const back = SH && SH.back; RP.edit = null; closeSheet(); if(back) openSheet(back); } else { RP.home = null; RP.more = false; }
     rerender(); audioInit(); chime([784, 988, 1175, 1568]); burst(r.left + r.width / 2, r.top, {n:50});
     const n = rpeStreak(rpeAll());
     toast(doc.rpe ? `RPE noté : ${rpeLoad(doc)} points de charge.${n > 1 ? ` ${n} jours d’affilée !` : ''}` : 'Jour de récupération noté.');
@@ -6652,14 +6908,14 @@ const ACT = {
   'rpe-less': () => { RP.more = false; RP.home = null; rerender(); },
   'rpe-edit': el => {
     const r = rpeAll().find(x => x.id === el.dataset.id); if(!r) return;
-    RP.edit = {id:r.virt ? null : r.id, src:r.src || null, v:r.rpe || 0, min:r.min || 60, type:r.type, d:r.d, at:r.at, t:r.t || null};
-    openSheet({type:'rpe'});
+    RP.edit = {id:r.virt ? null : r.id, src:r.src || null, tp:r.tp || null, v:r.rpe || 0, min:r.min || 60, type:r.type, d:r.d, at:r.at, t:r.t || null};
+    openSheet({type:'rpe', back:SH && SH.type === 'trp' ? {type:'trp', id:SH.id, d:SH.d} : null});
   },
   'rpe-add': () => { RP.edit = rpeNew({d:todayISO()}); openSheet({type:'rpe'}); },
   'rpe-del': async el => {
     const D = RP.edit; if(!D || !(D.id || D.src) || !guard()) return;
     if(el.dataset.confirm !== '1'){ el.dataset.confirm = '1'; el.style.color = 'var(--warn)'; toast('Touche encore pour supprimer.'); setTimeout(() => { el.dataset.confirm = ''; el.style.color = ''; }, 3000); return; }
-    RP.edit = null; closeSheet();
+    const back = SH && SH.back; RP.edit = null; closeSheet(); if(back) openSheet(back);
     if(D.src){ const id = 'p' + D.src, doc = {src:D.src, del:true, d:D.d, at:Date.now(), by:meId()}; S.rpe = {...S.rpe, [id]:doc}; save('rpe', id, doc); rerender(); toast('Supprimé.'); return; }
     const prev = S.rpe[D.id], nx = {...S.rpe}; delete nx[D.id]; S.rpe = nx; rerender();
     try{ await Store.del('rpe', D.id); toast('Supprimé.'); }catch(e){ S.rpe = {...S.rpe, [D.id]:prev}; rerender(); writeFail(e); }
@@ -6923,7 +7179,7 @@ document.addEventListener('change', e => {
   const t = e.target, k = t.dataset && t.dataset.change;
   if(t.dataset && t.dataset.draft) S.drafts[t.dataset.draft] = t.value;
   if(t.dataset && t.dataset.mu) muInput(t, true);
-  if(t.dataset && t.dataset.rpeDate !== undefined && RP.edit && /^\d{4}-\d{2}-\d{2}$/.test(t.value)) RP.edit.d = t.value;
+  if(t.dataset && t.dataset.rpeDate !== undefined && RP.edit && /^\d{4}-\d{2}-\d{2}$/.test(t.value)){ RP.edit.d = t.value; if(SH && SH.type === 'rpe') renderSheet(); }
   if(t.dataset && t.dataset.muDate !== undefined && MU.draft && /^\d{4}-\d{2}-\d{2}$/.test(t.value)) MU.draft.d = t.value;
   if(t.dataset && t.dataset.mf && canWrite()) commitMatch(t.dataset.mf, buildMatch(t.dataset.mf), 800);
   if(k === 'start' && /^\d{4}-\d{2}-\d{2}$/.test(t.value)) setSetting({start:t.value});

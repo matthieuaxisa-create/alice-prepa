@@ -148,3 +148,38 @@ Version 23 (13/11/2026)
   le match, mi-temps et fin de match, après le match, synonymes). Toucher un mot ou une phrase l'ajoute au
   prochain match (mots-clés, mots du groupe, repères) ou à un entraînement (mots-clés). Depuis une préparation,
   « Piocher dans Les mots du jeu ». L'affiche A3 est dans Ma bibliothèque (img/biblio/mots-du-jeu.jpg).
+
+Version 24 (13/11/2026)
+- L'éval FIBA s'affiche sous le score dans chaque cadre de match (Bilan > Mes matchs, carte « Dernier match »),
+  avec l'étiquette « Stats rentrées » ou « Stats en attente ». Pas d'éval quand un bilan n'a que les minutes.
+
+Version 25 (16/11/2026)
+- Accueil > « Aujourd'hui » : toute la journée dans l'ordre. Les cours du jour (le cours en cours est en
+  jaune, les cours passés s'estompent ; toucher « Mes cours » replie ou déplie la liste), les entraînements
+  du planning, le match et les séances du programme. Le soir (dès 18 h, ou quand tout est fini), une ligne
+  « Demain » annonce les cours, les entraînements et le match du lendemain.
+- RPE relié aux entraînements du planning :
+  - après un entraînement, la carte de l'accueil propose « Noter mon RPE » puis « Mon bilan » ;
+  - le RPE se note sur place, déjà relié à la séance : type et durée remplis tout seuls ;
+  - sur la carte « Mon RPE du jour », l'entraînement commencé et pas encore noté est choisi tout seul
+    (« Autre séance » pour noter autre chose ; « Hier » choisit l'entraînement de la veille) ;
+  - le bilan de l'entraînement (Après) montre le RPE, la durée et la charge, avec « Modifier » ;
+  - dans le planning de la semaine, une étiquette « RPE 7 » apparaît sur la séance ;
+  - dans Bilan > RPE, la ligne porte le nom de l'entraînement et « planning ».
+  Un RPE relié garde la clé de la séance (tp = « date_id », comme sa préparation).
+- Correction : le bouton « Noter mon RPE de cette séance » du bilan d'entraînement ne faisait rien.
+- Semaines A et B (Planning école) : bouton « Mon lycée a des semaines A et B » en bas du planning.
+  Alice dit si cette semaine est A ou B, puis l'appli alterne toute seule (réglage S.settings.ab, gardé dans
+  la sauvegarde). Chaque cours peut être « Toutes », « Semaine A » ou « Semaine B ». Le planning école
+  montre la semaine A ou B (« cette semaine » sur la bonne), et l'accueil, le planning d'entraînements et
+  la ligne « Demain » prennent les cours de la bonne semaine. Après des vacances, si le lycée ne repart pas
+  sur la bonne lettre, un toucher dans le réglage remet la bonne.
+- Le message du lundi « YES DAY » (NOTIFS, id n2) : la bannière « Appli à jour » annonce « YES DAY t'attend sur ton
+  accueil ». Sur l'accueil, la carte ne montre que le début du message ; un toucher l'ouvre en plein écran (les
+  « OUI » en grand, la citation mise en avant). « Je le garde » : le message s'envole vers Mental, puis la question
+  « Veux-tu que je reste sur ta page d'accueil, ou dans Mental ? ». « Sur mon accueil » l'épingle en haut de
+  l'accueil (version courte, un toucher pour le relire en plein écran, « Le ranger dans Mental » pour le retirer).
+  Dans Mental > Mes phrases, la case de ce message l'épingle ou le retire de l'accueil (il ne va pas dans le livre).
+- Pour le message d'un autre lundi : ajouter une ligne à NOTIFS avec un nouvel id (n3, n4…), la date (d), un titre
+  (t) et le texte (une ligne par phrase ; « … : OUI » et la citation entre “ ” sont mis en page tout seuls).
+  Seul le dernier message est proposé. Un message sans titre garde le fonctionnement de « La pensée ».
